@@ -508,3 +508,352 @@ const articles = [
 ];
 
 // Continue with Articles 6-15 in Part 3...
+// ============================================================
+// ARTICLE 11 — What Horses Teach Us About Human Behavior
+// ============================================================
+{
+  label: 'Unique Edge Article XI',
+  title: 'What Horses Teach Us About Human Behavior',
+  tagline: 'Spend enough time with horses and you will learn more about yourself than any mirror can show.',
+  keywords: ['what horses teach humans', 'horse psychology and humans', 'lessons from horses'],
+  category: 'edge',
+  pages: [
+    { type: 'title' },
+    { type: 'text', section: 'Opening', html: `
+      <p><span class="rd-dropcap">A</span> horse has no ego. It has no agenda beyond what is real right now. It cannot pretend. It cannot perform. It can only respond to what is genuinely present. Spend enough time with horses and you will learn more about your real self — not the one you show the world — than any other method of self-understanding can offer.</p>
+      <p>What horses teach us above all is that our inner state is not private. We walk through the world believing we can perform competence while feeling inadequate, project calm while being anxious, present patience while carrying resentment. Horses expose this belief as the comfortable fiction it has always been.</p>
+      <p>The horse does not see the performance. It sees what is underneath. It reads the stress in your body, the tiny tensions in your muscles, the quality of your breath. Everything you have learned to hide from other humans, the horse has already read. And then it shows you — honestly, without cruelty, without judgment — exactly who walked in. This is a service of extraordinary value, if you have the courage to receive it.</p>
+    `},
+    { type: 'section', heading: 'The Mirror You Cannot Lie To', sub: 'The horse reflects back not who you think you are, but who you actually are in this moment.' },
+    { type: 'text', section: 'The Mirror You Cannot Lie To', html: `
+      <p><span class="rd-dropcap">I</span> have watched people have revelations beside horses that they had been avoiding for years in other contexts. The person who insists they are patient until the horse reveals, without any accusation, that they are not. The person who believes they are calm until the horse shows them exactly how much they are holding. The person who thinks they are present until the horse demonstrates, by its inability to settle, that they are anywhere but here.</p>
+      <p>These revelations are not comfortable. They are not meant to be. But they are profoundly useful. The horse cannot be convinced to see what is not there. It cannot be charmed or reasoned with or persuaded to overlook what it is reading. It simply responds to what is actually present. And this makes it the most honest feedback mechanism most of us will ever encounter.</p>
+      <p>The people who grow most from their time with horses are the ones who learn to ask: what is the horse showing me about myself right now? Not what is wrong with the horse. What is the horse revealing about what I am bringing. This shift — from judgment of the horse to curiosity about oneself — is the moment horsemanship becomes something larger than a skill. It becomes a genuine practice of self-knowledge.</p>
+    `},
+    { type: 'quote', text: 'The horse is the most honest teacher you will ever have. It cannot be lied to, bribed, or manipulated. It only responds to what is true.' },
+    { type: 'section', heading: 'What Horses Teach About Presence', sub: 'The horse lives where most humans only visit. Fully inside the moment.' },
+    { type: 'text', section: 'What Horses Teach About Presence', html: `
+      <p><span class="rd-dropcap">H</span>orses exist in a quality of presence that most humans have lost contact with. Not the presence achieved through meditation or practice or effort, but the effortless, complete presence of an animal that has no capacity for being anywhere but here. The horse is not thinking about what happened yesterday. It is not planning tomorrow. It is this breath, this movement, this moment of connection. Fully and completely, without remainder.</p>
+      <p>Working with horses requires a degree of presence that most people find genuinely difficult at first. The horse will not meet you in your thoughts. It cannot find you there. It can only find you in your body, in your breath, in the quality of your physical being in this moment. To reach a horse, you must come all the way into the present. And for most people, this is an extraordinary demand — to leave behind the constant background noise of memory and planning and worry and simply be, without agenda, in a field with an animal that is doing the same thing effortlessly.</p>
+      <p>What horses give back, when you manage to arrive fully, is a quality of aliveness that is difficult to find anywhere else. The present moment, shared with a creature that is genuinely in it, becomes vivid in a way that the distracted life rarely is. Colors are brighter. Sound is clearer. Time moves differently. This is not sentimentality. This is what it feels like to be genuinely awake. Horses are simply very good at requiring it of you.</p>
+    `},
+    { type: 'quote', text: 'The horse does not ask you to be wise. It asks you to be here. And here, when you finally arrive, turns out to be enough.' },
+    { type: 'section', heading: 'What Horses Teach About Relationship', sub: 'Every horse relationship is a practice in giving without demanding a return.' },
+    { type: 'text', section: 'What Horses Teach About Relationship', html: `
+      <p><span class="rd-dropcap">T</span>he deepest thing horses teach us is something about the nature of relationship itself. A relationship that is worth anything is not built on what one party can extract from the other. It is built on genuine attention, genuine care, and a willingness to be affected by the other's experience. Horses demand this not through words but through the simple fact of what they are: creatures of extraordinary sensitivity who respond with complete honesty to what they are given.</p>
+      <p>If you approach a horse with the goal of getting something from it — a perfect session, an obedient horse, a result that proves your skill — the horse feels the agenda. It may comply. But it will not open. It will not offer the additional quality that genuine trust makes possible. The best horsemanship, in my experience, comes from people who have learned to enter the relationship without an agenda — to be curious about the horse, genuinely interested in its inner life, willing to be surprised and delighted and sometimes humbled by what they find.</p>
+      <p>This is not a skill you can practise only with horses. It is a way of being in relationships. A quality of attention and generosity and genuine curiosity about the other's experience. Horses teach it to us because they make it impossible to fake. But what they are teaching is not horsemanship. It is something larger. It is how to be genuinely present with another living being. And that, practised with a horse for long enough, tends to change the way you are present with every living being in your life.</p>
+    `},
+    { type: 'quote', text: 'Spend enough time listening to horses and you will find yourself listening differently to everything else. They teach you to pay attention. And attention, given freely, is the most generous thing one being can offer another.' }
+  ]
+},
+
+// ============================================================
+// ARTICLE 12 — Presence and Intention
+// ============================================================
+{
+  label: 'Unique Edge Article XII',
+  title: 'To Feel What a Horse Feels: Understanding Presence and Intention',
+  tagline: 'Horses live where most humans only visit — fully inside the present moment.',
+  keywords: ['horse sensitivity to humans', 'horse energy and intention', 'connection with horses'],
+  category: 'edge',
+  pages: [
+    { type: 'title' },
+    { type: 'text', section: 'Opening', html: `
+      <p><span class="rd-dropcap">P</span>resence is not a concept. It is not a state you can think your way into. It is a physical reality — the quality of being fully here, fully alive, fully available to what is happening in this exact moment. Horses live in presence permanently. It is not something they achieve. It is simply what they are.</p>
+      <p>Most humans have lost the ability to do this. We are almost never fully here. We are partly in the meeting we just left, partly in the obligation ahead, partly in a conversation replaying itself on the inside of our skull. We bring all of this into the arena. The horse feels every bit of it. Not as metaphor. As real, physical, readable information.</p>
+      <p>To understand what a horse feels in your presence, try this: stand still beside it, close your eyes, and feel your own body. Feel your breath, your heartbeat, the tensions in your face, your jaw, your hands. Feel where you are holding. Now ask yourself honestly — if your survival depended on reading energy accurately, what would you make of the creature standing beside you?</p>
+    `},
+    { type: 'section', heading: 'Intention as a Physical Force', sub: 'Your intention broadcasts before your action. The horse has already received the message.' },
+    { type: 'text', section: 'Intention as a Physical Force', html: `
+      <p><span class="rd-dropcap">I</span>ntention is not private. Every time you form a plan to move, to stop, to turn, to ask for something, your body begins preparing itself before the conscious action occurs. Muscles engage subtly. Weight shifts infinitesimally. Breath changes pattern. The gaze adjusts. To a creature of the horse's sensitivity, these micro-signals are as readable as speech.</p>
+      <p>This is why skilled horsemen often appear to their horses to be almost telepathic — the horse responds before the visible signal has been given. What is actually happening is much simpler and much more profound: the horse is reading the intention in the body before the body has completed the action. The physical preparation is the signal. The rein, the leg, the weight — these are confirmations, not initiations.</p>
+      <p>Once you understand this, the implications for how you train and how you handle horses become significant. Clarity of intention — knowing clearly in your own body what you want to happen next, without hesitation or doubt — communicates to the horse before any technical aid does. Confusion in your intention communicates confusion. Conflict between what you want and what you fear produces a horse that feels the conflict and does not know which message to answer.</p>
+      <p>The experienced rider who achieves effortless connection with a horse is often someone who has, over years, developed extraordinary clarity of intention. Their inner picture of what they want to happen is so clear, so fully inhabited by the body, that the horse finds the signal before the signal has been consciously sent. This is not magic. It is the logical result of presence — of being so fully in the moment with the horse that the two bodies begin to speak the same language without translation.</p>
+    `},
+    { type: 'quote', text: 'Before your hand moves, your mind has already moved. The horse felt it first. Your job is to make sure that what it felt was worth feeling.' },
+    { type: 'section', heading: 'Becoming a Place of Rest', sub: 'The greatest skill is not asking well. It is becoming someone the horse chooses to rest beside.' },
+    { type: 'text', section: 'Becoming a Place of Rest', html: `
+      <p><span class="rd-dropcap">T</span>here is a quality of presence that the very best horsemen and horsewomen develop over years that I can only describe as becoming a place of rest. The horse, in their presence, does not merely tolerate proximity. It actively seeks it. It turns toward them when something is frightening. It lowers its head and slows its breath simply because they have walked into the yard. This is presence used as a tool — not as manipulation, but as genuine offering.</p>
+      <p>Becoming a place of rest is not about being passive or without direction. It is about having a quality of inner stillness that remains stable regardless of what the horse is doing. When the horse escalates, you do not escalate. When the horse fears, you do not fear. When the horse is confused, you do not become urgent. You remain — steadily, warmly, without demand — the most stable thing in the horse's environment. And over time, the horse learns to borrow your stability. To use your calm as evidence that the world is manageable.</p>
+      <p>This quality cannot be performed. It must be real. You either have genuine stillness available to you in that moment or you do not. And if you do not, no technique will compensate. This is why so much of good horsemanship is actually inner work — the slow, difficult, deeply worthwhile work of learning to regulate your own nervous system. Not for abstract reasons. For the very practical reason that the horse will respond to your state before it responds to anything else, and everything you want to accomplish depends on that foundation being solid.</p>
+    `},
+    { type: 'quote', text: 'The horse does not ask you to be perfect. It asks you to be present. And presence, offered genuinely and consistently, is everything.' }
+  ]
+},
+
+// ============================================================
+// ARTICLE 13 — Horses React to Your Mind
+// ============================================================
+{
+  label: 'Unique Edge Article XIII',
+  title: 'Why Horses React to Your Mind and Not Just Your Actions',
+  tagline: 'Before your hand moves, your mind has already moved. The horse felt it first.',
+  keywords: ['do horses sense emotions', 'horse reaction to humans', 'horse awareness'],
+  category: 'edge',
+  pages: [
+    { type: 'title' },
+    { type: 'text', section: 'Opening', html: `
+      <p><span class="rd-dropcap">B</span>efore your hand moves, your mind has already moved. Before your leg gives the signal, your intention has already broadcast itself through every muscle, every small shift of weight in your body. A horse does not wait for the action. It reads the intention. By the time you have done something, the horse has already felt it coming.</p>
+      <p>This is not telepathy. This is the horse's extraordinary ability to read the tiny signals of a human body with a precision our conscious mind cannot match. When you think about stopping, your body prepares to stop — slightly, invisibly. The horse registers it. When you think about turning, your gaze shifts, your weight shifts. The horse is already turning.</p>
+      <p>This means that the quality of your thoughts — the clarity of your intentions, the absence of doubt and inner conflict — is not a philosophical nicety but a real and practical factor in every session you have with a horse. The horse that seems to read your mind is simply reading your body with more accuracy than you are reading it yourself. And once you understand that, the question of how to work better with horses becomes a question of how to think and feel more clearly inside your own body.</p>
+    `},
+    { type: 'section', heading: 'The Science of Subtle Signals', sub: 'The horse reads what the body says before the body knows it is saying it.' },
+    { type: 'text', section: 'The Science of Subtle Signals', html: `
+      <p><span class="rd-dropcap">T</span>he phenomenon of horses responding to human intention has a long history in both horsemanship practice and scientific research. The most famous historical example is Clever Hans — a horse in early twentieth century Germany that appeared to perform complex arithmetic, tapping out answers with its hoof. Careful investigation revealed something more interesting than a calculating horse: Hans was reading infinitesimal postural signals from the people around him, responding to the almost imperceptible release of tension in their bodies when he reached the correct answer.</p>
+      <p>What seemed like a trick was actually a profound demonstration of the horse's sensitivity to human body language at a level the humans themselves were completely unaware of. They did not know they were signalling. Hans did not know they were signalling. But the signal was there, real and readable, and the horse read it with extraordinary consistency. This is not a party trick. It is a description of how horses navigate their relationship with humans in every moment of every day.</p>
+      <p>Your body does not keep secrets from a horse. The physiological changes that accompany mental states — muscle tension, breath pattern, heart rate, the direction of gaze and attention — are all changes the horse reads in real time. Fear in a human produces a tighter grip, shorter breath, harder eyes. Confidence produces softness, deep breathing, a quality of forward focus without urgency. The horse categorises you continuously. And the category it places you in determines how it responds to you, regardless of what you are trying to do technically.</p>
+    `},
+    { type: 'quote', text: 'The horse does not hear your doubts. It feels them. And it responds to what it feels, not to what you intended.' },
+    { type: 'section', heading: 'Training Your Inner Life for Better Horsemanship', sub: 'The most important work happens before you pick up the rope.' },
+    { type: 'text', section: 'Training Your Inner Life for Better Horsemanship', html: `
+      <p><span class="rd-dropcap">I</span>f the horse responds to your inner state before it responds to your actions, then improving your inner state is improving your horsemanship. This is not a soft or vague idea. It is deeply practical. And it is where most formal equestrian training does not go, which is why many technically proficient riders never achieve the depth of connection they are looking for.</p>
+      <p>The first practice is learning to feel yourself. Most people move through the day with almost no conscious awareness of the state of their own body. They do not notice that their jaw is clenched, that their shoulders are up around their ears, that they have been holding their breath since the car journey. They arrive at the horse carrying all of this, entirely unconscious of it, and then are mystified when the horse is tight and unresponsive. Before you can manage what you broadcast to the horse, you must be able to feel what you are broadcasting.</p>
+      <p>The second practice is developing the ability to change your inner state deliberately. Not to pretend calm, but to generate it. Slow breathing. Deliberate release of held muscle tension. The conscious decision to drop the agenda and simply be present. These are not spiritual practices — though they may feel that way. They are practical tools that produce measurable changes in your body chemistry, changes that the horse reads and responds to with the same reliability as it reads any other signal.</p>
+      <p>The third practice is developing clarity of intention. Before you ask the horse for anything, have a clear, fully embodied picture of what you are asking for. Not a vague wish. A clear, felt sense of the movement, the softness, the response you want. When that picture is clear in your body, you will find the horse responds to it before your aids are complete. When it is unclear — when you are half-asking and half-doubting — the horse will reflect that confusion back with the same precision it reflects everything else.</p>
+    `},
+    { type: 'quote', text: 'The horse you ride is a portrait of your inner life on that day. If you want a different portrait, change the painter.' }
+  ]
+},
+
+// ============================================================
+// ARTICLE 14 — Silence, Energy, Movement
+// ============================================================
+{
+  label: 'Unique Edge Article XIV',
+  title: 'Silence, Energy, and Movement: The Language Horses Understand',
+  tagline: 'There is a language older than words. Horses speak it fluently. Most humans have forgotten it exists.',
+  keywords: ['horse communication signals', 'how horses communicate', 'non verbal communication horses'],
+  category: 'edge',
+  pages: [
+    { type: 'title' },
+    { type: 'text', section: 'Opening', html: `
+      <p><span class="rd-dropcap">T</span>here is a language older than any human tongue — older than the first word our ancestors ever spoke into the dark. It came before writing, before the moment our species decided everything important must be named. Horses speak it fluently. Most humans have forgotten it exists. Those who work well with horses have simply remembered how to listen.</p>
+      <p>This language is made of silence — the quality of stillness, the difference between an animal at rest and a predator waiting to strike. It is made of energy — the felt sense of aliveness in a body, the direction of attention. It is made of movement — not just direction and speed, but the weight and intention behind every step. The confidence or hesitation in a footfall. The difference between movement that is going somewhere and movement that is merely happening.</p>
+      <p>When I teach people to work with horses, I spend the first hour teaching them to be still. Not quiet — still. The quality of your stillness speaks more clearly to a horse than the quality of your voice. A still body with focused attention says: I am here. I am present. I am not going anywhere. This is one of the most reassuring things a human can offer a prey animal that spends its life scanning for threat.</p>
+    `},
+    { type: 'section', heading: 'The Language of Silence', sub: 'What you do not do speaks as loudly as what you do. Sometimes louder.' },
+    { type: 'text', section: 'The Language of Silence', html: `
+      <p><span class="rd-dropcap">S</span>ilence with horses is active. It is not the absence of communication — it is one of the most powerful forms of it. When you stand beside a horse and do nothing, you are saying: I have no demands right now. There is no pressure. This moment belongs to you. For an animal that lives under the constant weight of vigilance, this offering of unconditional stillness is profoundly meaningful.</p>
+      <p>The silence that precedes a request is just as important as the request itself. When you rush directly from one ask to the next, the horse never gets to process what just happened. It never gets to feel the release, to integrate the experience, to understand that the answer it gave was correct. The pause — the deliberate, generous pause after a horse gives you something — is where the learning actually occurs. It is where the horse's nervous system returns to baseline and the new memory is consolidated. Take it away and you are training in a fog.</p>
+      <p>Silence after a mistake is also valuable. When a horse gets something wrong — when it moves in the wrong direction, misreads your signal, becomes confused — the instinct is to immediately correct, to re-ask, to fix. Sometimes the most useful response is none at all. A pause. A breath. A moment of not asking, giving the horse's nervous system a chance to reset. Then begin again from somewhere simpler. The silence says: that did not cost anything. We are fine. Let us start again. This is a very different message from the continuous pressure of someone who corrects without pausing, who asks again immediately after a mistake, whose energy communicates that errors are expensive.</p>
+    `},
+    { type: 'quote', text: 'In the pause between asking and asking again is where the horse finds what it needs to try differently. Do not fill every silence. Some silences are doing the most important work.' },
+    { type: 'section', heading: 'The Language of Energy', sub: 'Energy is felt before it is seen. The horse is reading you before you open the gate.' },
+    { type: 'text', section: 'The Language of Energy', html: `
+      <p><span class="rd-dropcap">E</span>nergy, in the context of horsemanship, is simply the quality of aliveness in a body. It is the difference between a body that is switched on — present, attentive, directed — and a body that is passive, unfocused, elsewhere. Both states communicate clearly to the horse. High, directed energy says: something is about to happen. Pay attention. Low, soft energy says: rest. Nothing is required. These are the two most basic messages in the horse's language, and every communication between horse and human is built from some combination of them.</p>
+      <p>Learning to use your energy deliberately is one of the most transformative skills in horsemanship. The horseman who can raise their energy — not by moving faster, but by becoming more internally directed, more alive, more focused — and feel the horse respond to that inner shift before any external aid has been given, has understood something essential. And the horseman who can lower their energy, genuinely and completely, and use it to bring a tense horse down rather than continuing to escalate, has understood something even more essential.</p>
+      <p>Energy is also the first thing horses read about your emotional state. Anxiety produces a particular quality of energy — scattered, high-frequency, alert. Calm produces a different quality — slow, deep, continuous. Horses categorise these patterns instantly, and they respond to them as information about whether the environment is safe. You cannot fake the energy of genuine calm. But you can practise it. And the more you practise it in the company of horses — who give you immediate, honest feedback — the more available it becomes in other areas of your life as well.</p>
+    `},
+    { type: 'quote', text: 'You cannot fake calm energy to a horse. But you can practise genuine calm until it becomes the default. The horse will notice the moment it does.' },
+    { type: 'section', heading: 'The Language of Movement', sub: 'The way you move tells the horse what you are before you have spoken a word.' },
+    { type: 'text', section: 'The Language of Movement', html: `
+      <p><span class="rd-dropcap">H</span>orses read movement with a precision that makes their entire system of communication visible to anyone who knows how to watch. Every movement carries information: speed, direction, weight, intention. The quality of a footfall. Whether a step is placed or dropped. Whether the body is moving through space with purpose or simply occupying it randomly.</p>
+      <p>In natural horsemanship and in horse-to-horse communication, movement is the primary tool. Horses use movement and the threat of movement to communicate hierarchy, to invite connection, to set boundaries. A horse that moves another horse's feet has, in the language of horses, established a degree of authority over it. A horse that follows another horse's movement is expressing trust and willingness to be led. These patterns translate directly into human-horse work: the human who can move the horse's feet confidently and then give them back — move them, then release, then allow stillness — is speaking the horse's social language fluently.</p>
+      <p>Your own movement through space communicates constantly. The walk that arrives with clear direction and grounded weight says: I know where I am going and I am confident in it. The walk that is fast, light, and distracted says: I am not entirely sure what I am doing or where I am headed. The horse reads both. And the horse follows the first kind of movement more readily than the second — not because it has been trained to, but because clear, grounded, directed movement is the movement of a creature that knows what is happening. And a creature that knows what is happening is safer to be near than one that does not.</p>
+    `},
+    { type: 'quote', text: 'Move as if you know where you are going. Not fast. Not urgently. Simply with weight and direction and the quiet certainty of someone who has arrived. The horse will follow that.' }
+  ]
+},
+
+// ============================================================
+// ARTICLE 15 — Philosophy of Working With Horses
+// ============================================================
+{
+  label: 'Unique Edge Article XV',
+  title: 'The Philosophy of Working with Horses and Not Against Them',
+  tagline: 'There are two ways to work with a horse. Only one of them is real.',
+  keywords: ['natural horsemanship philosophy', 'working with horses not against', 'ethical horse training'],
+  category: 'edge',
+  pages: [
+    { type: 'title' },
+    { type: 'text', section: 'Opening', html: `
+      <p><span class="rd-dropcap">T</span>here are two ways to work with a horse. They look similar from the outside — a horse and rider moving together with apparent ease and harmony. But from inside the horse, they feel completely different. And the horse always knows the difference, even when the audience does not.</p>
+      <p>The first way is the way of control and management. It is not necessarily cruel. It can be technically correct, professionally delivered, and produce impressive results. But its foundation is the human's agenda, the human's timeline. The horse learns to manage its life within the edges of what is permitted. It may be content. But it is not free.</p>
+      <p>The second way is the way of real partnership. It begins not with what you want the horse to do, but with understanding what the horse is. It asks for more curiosity than certainty, more listening than instruction. It produces a horse that is not performing for you — it is participating with you. Partnership requires two willing participants. Everything else, however graceful, is something less.</p>
+    `},
+    { type: 'section', heading: 'The Question Behind the Question', sub: 'Every decision in the arena is an expression of a deeper belief about what horses are and what we owe them.' },
+    { type: 'text', section: 'The Question Behind the Question', html: `
+      <p><span class="rd-dropcap">U</span>nderneath every training decision — every choice about how to respond to resistance, how much pressure to use, when to push and when to release — there is a deeper belief about the nature of the horse and its relationship to humans. Most people never examine this belief. They simply inherited a set of practices from the people who taught them, who inherited from the people who taught them, and they use those practices without questioning the assumptions beneath them.</p>
+      <p>The assumption of much traditional horsemanship is that horses are animals to be managed — capable creatures with their own instincts and reactions, but fundamentally in need of human direction and control. In this view, the horse's resistance is a problem to be solved. Its fear is an obstacle. Its instincts are something to be trained over, reprogrammed, made compliant.</p>
+      <p>A different assumption is possible. The horse is a creature of extraordinary intelligence, sensitivity, and social sophistication — a creature that has been shaped by millions of years to live in relationship, to read and respond to the inner states of those around it, to participate in a collaborative existence with its herd. In this view, the horse's resistance is information. Its fear is communication. Its instincts are not obstacles but raw material — the very stuff from which real partnership, built with patience and honesty and respect, becomes possible.</p>
+      <p>The choice between these two assumptions is not merely philosophical. It produces different horses, different relationships, and different experiences of what it means to be with a horse at all. It is worth examining which one you hold — and whether it is one you have chosen deliberately or simply never thought to question.</p>
+    `},
+    { type: 'quote', text: 'The horse you have is not a reflection of your technique. It is a reflection of your philosophy. Change the philosophy, and the horse begins to change too.' },
+    { type: 'section', heading: 'Working With Nature, Not Over It', sub: 'The horse was designed by millions of years of evolution. Horsemanship is the art of working with that design.' },
+    { type: 'text', section: 'Working With Nature, Not Over It', html: `
+      <p><span class="rd-dropcap">E</span>very successful horseman I have ever met or read or had the privilege of watching has one thing in common: they work with the horse's nature rather than against it. They do not try to suppress the prey animal's fear response — they use it as information and work to become the thing the horse trusts more than it fears. They do not try to eliminate the horse's sensitivity — they value it as the source of the horse's capacity for communication and refinement.</p>
+      <p>Working with the horse's nature means accepting certain truths without resistance. Horses learn best when the pressure is clear, the release is immediate, and the sessions are short enough that the nervous system can integrate what has been offered. They learn through repetition, through consistency, through the building of new associations that over time become stronger than old fears. They do not learn through punishment, through force, through the removal of all choice until the only option is compliance.</p>
+      <p>It also means accepting that there are days when the horse is not available for what you had planned — when it is too anxious, too sore, too distracted by something in its environment that you cannot change. On those days, the horse that is worked with rather than against will be met where it is, given something achievable, and left with its dignity and its trust intact. The horse that is worked against will be pushed through its resistance until something gives — either the resistance or the relationship. Usually, over time, it is the relationship.</p>
+    `},
+    { type: 'quote', text: 'Nature built the horse over sixty million years. Your job is not to overcome that design. Your job is to understand it well enough to work within it. That is where the art begins.' },
+    { type: 'section', heading: 'The Life That Horses Offer', sub: 'This is not just about better horsemanship. It is about a better way of being in the world.' },
+    { type: 'text', section: 'The Life That Horses Offer', html: `
+      <p><span class="rd-dropcap">I</span> did not come to horses because I wanted to ride. I came to them because I was, at a point in my life, looking for something more honest than most of what the human world offered. I found it. Not in a dramatic way. Not in a single moment of revelation. I found it in ten thousand mornings in a field, with an animal that showed me, patiently and without judgment, exactly who I was that day and exactly how much distance there was between who I was and who I wanted to become.</p>
+      <p>Horses have given me things that no other practice, no teacher, no book has given me. They have taught me to be still. They have taught me that my inner state is not private, and that learning to manage it is not weakness but one of the most important skills a person can develop. They have taught me that real communication requires real listening — not the polite performance of listening while you wait to speak, but genuine, open, willing attention to what another being is actually expressing. They have taught me that trust is built slowly, in the dark, through a thousand small acts of consistency, and that it is worth far more than anything that can be obtained quickly.</p>
+      <p>Most of all, they have taught me that the quality of a relationship — any relationship — depends entirely on the quality of what each party brings to it. You cannot take more than you give and call it a partnership. You cannot demand without offering. You cannot manage from a distance and expect genuine connection. These are lessons from the arena. They are also, I have come to believe, lessons for everything. And that, in the end, is why horses are not just animals I work with. They are some of the best teachers I have ever had.</p>
+    `},
+    { type: 'quote', text: 'The horse does not know it is teaching you. It is simply being honest. But if you are paying attention, that honesty will change you. And a person changed by a horse is changed for the better, in ways that go far beyond the field.' }
+  ]
+}
+];
+
+// ============================================================
+// RENDER BOOKS TO GRID
+// ============================================================
+
+function renderBooksGrid() {
+  const booksGrid = document.getElementById('booksGrid');
+  if (!booksGrid) return;
+  
+  const icons = ['🐴', '🐎', '📖', '🔮', '✨', '🌟', '🍃', '🌙', '⚡', '💫', '🕯️', '📜', '🏔️', '🌊', '🔥'];
+  
+  booksGrid.innerHTML = '';
+  
+  articles.forEach((article, index) => {
+    const bookCard = document.createElement('div');
+    bookCard.className = 'book-card';
+    bookCard.setAttribute('data-category', article.category);
+    bookCard.setAttribute('data-index', index);
+    
+    const shortTitle = article.title.length > 55 ? article.title.substring(0, 52) + '...' : article.title;
+    
+    bookCard.innerHTML = `
+      <div class="book-cover">
+        <div class="book-category">${article.label}</div>
+        <div class="book-icon">${icons[index % icons.length]}</div>
+        <div class="book-number">${String(index + 1).padStart(2, '0')}</div>
+      </div>
+      <div class="book-info">
+        <div class="book-title">${shortTitle}</div>
+        <div class="book-excerpt">${article.tagline}</div>
+        <div class="book-read">Read Article</div>
+      </div>
+    `;
+    
+    bookCard.addEventListener('click', () => openArticleModal(index));
+    booksGrid.appendChild(bookCard);
+  });
+  
+  // Intersection Observer for reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  document.querySelectorAll('.book-card').forEach(card => observer.observe(card));
+}
+
+// ============================================================
+// BUILD ARTICLE HTML FROM PAGES
+// ============================================================
+
+function buildArticleHTML(article) {
+  let html = `
+    <div class="article-label">${article.label}</div>
+    <div class="article-title">${article.title}</div>
+    <div class="article-tagline">${article.tagline}</div>
+    <div class="article-keywords">
+      ${article.keywords.map(kw => `<span class="article-kw">${kw}</span>`).join('')}
+    </div>
+  `;
+  
+  article.pages.forEach(page => {
+    if (page.type === 'text') {
+      html += `<div class="article-section">
+        ${page.html}
+      </div>`;
+    }
+    if (page.type === 'section') {
+      html += `
+        <div class="section-heading">${page.heading}</div>
+        <div class="section-sub">${page.sub}</div>
+      `;
+    }
+    if (page.type === 'quote') {
+      html += `<div class="blockquote">${page.text}</div>`;
+    }
+  });
+  
+  html += `
+    <div class="article-footer">
+      The Horseman's Journal · Praveen Kumar
+    </div>
+  `;
+  
+  return html;
+}
+
+// ============================================================
+// MODAL FUNCTIONS
+// ============================================================
+
+const modal = document.getElementById('articleModal');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
+
+function openArticleModal(index) {
+  const article = articles[index];
+  if (!article) return;
+  
+  modalContent.innerHTML = buildArticleHTML(article);
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticleModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+if (modalClose) {
+  modalClose.addEventListener('click', closeArticleModal);
+}
+
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeArticleModal();
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+    closeArticleModal();
+  }
+});
+
+// ============================================================
+// FILTER FUNCTIONALITY
+// ============================================================
+
+const filterBtns = document.querySelectorAll('.chr-filter-btn');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.getAttribute('data-filter');
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.book-card').forEach(card => {
+      if (filter === 'all' || card.getAttribute('data-category') === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    
+    closeArticleModal();
+  });
+});
+
+// ============================================================
+// INITIALIZE
+// ============================================================
+
+renderBooksGrid();
+
+console.log('Chronicles loaded: 15 articles with complete multi-page content');
