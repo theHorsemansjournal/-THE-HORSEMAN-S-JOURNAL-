@@ -1176,3 +1176,51 @@ filterBtns.forEach(btn => {
 renderBooksGrid();
 
 console.log('Chronicles loaded: 15 complete articles with 4 animated 3D horses');
+
+// Simple test to verify books appear
+console.log('JavaScript loaded');
+
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM ready');
+  
+  const booksGrid = document.getElementById('booksGrid');
+  if (booksGrid) {
+    console.log('Books grid found');
+    
+    // Create test books
+    for (let i = 1; i <= 15; i++) {
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      card.setAttribute('data-category', i <= 5 ? 'foundational' : (i <= 10 ? 'practical' : 'edge'));
+      card.innerHTML = `
+        <div class="book-cover">
+          <div class="book-category">${i <= 5 ? 'Foundational' : (i <= 10 ? 'Practical' : 'Unique Edge')}</div>
+          <div class="book-icon">📖</div>
+          <div class="book-number">${String(i).padStart(2, '0')}</div>
+        </div>
+        <div class="book-info">
+          <div class="book-title">Test Article ${i}</div>
+          <div class="book-excerpt">This is a test article to verify books are visible.</div>
+          <div class="book-read">Read Article</div>
+        </div>
+      `;
+      booksGrid.appendChild(card);
+    }
+    
+    // Reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.book-card').forEach(card => observer.observe(card));
+    
+  } else {
+    console.error('Books grid NOT found!');
+  }
+});
