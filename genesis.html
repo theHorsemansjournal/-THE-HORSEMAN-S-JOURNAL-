@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genesis - The Horseman's Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Link to GLOBAL CSS (important!) -->
+  <link rel="stylesheet" href="global.css">
+  
+  <style>
+    /* Additional styles specific to Genesis page only */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #050302;
+      color: #e8dfc7;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ORBS — deep amber */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(130px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb1 {
+      width: 60vw; height: 60vw;
+      top: -15vh; right: -15vw;
+      background: radial-gradient(circle, rgba(200, 150, 50, 0.10), transparent);
+    }
+    .orb2 {
+      width: 50vw; height: 50vw;
+      bottom: -10vh; left: -20vw;
+      background: radial-gradient(circle, rgba(180, 120, 30, 0.06), transparent);
+    }
+    .orb3 {
+      width: 40vw; height: 40vw;
+      top: 35vh; left: 30vw;
+      background: radial-gradient(circle, rgba(160, 110, 30, 0.04), transparent);
+    }
+
+    /* CINEMATIC PRIMORDIAL HERO */
+    .genesis-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 650px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 55%, transparent 20%, rgba(5,3,2,0.8) 90%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+      animation: genesisFloat 7s ease-in-out infinite;
+    }
+    @keyframes genesisFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: .62rem;
+      letter-spacing: 8px;
+      color: rgba(200, 150, 50, 0.5);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 3px;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 80px rgba(200, 140, 40, 0.35), 0 0 160px rgba(180, 120, 20, 0.2), 0 4px 60px rgba(0,0,0,0.6);
+    }
+    .hero-title .gold {
+      color: #E8C84A;
+      text-shadow: 0 0 60px rgba(200,140,40,0.7), 0 0 120px rgba(200,140,40,0.3);
+    }
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-dline {
+      width: 90px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,150,50,0.5));
+    }
+    .hero-dline.r { background: linear-gradient(90deg, rgba(200,150,50,0.5), transparent); }
+    .hero-dgem {
+      width: 8px; height: 8px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 18px rgba(200,150,40,0.9);
+    }
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      color: rgba(220, 200, 160, 0.7);
+      letter-spacing: .5px;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUpDown 2.5s ease-in-out infinite;
+      cursor: pointer;
+    }
+    .hero-scroll span {
+      font-family: 'Cinzel', serif;
+      font-size: .55rem;
+      letter-spacing: 5px;
+      color: rgba(200,150,40,0.5);
+      text-transform: uppercase;
+    }
+    .hero-scroll svg {
+      width: 18px;
+      stroke: rgba(200,150,40,0.5);
+    }
+    @keyframes fadeUpDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.35; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 0.8; }
+    }
+
+    /* CONTENT — STONE TABLETS */
+    .genesis-content {
+      position: relative;
+      padding: 80px 2rem 140px;
+      max-width: 1000px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+    .block {
+      margin-bottom: 100px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .9s cubic-bezier(.23,1,.32,1);
+      position: relative;
+      background: linear-gradient(160deg, rgba(30,20,8,0.5), rgba(15,10,3,0.7));
+      border: 1px solid rgba(180,140,60,0.12);
+      border-radius: 6px;
+      padding: 3.5rem 3rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+    .block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .block h2 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 600;
+      color: #E8C84A;
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(200,150,40,0.2);
+    }
+    .block p {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.1rem;
+      line-height: 2;
+      color: rgba(225,215,190,0.8);
+      margin-bottom: 1.3rem;
+      text-indent: 2em;
+    }
+    .block p:first-of-type { text-indent: 0; }
+    .block p strong {
+      color: #E8C84A;
+      font-weight: 600;
+    }
+    .block-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 2rem 0 .5rem;
+    }
+    .block-ornament span {
+      width: 50px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,150,40,0.35), transparent);
+    }
+    .block-ornament i {
+      width: 6px; height: 6px;
+      background: rgba(200,150,40,0.5);
+      transform: rotate(45deg);
+    }
+    .block-quote {
+      text-align: center;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-top: 1px solid rgba(200,150,40,0.12);
+      border-bottom: 1px solid rgba(200,150,40,0.12);
+      background: rgba(200,150,40,0.02);
+    }
+    .block-quote p {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: rgba(220,190,130,0.85);
+      text-align: center;
+      text-indent: 0;
+    }
+    .block-closing {
+      text-align: center;
+      padding: 3.5rem 3rem;
+      background: linear-gradient(135deg, rgba(200,150,40,0.04), rgba(200,150,40,0.01));
+      border: 1px solid rgba(200,150,40,0.15);
+      border-radius: 8px;
+    }
+    .block-closing p {
+      text-align: center;
+      text-indent: 0;
+      font-size: 1.2rem;
+    }
+    .block-closing p:last-child {
+      font-size: 1.5rem;
+      color: #E8C84A;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.8rem 1rem 0; }
+      .nav3d { height: 56px; transform: rotateX(15deg); }
+      .brand { font-size: 0.7rem; }
+      .links { gap: 0; }
+      .links li a { font-size: .52rem; padding: 4px 5px; letter-spacing: 1px; }
+      .portal-top { font-size: .55rem; padding: 6px 12px; }
+      .block { margin-bottom: 60px; padding: 2rem 1.5rem; }
+      .block p { font-size: 1rem; }
+    }
+    @media (max-width: 520px) {
+      .brand small { display: none; }
+      .links li a { font-size: .45rem; padding: 3px 4px; }
+      .hero-title { font-size: 2rem; }
+      .block h2 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- NAVBAR - FIXED LINKS -->
+  <div class="navbar-wrapper">
+    <div class="scene">
+      <nav class="nav3d">
+        <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-top-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
+        <div class="face face-top"></div>
+        <div class="nav-content">
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+          <ul class="links">
+            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="awakening.html">AWAKENING</a></li>
+            <li><a href="chronicles.html">CHRONICLES</a></li>
+            <li><a href="companions.html">COMPANIONS</a></li>
+            <li><a href="essays.html">VERSES</a></li>
+            <li><a href="questions.html">QUESTIONS</a></li>
+          </ul>
+          <div class="portal-scene">
+            <button class="portal-btn" id="portalBtn">
+              <span class="portal-glow"></span>
+              <span class="portal-wall"></span>
+              <span class="portal-top">PORTAL ✦</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- PRIMORDIAL HERO -->
+  <section class="genesis-hero" id="genesisHero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">The Horseman's Journal</span>
+      <h1 class="hero-title">Gen<span class="gold">esis</span></h1>
+      <div class="hero-divider">
+        <div class="hero-dline"></div>
+        <div class="hero-dgem"></div>
+        <div class="hero-dline hero-dline r"></div>
+      </div>
+      <p class="hero-tagline">I do not train horses. I work with them until they no longer feel the need to resist.</p>
+    </div>
+    <div class="hero-scroll" id="scrollHint">
+      <span>Enter</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="genesis-content">
+
+    <div class="block">
+      <h2>The Work</h2>
+      <p>For over eleven years, I have worked with horses in a way that does not rely on force, domination, or mechanical repetition. I did not begin with a philosophy. I began like most people do, trying to make things work, trying to control outcomes, trying to get the horse to respond correctly.</p>
+      <p>Over time, that approach stopped making sense. What I do now is not about making a horse perform. It is about understanding what the horse is experiencing in each moment, what it feels, what it anticipates, and why it reacts the way it does.</p>
+      <p>Every behaviour, whether calm or explosive, comes from a place that can be observed and understood. My work is built around that understanding.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>The Shift</h2>
+      <p>There was a point where the usual methods stopped working, not because they failed to produce results, but because they failed to produce clarity.</p>
+      <p>I began to notice that a horse could comply and still remain tense, disconnected, or uncertain. The behaviour would look correct, but something underneath it remained unresolved.</p>
+      <p>Instead of asking, "How do I get the horse to do this?", the question became: <strong>Why does the horse feel the need to resist in the first place?</strong></p>
+      <p>Everything I do now comes from that shift.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>How I Work</h2>
+      <p>Most approaches to training respond to resistance by increasing pressure. Sometimes this works. But often, it only suppresses the visible behaviour while leaving the cause untouched.</p>
+      <p>When a horse resists, I do not immediately correct it. I observe it. I reduce unnecessary pressure. I allow space for the horse to process instead of react. I focus on removing confusion rather than overpowering it.</p>
+      <p>This does not always look impressive in the moment. It is slower in the beginning. But it produces something far more stable.</p>
+      <div class="block-quote"><p>A horse that understands, rather than a horse that complies</p></div>
+    </div>
+
+    <div class="block">
+      <h2>Core Principles</h2>
+      <p><strong>A horse must be able to think before it can learn.</strong> If the horse is overwhelmed, no amount of pressure will create clarity.</p>
+      <p><strong>Behaviour is information, not disobedience.</strong> Every reaction shows you something about the horse's internal state.</p>
+      <p><strong>Willingness is more valuable than obedience.</strong> A correct response given freely is fundamentally different from one that is forced.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>Experience</h2>
+      <p>Over the past eleven years, I have worked with a range of horses across different temperaments and conditions. Stallions, highly reactive horses, and individuals with deeply ingrained behavioural patterns.</p>
+      <p>Much of my work has involved fear based reactions, rearing, escalation, and horses that have been misunderstood or pushed too far.</p>
+      <p>These are not unusual cases. They are simply situations where the underlying issue has not been addressed.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>What I Offer</h2>
+      <p>I do not offer shortcuts, and I do not promise instant results.</p>
+      <p>What I offer is a way of working that prioritizes clarity over control, stability over speed, and understanding over repetition.</p>
+      <p>If someone comes to me, they should expect a process, not a quick solution.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>What Horses Taught Me</h2>
+      <p>There was a time I believed I was confident, even fearless. That belief does not survive long when you stand next to a thousand kilogram animal that can read every inconsistency in you.</p>
+      <p>Horses do not respond to what you say. They respond to what you are.</p>
+      <p>They forced me to confront fear, hesitation, and lack of clarity in a way nothing else could. Over time, the work became less about technique and more about presence.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block">
+      <h2>Boundary</h2>
+      <p>I do not work with dominance based or suppression based handling.</p>
+      <p>A horse cannot find clarity through a handler who is internally conflicted or externally aggressive. Emotional steadiness is not optional in this work. It is the foundation of it.</p>
+      <div class="block-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <div class="block block-closing">
+      <p>A horse does not need to be made obedient. It needs to feel safe enough to respond.</p>
+      <p><strong>That is where my work begins.</strong></p>
+    </div>
+
+  </section>
+
+  <!-- Link to GLOBAL JS (important!) -->
+  <script src="global.js"></script>
+  
+  <script>
+    // ============================================
+    // GENESIS PAGE - CANVAS ANIMATION
+    // ============================================
+    const canvas = document.getElementById('heroCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let W, H;
+      let mouseX = 0.5, mouseY = 0.5;
+      let time = 0;
+      let embers = [];
+      let stoneForms = [];
+
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      document.getElementById('genesisHero').addEventListener('mousemove', (e) => {
+        mouseX = e.clientX / window.innerWidth;
+        mouseY = e.clientY / window.innerHeight;
+      });
+
+      // Embers — rising gold particles
+      for (let i = 0; i < 120; i++) {
+        embers.push({
+          x: Math.random() * 1.3 - 0.15,
+          y: Math.random() * 1.3,
+          size: Math.random() * 2.5 + 0.3,
+          speed: Math.random() * 0.4 + 0.1,
+          opacity: Math.random() * 0.6 + 0.2,
+          phase: Math.random() * Math.PI * 2,
+          drift: (Math.random() - 0.5) * 0.5
+        });
+      }
+
+      // Stone forms — ancient shapes in the void
+      for (let i = 0; i < 6; i++) {
+        stoneForms.push({
+          x: Math.random() * 0.8 + 0.1,
+          y: Math.random() * 0.4 + 0.55,
+          w: Math.random() * 200 + 80,
+          h: Math.random() * 60 + 30,
+          opacity: Math.random() * 0.06 + 0.02,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+
+      function drawVoid() {
+        const grad = ctx.createRadialGradient(W * 0.5, H * 0.45, 0, W * 0.5, H * 0.45, W * 0.9);
+        grad.addColorStop(0, '#0a0806');
+        grad.addColorStop(0.5, '#060403');
+        grad.addColorStop(1, '#020101');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      function drawStoneForms() {
+        stoneForms.forEach(s => {
+          const sx = s.x * W;
+          const sy = s.y * H;
+          const pulse = 1 + Math.sin(time * 0.008 + s.phase) * 0.3;
+          ctx.fillStyle = `rgba(40,30,15,${s.opacity * pulse})`;
+          ctx.beginPath();
+          ctx.ellipse(sx, sy, s.w * pulse, s.h, Math.sin(time * 0.003 + s.phase) * 0.1, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      function drawEmbers() {
+        embers.forEach(e => {
+          const ex = e.x * W;
+          const ey = e.y * H;
+          const alpha = e.opacity * (0.5 + 0.5 * Math.sin(time * 0.04 + e.phase));
+          const sz = e.size * (0.7 + 0.3 * Math.sin(time * 0.06 + e.phase));
+
+          const glowGrad = ctx.createRadialGradient(ex, ey, 0, ex, ey, sz * 4);
+          glowGrad.addColorStop(0, `rgba(232,200,74,${alpha * 0.6})`);
+          glowGrad.addColorStop(0.5, `rgba(200,150,40,${alpha * 0.15})`);
+          glowGrad.addColorStop(1, 'rgba(200,150,40,0)');
+          ctx.fillStyle = glowGrad;
+          ctx.beginPath();
+          ctx.arc(ex, ey, sz * 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = `rgba(255,220,120,${alpha})`;
+          ctx.shadowColor = `rgba(255,200,80,${alpha})`;
+          ctx.shadowBlur = sz * 2;
+          ctx.beginPath();
+          ctx.arc(ex, ey, sz, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+      }
+
+      function drawCentralLight() {
+        const cx = W * 0.5 + (mouseX - 0.5) * 40;
+        const cy = H * 0.48 + (mouseY - 0.5) * 30;
+        const pulse = 1 + Math.sin(time * 0.015) * 0.15;
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, W * 0.55);
+        grad.addColorStop(0, `rgba(220,170,60,${0.06 * pulse})`);
+        grad.addColorStop(0.3, `rgba(180,120,30,${0.03 * pulse})`);
+        grad.addColorStop(0.7, 'rgba(80,40,10,0.005)');
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+        drawVoid();
+        drawCentralLight();
+        drawStoneForms();
+        drawEmbers();
+      }
+
+      function animate() {
+        time++;
+        embers.forEach(e => {
+          e.y -= e.speed * 0.08;
+          e.x += Math.sin(time * 0.02 + e.phase) * e.drift * 0.03;
+          if (e.y < -0.1) {
+            e.y = 1.05 + Math.random() * 0.2;
+            e.x = Math.random() * 1.3 - 0.15;
+          }
+        });
+        render();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    }
+
+    // ============================================
+    // SCROLL REVEAL
+    // ============================================
+    const blocks = document.querySelectorAll('.block');
+    const blockObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          blockObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    blocks.forEach(b => blockObserver.observe(b));
+
+    // ============================================
+    // SCROLL HINT - Click to scroll down
+    // ============================================
+    const scrollHint = document.getElementById('scrollHint');
+    if (scrollHint) {
+      scrollHint.addEventListener('click', () => {
+        const content = document.querySelector('.genesis-content');
+        if (content) {
+          content.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // ============================================
+    // PORTAL BUTTON - Return to home
+    // ============================================
+    const portalBtn = document.getElementById('portalBtn');
+    if (portalBtn) {
+      portalBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    }
+  </script>
+
+</body>
+</html>
