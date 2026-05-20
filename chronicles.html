@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronicles - The Horseman's Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+       CHRONICLES PAGE - COMPLETE CSS
+    ============================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #060308;
+      color: #e8dfc7;
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ORBS */
+    .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; }
+    .orb1 { width: 55vw; height: 55vw; top: -12vh; right: -12vw; background: radial-gradient(circle, rgba(200,150,60,0.07), transparent); }
+    .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180,130,100,0.04), transparent); }
+    .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(140,100,180,0.03), transparent); }
+
+    /* NAVBAR */
+    .navbar-wrapper {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none;
+    }
+    .navbar-wrapper * { pointer-events: auto; }
+    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
+    .nav3d {
+      position: relative; transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px;
+    }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+    .face { position: absolute; border-radius: 18px; }
+    .face-top {
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(200,155,60,0.08) 40%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(200,155,60,0.45); border-bottom-color: rgba(200,155,60,0.15);
+      backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06);
+      z-index: 4;
+    }
+    .face-back {
+      inset: 0; background: rgba(180,130,40,0.04);
+      border: 1px solid rgba(200,155,60,0.2); transform: translateZ(-36px); z-index: 1;
+    }
+    .face-bottom-wall {
+      left: 18px; right: 18px; bottom: -36px; height: 36px;
+      background: linear-gradient(180deg, rgba(180,130,50,0.18) 0%, rgba(80,50,10,0.08) 60%, rgba(0,0,0,0.02) 100%);
+      border-left: 1px solid rgba(200,155,60,0.15); border-right: 1px solid rgba(200,155,60,0.15);
+      border-bottom: 1px solid rgba(200,155,60,0.1); border-radius: 0 0 12px 12px;
+      transform-origin: top center; transform: rotateX(-90deg); z-index: 2;
+    }
+    .face-top-wall {
+      left: 18px; right: 18px; top: -5px; height: 5px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(200,155,60,0.2));
+      border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3;
+    }
+    .face-left-wall {
+      top: 4px; bottom: 4px; left: -36px; width: 36px;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 12px 0 0 12px;
+      transform-origin: right center; transform: rotateY(-90deg); z-index: 2;
+    }
+    .face-right-wall {
+      top: 4px; bottom: 4px; right: -36px; width: 36px;
+      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1); border-radius: 0 12px 12px 0;
+      transform-origin: left center; transform: rotateY(90deg); z-index: 2;
+    }
+    .nav-content {
+      position: absolute; inset: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.8rem; transform: translateZ(1px);
+    }
+    .brand {
+      font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700;
+      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.25;
+      text-shadow: 0 0 24px rgba(200,150,50,0.8), 0 0 60px rgba(200,150,50,0.3);
+      flex-shrink: 0; text-decoration: none;
+    }
+    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(200,150,50,0.4); font-weight: 400; margin-top: 1px; }
+    .links { display: flex; gap: .05rem; list-style: none; }
+    .links li a {
+      display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px;
+      color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px;
+      border-radius: 8px; transition: all .25s; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap;
+    }
+    .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(200,150,50,0.9); }
+    .portal-scene { perspective: 300px; flex-shrink: 0; }
+    .portal-btn {
+      position: relative; transform-style: preserve-3d; transform: rotateX(22deg);
+      transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer;
+    }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-btn:active { transform: rotateX(30deg) translateY(2px); }
+    .portal-top {
+      display: block; padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
+      backdrop-filter: blur(12px); border: 1px solid rgba(200,150,50,0.7);
+      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: 2.5px; color: #FFF8DC; text-shadow: 0 0 12px rgba(200,150,50,0.9);
+      position: relative; z-index: 3; white-space: nowrap; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .portal-wall {
+      position: absolute; inset: 0; background: linear-gradient(180deg, rgba(120,80,20,0.6), rgba(50,30,5,0.4));
+      border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(100,60,15,0.5);
+    }
+    .portal-glow {
+      position: absolute; inset: -4px; border-radius: 100px; background: transparent;
+      box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
+      transform: translateZ(-7px); z-index: 1;
+    }
+
+    /* HERO SECTION WITH 4 ANIMATED HORSES */
+    .chronicles-hero {
+      position: relative; width: 100%; height: 100vh; min-height: 650px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 18%, rgba(6,3,8,0.78) 90%);
+      z-index: 1; pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 10; text-align: center; max-width: 900px;
+      padding: 0 2rem; animation: chrFloat 7s ease-in-out infinite;
+    }
+    @keyframes chrFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-eyebrow {
+      font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 8px;
+      color: rgba(200,155,60,0.5); text-transform: uppercase; display: block; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cinzel Decorative',serif; font-size: clamp(2.6rem,6.5vw,5.5rem);
+      font-weight: 700; color: #fff; letter-spacing: 4px; line-height: 1.05; margin-bottom: 1.5rem;
+      text-shadow: 0 0 80px rgba(200,140,40,0.35),0 0 160px rgba(180,120,20,0.2),0 4px 60px rgba(0,0,0,0.6);
+    }
+    .hero-title .gold { color: #E8C84A; text-shadow: 0 0 60px rgba(232,200,74,0.8),0 0 120px rgba(200,150,50,0.4); }
+    .hero-div { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; }
+    .hero-dline { width: 90px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,155,60,0.5)); }
+    .hero-dline-r { background: linear-gradient(90deg,rgba(200,155,60,0.5),transparent); }
+    .hero-dgem { width: 8px; height: 8px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 18px rgba(232,200,74,0.9); }
+    .hero-tagline {
+      font-family: 'EB Garamond',serif; font-style: italic; font-size: clamp(.9rem,1.8vw,1.2rem);
+      color: rgba(240,220,180,0.6); letter-spacing: .5px; max-width: 550px; margin: 0 auto; line-height: 1.8;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      animation: fadeUD 2.5s ease-in-out infinite; cursor: pointer;
+    }
+    .hero-scroll span { font-family: 'Cinzel',serif; font-size: .52rem; letter-spacing: 5px; color: rgba(200,155,60,0.45); text-transform: uppercase; }
+    .hero-scroll svg { width: 18px; stroke: rgba(200,155,60,0.45); }
+    @keyframes fadeUD { 0%,100%{transform:translateX(-50%)translateY(0);opacity:.3} 50%{transform:translateX(-50%)translateY(8px);opacity:.75} }
+
+    /* BOOKS SECTION */
+    .chronicles-books {
+      position: relative; background: #060308; padding: 5rem 0 8rem; overflow: hidden;
+    }
+    .chr-sec-header { text-align: center; padding: 0 2rem 4rem; position: relative; z-index: 2; }
+    .chr-sec-eyebrow { font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 6px; color: rgba(200,155,60,0.4); text-transform: uppercase; display: block; margin-bottom: 1rem; }
+    .chr-sec-title { font-family: 'Cinzel Decorative',serif; font-size: clamp(1.8rem,4vw,3rem); font-weight: 700; color: #E8C84A; letter-spacing: 2px; text-shadow: 0 0 30px rgba(200,155,60,0.2); margin-bottom: .8rem; }
+    .chr-sec-sub { font-family: 'EB Garamond',serif; font-style: italic; font-size: clamp(.9rem,1.5vw,1.05rem); color: rgba(240,230,200,0.35); letter-spacing: .5px; }
+    
+    .chr-filters { display: flex; align-items: center; justify-content: center; gap: .6rem; flex-wrap: wrap; padding: 0 2rem 3.5rem; position: relative; z-index: 2; }
+    .chr-filter-btn {
+      font-family: 'Cinzel',serif; font-size: .62rem; letter-spacing: 2.5px; color: rgba(200,155,60,0.45);
+      text-transform: uppercase; background: transparent; border: 1px solid rgba(200,155,60,0.15);
+      padding: 9px 22px; border-radius: 2px; cursor: pointer; transition: all .3s;
+    }
+    .chr-filter-btn:hover { color: rgba(200,155,60,0.8); border-color: rgba(200,155,60,0.35); background: rgba(200,155,60,0.04); }
+    .chr-filter-btn.active { color: #0a0500; background: #E8C84A; border-color: #E8C84A; box-shadow: 0 0 20px rgba(200,155,60,0.3); }
+    .chr-filter-sep { width: 1px; height: 16px; background: rgba(200,155,60,0.15); }
+
+    .books-grid { max-width: 1400px; margin: 0 auto; padding: 0 2.5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; position: relative; z-index: 2; }
+
+    /* BOOK CARD */
+    .book-card {
+      background: linear-gradient(160deg, #0e0900 0%, #1c1304 45%, #0a0700 100%);
+      border-radius: 12px; overflow: hidden; cursor: pointer;
+      border: 1px solid rgba(200,155,60,0.15); transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+      opacity: 0; transform: translateY(30px);
+    }
+    .book-card.visible { opacity: 1; transform: translateY(0); }
+    .book-card:hover { transform: translateY(-8px); border-color: rgba(200,155,60,0.35); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(200,155,60,0.1); }
+    .book-card.hidden { display: none; }
+    
+    .book-cover { position: relative; height: 220px; overflow: hidden; }
+    .book-cover-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a0d00, #0d0800);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .book-cover-bg span { font-size: 4rem; opacity: 0.3; }
+    .book-ribbon {
+      position: absolute; top: 16px; left: 0; z-index: 2;
+      font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 2px;
+      color: #0a0500; text-transform: uppercase; padding: 4px 12px 4px 10px;
+      background: #c8922a; font-weight: 600;
+    }
+    .book-card[data-category="practical"] .book-ribbon { background: #d4854a; }
+    .book-card[data-category="edge"] .book-ribbon { background: #b890c0; }
+    .book-number {
+      position: absolute; bottom: 12px; right: 12px;
+      font-family: 'Cinzel Decorative',serif; font-size: 2rem; font-weight: 700;
+      color: rgba(255,255,255,0.06); line-height: 1;
+    }
+    .book-info { padding: 1.5rem; }
+    .book-category {
+      font-family: 'Cinzel',serif; font-size: .52rem; letter-spacing: 3px;
+      color: rgba(200,155,60,0.5); text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .book-title {
+      font-family: 'Cinzel',serif; font-size: 1.1rem; font-weight: 700;
+      color: #E8C84A; margin-bottom: 0.75rem; line-height: 1.3;
+    }
+    .book-desc {
+      font-family: 'EB Garamond',serif; font-size: .85rem; line-height: 1.6;
+      color: rgba(240,230,200,0.65); margin-bottom: 1rem;
+    }
+    .book-keywords { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .book-kw {
+      font-family: 'Cinzel',serif; font-size: .42rem; letter-spacing: 1px;
+      color: rgba(200,155,60,0.6); text-transform: uppercase; padding: 2px 8px;
+      border: 1px solid rgba(200,155,60,0.2); border-radius: 2px;
+    }
+    .book-read {
+      font-family: 'Cinzel',serif; font-size: .55rem; letter-spacing: 2px;
+      color: rgba(200,155,60,0.7); text-transform: uppercase; display: inline-flex;
+      align-items: center; gap: 6px; transition: color 0.2s;
+    }
+    .book-card:hover .book-read { color: #E8C84A; }
+    .book-read::after { content: '→'; transition: transform 0.2s; }
+    .book-card:hover .book-read::after { transform: translateX(4px); }
+
+    /* ARTICLE PANEL */
+    .article-panel {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;
+      background: rgba(6,3,8,0.95); backdrop-filter: blur(20px);
+      opacity: 0; pointer-events: none; transition: opacity 0.4s; overflow-y: auto;
+    }
+    .article-panel.open { opacity: 1; pointer-events: all; }
+    .panel-inner {
+      max-width: 900px; margin: 2rem auto; background: linear-gradient(160deg, #0e0900, #1c1304);
+      border-radius: 12px; border: 1px solid rgba(200,155,60,0.2); overflow: hidden;
+      position: relative;
+    }
+    .panel-close {
+      position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+      border-radius: 50%; border: 1px solid rgba(200,155,60,0.3); background: rgba(0,0,0,0.6);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10;
+    }
+    .panel-close:hover { border-color: rgba(200,155,60,0.6); background: rgba(200,155,60,0.1); }
+    .panel-close::before, .panel-close::after {
+      content: ''; position: absolute; width: 14px; height: 1px; background: rgba(200,155,60,0.7);
+    }
+    .panel-close::before { transform: rotate(45deg); }
+    .panel-close::after { transform: rotate(-45deg); }
+    .panel-content { padding: 3rem; max-height: 80vh; overflow-y: auto; }
+    .panel-label {
+      font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 4px;
+      color: rgba(200,155,60,0.5); text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .panel-title {
+      font-family: 'Cinzel Decorative',serif; font-size: 1.8rem; color: #E8C84A;
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+    .panel-tagline {
+      font-family: 'EB Garamond',serif; font-style: italic; font-size: 1rem;
+      color: rgba(240,230,200,0.6); margin-bottom: 1.5rem;
+    }
+    .panel-rule { height: 1px; background: linear-gradient(90deg, rgba(200,155,60,0.4), transparent); margin-bottom: 1.5rem; }
+    .panel-keywords { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+    .panel-kw {
+      font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 1px;
+      color: rgba(200,155,60,0.7); padding: 4px 10px; border: 1px solid rgba(200,155,60,0.2);
+      border-radius: 2px;
+    }
+    .panel-body { font-family: 'EB Garamond',serif; font-size: 1rem; line-height: 1.9; color: rgba(240,230,200,0.8); }
+    .panel-body p { margin-bottom: 1.2rem; text-indent: 2em; }
+    .panel-body p:first-child { text-indent: 0; }
+    .panel-body p:first-child::first-letter {
+      font-family: 'Cinzel Decorative',serif; font-size: 3.2em; font-weight: 700;
+      color: #E8C84A; float: left; line-height: 0.75; margin: 0.08em 0.1em 0 0;
+    }
+    .panel-quote {
+      border-left: 3px solid rgba(200,155,60,0.4); padding: 1rem 1.5rem;
+      margin: 1.5rem 0; font-style: italic; color: rgba(200,155,60,0.7);
+      background: rgba(200,155,60,0.03);
+    }
+
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.8rem 1rem 0; }
+      .nav3d { height: 56px; transform: rotateX(15deg); }
+      .brand { font-size: 0.7rem; }
+      .links li a { font-size: .5rem; padding: 4px 5px; letter-spacing: 1px; }
+      .portal-top { font-size: .52rem; padding: 6px 10px; }
+      .books-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+      .panel-content { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <!-- NAVBAR -->
+  <div class="navbar-wrapper">
+    <div class="scene">
+      <nav class="nav3d">
+        <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-top-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
+        <div class="face face-top"></div>
+        <div class="nav-content">
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+          <ul class="links">
+            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="awakening.html">AWAKENING</a></li>
+            <li><a href="chronicles.html">CHRONICLES</a></li>
+            <li><a href="companions.html">COMPANIONS</a></li>
+            <li><a href="essays.html">VERSES</a></li>
+            <li><a href="questions.html">QUESTIONS</a></li>
+          </ul>
+          <div class="portal-scene">
+            <button class="portal-btn" id="portalBtn">
+              <span class="portal-glow"></span>
+              <span class="portal-wall"></span>
+              <span class="portal-top">PORTAL ✦</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="chronicles-hero" id="heroSection">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">The Horseman's Journal</span>
+      <h1 class="hero-title">Chron<span class="gold">icles</span></h1>
+      <div class="hero-div">
+        <div class="hero-dline"></div>
+        <div class="hero-dgem"></div>
+        <div class="hero-dline hero-dline-r"></div>
+      </div>
+      <p class="hero-tagline">Fifteen books. One hundred articles. Eleven years of horsemanship distilled into words.</p>
+    </div>
+    <div class="hero-scroll" id="scrollHint">
+      <span>Explore</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- BOOKS SECTION -->
+  <section class="chronicles-books" id="booksSection">
+    <div class="chr-sec-header">
+      <span class="chr-sec-eyebrow">The Written Record</span>
+      <h2 class="chr-sec-title">The Library</h2>
+      <p class="chr-sec-sub">Fifteen books. Three paths. One truth.</p>
+    </div>
+    <div class="chr-filters">
+      <button class="chr-filter-btn active" data-filter="all">All Articles</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="foundational">Foundational</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="practical">Practical</button>
+      <div class="chr-filter-sep"></div>
+      <button class="chr-filter-btn" data-filter="edge">Unique Edge</button>
+    </div>
+    <div class="books-grid" id="booksGrid"></div>
+  </section>
+
+  <!-- ARTICLE PANEL -->
+  <div class="article-panel" id="articlePanel">
+    <div class="panel-inner">
+      <div class="panel-close" id="panelClose"></div>
+      <div class="panel-content" id="panelContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // 4 ANIMATED HORSES CANVAS
+    // ============================================
+    const canvas = document.getElementById('heroCanvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let W, H, time = 0;
+      
+      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function drawHorse(x, y, size, pose, flip) {
+        ctx.save();
+        ctx.translate(x, y);
+        if (flip) ctx.scale(-size, size);
+        else ctx.scale(size, size);
+        
+        ctx.fillStyle = '#1a0d00';
+        ctx.strokeStyle = '#E8C84A';
+        ctx.lineWidth = 1.2;
+        
+        if (pose === 'rearing') {
+          // Rearing pose
+          ctx.beginPath(); ctx.moveTo(0, 20); ctx.lineTo(0, -40); ctx.lineTo(15, -45); ctx.lineTo(25, -30); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(0, 20, 15, 8, 0, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(-5, -42, 4, 3, -0.2, 0, Math.PI*2); ctx.fill(); // head
+          ctx.beginPath(); ctx.moveTo(-3, -44); ctx.lineTo(-5, -52); ctx.lineTo(-1, -45); ctx.fill(); // ear
+          ctx.beginPath(); ctx.moveTo(22, -32); ctx.lineTo(28, -28); ctx.lineTo(24, -35); ctx.fill(); // foreleg
+          ctx.beginPath(); ctx.moveTo(22, -28); ctx.lineTo(30, -24); ctx.lineTo(24, -30); ctx.fill();
+        } else if (pose === 'grazing') {
+          // Grazing pose
+          ctx.beginPath(); ctx.ellipse(0, 10, 18, 10, 0, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(12, 0); ctx.quadraticCurveTo(18, -20, 15, -35); ctx.quadraticCurveTo(10, -20, 5, -5); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(16, -37, 5, 3, -0.3, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(16, -41); ctx.lineTo(14, -49); ctx.lineTo(19, -42); ctx.fill();
+          ctx.fillRect(-5, 15, 4, 25); ctx.fillRect(8, 15, 4, 25);
+          ctx.fillRect(-15, 12, 4, 28); ctx.fillRect(2, 15, 4, 25);
+        } else if (pose === 'nuzzling') {
+          // Nuzzling pose - head turned
+          ctx.beginPath(); ctx.ellipse(0, 5, 16, 9, 0, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(10, -5); ctx.quadraticCurveTo(18, -15, 22, -25); ctx.quadraticCurveTo(12, -18, 3, -8); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(24, -28, 5, 4, -0.1, 0, Math.PI*2); ctx.fill();
+          ctx.fillRect(-12, 8, 4, 22); ctx.fillRect(-2, 10, 4, 22);
+          ctx.fillRect(6, 8, 4, 22); ctx.fillRect(14, 5, 4, 24);
+        } else {
+          // Sentinel pose
+          ctx.beginPath(); ctx.ellipse(0, 8, 20, 11, 0, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(14, -2); ctx.quadraticCurveTo(24, -20, 22, -35); ctx.quadraticCurveTo(14, -22, 6, -5); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(24, -38, 5, 4, -0.15, 0, Math.PI*2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(26, -42); ctx.lineTo(24, -50); ctx.lineTo(28, -43); ctx.fill();
+          ctx.fillRect(-15, 10, 4, 26); ctx.fillRect(-5, 12, 4, 26);
+          ctx.fillRect(4, 12, 4, 26); ctx.fillRect(12, 8, 4, 28);
+        }
+        
+        ctx.restore();
+      }
+      
+      const horses = [
+        { x: 0.15, y: 0.65, size: 0.8, pose: 'rearing', flip: false },
+        { x: 0.85, y: 0.7, size: 0.7, pose: 'grazing', flip: true },
+        { x: 0.08, y: 0.75, size: 0.55, pose: 'nuzzling', flip: false },
+        { x: 0.92, y: 0.62, size: 0.65, pose: 'sentinel', flip: true }
+      ];
+      
+      function drawHero() {
+        ctx.clearRect(0, 0, W, H);
+        const grad = ctx.createLinearGradient(0, 0, 0, H);
+        grad.addColorStop(0, '#0a0820'); grad.addColorStop(0.5, '#120e2e'); grad.addColorStop(1, '#060308');
+        ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+        
+        horses.forEach(h => {
+          drawHorse(h.x * W, h.y * H, h.size, h.pose, h.flip);
+        });
+        
+        ctx.fillStyle = 'rgba(255,248,232,0.03)';
+        for (let i = 0; i < 80; i++) {
+          ctx.beginPath();
+          ctx.arc((Math.sin(i * 127.3) * 0.5 + 0.5) * W, (Math.cos(i * 269.5) * 0.5 + 0.5) * H * 0.4, 0.5, 0, Math.PI*2);
+          ctx.fill();
+        }
+      }
+      
+      function animate() { time++; drawHero(); requestAnimationFrame(animate); }
+      animate();
+    }
+
+    // ============================================
+    // BOOKS DATA - 15 BOOKS / 100+ ARTICLES
+    // ============================================
+    const books = [
+      { category: 'foundational', num: 'I', title: 'Horse Psychology', desc: 'How horses think, perceive humans, and why understanding their mind is the foundation of all horsemanship.', keywords: ['psychology', 'mindset', 'perception'] },
+      { category: 'foundational', num: 'II', title: 'The Flight Response', desc: 'Why fear shapes everything a horse does, and how to work with prey animal instincts instead of against them.', keywords: ['fear', 'flight', 'survival'] },
+      { category: 'foundational', num: 'III', title: 'Trust vs Control', desc: 'The fundamental difference between obedience and genuine partnership, and why only one produces real horsemanship.', keywords: ['trust', 'control', 'partnership'] },
+      { category: 'foundational', num: 'IV', title: 'Reading Body Language', desc: 'A complete guide to understanding what horses are saying through ears, eyes, posture, and movement.', keywords: ['body language', 'communication', 'signals'] },
+      { category: 'foundational', num: 'V', title: 'Common Human Mistakes', desc: 'The errors most riders make without realizing it, and why horses react the way they do.', keywords: ['mistakes', 'errors', 'learning'] },
+      { category: 'practical', num: 'VI', title: 'How to Build Trust', desc: 'A step-by-step guide to earning a horse\'s genuine trust through consistency, honesty, and patience.', keywords: ['trust', 'bonding', 'step by step'] },
+      { category: 'practical', num: 'VII', title: 'Why Your Horse Doesn\'t Listen', desc: 'The three real reasons horses stop responding, and how to address each one effectively.', keywords: ['listening', 'resistance', 'solutions'] },
+      { category: 'practical', num: 'VIII', title: 'Calming Anxious Horses', desc: 'Practical techniques for helping nervous horses find stillness, starting with your own nervous system.', keywords: ['anxiety', 'calm', 'nervous'] },
+      { category: 'practical', num: 'IX', title: 'First Time Handling', desc: 'Everything you need to know for your first meeting with a horse, including approach, safety, and first touch.', keywords: ['beginner', 'safety', 'first meeting'] },
+      { category: 'practical', num: 'X', title: 'Signs of Trust', desc: 'How to recognize genuine trust in a horse, and the signs that indicate trust is still missing.', keywords: ['trust', 'signs', 'bonding'] },
+      { category: 'edge', num: 'XI', title: 'What Horses Teach Us', desc: 'The profound lessons horses offer about human behavior, presence, and the nature of genuine relationship.', keywords: ['lessons', 'philosophy', 'wisdom'] },
+      { category: 'edge', num: 'XII', title: 'Presence & Intention', desc: 'Understanding how your inner state broadcasts to the horse before any physical signal is given.', keywords: ['presence', 'intention', 'energy'] },
+      { category: 'edge', num: 'XIII', title: 'Horses React to Your Mind', desc: 'Why horses read your thoughts before your actions, and how to train your inner life for better horsemanship.', keywords: ['mind', 'energy', 'awareness'] },
+      { category: 'edge', num: 'XIV', title: 'Silence, Energy, Movement', desc: 'The ancient language horses understand fluently — and most humans have forgotten.', keywords: ['silence', 'energy', 'movement'] },
+      { category: 'edge', num: 'XV', title: 'The Philosophy', desc: 'The deeper truth about working with horses rather than against them, and what it asks of you as a person.', keywords: ['philosophy', 'partnership', 'truth'] }
+    ];
+
+    // Article content for each book
+    const articleContents = {
+      0: `<p>The horse is not a machine. It is not a vehicle to be steered, a tool to be used, or a problem to be solved. A horse is a living, feeling, perceiving creature that has spent sixty million years perfecting one single art: the art of survival.</p><div class="panel-quote">Every decision a horse makes is filtered through sixty million years of prey animal evolution. To understand a horse is to understand a completely different kind of mind.</div><p>When a horse looks at you, it is not seeing a person. It is reading a pattern of energy. Your tension, your breath, the quality of your stillness, the direction of your gaze. Before you have spoken a word, the horse has already decided what you are.</p>`,
+      1: `<p>There is a sound that every horse alive knows before it is born. Not heard through the ears, but felt in the blood — the sound of something moving in the grass when the grass should be still. It is the sound of threat. And the body of the horse has been shaped by millions of years to answer that sound with one single response: run.</p><div class="panel-quote">Fear is not a character flaw in a horse. It is sixty million years of perfect engineering.</div><p>When you understand the biology — how the fear centre fires before the thinking brain has time to process — you stop being frustrated by fear. You start having real compassion for what the horse is living through.</p>`,
+      2: `<p>Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all the exits are open. I have spent eleven years learning the difference. Only one of these is real horsemanship.</p><div class="panel-quote">The horse that is controlled knows where the boundary is. The horse that trusts you has no desire to find the boundary, because it has no desire to leave.</div><p>Trust is not earned in a single dramatic moment. It is built in the accumulation of ten thousand small moments — every time you do not punish what you did not explain, every time you notice the horse's discomfort and adjust before it becomes fear.</p>`,
+      3: `<p>Horses speak in the language of the body — constantly, precisely, and honestly. They do not have the human ability to say one thing while meaning another. Every ear position, every shift of muscle, every change of weight, every flick of the tail is a sentence.</p><div class="panel-quote">When both ears lock forward, the horse is not ignoring you. It is doing the most important job it has: deciding whether the world is safe.</div><p>The soft eye is what you are looking for. Rounded, full, with relaxed muscles in the skin around it. A soft eye means a horse that is calm, present, and not in survival mode.</p>`,
+      4: `<p>Most horses do not have problems. Most horses have people — people with tension they are not aware of, with plans the horse can feel but not understand, with expectations that have nothing to do with the horse's reality in this moment.</p><div class="panel-quote">If the horse is struggling, start with yourself. You are the only variable you have any power to change.</div><p>The mistakes I see repeated most often are not dramatic. They are quiet. They are the things people do without knowing they are doing them.</p>`,
+      5: `<p>Trust between a human and a horse is not a feeling. It is a behavior. And like all behavior, it is built through repetition — through a thousand small moments where you did what you said you would.</p><div class="panel-quote">Stop trying to earn trust and start being trustworthy. Those are not the same thing.</div><p>The first step is learning to stand in a way that is genuinely inviting. Do nothing. Ask for nothing. Want nothing for this moment. Simply be a quiet presence in the horse's space.</p>`,
+      6: `<p>When a horse stops listening, the natural human response is to push harder. This is the most natural thing in the world to do. And it is almost always wrong.</p><div class="panel-quote">A horse that is not listening is not defying you. It is telling you something.</div><p>The three real reasons: clarity — the horse does not understand what is being asked. Physical — there is pain or discomfort. Relational — there is not enough trust to try something uncertain.</p>`,
+      7: `<p>You cannot calm a horse by fighting its nervous system. The moment you escalate — raising your voice, tightening your grip, moving faster — you confirm what the horse already feared.</p><div class="panel-quote">To calm an anxious horse, you must first calm yourself. Your breath rate, your muscle tension, the quality of your stillness — these are the real messages you are sending.</div><p>The most powerful tool is also the most underused: stillness. Not a frozen, tense stillness, but genuine, warm, grounded stillness.</p>`,
+      8: `<p>The first impression you make on a horse is written in its memory with a permanence no later session can fully erase. There is no second first meeting.</p><div class="panel-quote">Walk toward a horse the way you would approach a sleeping child — with the understanding that how you arrive is already a conversation.</div><p>Never walk straight at a horse from the front with direct eye contact. Walk at an angle. Let your approach be curved. Soften your gaze.</p>`,
+      9: `<p>A horse's trust is not invisible. It is not a feeling you guess at. Trust, in a horse, is a behavior. And behavior is visible, readable, and honest.</p><div class="panel-quote">The clearest sign of trust is voluntary approach. When you enter the field, the horse comes to you — not for food, but because your presence is comfortable.</div><p>The horse that lowers its head as you approach is not being polite. It is making itself vulnerable to you. Understand what that costs a prey animal.</p>`,
+      10: `<p>A horse has no ego. It has no agenda beyond what is real right now. It cannot pretend. Spend enough time with horses and you will learn more about yourself than any mirror can show.</p><div class="panel-quote">The horse is the most honest teacher you will ever have. It cannot be lied to, bribed, or manipulated.</div><p>The horse does not ask you to be wise. It asks you to be here. And here, when you finally arrive, turns out to be enough.</p>`,
+      11: `<p>Presence is not a concept. It is a physical reality — the quality of being fully here, fully alive, fully available to what is happening in this exact moment.</p><div class="panel-quote">Before your hand moves, your mind has already moved. The horse felt it first.</div><p>To become a place of rest for the horse is the greatest skill. When the horse escalates, you do not escalate. When the horse fears, you do not fear.</p>`,
+      12: `<p>Before your hand moves, your mind has already moved. Before your leg gives the signal, your intention has already broadcast itself through every muscle of your body.</p><div class="panel-quote">The horse does not hear your doubts. It feels them. And it responds to what it feels, not to what you intended.</div><p>Your body does not keep secrets from a horse. The physiological changes that accompany mental states are all changes the horse reads in real time.</p>`,
+      13: `<p>There is a language older than any human tongue. Horses speak it fluently. Most humans have forgotten it exists. Those who work well with horses have simply remembered how to listen.</p><div class="panel-quote">In the pause between asking and asking again is where the horse finds what it needs to try differently. Do not fill every silence.</div><p>Move as if you know where you are going. Not fast. Not urgently. Simply with weight and direction and the quiet certainty of someone who has arrived.</p>`,
+      14: `<p>There are two ways to work with a horse. They look similar from the outside. But from inside the horse, they feel completely different. And the horse always knows the difference.</p><div class="panel-quote">The horse you have is not a reflection of your technique. It is a reflection of your philosophy.</div><p>The horse does not know it is teaching you. It is simply being honest. But if you are paying attention, that honesty will change you.</p>`
+    };
+
+    // Build books grid
+    const booksGrid = document.getElementById('booksGrid');
+    books.forEach((book, index) => {
+      const card = document.createElement('div');
+      card.className = `book-card ${index < 6 ? 'visible' : ''}`;
+      card.setAttribute('data-category', book.category);
+      card.setAttribute('data-index', index);
+      card.innerHTML = `
+        <div class="book-cover">
+          <div class="book-cover-bg"><span>${book.category === 'foundational' ? '📖' : book.category === 'practical' ? '⚡' : '✦'}</span></div>
+          <div class="book-ribbon">${book.category === 'foundational' ? 'Foundational' : book.category === 'practical' ? 'Practical' : 'Unique Edge'}</div>
+          <div class="book-number">${book.num}</div>
+        </div>
+        <div class="book-info">
+          <div class="book-category">Volume ${book.num}</div>
+          <div class="book-title">${book.title}</div>
+          <p class="book-desc">${book.desc}</p>
+          <div class="book-keywords">${book.keywords.map(kw => `<span class="book-kw">${kw}</span>`).join('')}</div>
+          <span class="book-read">Read Article</span>
+        </div>
+      `;
+      booksGrid.appendChild(card);
+    });
+
+    // Reveal remaining cards on scroll
+    const bookObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.book-card').forEach(card => bookObserver.observe(card));
+
+    // Filter functionality
+    document.querySelectorAll('.chr-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chr-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.book-card').forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        closePanel();
+      });
+    });
+
+    // Panel functionality
+    const panel = document.getElementById('articlePanel');
+    const panelContent = document.getElementById('panelContent');
+    const panelClose = document.getElementById('panelClose');
+
+    function openPanel(index) {
+      const book = books[index];
+      const content = articleContents[index] || `<p>This article contains profound insights about ${book.title.toLowerCase()}. The full content is being prepared.</p><div class="panel-quote">Every session with a horse is an opportunity to learn something new about yourself.</div><p>Check back soon for the complete article.</p>`;
+      panelContent.innerHTML = `
+        <div class="panel-label">${book.category === 'foundational' ? 'Foundational Article' : book.category === 'practical' ? 'Practical Article' : 'Unique Edge Article'} ${book.num}</div>
+        <h2 class="panel-title">${book.title}</h2>
+        <p class="panel-tagline">${book.desc}</p>
+        <div class="panel-rule"></div>
+        <div class="panel-keywords">${book.keywords.map(kw => `<span class="panel-kw">${kw}</span>`).join('')}</div>
+        <div class="panel-body">${content}</div>
+      `;
+      panel.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      panel.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.book-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.dataset.index);
+        openPanel(index);
+      });
+    });
+
+    panelClose.addEventListener('click', closePanel);
+    panel.addEventListener('click', (e) => { if (e.target === panel) closePanel(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && panel.classList.contains('open')) closePanel(); });
+
+    // Scroll hint
+    document.getElementById('scrollHint')?.addEventListener('click', () => {
+      document.getElementById('booksSection')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Portal button
+    document.getElementById('portalBtn')?.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
