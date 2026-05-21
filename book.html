@@ -2,133 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Book - The Horseman's Journal</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Link to GLOBAL CSS -->
+  <link rel="stylesheet" href="global.css">
+  
   <style>
+    /* Book page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #060308;
       color: #e8dfc7;
       font-family: 'EB Garamond', serif;
       overflow-x: hidden;
-    }
-
-    /* 3D NAVBAR - MATCHING YOUR WEBSITE */
-    .navbar-wrapper {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; justify-content: center; padding: 1.5rem 2rem 0;
-    }
-    .navbar-wrapper * { pointer-events: auto; }
-    .scene {
-      perspective: 700px;
-      perspective-origin: 50% 60%;
-      width: 100%;
-      max-width: 1020px;
-    }
-    .nav3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(28deg) rotateY(0deg);
-      transition: transform .5s cubic-bezier(.23,1,.32,1);
-      height: 64px;
-    }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top {
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(200,155,60,0.08) 40%, rgba(255,255,255,0.04) 100%);
-      border: 1px solid rgba(200,155,60,0.45);
-      border-bottom-color: rgba(200,155,60,0.15);
-      backdrop-filter: blur(18px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06);
-      z-index: 4;
-    }
-    .face-back {
-      inset: 0;
-      background: rgba(180,130,40,0.04);
-      border: 1px solid rgba(200,155,60,0.2);
-      transform: translateZ(-36px);
-      z-index: 1;
-    }
-    .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall { display: none; }
-    .nav-content {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.8rem;
-      transform: translateZ(1px);
-    }
-    .brand {
-      font-family: 'Cinzel', serif;
-      font-size: .85rem;
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(200,150,50,0.4); }
-    .links { display: flex; gap: .05rem; list-style: none; }
-    .links li a {
-      display: block;
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: rgba(255,240,180,0.5);
-      text-decoration: none;
-      padding: 6px 8px;
-      border-radius: 8px;
-      transition: all .25s;
-    }
-    .links li a:hover, .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(200,150,50,0.9); }
-    .portal-scene { perspective: 300px; flex-shrink: 0; }
-    .portal-btn {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(22deg);
-      transition: transform .25s;
-      display: inline-block;
-      border: none;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-    }
-    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
-    .portal-top {
-      display: block;
-      padding: 8px 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(200,150,50,0.7);
-      border-radius: 100px;
-      font-family: 'Raleway', sans-serif;
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      color: #FFF8DC;
-      position: relative;
-      z-index: 3;
-      white-space: nowrap;
-    }
-    .portal-wall {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(120,80,20,0.6), rgba(50,30,5,0.4));
-      border-radius: 100px;
-      transform: translateZ(-14px);
-      z-index: 2;
-    }
-    .portal-glow {
-      position: absolute;
-      inset: -4px;
-      border-radius: 100px;
-      box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
-      transform: translateZ(-7px);
-      z-index: 1;
     }
 
     /* BOOK SHOWCASE SECTION */
@@ -302,26 +191,34 @@
       color: rgba(240,230,200,0.3);
     }
 
+    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.8rem 1rem 0; }
-      .nav3d { height: 56px; transform: rotateX(15deg); }
-      .brand { font-size: 0.7rem; }
-      .links li a { font-size: 0.45rem; padding: 4px 5px; }
       .book-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .book-3d { max-width: 280px; }
+      .book-3d { max-width: 280px; margin: 0 auto; }
       .book-info-area h1 { font-size: 1.8rem; }
+      .book-showcase { padding: 140px 1.5rem 4rem; }
+      .buy-btn, .preview-btn { display: inline-block; margin: 0.5rem; }
+    }
+    @media (max-width: 520px) {
+      .price { font-size: 1.5rem; }
+      .book-info-area h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
         <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-top-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
         <div class="face face-top"></div>
         <div class="nav-content">
-          <a href="index.html" class="brand">THE HORSEMAN'S JOURNAL<small>EST. MMXXVI</small></a>
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
             <li><a href="genesis.html">GENESIS</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
@@ -364,32 +261,67 @@
         <div class="book-meta">
           <span class="meta-badge">📖 400 Pages</span>
           <span class="meta-badge">📚 A5 Format</span>
-          <span class="meta-badge">✨ 15 Articles</span>
+          <span class="meta-badge">✨ 15 Articles + 11 Essays</span>
         </div>
         <div class="book-description">
           <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
           <p>This book is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
         </div>
         <div class="price">$24.99 USD</div>
-        <button class="buy-btn" id="buyNowBtn">✦ PURCHASE NOW ✦</button>
-        <button class="preview-btn" id="previewBtn">📖 Preview Sample</button>
+        
+        <!-- GLOBAL PAYMENT OPTIONS -->
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_HERE">
+            <button type="submit" class="buy-btn" style="background:#E8C84A; color:#0a0500;">✦ PayPal (Global) ✦</button>
+          </form>
+          <button class="preview-btn" id="previewBtn">📖 Preview Sample</button>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <div class="upi-text" id="upiText" style="display:inline-block; background:rgba(232,200,74,0.08); border:1px solid rgba(232,200,74,0.2); padding:10px 20px; border-radius:40px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:1px; cursor:pointer;">
+            🇮🇳 UPI: horsemans@okhdfcbank (Click to Copy)
+          </div>
+        </div>
         <div class="secure-note">🔒 Secure checkout · Instant PDF download</div>
       </div>
     </div>
   </section>
 
   <script>
-    // === REPLACE THIS WITH YOUR ACTUAL GUMROAD LINK ===
-    // 1. Go to Gumroad.com and sign up (free)
-    // 2. Upload your PDF
-    // 3. Copy your product link and paste below
-    const GUMROAD_LINK = "https://praveen.gumroad.com/l/horsemans-journal";
+    // === SETUP FOR BOOK PAGE ===
     
+    // Gumroad alternative (optional - replace with your link)
+    const GUMROAD_LINK = "https://praveen.gumroad.com/l/horsemans-journal";
     const SAMPLE_PDF = "sample.pdf";
     
-    document.getElementById('buyNowBtn').onclick = () => window.open(GUMROAD_LINK, '_blank');
-    document.getElementById('previewBtn').onclick = () => window.open(SAMPLE_PDF, '_blank');
-    document.getElementById('portalBtn').onclick = () => window.location.href = 'index.html';
+    // Preview button
+    const previewBtn = document.getElementById('previewBtn');
+    if (previewBtn) {
+      previewBtn.onclick = () => window.open(SAMPLE_PDF, '_blank');
+    }
+    
+    // UPI COPY FUNCTIONALITY
+    const upiText = document.getElementById('upiText');
+    if (upiText) {
+      upiText.addEventListener('click', () => {
+        const upiId = 'horsemans@okhdfcbank';
+        navigator.clipboard.writeText(upiId);
+        const originalText = upiText.innerHTML;
+        upiText.innerHTML = '✓ UPI ID Copied!';
+        setTimeout(() => {
+          upiText.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+    
+    // PORTAL BUTTON - smooth scroll to top
+    const portalBtn = document.getElementById('portalBtn');
+    if (portalBtn) {
+      portalBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   </script>
 </body>
 </html>
