@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Questions - The Horseman's Journal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
+  <!-- Link to GLOBAL CSS -->
+  <link rel="stylesheet" href="global.css">
+  
   <style>
+    /* Questions page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
@@ -25,33 +29,6 @@
     .orb1 { width: 55vw; height: 55vw; top: -12vh; right: -12vw; background: radial-gradient(circle, rgba(200, 150, 60, 0.09), transparent); }
     .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180, 120, 40, 0.05), transparent); }
     .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(160, 100, 30, 0.035), transparent); }
-
-    /* NAVBAR - FIXED */
-    .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none; }
-    .navbar-wrapper * { pointer-events: auto; }
-    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
-    .nav3d { position: relative; transform-style: preserve-3d; transform: rotateX(28deg) rotateY(0deg); transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px; }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top { inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(180,140,60,0.08) 40%, rgba(255,255,255,0.04) 100%); border: 1px solid rgba(180,140,60,0.45); border-bottom-color: rgba(180,140,60,0.15); backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06); z-index: 4; }
-    .face-back { inset: 0; background: rgba(160,120,40,0.04); border: 1px solid rgba(180,140,60,0.2); transform: translateZ(-36px); z-index: 1; }
-    .face-bottom-wall { left: 18px; right: 18px; bottom: -36px; height: 36px; background: linear-gradient(180deg, rgba(160,120,50,0.18) 0%, rgba(70,40,0,0.08) 60%, rgba(0,0,0,0.02) 100%); border-left: 1px solid rgba(180,140,60,0.15); border-right: 1px solid rgba(180,140,60,0.15); border-bottom: 1px solid rgba(180,140,60,0.1); border-radius: 0 0 12px 12px; transform-origin: top center; transform: rotateX(-90deg); z-index: 2; }
-    .face-top-wall { left: 18px; right: 18px; top: -5px; height: 5px; background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(180,140,60,0.2)); border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3; }
-    .face-left-wall { top: 4px; bottom: 4px; left: -36px; width: 36px; background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(160,120,50,0.1) 100%); border: 1px solid rgba(180,140,60,0.1); border-radius: 12px 0 0 12px; transform-origin: right center; transform: rotateY(-90deg); z-index: 2; }
-    .face-right-wall { top: 4px; bottom: 4px; right: -36px; width: 36px; background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(160,120,50,0.1) 100%); border: 1px solid rgba(180,140,60,0.1); border-radius: 0 12px 12px 0; transform-origin: left center; transform: rotateY(90deg); z-index: 2; }
-    .nav-content { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 0 1.8rem; transform: translateZ(1px); }
-    .brand { font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700; color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.25; text-shadow: 0 0 24px rgba(180,140,50,0.8), 0 0 60px rgba(180,140,50,0.3); flex-shrink: 0; text-decoration: none; }
-    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(180,140,50,0.4); font-weight: 400; margin-top: 1px; }
-    .links { display: flex; gap: .05rem; list-style: none; }
-    .links li a { display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px; color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px; border-radius: 8px; transition: all .25s; text-shadow: 0 1px 3px rgba(0,0,0,0.8); white-space: nowrap; }
-    .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(180,140,50,0.9); }
-    .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.12); text-shadow: 0 0 16px rgba(180,140,50,0.9); }
-    .portal-scene { perspective: 300px; flex-shrink: 0; }
-    .portal-btn { position: relative; transform-style: preserve-3d; transform: rotateX(22deg); transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer; }
-    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
-    .portal-top { display: block; padding: 8px 18px; background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(180,140,50,0.38) 50%, rgba(140,90,20,0.28) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(180,140,50,0.7); border-bottom-color: rgba(180,140,50,0.2); border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: 2.5px; color: #FFF8DC; text-shadow: 0 0 12px rgba(180,140,50,0.9); position: relative; z-index: 3; white-space: nowrap; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); }
-    .portal-wall { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(100,60,20,0.6), rgba(40,20,5,0.4)); border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(80,40,10,0.5); }
-    .portal-glow { position: absolute; inset: -4px; border-radius: 100px; background: transparent; box-shadow: 0 0 20px rgba(180,140,50,0.4), 0 0 60px rgba(180,140,50,0.15); transform: translateZ(-7px); z-index: 1; }
 
     /* HERO */
     .questions-hero { position: relative; width: 100%; height: 100vh; min-height: 650px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -137,8 +114,14 @@
     .answer-nav-btn:hover { color: #E8C84A; }
     .answer-nav-count { font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 2px; color: rgba(200,150,60,0.25); }
 
-    @media(max-width:860px){.navbar-wrapper{padding:.8rem 1rem 0}.nav3d{height:56px;transform:rotateX(15deg)}.brand{font-size:.7rem}.links{gap:0}.links li a{font-size:.5rem;padding:4px 5px;letter-spacing:1px}.portal-top{font-size:.52rem;padding:6px 10px}.answer-content{padding:1.5rem 1.5rem 3rem}}
-    @media(max-width:520px){.brand small{display:none}.links li a{font-size:.42rem;padding:3px 4px}}
+    /* FIXED MOBILE RESPONSIVE - NO NAVBAR STYLES HERE */
+    @media (max-width: 860px) {
+      .answer-content { padding: 1.5rem 1.5rem 3rem; }
+    }
+    @media (max-width: 520px) {
+      .filter-buttons { justify-content: center; }
+      .filter-btn { font-size: .45rem; padding: 6px 10px; }
+    }
   </style>
 </head>
 <body>
@@ -147,7 +130,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR - FIXED -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -166,6 +149,8 @@
             <li><a href="companions.html">COMPANIONS</a></li>
             <li><a href="essays.html">VERSES</a></li>
             <li><a href="questions.html" class="active">QUESTIONS</a></li>
+            <li><a href="gathering.html">GATHERING</a></li>
+            <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
             <button class="portal-btn" id="portalBtn">
@@ -233,7 +218,10 @@
     let W,H,mx=.5,my=.5,time=0,activeScene=-1,sceneTransition=0;
     function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
     resize();addEventListener('resize',resize);
-    document.getElementById('questionsHero').addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H});
+    const heroSection = document.getElementById('questionsHero');
+    if(heroSection){
+      heroSection.addEventListener('mousemove',e=>{mx=e.clientX/W;my=e.clientY/H});
+    }
     const particles=[];
     for(let i=0;i<70;i++)particles.push({x:Math.random()*1.3-.15,y:Math.random()*1.2,size:Math.random()*2+.3,speed:Math.random()*.3+.06,opacity:Math.random()*.4+.1,phase:Math.random()*Math.PI*2,drift:(Math.random()-.5)*.4,baseSpeed:Math.random()*.3+.06});
     function drawSky(){const t=sceneTransition;const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,`rgb(${26+t*20},${40-t*18},${64-t*38})`);g.addColorStop(1,`rgb(${74-t*28},${53-t*30},${32-t*12})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,H)}
@@ -271,10 +259,12 @@
     document.querySelectorAll('.filter-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');af=b.getAttribute('data-filter');filterQ()})});
 
     const ap=document.getElementById('answerPanel'),ac=document.getElementById('answerContent'),av=document.getElementById('answerViewer');let cq=-1;
-    function openAnswer(i){cq=i;const q=questions[i];activeScene=q.scene;document.getElementById('heroTitle').innerHTML=q.title.split('?')[0]+'<span class="gold">?</span>';document.getElementById('heroTagline').textContent=q.excerpt;ac.innerHTML=`<span class="answer-num">Question ${q.num} · ${q.category}</span><h2 class="answer-title">${q.title}</h2><div class="answer-body">${q.answer}</div><div class="answer-nav"><button class="answer-nav-btn" id="answerPrev">← Previous</button><span class="answer-nav-count">${q.num} / 12</span><button class="answer-nav-btn" id="answerNext">Next →</button></div>`;document.getElementById('answerPrev').addEventListener('click',()=>{openAnswer((cq-1+questions.length)%questions.length)});document.getElementById('answerNext').addEventListener('click',()=>{openAnswer((cq+1)%questions.length)});ap.classList.add('open');av.scrollTop=0;document.body.style.overflow='hidden'}
+    function openAnswer(i){cq=i;const q=questions[i];activeScene=q.scene;document.getElementById('heroTitle').innerHTML=q.title.split('?')[0]+'<span class="gold">?</span>';document.getElementById('heroTagline').textContent=q.excerpt;ac.innerHTML=`<span class="answer-num">Question ${q.num} · ${q.category}</span><h2 class="answer-title">${q.title}</h2><div class="answer-body">${q.answer}</div><div class="answer-nav"><button class="answer-nav-btn" id="answerPrev">← Previous</button><span class="answer-nav-count">${q.num} / 12</span><button class="answer-nav-btn" id="answerNext">Next →</button></div>`;const prevBtn=document.getElementById('answerPrev');const nextBtn=document.getElementById('answerNext');if(prevBtn)prevBtn.addEventListener('click',()=>{openAnswer((cq-1+questions.length)%questions.length)});if(nextBtn)nextBtn.addEventListener('click',()=>{openAnswer((cq+1)%questions.length)});ap.classList.add('open');av.scrollTop=0;document.body.style.overflow='hidden'}
     function closeAnswer(){ap.classList.remove('open');document.body.style.overflow='';activeScene=-1;document.getElementById('heroTitle').innerHTML='Quest<span class="gold">ions</span>';document.getElementById('heroTagline').textContent='Straight from the arena. No theories. Only what works.'}
-    document.getElementById('answerClose').addEventListener('click',closeAnswer);
-    document.getElementById('answerBackdrop').addEventListener('click',closeAnswer);
+    const answerClose = document.getElementById('answerClose');
+    const answerBackdrop = document.getElementById('answerBackdrop');
+    if(answerClose) answerClose.addEventListener('click',closeAnswer);
+    if(answerBackdrop) answerBackdrop.addEventListener('click',closeAnswer);
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ap.classList.contains('open'))closeAnswer();if(ap.classList.contains('open')){if(e.key==='ArrowRight')openAnswer((cq+1)%questions.length);if(e.key==='ArrowLeft')openAnswer((cq-1+questions.length)%questions.length)}});
 
     // Scroll hint click
@@ -286,11 +276,11 @@
       });
     }
 
-    // Portal button
+    // Portal button - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if(portalBtn){
       portalBtn.addEventListener('click',()=>{
-        window.location.href = 'index.html';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
   </script>
