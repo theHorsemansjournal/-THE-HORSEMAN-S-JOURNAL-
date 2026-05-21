@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Admin Login - The Horseman's Journal</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,15 +13,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1rem;
     }
     .login-container {
       background: linear-gradient(145deg, #1a1528, #0f0c1a);
       border: 1px solid rgba(232,200,74,0.3);
       border-radius: 20px;
-      padding: 3rem;
-      width: 380px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 380px;
       text-align: center;
       box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .back-link {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: rgba(232,200,74,0.4);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-family: 'Cinzel', serif;
+      transition: color 0.3s;
+    }
+    .back-link:hover {
+      color: #E8C84A;
     }
     .login-container h1 {
       font-family: 'Cinzel Decorative', serif;
@@ -71,19 +87,27 @@
     }
     .error { color: #ff8888; margin-top: 15px; font-size: 0.75rem; display: none; }
     .lock-icon { font-size: 3rem; margin-bottom: 1rem; }
+    
+    @media (max-width: 480px) {
+      .login-container { padding: 1.8rem; }
+      .login-container h1 { font-size: 1.2rem; }
+    }
   </style>
 </head>
 <body>
   <div class="login-container">
+    <a href="index.html" class="back-link">← Back to Site</a>
     <div class="lock-icon">🔒</div>
     <h1>The Horseman's Journal</h1>
     <p>Content Management System</p>
-    <input type="password" id="adminPassword" placeholder="Enter Admin Password">
+    <input type="password" id="adminPassword" placeholder="Enter Admin Password" autocomplete="off">
     <button onclick="login()">ACCESS PORTAL ✦</button>
     <div class="error" id="errorMsg">Incorrect password. Please try again.</div>
+    <p style="margin-top: 1rem; font-size: 0.55rem; color: rgba(240,230,200,0.15);">⚠️ Change default password after first login</p>
   </div>
   <script>
-    // CHANGE THIS PASSWORD TO YOUR OWN
+    // ⚠️ IMPORTANT: CHANGE THIS PASSWORD TO YOUR OWN AND REMEMBER IT!
+    // Change "Horseman2024" to your own secure password
     const CORRECT_PASSWORD = "Horseman2024";
     
     function login() {
@@ -96,6 +120,11 @@
         document.getElementById('errorMsg').style.display = 'block';
       }
     }
+    
+    // Press Enter key to login
+    document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') login();
+    });
   </script>
 </body>
 </html>
