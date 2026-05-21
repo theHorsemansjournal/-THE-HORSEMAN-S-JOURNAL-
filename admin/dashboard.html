@@ -3,119 +3,395 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Content - The Horseman's Journal</title>
+  <title>Content Manager - The Horseman's Journal</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #060308; color: #e8dfc7; font-family: 'EB Garamond', serif; padding: 2rem; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    h1 { font-family: 'Cinzel Decorative', serif; color: #E8C84A; margin-bottom: 2rem; }
-    .section-selector { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .section-btn { background: transparent; border: 1px solid rgba(232,200,74,0.3); padding: 10px 20px; color: #e8dfc7; font-family: 'Cinzel', serif; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
-    .section-btn:hover, .section-btn.active { background: #E8C84A; color: #060308; border-color: #E8C84A; }
-    .editor-panel { background: linear-gradient(145deg, #1a1528, #0f0c1a); border: 1px solid rgba(232,200,74,0.2); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
-    .editor-panel h3 { font-family: 'Cinzel', serif; color: #E8C84A; margin-bottom: 1rem; }
-    label { display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(232,200,74,0.6); margin-top: 1rem; margin-bottom: 0.5rem; }
-    input, textarea { width: 100%; padding: 12px; background: rgba(20,15,35,0.5); border: 1px solid rgba(232,200,74,0.2); border-radius: 8px; color: #fff; font-family: 'EB Garamond', serif; font-size: 1rem; }
-    textarea { min-height: 300px; }
-    button { background: #E8C84A; border: none; padding: 12px 24px; font-family: 'Cinzel', serif; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 1rem; margin-right: 1rem; }
-    button.secondary { background: transparent; border: 1px solid rgba(232,200,74,0.3); color: #e8dfc7; }
-    .save-status { margin-top: 1rem; font-style: italic; color: rgba(232,200,74,0.5); }
-    .logout-btn { position: fixed; top: 20px; right: 20px; background: rgba(232,200,74,0.1); border: 1px solid rgba(232,200,74,0.3); padding: 8px 16px; border-radius: 8px; color: #e8dfc7; cursor: pointer; }
+    body {
+      background: #060308;
+      font-family: 'EB Garamond', serif;
+      color: #e8dfc7;
+    }
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 260px;
+      height: 100vh;
+      background: linear-gradient(180deg, #0f0c1a, #080614);
+      border-right: 1px solid rgba(232,200,74,0.15);
+      padding: 2rem 0;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      text-align: center;
+      padding: 0 1rem 2rem;
+      border-bottom: 1px solid rgba(232,200,74,0.1);
+      margin-bottom: 2rem;
+    }
+    .sidebar-logo h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1rem;
+      color: #E8C84A;
+      letter-spacing: 2px;
+    }
+    .sidebar-logo p {
+      font-size: 0.65rem;
+      color: rgba(240,230,200,0.3);
+      margin-top: 5px;
+    }
+    .nav-item {
+      padding: 12px 24px;
+      margin: 4px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: rgba(240,230,200,0.5);
+    }
+    .nav-item:hover {
+      background: rgba(232,200,74,0.1);
+      color: #E8C84A;
+    }
+    .nav-item.active {
+      background: rgba(232,200,74,0.15);
+      color: #E8C84A;
+      border-left: 2px solid #E8C84A;
+    }
+    .main-content {
+      margin-left: 260px;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(232,200,74,0.1);
+    }
+    .top-bar h1 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      color: #E8C84A;
+    }
+    .logout-btn {
+      background: transparent;
+      border: 1px solid rgba(232,200,74,0.3);
+      padding: 8px 20px;
+      border-radius: 30px;
+      color: #e8dfc7;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      transition: all 0.3s;
+    }
+    .logout-btn:hover {
+      background: rgba(232,200,74,0.1);
+      border-color: #E8C84A;
+    }
+    .editor-card {
+      background: linear-gradient(145deg, #1a1528, #0f0c1a);
+      border: 1px solid rgba(232,200,74,0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .editor-card h3 {
+      font-family: 'Cinzel', serif;
+      color: #E8C84A;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+    label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: rgba(232,200,74,0.5);
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Cinzel', serif;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: rgba(20,15,35,0.6);
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 10px;
+      color: #e8dfc7;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(232,200,74,0.5);
+    }
+    textarea {
+      min-height: 250px;
+      line-height: 1.6;
+    }
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .save-btn {
+      background: #E8C84A;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .save-btn:hover {
+      background: #f0d860;
+      transform: translateY(-2px);
+    }
+    .cancel-btn {
+      background: transparent;
+      border: 1px solid rgba(232,200,74,0.3);
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      color: #e8dfc7;
+    }
+    .status-msg {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      font-style: italic;
+      color: rgba(232,200,74,0.5);
+    }
+    .article-item {
+      background: rgba(20,15,35,0.3);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .article-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .article-header span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      color: rgba(232,200,74,0.6);
+    }
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; }
+      .main-content { margin-left: 200px; }
+      .nav-item { padding: 8px 16px; font-size: 0.6rem; }
+    }
   </style>
 </head>
 <body>
-  <button class="logout-btn" onclick="logout()">Logout</button>
-  <div class="container">
-    <h1>Content Manager</h1>
-    <div class="section-selector" id="sectionSelector"></div>
-    <div class="editor-panel" id="editorPanel"></div>
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <h2>📖 THE HORSEMAN'S<br>JOURNAL</h2>
+      <p>Content Management</p>
+    </div>
+    <div class="nav-item active" data-section="book">📚 BOOK SETTINGS</div>
+    <div class="nav-item" data-section="genesis">📜 GENESIS</div>
+    <div class="nav-item" data-section="awakening">🌅 AWAKENING</div>
+    <div class="nav-item" data-section="chronicles">📖 CHRONICLES</div>
+    <div class="nav-item" data-section="companions">🐴 COMPANIONS</div>
+    <div class="nav-item" data-section="essays">✍️ VERSES</div>
+    <div class="nav-item" data-section="questions">❓ QUESTIONS</div>
   </div>
+
+  <div class="main-content">
+    <div class="top-bar">
+      <h1 id="pageTitle">Book Settings</h1>
+      <button class="logout-btn" onclick="logout()">LOGOUT ✦</button>
+    </div>
+    <div id="editorContainer"></div>
+  </div>
+
   <script>
     // Check authentication
     if (localStorage.getItem('adminAuth') !== 'true') {
       window.location.href = 'index.html';
     }
 
-    const sections = ['genesis', 'awakening', 'chronicles', 'companions', 'essays', 'questions'];
-    let currentSection = 'genesis';
-    let currentData = null;
+    let currentSection = 'book';
+    let contentData = {};
 
-    async function loadSection(section) {
-      currentSection = section;
-      try {
-        const response = await fetch(`../content/${section}.json?t=${Date.now()}`);
-        currentData = await response.json();
-        renderEditor();
-      } catch(e) {
-        console.error('Error loading', e);
-        currentData = { title: '', content: '', articles: [] };
-        renderEditor();
+    // Sample content data structure
+    const defaultContent = {
+      book: {
+        title: "THE HORSEMAN'S JOURNAL",
+        subtitle: "A CONVERSATION IN SILENCE",
+        author: "PRAVEEN KUMAR",
+        price: "24.99",
+        isbn: "",
+        edition: "First Edition",
+        year: "2024",
+        pages: "400",
+        description: "Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This book is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.",
+        aboutAuthor: "Praveen Kumar has spent eleven years working with horses across India. His approach prioritizes understanding over control, trust over obedience, and presence over technique."
+      },
+      genesis: { title: "Genesis", content: "The philosophy begins here..." },
+      awakening: { title: "Awakening", content: "The black stallion story..." },
+      chronicles: { title: "Chronicles", articles: [] },
+      companions: { title: "Companions", content: "The horses who shaped me..." },
+      essays: { title: "Verses", content: "Poetry and essays..." },
+      questions: { title: "Questions", content: "Q&A section..." }
+    };
+
+    function loadContent() {
+      const saved = localStorage.getItem('journalContent');
+      if (saved) {
+        contentData = JSON.parse(saved);
+      } else {
+        contentData = defaultContent;
+      }
+      renderEditor();
+    }
+
+    function saveContent() {
+      localStorage.setItem('journalContent', JSON.stringify(contentData));
+      showStatus('Content saved successfully!');
+    }
+
+    function showStatus(msg) {
+      const statusDiv = document.getElementById('statusMsg');
+      if (statusDiv) {
+        statusDiv.textContent = msg;
+        setTimeout(() => { statusDiv.textContent = ''; }, 2000);
       }
     }
 
     function renderEditor() {
-      const panel = document.getElementById('editorPanel');
-      if (section === 'chronicles') {
-        panel.innerHTML = `
-          <h3>Editing: ${currentSection.toUpperCase()}</h3>
-          ${currentData.articles.map((article, i) => `
-            <div style="border-top:1px solid rgba(232,200,74,0.1); margin-top:1rem; padding-top:1rem;">
-              <label>Article ${i+1} Title</label>
-              <input type="text" id="art_title_${i}" value="${escapeHtml(article.title)}">
-              <label>Article Content (HTML allowed)</label>
-              <textarea id="art_content_${i}">${escapeHtml(article.content)}</textarea>
+      const container = document.getElementById('editorContainer');
+      const data = contentData[currentSection];
+      
+      if (currentSection === 'book') {
+        container.innerHTML = `
+          <div class="editor-card">
+            <h3>📖 Book Information</h3>
+            <label>Book Title</label>
+            <input type="text" id="bookTitle" value="${escapeHtml(data.title)}">
+            <label>Subtitle</label>
+            <input type="text" id="bookSubtitle" value="${escapeHtml(data.subtitle)}">
+            <label>Author Name</label>
+            <input type="text" id="bookAuthor" value="${escapeHtml(data.author)}">
+            <label>Price (USD)</label>
+            <input type="text" id="bookPrice" value="${escapeHtml(data.price)}">
+            <label>Edition</label>
+            <input type="text" id="bookEdition" value="${escapeHtml(data.edition)}">
+            <label>Year</label>
+            <input type="text" id="bookYear" value="${escapeHtml(data.year)}">
+            <label>Pages</label>
+            <input type="text" id="bookPages" value="${escapeHtml(data.pages)}">
+            <label>Book Description (for back cover)</label>
+            <textarea id="bookDescription">${escapeHtml(data.description)}</textarea>
+            <label>About the Author</label>
+            <textarea id="bookAboutAuthor">${escapeHtml(data.aboutAuthor)}</textarea>
+            <div class="button-group">
+              <button class="save-btn" onclick="saveBookData()">SAVE BOOK INFO</button>
             </div>
-          `).join('')}
-          <div class="save-status" id="saveStatus"></div>
-          <button onclick="saveContent()">Save Changes</button>
-          <button class="secondary" onclick="loadSection(currentSection)">Refresh</button>
+            <div id="statusMsg" class="status-msg"></div>
+          </div>
         `;
+      } else if (currentSection === 'chronicles') {
+        container.innerHTML = `
+          <div class="editor-card">
+            <h3>📖 Chronicles (15 Articles)</h3>
+            <div id="chroniclesArticles"></div>
+            <div class="button-group">
+              <button class="save-btn" onclick="saveChroniclesData()">SAVE ALL ARTICLES</button>
+            </div>
+            <div id="statusMsg" class="status-msg"></div>
+          </div>
+        `;
+        const articlesContainer = document.getElementById('chroniclesArticles');
+        const articles = data.articles || [];
+        for (let i = 0; i < 15; i++) {
+          const article = articles[i] || { title: `Article ${i+1}`, content: '' };
+          articlesContainer.innerHTML += `
+            <div class="article-item">
+              <div class="article-header">
+                <span>Article ${String(i+1).padStart(2,'0')}</span>
+              </div>
+              <label>Title</label>
+              <input type="text" id="art_title_${i}" value="${escapeHtml(article.title)}">
+              <label>Content (HTML allowed)</label>
+              <textarea id="art_content_${i}" rows="8">${escapeHtml(article.content)}</textarea>
+            </div>
+          `;
+        }
       } else {
-        panel.innerHTML = `
-          <h3>Editing: ${currentSection.toUpperCase()}</h3>
-          <label>Page Title</label>
-          <input type="text" id="pageTitle" value="${escapeHtml(currentData.title || '')}">
-          <label>Page Content (HTML allowed)</label>
-          <textarea id="pageContent">${escapeHtml(currentData.content || '')}</textarea>
-          <div class="save-status" id="saveStatus"></div>
-          <button onclick="saveContent()">Save Changes</button>
-          <button class="secondary" onclick="loadSection(currentSection)">Refresh</button>
+        container.innerHTML = `
+          <div class="editor-card">
+            <h3>${currentSection.toUpperCase()}</h3>
+            <label>Page Title</label>
+            <input type="text" id="pageTitle" value="${escapeHtml(data.title)}">
+            <label>Content (HTML allowed)</label>
+            <textarea id="pageContent" rows="12">${escapeHtml(data.content)}</textarea>
+            <div class="button-group">
+              <button class="save-btn" onclick="savePageData()">SAVE CHANGES</button>
+            </div>
+            <div id="statusMsg" class="status-msg"></div>
+          </div>
         `;
       }
     }
 
-    function escapeHtml(str) { return str ? str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}) : ''; }
+    function saveBookData() {
+      contentData.book = {
+        title: document.getElementById('bookTitle').value,
+        subtitle: document.getElementById('bookSubtitle').value,
+        author: document.getElementById('bookAuthor').value,
+        price: document.getElementById('bookPrice').value,
+        edition: document.getElementById('bookEdition').value,
+        year: document.getElementById('bookYear').value,
+        pages: document.getElementById('bookPages').value,
+        description: document.getElementById('bookDescription').value,
+        aboutAuthor: document.getElementById('bookAboutAuthor').value
+      };
+      saveContent();
+    }
 
-    async function saveContent() {
-      const status = document.getElementById('saveStatus');
-      status.textContent = 'Saving...';
-      let updatedData = { ...currentData };
-      
-      if (currentSection === 'chronicles') {
-        updatedData.articles = currentData.articles.map((article, i) => ({
+    function savePageData() {
+      contentData[currentSection] = {
+        title: document.getElementById('pageTitle').value,
+        content: document.getElementById('pageContent').value
+      };
+      saveContent();
+    }
+
+    function saveChroniclesData() {
+      const articles = [];
+      for (let i = 0; i < 15; i++) {
+        articles.push({
           title: document.getElementById(`art_title_${i}`).value,
           content: document.getElementById(`art_content_${i}`).value
-        }));
-      } else {
-        updatedData.title = document.getElementById('pageTitle').value;
-        updatedData.content = document.getElementById('pageContent').value;
-      }
-      
-      try {
-        const response = await fetch(`../content/${currentSection}.json`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedData)
         });
-        if (response.ok) {
-          status.textContent = 'Saved successfully!';
-          setTimeout(() => status.textContent = '', 2000);
-        } else {
-          status.textContent = 'Save failed. Check file permissions.';
-        }
-      } catch(e) {
-        status.textContent = 'Error saving: ' + e.message;
       }
+      contentData.chronicles = { title: "Chronicles", articles: articles };
+      saveContent();
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
     }
 
     function logout() {
@@ -123,20 +399,18 @@
       window.location.href = 'index.html';
     }
 
-    // Render section buttons
-    const selector = document.getElementById('sectionSelector');
-    sections.forEach(s => {
-      const btn = document.createElement('button');
-      btn.textContent = s.toUpperCase();
-      btn.className = 'section-btn';
-      btn.onclick = () => {
-        document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        loadSection(s);
-      };
-      selector.appendChild(btn);
+    // Navigation
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+        currentSection = item.dataset.section;
+        document.getElementById('pageTitle').innerHTML = item.textContent;
+        renderEditor();
+      });
     });
-    loadSection('genesis');
+
+    loadContent();
   </script>
 </body>
 </html>
