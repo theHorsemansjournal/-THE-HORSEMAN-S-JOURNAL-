@@ -21,7 +21,7 @@ body {
     z-index: 200;
     display: flex;
     justify-content: center;
-    padding: 1.5rem 2rem 0;
+    padding: 1rem 1rem 0;
     pointer-events: none;
 }
 
@@ -132,46 +132,49 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1.8rem;
+    padding: 0 1.2rem;
     transform: translateZ(1px);
+    flex-wrap: wrap;
+    gap: 0.3rem;
 }
 
 .brand {
     font-family: 'Cinzel', serif;
-    font-size: .85rem;
+    font-size: .75rem;
     font-weight: 700;
     color: #E8C84A;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    line-height: 1.25;
     text-shadow: 0 0 24px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.3);
     flex-shrink: 0;
     text-decoration: none;
 }
 
 .brand small {
-    display: block;
-    font-size: .52rem;
-    letter-spacing: 4px;
+    display: inline-block;
+    font-size: .45rem;
+    letter-spacing: 3px;
     color: rgba(212, 175, 55, 0.4);
     font-weight: 400;
-    margin-top: 1px;
+    margin-left: 0.3rem;
 }
 
 .links {
     display: flex;
-    gap: .05rem;
+    gap: 0.1rem;
     list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .links li a {
     display: block;
-    font-size: .62rem;
+    font-size: .55rem;
     font-weight: 600;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: rgba(255, 240, 180, 0.5);
     text-decoration: none;
-    padding: 6px 8px;
+    padding: 4px 6px;
     border-radius: 8px;
     transition: all .25s;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
@@ -179,7 +182,8 @@ body {
     white-space: nowrap;
 }
 
-.links li a:hover {
+.links li a:hover,
+.links li a.active {
     color: #FFF8DC;
     background: rgba(255, 255, 255, 0.07);
     text-shadow: 0 0 16px rgba(212, 175, 55, 0.9);
@@ -212,16 +216,16 @@ body {
 
 .portal-top {
     display: block;
-    padding: 8px 18px;
+    padding: 5px 12px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(180, 120, 0, 0.25) 100%);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(212, 175, 55, 0.7);
     border-bottom-color: rgba(212, 175, 55, 0.2);
     border-radius: 100px;
     font-family: 'Raleway', sans-serif;
-    font-size: .65rem;
+    font-size: .55rem;
     font-weight: 700;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     color: #FFF8DC;
     text-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
     position: relative;
@@ -594,6 +598,214 @@ body {
     color: var(--color, #E8C84A);
 }
 
+/* ===== BOOK SHOWCASE SECTION ===== */
+.book-showcase {
+    position: relative;
+    background: linear-gradient(180deg, #030108 0%, #020106 100%);
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    z-index: 10;
+}
+
+.book-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.book-3d-wrapper {
+    perspective: 1200px;
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    justify-content: center;
+}
+
+.book-3d {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    transform-style: preserve-3d;
+    transform: rotateY(-15deg) rotateX(6deg);
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.book-3d:hover {
+    transform: rotateY(-8deg) rotateX(3deg) translateY(-10px);
+}
+
+.book-cover {
+    background: linear-gradient(145deg, #2a1a0a, #1a0f02);
+    border-radius: 8px 4px 4px 8px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.book-cover::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 4px;
+}
+
+.book-spine {
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    bottom: 5px;
+    width: 15px;
+    background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a);
+    border-radius: 3px 0 0 3px;
+}
+
+.book-pages-edge {
+    position: absolute;
+    right: -6px;
+    top: 8px;
+    bottom: 8px;
+    width: 6px;
+    background: linear-gradient(180deg, #f5efd4, #d4c8a0);
+    border-radius: 0 2px 2px 0;
+    opacity: 0.5;
+}
+
+.book-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.8rem;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+}
+
+.book-title-cover {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #E8C84A;
+    letter-spacing: 2px;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+}
+
+.book-subtitle-cover {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: rgba(240, 230, 200, 0.6);
+}
+
+.book-author-cover {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: rgba(212, 175, 55, 0.5);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+}
+
+.book-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.book-info h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: #E8C84A;
+    letter-spacing: 3px;
+    margin-bottom: 0.5rem;
+}
+
+.book-info h4 {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(240, 230, 200, 0.5);
+    margin-bottom: 1.5rem;
+}
+
+.book-info p {
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+    color: rgba(240, 230, 200, 0.75);
+}
+
+.book-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.book-meta span {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 5px 14px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    font-family: 'Cinzel', serif;
+}
+
+.book-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.book-btn-primary {
+    background: #E8C84A;
+    color: #0a0500;
+    padding: 12px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.book-btn-primary:hover {
+    background: #f0d860;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(232, 200, 74, 0.2);
+}
+
+.book-btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(232, 200, 74, 0.4);
+    color: #E8C84A;
+    padding: 12px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.book-btn-secondary:hover {
+    background: rgba(232, 200, 74, 0.1);
+    border-color: #E8C84A;
+    transform: translateY(-2px);
+}
+
 /* ===== CONTACT SECTION ===== */
 .contact {
     position: relative;
@@ -741,58 +953,132 @@ body {
     letter-spacing: .5px;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE - FIXED MOBILE NAVBAR ===== */
 @media (max-width: 860px) {
     .navbar-wrapper {
-        padding: 0.8rem 1rem 0;
+        padding: 0.5rem;
+        overflow-x: visible;
+    }
+    .scene {
+        perspective: none;
+        width: 100%;
     }
     .nav3d {
-        height: 56px;
-        transform: rotateX(15deg);
+        height: auto;
+        transform: rotateX(0deg) !important;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+    }
+    .nav3d:hover {
+        transform: rotateX(0deg) !important;
+    }
+    .face-top {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .face-bottom-wall,
+    .face-top-wall,
+    .face-left-wall,
+    .face-right-wall,
+    .face-back {
+        display: none;
+    }
+    .nav-content {
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0.6rem;
+        justify-content: center;
     }
     .brand {
-        font-size: 0.7rem;
+        font-size: 0.55rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+    .brand small {
+        font-size: 0.35rem;
+        display: inline-block;
+    }
+    .links {
+        gap: 0.2rem;
+        justify-content: center;
+        width: 100%;
     }
     .links li a {
-        font-size: .5rem;
-        padding: 4px 5px;
-        letter-spacing: 1px;
+        font-size: 0.45rem;
+        padding: 3px 5px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    .portal-scene {
+        position: static;
+        margin-top: 0.2rem;
     }
     .portal-top {
-        font-size: .52rem;
-        padding: 6px 10px;
+        font-size: 0.45rem;
+        padding: 3px 8px;
     }
     .main-title {
-        font-size: 1.6rem;
-        letter-spacing: 4px;
+        font-size: 1.4rem;
+        letter-spacing: 3px;
     }
     .title-overlay {
-        top: 16%;
+        top: 12%;
     }
     .great-hall {
-        padding: 3rem 1.5rem 4rem;
+        padding: 2rem 1rem 3rem;
     }
     .hall-card {
-        padding: 2rem 1.5rem;
-        gap: 1.2rem;
+        padding: 1rem 0.8rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
     .hall-card-num {
-        font-size: 2.2rem;
-        width: 40px;
+        font-size: 1.2rem;
+        width: 25px;
     }
     .hall-card-name {
-        font-size: .95rem;
+        font-size: 0.75rem;
+        letter-spacing: 1px;
     }
     .hall-card-icon {
-        font-size: 1.4rem;
+        font-size: 1rem;
+    }
+    .hall-card-desc {
+        font-size: 0.65rem;
     }
     .hall-card-arrow {
         display: none;
     }
     .hall-card:hover {
-        padding-left: 2rem;
+        padding-left: 0.8rem;
     }
     .contact-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .contact-link-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .contact-link-label {
+        font-size: 0.45rem;
+    }
+    .book-inner {
         gap: 1.5rem;
+        flex-direction: column;
+    }
+    .book-3d {
+        max-width: 200px;
+    }
+    .book-title-cover {
+        font-size: 0.9rem;
+    }
+    .book-info h3 {
+        font-size: 1.2rem;
     }
 }
