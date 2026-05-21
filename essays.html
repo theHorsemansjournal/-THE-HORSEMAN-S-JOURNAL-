@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Verses - The Horseman's Journal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
+  <!-- Link to GLOBAL CSS -->
+  <link rel="stylesheet" href="global.css">
+  
   <style>
+    /* Essays page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -42,189 +46,6 @@
       width: 35vw; height: 35vw;
       top: 50vh; left: 40vw;
       background: radial-gradient(circle, rgba(160, 140, 220, 0.04), transparent);
-    }
-
-    /* NAVBAR - FIXED LINKS */
-    .navbar-wrapper {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      justify-content: center;
-      padding: 1.5rem 2rem 0;
-      pointer-events: none;
-    }
-    .navbar-wrapper * { pointer-events: auto; }
-    .scene {
-      perspective: 700px;
-      perspective-origin: 50% 60%;
-      width: 100%;
-      max-width: 1020px;
-    }
-    .nav3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(28deg) rotateY(0deg);
-      transition: transform .5s cubic-bezier(.23, 1, .32, 1);
-      height: 64px;
-    }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top {
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(212,175,55,0.06) 40%, rgba(255,255,255,0.04) 100%);
-      border: 1px solid rgba(212,175,55,0.45);
-      border-bottom-color: rgba(212,175,55,0.15);
-      backdrop-filter: blur(18px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(212,175,55,0.06);
-      z-index: 4;
-    }
-    .face-back {
-      inset: 0;
-      background: rgba(212,175,55,0.04);
-      border: 1px solid rgba(212,175,55,0.2);
-      transform: translateZ(-36px);
-      z-index: 1;
-    }
-    .face-bottom-wall {
-      left: 18px; right: 18px; bottom: -36px; height: 36px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.18) 0%, rgba(100,60,0,0.08) 60%, rgba(0,0,0,0.02) 100%);
-      border-left: 1px solid rgba(212,175,55,0.15);
-      border-right: 1px solid rgba(212,175,55,0.15);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 0 12px 12px;
-      transform-origin: top center;
-      transform: rotateX(-90deg);
-      z-index: 2;
-    }
-    .face-top-wall {
-      left: 18px; right: 18px; top: -5px; height: 5px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(212,175,55,0.2));
-      border-radius: 18px 18px 0 0;
-      transform-origin: bottom center;
-      transform: rotateX(90deg);
-      z-index: 3;
-    }
-    .face-left-wall {
-      top: 4px; bottom: 4px; left: -36px; width: 36px;
-      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 12px 0 0 12px;
-      transform-origin: right center;
-      transform: rotateY(-90deg);
-      z-index: 2;
-    }
-    .face-right-wall {
-      top: 4px; bottom: 4px; right: -36px; width: 36px;
-      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 12px 12px 0;
-      transform-origin: left center;
-      transform: rotateY(90deg);
-      z-index: 2;
-    }
-    .nav-content {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.8rem;
-      transform: translateZ(1px);
-    }
-    .brand {
-      font-family: 'Cinzel', serif;
-      font-size: .85rem;
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      line-height: 1.25;
-      text-shadow: 0 0 24px rgba(212,175,55,0.8), 0 0 60px rgba(212,175,55,0.3);
-      flex-shrink: 0;
-      text-decoration: none;
-    }
-    .brand small {
-      display: block;
-      font-size: .52rem;
-      letter-spacing: 4px;
-      color: rgba(212,175,55,0.4);
-      font-weight: 400;
-      margin-top: 1px;
-    }
-    .links { display: flex; gap: .05rem; list-style: none; }
-    .links li a {
-      display: block;
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: rgba(255,240,180,0.5);
-      text-decoration: none;
-      padding: 6px 8px;
-      border-radius: 8px;
-      transition: all .25s;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-      white-space: nowrap;
-    }
-    .links li a:hover {
-      color: #FFF8DC;
-      background: rgba(255,255,255,0.07);
-      text-shadow: 0 0 16px rgba(212,175,55,0.9);
-    }
-    .links li a.active {
-      color: #FFF8DC;
-      background: rgba(255,255,255,0.12);
-      text-shadow: 0 0 16px rgba(212,175,55,0.9);
-    }
-    .portal-scene { perspective: 300px; flex-shrink: 0; }
-    .portal-btn {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(22deg);
-      transition: transform .25s;
-      display: inline-block;
-      border: none;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-    }
-    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
-    .portal-top {
-      display: block;
-      padding: 8px 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25) 100%);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(212,175,55,0.7);
-      border-radius: 100px;
-      font-family: 'Raleway', sans-serif;
-      font-size: .65rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      color: #FFF8DC;
-      text-shadow: 0 0 12px rgba(212,175,55,0.9);
-      position: relative;
-      z-index: 3;
-      white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-    }
-    .portal-wall {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4));
-      border-radius: 100px;
-      transform: translateZ(-14px);
-      z-index: 2;
-      border: 1px solid rgba(120,70,0,0.5);
-    }
-    .portal-glow {
-      position: absolute;
-      inset: -4px;
-      border-radius: 100px;
-      background: transparent;
-      box-shadow: 0 0 20px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15);
-      transform: translateZ(-7px);
-      z-index: 1;
     }
 
     /* CINEMATIC MOUNTAIN HERO WITH CANVAS */
@@ -633,11 +454,8 @@
       color: rgba(200,155,60,0.4);
     }
 
+    /* FIXED MOBILE RESPONSIVE - NO NAVBAR STYLES HERE */
     @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.8rem 1rem 0; }
-      .nav3d { height: 56px; transform: rotateX(15deg); }
-      .brand { font-size: 0.7rem; }
-      .links li a { font-size: 0.5rem; padding: 4px 5px; letter-spacing: 1px; }
       .modal-body { padding: 0 1.5rem 1.5rem 1.5rem; }
     }
   </style>
@@ -648,7 +466,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR - FIXED LINKS -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -667,6 +485,8 @@
             <li><a href="companions.html">COMPANIONS</a></li>
             <li><a href="essays.html" class="active">VERSES</a></li>
             <li><a href="questions.html">QUESTIONS</a></li>
+            <li><a href="gathering.html">GATHERING</a></li>
+            <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
             <button class="portal-btn" id="portalBtn">
@@ -720,166 +540,171 @@
     // CINEMATIC MOUNTAIN LANDSCAPE - CANVAS ANIMATION
     // ============================================================
     const canvas = document.getElementById('heroCanvas');
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    let mouseX = 0.5, mouseY = 0.5;
-    let particles = [];
-    let time = 0;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let W, H;
+      let mouseX = 0.5, mouseY = 0.5;
+      let particles = [];
+      let time = 0;
 
-    function resize() {
-      W = canvas.width = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    document.getElementById('versesHero').addEventListener('mousemove', (e) => {
-      mouseX = e.clientX / window.innerWidth;
-      mouseY = e.clientY / window.innerHeight;
-    });
-
-    // Initialize gold particles
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * 1.4 - 0.2,
-        y: Math.random() * 1.2,
-        size: Math.random() * 1.8 + 0.4,
-        speed: Math.random() * 0.3 + 0.08,
-        opacity: Math.random() * 0.5 + 0.15,
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-
-    function generateMountains(layers, baseY, amp, colorBase, colorPeak, offsetX) {
-      const points = [];
-      const steps = 80;
-      for (let i = 0; i <= steps; i++) {
-        const nx = i / steps;
-        const x = nx * W;
-        let y = baseY - amp * (
-          Math.sin(nx * Math.PI * 1.7 + offsetX * 2.1) * 0.6 +
-          Math.sin(nx * Math.PI * 3.4 + offsetX * 1.3) * 0.25 +
-          Math.sin(nx * Math.PI * 5.8 + offsetX * 0.8) * 0.1 +
-          Math.sin(nx * Math.PI * 9.2 + offsetX * 0.5) * 0.05
-        );
-        y += Math.sin(nx * 0.6 + offsetX) * amp * 0.15;
-        y = Math.min(y, baseY);
-        points.push({ x, y });
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
       }
-      return points;
-    }
+      resize();
+      window.addEventListener('resize', resize);
 
-    function drawMountains(points, colorBottom, colorTop, alpha) {
-      const grad = ctx.createLinearGradient(0, H * 0.35, 0, H);
-      grad.addColorStop(0, colorTop);
-      grad.addColorStop(1, colorBottom);
-      ctx.fillStyle = grad;
-      ctx.globalAlpha = alpha;
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, H);
-      points.forEach(p => ctx.lineTo(p.x, p.y));
-      ctx.lineTo(W, H);
-      ctx.closePath();
-      ctx.fill();
-      ctx.globalAlpha = 1;
-    }
-
-    function drawGoldEdge(points, thickness, alpha) {
-      ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
-      ctx.lineWidth = thickness;
-      ctx.shadowColor = `rgba(212,175,55,${alpha * 1.2})`;
-      ctx.shadowBlur = thickness * 4;
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y);
+      const heroSection = document.getElementById('versesHero');
+      if (heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX / window.innerWidth;
+          mouseY = e.clientY / window.innerHeight;
+        });
       }
-      ctx.stroke();
-      ctx.shadowBlur = 0;
-    }
 
-    function drawParticles() {
-      particles.forEach(p => {
-        const px = p.x * W;
-        const py = p.y * H + Math.sin(time * p.speed * 0.7 + p.phase) * 12;
-        const alpha = p.opacity * (0.5 + 0.5 * Math.sin(time * 0.04 + p.phase));
-        ctx.fillStyle = `rgba(232,200,74,${alpha})`;
-        ctx.shadowColor = `rgba(232,200,74,${alpha})`;
-        ctx.shadowBlur = 3;
+      // Initialize gold particles
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * 1.4 - 0.2,
+          y: Math.random() * 1.2,
+          size: Math.random() * 1.8 + 0.4,
+          speed: Math.random() * 0.3 + 0.08,
+          opacity: Math.random() * 0.5 + 0.15,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+
+      function generateMountains(layers, baseY, amp, colorBase, colorPeak, offsetX) {
+        const points = [];
+        const steps = 80;
+        for (let i = 0; i <= steps; i++) {
+          const nx = i / steps;
+          const x = nx * W;
+          let y = baseY - amp * (
+            Math.sin(nx * Math.PI * 1.7 + offsetX * 2.1) * 0.6 +
+            Math.sin(nx * Math.PI * 3.4 + offsetX * 1.3) * 0.25 +
+            Math.sin(nx * Math.PI * 5.8 + offsetX * 0.8) * 0.1 +
+            Math.sin(nx * Math.PI * 9.2 + offsetX * 0.5) * 0.05
+          );
+          y += Math.sin(nx * 0.6 + offsetX) * amp * 0.15;
+          y = Math.min(y, baseY);
+          points.push({ x, y });
+        }
+        return points;
+      }
+
+      function drawMountains(points, colorBottom, colorTop, alpha) {
+        const grad = ctx.createLinearGradient(0, H * 0.35, 0, H);
+        grad.addColorStop(0, colorTop);
+        grad.addColorStop(1, colorBottom);
+        ctx.fillStyle = grad;
+        ctx.globalAlpha = alpha;
         ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.moveTo(points[0].x, H);
+        points.forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.lineTo(W, H);
+        ctx.closePath();
         ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      function drawGoldEdge(points, thickness, alpha) {
+        ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+        ctx.lineWidth = thickness;
+        ctx.shadowColor = `rgba(212,175,55,${alpha * 1.2})`;
+        ctx.shadowBlur = thickness * 4;
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+          ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.stroke();
         ctx.shadowBlur = 0;
-      });
-    }
-
-    function drawMist(y, height, alpha) {
-      const grad = ctx.createLinearGradient(0, y, 0, y + height);
-      grad.addColorStop(0, `rgba(180,160,210,0)`);
-      grad.addColorStop(0.5, `rgba(180,150,200,${alpha})`);
-      grad.addColorStop(1, `rgba(180,160,210,0)`);
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, y, W, height);
-    }
-
-    function drawStars() {
-      const starCount = 100;
-      for (let i = 0; i < starCount; i++) {
-        const sx = (Math.sin(i * 127.1 + 311.7) * 0.5 + 0.5) * W;
-        const sy = (Math.cos(i * 269.5 + 183.3) * 0.5 + 0.5) * H * 0.5;
-        const twinkle = 0.3 + 0.7 * Math.abs(Math.sin(time * 0.015 + i * 2.7));
-        const alpha = twinkle * (0.15 + 0.25 * (1 - sy / (H * 0.5)));
-        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
-        ctx.beginPath();
-        ctx.arc(sx, sy, 0.4 + twinkle * 0.6, 0, Math.PI * 2);
-        ctx.fill();
       }
+
+      function drawParticles() {
+        particles.forEach(p => {
+          const px = p.x * W;
+          const py = p.y * H + Math.sin(time * p.speed * 0.7 + p.phase) * 12;
+          const alpha = p.opacity * (0.5 + 0.5 * Math.sin(time * 0.04 + p.phase));
+          ctx.fillStyle = `rgba(232,200,74,${alpha})`;
+          ctx.shadowColor = `rgba(232,200,74,${alpha})`;
+          ctx.shadowBlur = 3;
+          ctx.beginPath();
+          ctx.arc(px, py, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+      }
+
+      function drawMist(y, height, alpha) {
+        const grad = ctx.createLinearGradient(0, y, 0, y + height);
+        grad.addColorStop(0, `rgba(180,160,210,0)`);
+        grad.addColorStop(0.5, `rgba(180,150,200,${alpha})`);
+        grad.addColorStop(1, `rgba(180,160,210,0)`);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, y, W, height);
+      }
+
+      function drawStars() {
+        const starCount = 100;
+        for (let i = 0; i < starCount; i++) {
+          const sx = (Math.sin(i * 127.1 + 311.7) * 0.5 + 0.5) * W;
+          const sy = (Math.cos(i * 269.5 + 183.3) * 0.5 + 0.5) * H * 0.5;
+          const twinkle = 0.3 + 0.7 * Math.abs(Math.sin(time * 0.015 + i * 2.7));
+          const alpha = twinkle * (0.15 + 0.25 * (1 - sy / (H * 0.5)));
+          ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+          ctx.beginPath();
+          ctx.arc(sx, sy, 0.4 + twinkle * 0.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function renderMountains() {
+        ctx.clearRect(0, 0, W, H);
+
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+        skyGrad.addColorStop(0, '#08061a');
+        skyGrad.addColorStop(0.4, '#0c0a24');
+        skyGrad.addColorStop(0.75, '#0e0b20');
+        skyGrad.addColorStop(1, '#060410');
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, W, H);
+
+        drawStars();
+
+        const parallaxX = (mouseX - 0.5) * 30;
+
+        const farMountains = generateMountains(3, H * 0.48, H * 0.28, 'rgba(25,18,55,1)', 'rgba(40,28,75,1)', parallaxX * 0.2);
+        drawMountains(farMountains, '#0f0a28', '#1a1040', 0.85);
+        drawGoldEdge(farMountains, 0.8, 0.08);
+
+        const midMountains = generateMountains(2, H * 0.58, H * 0.34, 'rgba(18,12,42,1)', 'rgba(30,20,65,1)', parallaxX * 0.5 + 1.5);
+        drawMountains(midMountains, '#0c0722', '#140e35', 0.9);
+        drawGoldEdge(midMountains, 1.4, 0.14);
+
+        const fgMountains = generateMountains(1, H * 0.72, H * 0.38, 'rgba(10,6,28,1)', 'rgba(20,14,48,1)', parallaxX * 0.9 + 3.2);
+        drawMountains(fgMountains, '#060410', '#0e0828', 0.95);
+        drawGoldEdge(fgMountains, 2.2, 0.22);
+
+        drawMist(H * 0.55, H * 0.18, 0.025 + Math.sin(time * 0.02) * 0.008);
+        drawMist(H * 0.62, H * 0.12, 0.018);
+        drawMist(H * 0.44, H * 0.14, 0.015);
+
+        drawParticles();
+      }
+
+      function animateMountains() {
+        time++;
+        particles.forEach(p => {
+          p.y -= p.speed * 0.08;
+          if (p.y < -0.15) { p.y = 1.1 + Math.random() * 0.15; p.x = Math.random() * 1.4 - 0.2; }
+        });
+        renderMountains();
+        requestAnimationFrame(animateMountains);
+      }
+      animateMountains();
     }
-
-    function renderMountains() {
-      ctx.clearRect(0, 0, W, H);
-
-      const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
-      skyGrad.addColorStop(0, '#08061a');
-      skyGrad.addColorStop(0.4, '#0c0a24');
-      skyGrad.addColorStop(0.75, '#0e0b20');
-      skyGrad.addColorStop(1, '#060410');
-      ctx.fillStyle = skyGrad;
-      ctx.fillRect(0, 0, W, H);
-
-      drawStars();
-
-      const parallaxX = (mouseX - 0.5) * 30;
-
-      const farMountains = generateMountains(3, H * 0.48, H * 0.28, 'rgba(25,18,55,1)', 'rgba(40,28,75,1)', parallaxX * 0.2);
-      drawMountains(farMountains, '#0f0a28', '#1a1040', 0.85);
-      drawGoldEdge(farMountains, 0.8, 0.08);
-
-      const midMountains = generateMountains(2, H * 0.58, H * 0.34, 'rgba(18,12,42,1)', 'rgba(30,20,65,1)', parallaxX * 0.5 + 1.5);
-      drawMountains(midMountains, '#0c0722', '#140e35', 0.9);
-      drawGoldEdge(midMountains, 1.4, 0.14);
-
-      const fgMountains = generateMountains(1, H * 0.72, H * 0.38, 'rgba(10,6,28,1)', 'rgba(20,14,48,1)', parallaxX * 0.9 + 3.2);
-      drawMountains(fgMountains, '#060410', '#0e0828', 0.95);
-      drawGoldEdge(fgMountains, 2.2, 0.22);
-
-      drawMist(H * 0.55, H * 0.18, 0.025 + Math.sin(time * 0.02) * 0.008);
-      drawMist(H * 0.62, H * 0.12, 0.018);
-      drawMist(H * 0.44, H * 0.14, 0.015);
-
-      drawParticles();
-    }
-
-    function animateMountains() {
-      time++;
-      particles.forEach(p => {
-        p.y -= p.speed * 0.08;
-        if (p.y < -0.15) { p.y = 1.1 + Math.random() * 0.15; p.x = Math.random() * 1.4 - 0.2; }
-      });
-      renderMountains();
-      requestAnimationFrame(animateMountains);
-    }
-    animateMountains();
 
     // ============================================================
     // COMPLETE ESSAYS DATA - ALL 11 VERSES
@@ -1061,8 +886,8 @@
       document.body.style.overflow = '';
     }
     
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
     // Scroll hint
@@ -1074,11 +899,11 @@
       });
     }
 
-    // Portal button
+    // Portal button - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if (portalBtn) {
       portalBtn.addEventListener('click', () => {
-        window.location.href = 'index.html';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
   </script>
