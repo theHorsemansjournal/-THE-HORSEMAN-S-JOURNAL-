@@ -3,21 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The Gathering - The Horseman's Journal</title>
+  <title>The Gathering | Share Your Horse Story - The Horseman's Journal</title>
+  <meta name="description" content="Share your horse story, ask questions, or submit your experience. Every horse person carries a story. Join The Gathering and become part of the herd.">
+  <meta name="keywords" content="share horse story, horse community, equestrian stories, horsemanship community, horse people">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
-  <!-- Link to GLOBAL CSS -->
   <link rel="stylesheet" href="global.css">
   
   <style>
-    /* Gathering page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #020108; color: #f0ede0; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
 
-    /* DOME */
     .dome-section { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #domeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .dome-title-overlay { position: absolute; top: 16%; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; pointer-events: none; transition: opacity 1.8s; }
@@ -26,7 +27,6 @@
     .dome-hint { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 5; pointer-events: none; transition: opacity 1.2s; }
     .dome-hint-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .72rem; color: rgba(240,230,200,0.22); text-align: center; }
 
-    /* STORY FORM OVERLAY */
     .form-overlay { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .5s; }
     .form-overlay.open { opacity: 1; pointer-events: all; }
     .form-backdrop { position: absolute; inset: 0; background: rgba(4,2,8,0.94); backdrop-filter: blur(10px); }
@@ -45,7 +45,6 @@
     .form-submit:hover { background: #f0d860; box-shadow: 0 0 25px rgba(200,170,80,0.4); }
     .form-note { text-align: center; margin-top: 1rem; font-family: 'EB Garamond', serif; font-style: italic; font-size: .7rem; color: rgba(240,230,200,0.25); }
 
-    /* COMMUNITY */
     .community { position: relative; background: linear-gradient(180deg, #060310 0%, #030108 100%); padding: 5rem 2rem 7rem; z-index: 10; }
     .community-inner { max-width: 700px; margin: 0 auto; text-align: center; }
     .comm-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 2rem; }
@@ -58,15 +57,14 @@
     .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; background: transparent; border: 1px solid rgba(200,170,80,0.35); border-radius: 4px; cursor: pointer; text-decoration: none; transition: all .4s; }
     .share-btn:hover { background: rgba(200,170,80,0.06); border-color: rgba(200,170,80,0.6); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
-    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
       .form-panel { padding: 1.8rem; margin: 1rem; }
+      .community { padding: 3rem 1.5rem 5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -100,7 +98,6 @@
     </div>
   </div>
 
-  <!-- DOME -->
   <section class="dome-section" id="domeSection">
     <canvas id="domeCanvas"></canvas>
     <div class="dome-title-overlay" id="domeTitleOverlay">
@@ -112,7 +109,6 @@
     </div>
   </section>
 
-  <!-- STORY FORM -->
   <div class="form-overlay" id="formOverlay">
     <div class="form-backdrop" id="formBackdrop"></div>
     <div class="form-panel">
@@ -139,7 +135,6 @@
     </div>
   </div>
 
-  <!-- COMMUNITY -->
   <section class="community" id="communitySection">
     <div class="community-inner">
       <div class="comm-ornament"><div class="comm-oln"></div><div class="comm-gem"></div><div class="comm-oln comm-oln-r"></div></div>
@@ -158,14 +153,15 @@
   </section>
 
   <script>
-    // ═══════════════════════════════════════════════
-    // DOME CANVAS
-    // ═══════════════════════════════════════════════
+    // DOME CANVAS ANIMATION
     const canvas = document.getElementById('domeCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
+    
     function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-    resize(); addEventListener('resize', resize);
+    resize(); 
+    window.addEventListener('resize', resize);
+    
     const domeSection = document.getElementById('domeSection');
     if(domeSection){
       domeSection.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
@@ -266,7 +262,6 @@
       { x:0.48, y:0.82, s:1.0, coat:'#5a4828', mane:'#6a5530', pose:'grazing', flip:false, label:'Share Your Story' },
     ];
 
-    // Store screen positions for click detection
     let outsideClickZones = [];
 
     function drawAll() {
@@ -288,10 +283,8 @@
         const hx = oh.x * W + (mx - 0.5) * 35;
         const hy = oh.y * H + (my - 0.5) * 15;
         drawHorse(hx, hy, oh.s, oh.coat, oh.mane, oh.pose, oh.flip);
-        // Store click zone
         const sc = oh.s;
         outsideClickZones.push({ x: hx, y: hy - 20, r: 55 * sc });
-        // Draw subtle label above horse
         const alpha = 0.25 + Math.sin(t * 0.03) * 0.08;
         ctx.fillStyle = 'rgba(232,200,74,' + alpha + ')';
         ctx.font = 'italic ' + (10 * oh.s) + 'px "EB Garamond", serif';
@@ -310,7 +303,6 @@
       drawOutside();
     }
 
-    // Canvas click detection
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
@@ -324,7 +316,6 @@
       }
     });
 
-    // Canvas hover detection
     canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
       const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
@@ -336,12 +327,10 @@
       canvas.style.cursor = hovering ? 'pointer' : 'default';
     });
 
-    // ═══════════════════════════════════════════════
-    // STORY FORM
-    // ═══════════════════════════════════════════════
     const formOverlay = document.getElementById('formOverlay');
     function openForm() { formOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeForm() { formOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    
     const formClose = document.getElementById('formClose');
     const formBackdrop = document.getElementById('formBackdrop');
     const shareBtn = document.getElementById('shareBtn');
@@ -358,22 +347,19 @@
         const photo = document.getElementById('formPhoto').value.trim();
         if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
         
-        // Build WhatsApp message
         let msg = '📖 *New Story from The Gathering*%0A%0A';
         msg += '*Name:* ' + name + '%0A';
         if (horse) msg += '*Horse:* ' + horse + '%0A';
         msg += '*Story:* ' + story + '%0A';
         if (photo) msg += '*Photo:* ' + photo + '%0A';
         
-        // IMPORTANT: Replace this with your actual WhatsApp number (with country code)
-        // Example: for India +91 9876543210, put '919876543210'
-        const waNumber = '919XXXXXXXXX'; // <-- CHANGE THIS TO YOUR WHATSAPP NUMBER
+        // [REPLACE WITH YOUR WHATSAPP NUMBER]
+        // For India: add 91 followed by 10-digit number (e.g., 919876543210)
+        const waNumber = '[ADD YOUR WHATSAPP NUMBER WITH COUNTRY CODE]';
         const waURL = 'https://wa.me/' + waNumber + '?text=' + msg;
         
-        // Try WhatsApp
         window.open(waURL, '_blank');
         
-        // Clear form
         document.getElementById('formName').value = '';
         document.getElementById('formHorse').value = '';
         document.getElementById('formStory').value = '';
@@ -385,7 +371,8 @@
     const titleOverlay = document.getElementById('domeTitleOverlay');
     const hintEl = document.getElementById('domeHint');
     let lastMove = 0;
-    addEventListener('mousemove', () => { lastMove = t; });
+    window.addEventListener('mousemove', () => { lastMove = t; });
+    
     function animate() {
       t++; render();
       const idle = t - lastMove > 200;
@@ -394,9 +381,8 @@
       requestAnimationFrame(animate);
     }
     animate();
-    addEventListener('resize', () => { resize(); });
+    window.addEventListener('resize', () => { resize(); });
 
-    // Portal button - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if (portalBtn) {
       portalBtn.addEventListener('click', () => {
