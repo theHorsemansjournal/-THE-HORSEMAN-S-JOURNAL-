@@ -20,7 +20,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       NAVBAR - FIXED FOR MOBILE
+       NAVBAR - FULLY VISIBLE ON MOBILE (FIXED)
     ═══════════════════════════════════════════════ */
     .navbar-wrapper {
       position: fixed;
@@ -143,7 +143,56 @@
       transform: translateZ(-7px); z-index: 1;
     }
 
-    /* REST OF YOUR CSS - SAME AS YOUR ORIGINAL */
+    /* FIXED MOBILE RESPONSIVE - NAVBAR FULLY VISIBLE */
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
+      .scene { perspective: none; width: 100%; overflow-x: visible; }
+      .nav3d { 
+        height: auto; 
+        min-height: auto; 
+        transform: rotateX(0deg) !important; 
+        background: rgba(0,0,0,0.35); 
+        border-radius: 20px; 
+        backdrop-filter: blur(12px);
+        margin-bottom: 0;
+      }
+      .nav3d:hover { transform: rotateX(0deg) !important; }
+      .face-top { background: rgba(0,0,0,0.2); border: 1px solid rgba(212,175,55,0.2); backdrop-filter: blur(12px); }
+      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall, .face-back { display: none; }
+      .nav-content { 
+        position: relative; 
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        gap: 0.4rem; 
+        padding: 0.6rem;
+        justify-content: center;
+      }
+      .brand { font-size: 0.55rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
+      .brand small { font-size: 0.35rem; }
+      .links { gap: 0.2rem; justify-content: center; width: 100%; }
+      .links li a { font-size: 0.45rem; padding: 3px 6px; letter-spacing: 0.5px; white-space: nowrap; }
+      .portal-scene { position: static; margin-top: 0.2rem; }
+      .portal-top { font-size: 0.45rem; padding: 3px 10px; }
+      .main-title { font-size: 1.4rem; letter-spacing: 3px; }
+      .title-overlay { top: 12%; width: 90%; }
+      .great-hall { padding: 2rem 1rem 3rem; }
+      .hall-card { padding: 1rem 0.8rem; gap: 0.5rem; flex-wrap: wrap; }
+      .hall-card-num { font-size: 1.2rem; width: 25px; }
+      .hall-card-name { font-size: 0.75rem; letter-spacing: 1px; }
+      .hall-card-icon { font-size: 1rem; }
+      .hall-card-desc { font-size: 0.65rem; }
+      .hall-card-arrow { display: none; }
+      .hall-card:hover { padding-left: 0.8rem; }
+      .contact-links { gap: 1rem; flex-wrap: wrap; }
+      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
+      .contact-link-label { font-size: 0.45rem; }
+      .book-inner { gap: 1.5rem; flex-direction: column; }
+      .book-3d { max-width: 200px; }
+      .book-title-cover { font-size: 0.9rem; }
+      .book-info h3 { font-size: 1.2rem; }
+    }
+
+    /* REST OF YOUR ORIGINAL STYLES - KEPT IDENTICAL */
     .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .title-overlay {
@@ -281,11 +330,37 @@
     .book-info p { line-height: 1.9; margin-bottom: 1.5rem; color: rgba(240,230,200,0.75); }
     .book-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .book-meta span { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2); padding: 5px 14px; border-radius: 30px; font-size: 0.7rem; font-family: 'Cinzel', serif; }
-    .book-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .book-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .book-btn-primary { background: #E8C84A; color: #0a0500; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; border: none; cursor: pointer; }
     .book-btn-primary:hover { background: #f0d860; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,200,74,0.2); }
     .book-btn-secondary { background: transparent; border: 1px solid rgba(232,200,74,0.4); color: #E8C84A; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; cursor: pointer; }
     .book-btn-secondary:hover { background: rgba(232,200,74,0.1); border-color: #E8C84A; transform: translateY(-2px); }
+    
+    /* GLOBAL PAYMENT OPTIONS */
+    .payment-options {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    .paypal-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .paypal-btn:hover { transform: translateY(-2px); }
+    .upi-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      color: rgba(232,200,74,0.7);
+      letter-spacing: 1px;
+      background: rgba(212,175,55,0.08);
+      padding: 8px 16px;
+      border-radius: 40px;
+      border: 1px solid rgba(232,200,74,0.3);
+    }
 
     .contact {
       position: relative;
@@ -322,37 +397,6 @@
     .hall-fo-r { background: linear-gradient(90deg, rgba(200,160,60,0.25), transparent); }
     .hall-fg { width: 5px; height: 5px; background: rgba(200,160,60,0.4); transform: rotate(45deg); }
     .hall-footer-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .8rem; color: rgba(240,230,200,0.18); letter-spacing: .5px; }
-
-    /* FIXED MOBILE RESPONSIVE */
-    @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.5rem 0.5rem 0; }
-      .nav3d { height: auto; min-height: 70px; transform: rotateX(5deg); }
-      .nav-content { flex-direction: column; gap: 0.3rem; padding: 0.5rem; }
-      .brand { font-size: 0.6rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
-      .brand small { font-size: 0.4rem; display: inline-block; }
-      .links { gap: 0.2rem; justify-content: center; flex-wrap: wrap; width: 100%; }
-      .links li a { font-size: 0.45rem; padding: 3px 5px; letter-spacing: 0.5px; }
-      .portal-scene { position: absolute; top: -8px; right: 5px; }
-      .portal-top { font-size: 0.45rem; padding: 3px 8px; }
-      .main-title { font-size: 1.4rem; letter-spacing: 3px; }
-      .title-overlay { top: 12%; }
-      .great-hall { padding: 2rem 1rem 3rem; }
-      .hall-card { padding: 1.2rem 1rem; gap: 0.8rem; }
-      .hall-card-num { font-size: 1.5rem; width: 30px; }
-      .hall-card-name { font-size: 0.8rem; letter-spacing: 2px; }
-      .hall-card-icon { font-size: 1.2rem; }
-      .hall-card-desc { font-size: 0.7rem; }
-      .hall-card-arrow { display: none; }
-      .hall-card:hover { padding-left: 1rem; }
-      .contact-links { gap: 1rem; }
-      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
-      .contact-link-label { font-size: 0.45rem; }
-      .book-inner { gap: 1.5rem; }
-      .book-3d { max-width: 220px; }
-      .book-title-cover { font-size: 1rem; }
-      .book-info h3 { font-size: 1.3rem; }
-      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -454,7 +498,7 @@
     </div>
   </section>
 
-  <!-- BOOK SHOWCASE SECTION -->
+  <!-- BOOK SHOWCASE SECTION with GLOBAL PAYMENT -->
   <section class="book-showcase">
     <div class="book-inner">
       <div class="book-3d-wrapper">
@@ -482,6 +526,22 @@
           <a href="book.html" class="book-btn-primary">✦ DISCOVER THE BOOK ✦</a>
           <button class="book-btn-secondary" id="previewBookBtn">📖 Preview Sample</button>
         </div>
+        <!-- GLOBAL PAYMENT OPTIONS - Works in India and Worldwide -->
+        <div class="payment-options">
+          <!-- PayPal - Works globally -->
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-form">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_HERE">
+            <button type="submit" class="paypal-btn">
+              <img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" alt="Buy Now with PayPal" style="background:transparent; border-radius:30px;">
+            </button>
+          </form>
+          <!-- UPI for India (replace with your UPI ID) -->
+          <div class="upi-text" id="upiText" style="cursor:pointer;" title="Click to copy UPI ID">
+            🇮🇳 UPI: horsemans@okhdfcbank
+          </div>
+        </div>
+        <p style="font-size:0.55rem; color:rgba(240,230,200,0.25); margin-top:0.8rem; letter-spacing:1px;">✓ Secure payments via PayPal (Global) & UPI (India)</p>
       </div>
     </div>
   </section>
@@ -497,10 +557,10 @@
           <span class="contact-link-label">Instagram</span>
           <span class="contact-link-value">@thehorsemansjournal</span>
         </a>
-        <a href="https://wa.me/919XXXXXXXXX" class="contact-link" target="_blank" rel="noopener">
+        <a href="#" class="contact-link" id="whatsappLink">
           <div class="contact-link-icon">💬</div>
           <span class="contact-link-label">WhatsApp</span>
-          <span class="contact-link-value">+91 9XXX XXX XXX</span>
+          <span class="contact-link-value" id="whatsappNumber">[Update Number]</span>
         </a>
         <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
           <div class="contact-link-icon">✉️</div>
@@ -513,16 +573,13 @@
 
   <script>
     // ============================================================
-    // OPTIMIZED CANVAS ANIMATION - SAME VISUALS, BETTER PERFORMANCE
+    // OPTIMIZED CANVAS ANIMATION - SMOOTH PERFORMANCE
     // ============================================================
     const canvas = document.getElementById('worldCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
-    let lastFrameTime = 0;
-    let frameDelay = 16; // 60fps default
     let isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
     
-    // Reduce particles on mobile for better performance (same visual density)
     const particleCount = isMobile ? 180 : 350;
     const grassCount = isMobile ? 300 : 600;
     const flyCount = isMobile ? 25 : 45;
@@ -548,7 +605,6 @@
       ph: Math.random() * Math.PI * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.25
     }));
 
-    // Your horse drawing function - COMPLETELY UNCHANGED
     function horse(hx, hy, sc, coat, mane, pose, flip) {
       ctx.save(); ctx.translate(hx, hy);
       if (flip) ctx.scale(-sc, sc); else ctx.scale(sc, sc);
@@ -690,16 +746,16 @@
       lanternEls.forEach(({ el, s }) => { const px = (mx - 0.5) * 25 * s.depth; const py = (my - 0.5) * 14 * s.depth; el.style.left = (s.lx * 100) + '%'; el.style.top = (s.ly * 100) + '%'; el.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`; });
     }
 
-    // Hall particles
+    // HALL PARTICLES - OPTIMIZED
     const hallParticles = document.getElementById('hallParticles');
-    const hallParticleCount = isMobile ? 15 : 30;
+    const hallParticleCount = isMobile ? 12 : 25;
     for (let i = 0; i < hallParticleCount; i++) {
       const p = document.createElement('div');
       p.className = 'hall-bg-particle';
       p.style.left = Math.random() * 100 + '%';
       p.style.top = Math.random() * 100 + '%';
-      p.style.animationDuration = (Math.random() * 10 + 8) + 's';
-      p.style.animationDelay = Math.random() * 10 + 's';
+      p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+      p.style.animationDelay = Math.random() * 15 + 's';
       hallParticles.appendChild(p);
     }
 
@@ -708,35 +764,65 @@
     let lastMove = 0;
     addEventListener('mousemove', () => { lastMove = t; });
 
-    // OPTIMIZED ANIMATION LOOP - Frame limiting for mobile
+    // SMOOTH ANIMATION LOOP
     let lastRender = 0;
+    let frameCount = 0;
+    
     function animate(now) {
       requestAnimationFrame(animate);
       
-      // Limit frame rate on mobile for better performance
-      if (isMobile && now - lastRender < 50) return; // 20fps on mobile
-      if (!isMobile && now - lastRender < 16) return; // 60fps on desktop
+      const targetFPS = isMobile ? 30 : 60;
+      const frameInterval = 1000 / targetFPS;
       
+      if (now - lastRender < frameInterval) return;
       lastRender = now;
+      
       t++;
       render();
       updateLanterns();
-      const idle = t - lastMove > 200;
-      titleOverlay.style.opacity = idle ? '0.3' : '0.9';
-      hintOverlay.style.opacity = idle ? '0' : '0.7';
+      
+      frameCount++;
+      if (frameCount % 2 === 0) {
+        const idle = t - lastMove > 200;
+        titleOverlay.style.opacity = idle ? '0.3' : '0.9';
+        hintOverlay.style.opacity = idle ? '0' : '0.7';
+      }
     }
     requestAnimationFrame(animate);
     addEventListener('resize', () => { resize(); });
 
-    // Portal button
+    // PORTAL BUTTON - scrolls to top of page (refreshes experience)
     document.getElementById('portalBtn').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Preview book button
+    // PREVIEW BOOK BUTTON
     document.getElementById('previewBookBtn').addEventListener('click', () => {
       window.open('sample.pdf', '_blank');
     });
+
+    // UPI COPY FUNCTIONALITY
+    const upiText = document.getElementById('upiText');
+    if (upiText) {
+      upiText.addEventListener('click', () => {
+        const upiId = 'horsemans@okhdfcbank';
+        navigator.clipboard.writeText(upiId);
+        const originalText = upiText.innerHTML;
+        upiText.innerHTML = '✓ UPI ID Copied!';
+        setTimeout(() => {
+          upiText.innerHTML = originalText;
+        }, 2000);
+      });
+    }
+
+    // WhatsApp placeholder - user can update later
+    const whatsappLink = document.getElementById('whatsappLink');
+    const whatsappNumber = document.getElementById('whatsappNumber');
+    // Leave blank as requested
+    if (whatsappLink) {
+      whatsappLink.href = '#';
+      whatsappNumber.textContent = '[Update Number]';
+    }
   </script>
 </body>
 </html>
