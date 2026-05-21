@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gathering - The Horseman's Journal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #020108; color: #f0ede0; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
+
+    /* NAVBAR - FIXED */
+    .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none; }
+    .navbar-wrapper * { pointer-events: auto; }
+    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
+    .nav3d { position: relative; transform-style: preserve-3d; transform: rotateX(28deg); transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px; }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+    .face { position: absolute; border-radius: 18px; }
+    .face-top { inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(180,160,80,0.08) 40%, rgba(255,255,255,0.04) 100%); border: 1px solid rgba(180,160,80,0.45); border-bottom-color: rgba(180,160,80,0.15); backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 0 60px rgba(160,140,60,0.06); z-index: 4; }
+    .face-back { inset: 0; background: rgba(160,140,60,0.04); border: 1px solid rgba(180,160,80,0.2); transform: translateZ(-36px); z-index: 1; }
+    .face-bottom-wall { left: 18px; right: 18px; bottom: -36px; height: 36px; background: linear-gradient(180deg, rgba(160,140,60,0.18) 0%, rgba(80,60,20,0.08) 60%, rgba(0,0,0,0.02) 100%); border-radius: 0 0 12px 12px; transform-origin: top center; transform: rotateX(-90deg); z-index: 2; }
+    .face-top-wall { left: 18px; right: 18px; top: -5px; height: 5px; background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(180,160,80,0.2)); border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3; }
+    .face-left-wall { top: 4px; bottom: 4px; left: -36px; width: 36px; background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(160,140,60,0.1) 100%); border-radius: 12px 0 0 12px; transform-origin: right center; transform: rotateY(-90deg); z-index: 2; }
+    .face-right-wall { top: 4px; bottom: 4px; right: -36px; width: 36px; background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(160,140,60,0.1) 100%); border-radius: 0 12px 12px 0; transform-origin: left center; transform: rotateY(90deg); z-index: 2; }
+    .nav-content { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 0 1.8rem; }
+    .brand { font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700; color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; text-shadow: 0 0 24px rgba(180,160,60,0.8); text-decoration: none; }
+    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(180,160,60,0.4); font-weight: 400; }
+    .links { display: flex; gap: .05rem; list-style: none; }
+    .links li a { display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px; color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px; border-radius: 8px; transition: all .25s; white-space: nowrap; }
+    .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(180,160,60,0.9); }
+    .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.12); text-shadow: 0 0 16px rgba(180,160,60,0.9); }
+    .portal-scene { perspective: 300px; flex-shrink: 0; }
+    .portal-btn { position: relative; transform-style: preserve-3d; transform: rotateX(22deg); transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer; }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-top { display: block; padding: 8px 18px; background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(180,160,80,0.38) 50%, rgba(140,100,20,0.28) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(180,160,80,0.7); border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: 2.5px; color: #FFF8DC; position: relative; z-index: 3; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); }
+    .portal-wall { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(100,70,30,0.6), rgba(40,25,10,0.4)); border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(80,50,20,0.5); }
+    .portal-glow { position: absolute; inset: -4px; border-radius: 100px; background: transparent; box-shadow: 0 0 20px rgba(180,160,80,0.4); transform: translateZ(-7px); z-index: 1; }
+
+    /* DOME */
+    .dome-section { position: relative; width: 100%; height: 100vh; overflow: hidden; }
+    #domeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .dome-title-overlay { position: absolute; top: 16%; left: 50%; transform: translateX(-50%); z-index: 5; text-align: center; pointer-events: none; transition: opacity 1.8s; }
+    .dome-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 4.5vw, 3.2rem); font-weight: 700; color: #fff; letter-spacing: 5px; text-shadow: 0 0 50px rgba(200,170,80,0.3); margin-bottom: .5rem; }
+    .dome-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: .85rem; color: rgba(240,230,200,0.3); }
+    .dome-hint { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); z-index: 5; pointer-events: none; transition: opacity 1.2s; }
+    .dome-hint-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .72rem; color: rgba(240,230,200,0.22); text-align: center; }
+
+    /* STORY FORM OVERLAY */
+    .form-overlay { position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .5s; }
+    .form-overlay.open { opacity: 1; pointer-events: all; }
+    .form-backdrop { position: absolute; inset: 0; background: rgba(4,2,8,0.94); backdrop-filter: blur(10px); }
+    .form-panel { position: relative; z-index: 2; background: linear-gradient(160deg, #120c1a 0%, #1a1230 50%, #0e0a1c 100%); border: 1px solid rgba(200,170,80,0.2); border-radius: 12px; max-width: 600px; width: 92%; padding: 2.5rem; box-shadow: 0 30px 80px rgba(0,0,0,0.7); }
+    .form-close { position: absolute; top: 16px; right: 16px; width: 30px; height: 30px; border: 1px solid rgba(200,170,80,0.25); border-radius: 50%; background: rgba(0,0,0,0.4); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .3s; }
+    .form-close:hover { border-color: rgba(200,170,80,0.5); background: rgba(200,170,80,0.1); }
+    .form-close::before, .form-close::after { content: ''; position: absolute; width: 12px; height: 1px; background: rgba(200,170,80,0.6); }
+    .form-close::before { transform: rotate(45deg); } .form-close::after { transform: rotate(-45deg); }
+    .form-title { font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; color: #E8C84A; margin-bottom: 1.5rem; text-align: center; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label { font-family: 'Cinzel', serif; font-size: .5rem; letter-spacing: 3px; color: rgba(200,170,80,0.5); text-transform: uppercase; display: block; margin-bottom: .4rem; }
+    .form-input, .form-textarea { width: 100%; padding: 10px 14px; background: rgba(20,15,35,0.5); border: 1px solid rgba(200,170,80,0.15); border-radius: 6px; font-family: 'EB Garamond', serif; font-size: .9rem; color: rgba(240,230,200,0.8); outline: none; transition: border-color .3s; }
+    .form-input:focus, .form-textarea:focus { border-color: rgba(200,170,80,0.4); }
+    .form-textarea { min-height: 120px; resize: vertical; }
+    .form-submit { width: 100%; padding: 12px; font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 4px; color: #0d0804; text-transform: uppercase; background: #E8C84A; border: none; border-radius: 6px; cursor: pointer; transition: all .3s; margin-top: .5rem; }
+    .form-submit:hover { background: #f0d860; box-shadow: 0 0 25px rgba(200,170,80,0.4); }
+    .form-note { text-align: center; margin-top: 1rem; font-family: 'EB Garamond', serif; font-style: italic; font-size: .7rem; color: rgba(240,230,200,0.25); }
+
+    /* COMMUNITY */
+    .community { position: relative; background: linear-gradient(180deg, #060310 0%, #030108 100%); padding: 5rem 2rem 7rem; z-index: 10; }
+    .community-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .comm-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 2rem; }
+    .comm-oln { flex: 1; max-width: 80px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,170,80,0.4)); }
+    .comm-oln-r { background: linear-gradient(90deg, rgba(200,170,80,0.4), transparent); }
+    .comm-gem { width: 6px; height: 6px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 12px rgba(200,170,80,0.6); }
+    .comm-heading { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: #fff; letter-spacing: 3px; text-shadow: 0 0 40px rgba(200,170,80,0.2); margin-bottom: 1.5rem; }
+    .comm-message-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(1rem, 1.4vw, 1.15rem); color: rgba(240,225,195,0.5); line-height: 2; margin-bottom: 2rem; }
+    .comm-message-text em { color: #E8C84A; font-style: normal; }
+    .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; background: transparent; border: 1px solid rgba(200,170,80,0.35); border-radius: 4px; cursor: pointer; text-decoration: none; transition: all .4s; }
+    .share-btn:hover { background: rgba(200,170,80,0.06); border-color: rgba(200,170,80,0.6); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+
+    @media(max-width:860px){.navbar-wrapper{padding:.8rem 1rem 0}.nav3d{height:56px;transform:rotateX(15deg)}.brand{font-size:.7rem}.links li a{font-size:.5rem;padding:4px 5px;letter-spacing:1px}.portal-top{font-size:.52rem;padding:6px 10px}}
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR - FIXED LINKS -->
+  <div class="navbar-wrapper">
+    <div class="scene">
+      <nav class="nav3d">
+        <div class="face face-back"></div>
+        <div class="face face-bottom-wall"></div>
+        <div class="face face-top-wall"></div>
+        <div class="face face-left-wall"></div>
+        <div class="face face-right-wall"></div>
+        <div class="face face-top"></div>
+        <div class="nav-content">
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
+          <ul class="links">
+            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="awakening.html">AWAKENING</a></li>
+            <li><a href="chronicles.html">CHRONICLES</a></li>
+            <li><a href="companions.html">COMPANIONS</a></li>
+            <li><a href="essays.html">VERSES</a></li>
+            <li><a href="questions.html">QUESTIONS</a></li>
+            <li><a href="gathering.html" class="active">GATHERING</a></li>
+          </ul>
+          <div class="portal-scene">
+            <button class="portal-btn" id="portalBtn">
+              <span class="portal-glow"></span>
+              <span class="portal-wall"></span>
+              <span class="portal-top">PORTAL ✦</span>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- DOME -->
+  <section class="dome-section" id="domeSection">
+    <canvas id="domeCanvas"></canvas>
+    <div class="dome-title-overlay" id="domeTitleOverlay">
+      <h1 class="dome-title">The Gathering</h1>
+      <p class="dome-sub">Enter the dome. Meet the herd. Share your story.</p>
+    </div>
+    <div class="dome-hint" id="domeHint">
+      <p class="dome-hint-text">Click a horse outside the dome to share your story</p>
+    </div>
+  </section>
+
+  <!-- STORY FORM -->
+  <div class="form-overlay" id="formOverlay">
+    <div class="form-backdrop" id="formBackdrop"></div>
+    <div class="form-panel">
+      <button class="form-close" id="formClose"></button>
+      <h2 class="form-title">Share Your Story</h2>
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" class="form-input" id="formName" placeholder="What should we call you?">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Horse's Name (optional)</label>
+        <input type="text" class="form-input" id="formHorse" placeholder="Who taught you?">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Story, Question, or Review</label>
+        <textarea class="form-textarea" id="formStory" placeholder="Tell us about your experience, ask a question, or share what horses have taught you..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Photo Link (optional — Instagram, Google Photos, etc.)</label>
+        <input type="text" class="form-input" id="formPhoto" placeholder="Paste a link to your photo">
+      </div>
+      <button class="form-submit" id="formSubmit">Send Your Story ✦</button>
+      <p class="form-note">Your story will be sent to the horseman. Approved stories appear here.</p>
+    </div>
+  </div>
+
+  <!-- COMMUNITY -->
+  <section class="community" id="communitySection">
+    <div class="community-inner">
+      <div class="comm-ornament"><div class="comm-oln"></div><div class="comm-gem"></div><div class="comm-oln comm-oln-r"></div></div>
+      <h2 class="comm-heading">Every Horse Person Carries a Story</h2>
+      <p class="comm-message-text">
+        Somewhere between the first touch and the last ride,<br>
+        between the fear and the trust,<br>
+        between the fall and the getting back up —<br>
+        <em>something changed in you.</em><br><br>
+        That story belongs here.<br>
+        Your question matters. Your experience is worth sharing.<br>
+        Write it down. The herd is listening.
+      </p>
+      <button class="share-btn" id="shareBtn">Share Your Story ✦</button>
+    </div>
+  </section>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    // DOME CANVAS
+    // ═══════════════════════════════════════════════
+    const canvas = document.getElementById('domeCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, mx = 0.5, my = 0.5, t = 0;
+    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+    resize(); addEventListener('resize', resize);
+    document.getElementById('domeSection').addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+
+    const stars = Array.from({length: 200}, () => ({ x: Math.random(), y: Math.random() * 0.85, r: Math.random() * 1.4 + 0.2, sp: Math.random() * 0.015 + 0.004, off: Math.random() * Math.PI * 2, ba: Math.random() * 0.5 + 0.15 }));
+    const dcx = () => W * 0.5, dcy = () => H * 0.68, drw = () => W * 0.48, drh = () => H * 0.56;
+
+    function drawSky() {
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, '#020108'); g.addColorStop(0.4, '#030418'); g.addColorStop(0.7, '#060520'); g.addColorStop(1, '#0a081e');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      stars.forEach(s => { const tw = Math.sin(t * s.sp + s.off) * 0.3 + 0.7; ctx.fillStyle = 'rgba(255,255,255,' + (s.ba * tw) + ')'; ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r * tw, 0, Math.PI * 2); ctx.fill(); });
+    }
+
+    function drawGround() {
+      const g = ctx.createLinearGradient(0, H * 0.72, 0, H);
+      g.addColorStop(0, 'rgba(20,15,30,0.3)'); g.addColorStop(1, 'rgba(8,5,15,0.85)');
+      ctx.fillStyle = g; ctx.fillRect(0, H * 0.72, W, H * 0.28);
+    }
+
+    function drawDome() {
+      const cx = dcx(), cy = dcy(), rw = drw(), rh = drh(), tilt = (mx - 0.5) * 10;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(tilt * Math.PI / 180);
+      const glass = ctx.createRadialGradient(0, -rh * 0.3, 0, 0, 0, rh);
+      glass.addColorStop(0, 'rgba(200,220,240,0.06)'); glass.addColorStop(0.5, 'rgba(150,180,210,0.025)'); glass.addColorStop(1, 'rgba(60,80,120,0.005)');
+      ctx.fillStyle = glass; ctx.beginPath(); ctx.ellipse(0, 0, rw, rh, 0, Math.PI, 0); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = 'rgba(220,240,255,0.12)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(0, 0, rw, rh, 0, Math.PI, 0); ctx.stroke();
+      for (let i = 0; i < 11; i++) { const a = (i / 10) * Math.PI; ctx.strokeStyle = 'rgba(50,42,60,0.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(Math.cos(a) * rw, -Math.sin(a) * rh); ctx.stroke(); }
+      for (let r = 0; r < 4; r++) { ctx.strokeStyle = 'rgba(60,50,75,0.3)'; ctx.lineWidth = r === 0 ? 2 : 1; ctx.beginPath(); ctx.ellipse(0, -rh * (0.2 + r * 0.22), rw * (1 - r * 0.08), 8, 0, 0, Math.PI * 2); ctx.stroke(); }
+      ctx.strokeStyle = 'rgba(90,75,100,0.5)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(0, 0, rw + 4, rh * 0.15 + 2, 0, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawStables() {
+      const cx = dcx(), cy = dcy(), rw = drw();
+      for (let s = 0; s < 5; s++) {
+        const sx = cx - rw * 0.7 + s * rw * 0.35, sy = cy - drh() * 0.25;
+        ctx.fillStyle = 'rgba(35,25,16,0.65)'; ctx.fillRect(sx - 24, sy - 18, 48, 60);
+        ctx.strokeStyle = 'rgba(60,42,28,0.55)'; ctx.lineWidth = 2; ctx.strokeRect(sx - 24, sy - 18, 48, 60);
+        ctx.fillStyle = 'rgba(70,45,25,0.45)'; ctx.fillRect(sx - 18, sy - 12, 36, 10);
+        ctx.fillStyle = 'rgba(25,16,8,0.75)'; ctx.fillRect(sx - 28, sy - 24, 56, 10);
+        ctx.fillStyle = 'rgba(80,60,35,0.25)'; ctx.fillRect(sx - 20, sy + 30, 40, 8);
+      }
+    }
+
+    function drawHorse(hx, hy, sc, coat, mane, pose, flip) {
+      ctx.save(); ctx.translate(hx, hy); if (flip) ctx.scale(-sc, sc); else ctx.scale(sc, sc);
+      const br = Math.sin(t * 0.018 + hx * 0.01) * 1.5;
+      if (pose === 'standing') {
+        ctx.fillStyle = coat; [-14, -2, 8, 18].forEach((lx, i) => ctx.fillRect(lx, 14 + (i%2?br:-br), 4, 22));
+        ctx.beginPath(); ctx.ellipse(0, 4, 26, 12, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(17, 0); ctx.quadraticCurveTo(26, -24, 22, -36); ctx.quadraticCurveTo(16, -24, 7, -2); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(22, -38, 8, 5, -0.1, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(22, -42); ctx.lineTo(20, -50); ctx.lineTo(18, -42); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(24, -42); ctx.lineTo(26, -50); ctx.lineTo(24, -42); ctx.fill();
+        ctx.strokeStyle = mane; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(17, -3); ctx.quadraticCurveTo(20, -16, 24, -28); ctx.stroke();
+        const ts = Math.sin(t * 0.022) * 2; ctx.strokeStyle = mane; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(-24, 2); ctx.quadraticCurveTo(-32, -4, -30+ts, -12); ctx.stroke();
+      } else if (pose === 'grazing') {
+        ctx.fillStyle = coat; [-14, -2, 8, 18].forEach((lx, i) => ctx.fillRect(lx, 16 + (i%2?br:-br), 4, 20));
+        ctx.beginPath(); ctx.ellipse(0, 5, 26, 12, 0, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(17, 1); ctx.quadraticCurveTo(30, 10, 24, 24); ctx.quadraticCurveTo(17, 18, 6, 3); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(26, 28, 7, 5, 0.25, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(28, 23); ctx.lineTo(30, 18); ctx.lineTo(26, 23); ctx.fill();
+        ctx.strokeStyle = mane; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(17, -2); ctx.quadraticCurveTo(22, 5, 26, 16); ctx.stroke();
+        const ts = Math.sin(t * 0.024) * 3; ctx.strokeStyle = mane; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(-24, 3); ctx.quadraticCurveTo(-32, -2, -30+ts, -10); ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawHuman(hx, hy, sc, pose) {
+      ctx.save(); ctx.translate(hx, hy); ctx.scale(sc, sc);
+      ctx.fillStyle = '#1a1512'; ctx.fillRect(-3, 10, 3, 16); ctx.fillRect(2, 10, 3, 16);
+      ctx.fillStyle = pose === 'child' ? '#3a2518' : '#2a2520'; ctx.beginPath(); ctx.ellipse(0, 2, 6, 11, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = pose === 'elder' ? '#888' : '#3a3028'; ctx.beginPath(); ctx.arc(0, -12, 4.5, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = pose === 'elder' ? '#aaa' : pose === 'child' ? '#4a3020' : '#2a2018'; ctx.beginPath(); ctx.arc(0, -14, 5, Math.PI, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#2a2520'; ctx.lineWidth = 1.8; ctx.beginPath(); ctx.moveTo(5, -3); ctx.lineTo(pose === 'kneeling' ? 8 : 12, pose === 'kneeling' ? 5 : -8); ctx.stroke();
+      if (pose === 'kneeling') { ctx.fillStyle = '#1a1512'; ctx.fillRect(-4, 22, 8, 4); }
+      ctx.restore();
+    }
+
+    const characters = [
+      { px:0.20, py:0.54, hcoat:'#4a4045', hmane:'#5a5055', hpose:'standing', hflip:false, hp:'elder' },
+      { px:0.33, py:0.58, hcoat:'#6a3a20', hmane:'#8a4a28', hpose:'grazing', hflip:true, hp:'child' },
+      { px:0.46, py:0.62, hcoat:'#4a3020', hmane:'#3a2018', hpose:'standing', hflip:false, hp:'kneeling' },
+      { px:0.60, py:0.50, hcoat:'#1a0e06', hmane:'#0a0604', hpose:'standing', hflip:true, hp:'standing' },
+      { px:0.74, py:0.56, hcoat:'#8a6a30', hmane:'#aa8a40', hpose:'grazing', hflip:false, hp:'child' },
+      { px:0.18, py:0.66, hcoat:'#0d0a0e', hmane:'#1a1418', hpose:'standing', hflip:true, hp:'elder' },
+      { px:0.40, py:0.46, hcoat:'#6a6a72', hmane:'#8a8a92', hpose:'standing', hflip:false, hp:'child' },
+      { px:0.66, py:0.64, hcoat:'#3a2818', hmane:'#2a1808', hpose:'standing', hflip:false, hp:'kneeling' },
+      { px:0.50, py:0.53, hcoat:'#d8d4cc', hmane:'#e8e4dc', hpose:'standing', hflip:true, hp:'elder' },
+      { px:0.28, py:0.48, hcoat:'#080608', hmane:'#141018', hpose:'grazing', hflip:false, hp:'standing' },
+    ];
+
+    const outsideHorses = [
+      { x:0.08, y:0.78, s:1.2, coat:'#0a080c', mane:'#1a1418', pose:'grazing', flip:false, label:'Share Your Story' },
+      { x:0.88, y:0.76, s:1.15, coat:'#2a1a12', mane:'#3a2818', pose:'standing', flip:true, label:'Share Your Story' },
+      { x:0.48, y:0.82, s:1.0, coat:'#5a4828', mane:'#6a5530', pose:'grazing', flip:false, label:'Share Your Story' },
+    ];
+
+    // Store screen positions for click detection
+    let outsideClickZones = [];
+
+    function drawAll() {
+      const cx = dcx(), cy = dcy(), rw = drw(), rh = drh();
+      characters.forEach(ch => {
+        const angle = (ch.px - 0.5) * Math.PI * 0.85;
+        const depth = 0.4 + ch.py * 0.6;
+        const hx = cx + Math.cos(angle) * rw * depth * 0.85;
+        const hy = cy + rh * (ch.py - 0.45) * 0.7;
+        const sc = 0.4 + depth * 0.5;
+        drawHorse(hx + 16, hy + 5, sc, ch.hcoat, ch.hmane, ch.hpose, ch.hflip);
+        drawHuman(hx - 6, hy + 8, sc * 0.6, ch.hp);
+      });
+    }
+
+    function drawOutside() {
+      outsideClickZones = [];
+      outsideHorses.forEach(oh => {
+        const hx = oh.x * W + (mx - 0.5) * 35;
+        const hy = oh.y * H + (my - 0.5) * 15;
+        drawHorse(hx, hy, oh.s, oh.coat, oh.mane, oh.pose, oh.flip);
+        // Store click zone
+        const sc = oh.s;
+        outsideClickZones.push({ x: hx, y: hy - 20, r: 55 * sc });
+        // Draw subtle label above horse
+        const alpha = 0.25 + Math.sin(t * 0.03) * 0.08;
+        ctx.fillStyle = 'rgba(232,200,74,' + alpha + ')';
+        ctx.font = 'italic ' + (10 * oh.s) + 'px "EB Garamond", serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(oh.label, hx, hy - 60 * oh.s);
+      });
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+      drawSky();
+      drawGround();
+      drawDome();
+      drawStables();
+      drawAll();
+      drawOutside();
+    }
+
+    // Canvas click detection
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+      for (let i = 0; i < outsideClickZones.length; i++) {
+        const z = outsideClickZones[i];
+        const dx = cx - z.x, dy = cy - z.y;
+        if (Math.sqrt(dx*dx + dy*dy) < z.r) {
+          openForm();
+          return;
+        }
+      }
+    });
+
+    // Canvas hover detection
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left, cy = e.clientY - rect.top;
+      let hovering = false;
+      for (let i = 0; i < outsideClickZones.length; i++) {
+        const z = outsideClickZones[i];
+        if (Math.sqrt((cx-z.x)*(cx-z.x) + (cy-z.y)*(cy-z.y)) < z.r) { hovering = true; break; }
+      }
+      canvas.style.cursor = hovering ? 'pointer' : 'default';
+    });
+
+    // ═══════════════════════════════════════════════
+    // STORY FORM
+    // ═══════════════════════════════════════════════
+    const formOverlay = document.getElementById('formOverlay');
+    function openForm() { formOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeForm() { formOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('formClose').addEventListener('click', closeForm);
+    document.getElementById('formBackdrop').addEventListener('click', closeForm);
+    document.getElementById('shareBtn').addEventListener('click', openForm);
+
+    document.getElementById('formSubmit').addEventListener('click', () => {
+      const name = document.getElementById('formName').value.trim();
+      const horse = document.getElementById('formHorse').value.trim();
+      const story = document.getElementById('formStory').value.trim();
+      const photo = document.getElementById('formPhoto').value.trim();
+      if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
+      
+      // Build WhatsApp message
+      let msg = '📖 *New Story from The Gathering*%0A%0A';
+      msg += '*Name:* ' + name + '%0A';
+      if (horse) msg += '*Horse:* ' + horse + '%0A';
+      msg += '*Story:* ' + story + '%0A';
+      if (photo) msg += '*Photo:* ' + photo + '%0A';
+      
+      // IMPORTANT: Replace this with your actual WhatsApp number (with country code)
+      // Example: for India +91 9876543210, put '919876543210'
+      const waNumber = '919XXXXXXXXX'; // <-- CHANGE THIS TO YOUR WHATSAPP NUMBER
+      const waURL = 'https://wa.me/' + waNumber + '?text=' + msg;
+      
+      // Also build mailto fallback
+      const emailSubject = 'New Story: ' + name;
+      let emailBody = 'Name: ' + name + '\n';
+      if (horse) emailBody += 'Horse: ' + horse + '\n';
+      emailBody += 'Story: ' + story + '\n';
+      if (photo) emailBody += 'Photo: ' + photo + '\n';
+      const mailURL = 'mailto:praveen@thehorsemansjournal.com?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody);
+      
+      // Try WhatsApp first, fallback to email
+      window.open(waURL, '_blank');
+      
+      // Clear form
+      document.getElementById('formName').value = '';
+      document.getElementById('formHorse').value = '';
+      document.getElementById('formStory').value = '';
+      document.getElementById('formPhoto').value = '';
+      closeForm();
+    });
+
+    const titleOverlay = document.getElementById('domeTitleOverlay');
+    const hintEl = document.getElementById('domeHint');
+    let lastMove = 0;
+    addEventListener('mousemove', () => { lastMove = t; });
+    function animate() {
+      t++; render();
+      const idle = t - lastMove > 200;
+      titleOverlay.style.opacity = idle ? '0.3' : '0.9';
+      hintEl.style.opacity = idle ? '0' : '0.7';
+      requestAnimationFrame(animate);
+    }
+    animate();
+    addEventListener('resize', () => { resize(); });
+
+    // Portal button
+    const portalBtn = document.getElementById('portalBtn');
+    if (portalBtn) {
+      portalBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    }
+  </script>
+</body>
+</html>
