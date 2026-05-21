@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Content - The Horseman's Journal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #060308; color: #e8dfc7; font-family: 'EB Garamond', serif; padding: 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { font-family: 'Cinzel Decorative', serif; color: #E8C84A; margin-bottom: 2rem; }
+    .section-selector { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .section-btn { background: transparent; border: 1px solid rgba(232,200,74,0.3); padding: 10px 20px; color: #e8dfc7; font-family: 'Cinzel', serif; cursor: pointer; border-radius: 8px; transition: all 0.3s; }
+    .section-btn:hover, .section-btn.active { background: #E8C84A; color: #060308; border-color: #E8C84A; }
+    .editor-panel { background: linear-gradient(145deg, #1a1528, #0f0c1a); border: 1px solid rgba(232,200,74,0.2); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; }
+    .editor-panel h3 { font-family: 'Cinzel', serif; color: #E8C84A; margin-bottom: 1rem; }
+    label { display: block; font-size: 0.75rem; letter-spacing: 2px; color: rgba(232,200,74,0.6); margin-top: 1rem; margin-bottom: 0.5rem; }
+    input, textarea { width: 100%; padding: 12px; background: rgba(20,15,35,0.5); border: 1px solid rgba(232,200,74,0.2); border-radius: 8px; color: #fff; font-family: 'EB Garamond', serif; font-size: 1rem; }
+    textarea { min-height: 300px; }
+    button { background: #E8C84A; border: none; padding: 12px 24px; font-family: 'Cinzel', serif; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 1rem; margin-right: 1rem; }
+    button.secondary { background: transparent; border: 1px solid rgba(232,200,74,0.3); color: #e8dfc7; }
+    .save-status { margin-top: 1rem; font-style: italic; color: rgba(232,200,74,0.5); }
+    .logout-btn { position: fixed; top: 20px; right: 20px; background: rgba(232,200,74,0.1); border: 1px solid rgba(232,200,74,0.3); padding: 8px 16px; border-radius: 8px; color: #e8dfc7; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+  <div class="container">
+    <h1>Content Manager</h1>
+    <div class="section-selector" id="sectionSelector"></div>
+    <div class="editor-panel" id="editorPanel"></div>
+  </div>
+  <script>
+    // Check authentication
+    if (localStorage.getItem('adminAuth') !== 'true') {
+      window.location.href = 'index.html';
+    }
+
+    const sections = ['genesis', 'awakening', 'chronicles', 'companions', 'essays', 'questions'];
+    let currentSection = 'genesis';
+    let currentData = null;
+
+    async function loadSection(section) {
+      currentSection = section;
+      try {
+        const response = await fetch(`../content/${section}.json?t=${Date.now()}`);
+        currentData = await response.json();
+        renderEditor();
+      } catch(e) {
+        console.error('Error loading', e);
+        currentData = { title: '', content: '', articles: [] };
+        renderEditor();
+      }
+    }
+
+    function renderEditor() {
+      const panel = document.getElementById('editorPanel');
+      if (section === 'chronicles') {
+        panel.innerHTML = `
+          <h3>Editing: ${currentSection.toUpperCase()}</h3>
+          ${currentData.articles.map((article, i) => `
+            <div style="border-top:1px solid rgba(232,200,74,0.1); margin-top:1rem; padding-top:1rem;">
+              <label>Article ${i+1} Title</label>
+              <input type="text" id="art_title_${i}" value="${escapeHtml(article.title)}">
+              <label>Article Content (HTML allowed)</label>
+              <textarea id="art_content_${i}">${escapeHtml(article.content)}</textarea>
+            </div>
+          `).join('')}
+          <div class="save-status" id="saveStatus"></div>
+          <button onclick="saveContent()">Save Changes</button>
+          <button class="secondary" onclick="loadSection(currentSection)">Refresh</button>
+        `;
+      } else {
+        panel.innerHTML = `
+          <h3>Editing: ${currentSection.toUpperCase()}</h3>
+          <label>Page Title</label>
+          <input type="text" id="pageTitle" value="${escapeHtml(currentData.title || '')}">
+          <label>Page Content (HTML allowed)</label>
+          <textarea id="pageContent">${escapeHtml(currentData.content || '')}</textarea>
+          <div class="save-status" id="saveStatus"></div>
+          <button onclick="saveContent()">Save Changes</button>
+          <button class="secondary" onclick="loadSection(currentSection)">Refresh</button>
+        `;
+      }
+    }
+
+    function escapeHtml(str) { return str ? str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}) : ''; }
+
+    async function saveContent() {
+      const status = document.getElementById('saveStatus');
+      status.textContent = 'Saving...';
+      let updatedData = { ...currentData };
+      
+      if (currentSection === 'chronicles') {
+        updatedData.articles = currentData.articles.map((article, i) => ({
+          title: document.getElementById(`art_title_${i}`).value,
+          content: document.getElementById(`art_content_${i}`).value
+        }));
+      } else {
+        updatedData.title = document.getElementById('pageTitle').value;
+        updatedData.content = document.getElementById('pageContent').value;
+      }
+      
+      try {
+        const response = await fetch(`../content/${currentSection}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedData)
+        });
+        if (response.ok) {
+          status.textContent = 'Saved successfully!';
+          setTimeout(() => status.textContent = '', 2000);
+        } else {
+          status.textContent = 'Save failed. Check file permissions.';
+        }
+      } catch(e) {
+        status.textContent = 'Error saving: ' + e.message;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('adminAuth');
+      window.location.href = 'index.html';
+    }
+
+    // Render section buttons
+    const selector = document.getElementById('sectionSelector');
+    sections.forEach(s => {
+      const btn = document.createElement('button');
+      btn.textContent = s.toUpperCase();
+      btn.className = 'section-btn';
+      btn.onclick = () => {
+        document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        loadSection(s);
+      };
+      selector.appendChild(btn);
+    });
+    loadSection('genesis');
+  </script>
+</body>
+</html>
