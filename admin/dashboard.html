@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Content Manager - The Horseman's Journal</title>
+  <title>Content Manager - The Horseman's Journal CMS</title>
+  <meta name="description" content="Content Management System for The Horseman's Journal">
+  <meta name="robots" content="noindex, nofollow">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -21,6 +24,7 @@
       border-right: 1px solid rgba(232,200,74,0.15);
       padding: 2rem 0;
       overflow-y: auto;
+      z-index: 100;
     }
     .sidebar-logo {
       text-align: center;
@@ -177,17 +181,6 @@
       background: #f0d860;
       transform: translateY(-2px);
     }
-    .cancel-btn {
-      background: transparent;
-      border: 1px solid rgba(232,200,74,0.3);
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      color: #e8dfc7;
-    }
     .status-msg {
       margin-top: 1rem;
       font-size: 0.8rem;
@@ -213,6 +206,7 @@
       font-size: 0.7rem;
       color: rgba(232,200,74,0.6);
     }
+    
     @media (max-width: 768px) {
       .sidebar { width: 200px; }
       .main-content { margin-left: 200px; padding: 1rem; }
@@ -277,14 +271,12 @@
     let currentSection = 'book';
     let contentData = {};
 
-    // Sample content data structure
     const defaultContent = {
       book: {
         title: "THE HORSEMAN'S JOURNAL",
         subtitle: "A CONVERSATION IN SILENCE",
         author: "PRAVEEN KUMAR",
-        price: "24.99",
-        isbn: "",
+        price: "10.99",
         edition: "First Edition",
         year: "2024",
         pages: "400",
@@ -344,7 +336,7 @@
             <input type="text" id="bookYear" value="${escapeHtml(data.year)}">
             <label>Pages</label>
             <input type="text" id="bookPages" value="${escapeHtml(data.pages)}">
-            <label>Book Description (for back cover)</label>
+            <label>Book Description</label>
             <textarea id="bookDescription">${escapeHtml(data.description)}</textarea>
             <label>About the Author</label>
             <textarea id="bookAboutAuthor">${escapeHtml(data.aboutAuthor)}</textarea>
