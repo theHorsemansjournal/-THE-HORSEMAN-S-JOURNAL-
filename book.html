@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The Book - The Horseman's Journal</title>
+  <title>The Book | The Horseman's Journal - A Conversation in Silence</title>
+  <meta name="description" content="Discover 'A Conversation in Silence' - a book about trust, fear, and the invisible bond between horse and human. 400 pages of horsemanship wisdom.">
+  <meta name="keywords" content="horse book, horsemanship book, equestrian book, horse training book, trust with horses">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
   
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
-  <!-- Link to GLOBAL CSS -->
   <link rel="stylesheet" href="global.css">
   
   <style>
-    /* Book page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #060308;
@@ -20,7 +22,6 @@
       overflow-x: hidden;
     }
 
-    /* BOOK SHOWCASE SECTION */
     .book-showcase {
       min-height: 100vh;
       display: flex;
@@ -37,7 +38,6 @@
       align-items: center;
     }
     
-    /* 3D BOOK */
     .book-3d-wrapper {
       perspective: 1200px;
     }
@@ -190,8 +190,19 @@
       font-size: 0.7rem;
       color: rgba(240,230,200,0.3);
     }
+    .upi-text {
+      display: inline-block;
+      background: rgba(232,200,74,0.08);
+      border: 1px solid rgba(232,200,74,0.2);
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
 
-    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
       .book-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
       .book-3d { max-width: 280px; margin: 0 auto; }
@@ -207,7 +218,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -267,45 +277,40 @@
           <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
           <p>This book is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
         </div>
-        <div class="price">$24.99 USD</div>
+        <div class="price">$10.99 USD</div>
         
-        <!-- GLOBAL PAYMENT OPTIONS -->
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_HERE">
-            <button type="submit" class="buy-btn" style="background:#E8C84A; color:#0a0500;">✦ PayPal (Global) ✦</button>
+            <input type="hidden" name="hosted_button_id" value="[ADD YOUR PAYPAL BUTTON ID HERE]">
+            <button type="submit" class="buy-btn">✦ PayPal (Global) ✦</button>
           </form>
           <button class="preview-btn" id="previewBtn">📖 Preview Sample</button>
         </div>
-        <div style="margin-bottom: 1rem;">
-          <div class="upi-text" id="upiText" style="display:inline-block; background:rgba(232,200,74,0.08); border:1px solid rgba(232,200,74,0.2); padding:10px 20px; border-radius:40px; font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:1px; cursor:pointer;">
-            🇮🇳 UPI: horsemans@okhdfcbank (Click to Copy)
+        
+        <div>
+          <div class="upi-text" id="upiText" style="cursor:pointer;">
+            🇮🇳 UPI: [ADD YOUR UPI ID HERE] (Click to Copy)
           </div>
         </div>
+        
         <div class="secure-note">🔒 Secure checkout · Instant PDF download</div>
       </div>
     </div>
   </section>
 
   <script>
-    // === SETUP FOR BOOK PAGE ===
-    
-    // Gumroad alternative (optional - replace with your link)
-    const GUMROAD_LINK = "https://praveen.gumroad.com/l/horsemans-journal";
     const SAMPLE_PDF = "sample.pdf";
     
-    // Preview button
     const previewBtn = document.getElementById('previewBtn');
     if (previewBtn) {
       previewBtn.onclick = () => window.open(SAMPLE_PDF, '_blank');
     }
     
-    // UPI COPY FUNCTIONALITY
     const upiText = document.getElementById('upiText');
     if (upiText) {
       upiText.addEventListener('click', () => {
-        const upiId = 'horsemans@okhdfcbank';
+        const upiId = '[ADD YOUR UPI ID HERE]';
         navigator.clipboard.writeText(upiId);
         const originalText = upiText.innerHTML;
         upiText.innerHTML = '✓ UPI ID Copied!';
@@ -315,7 +320,6 @@
       });
     }
     
-    // PORTAL BUTTON - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if (portalBtn) {
       portalBtn.addEventListener('click', () => {
