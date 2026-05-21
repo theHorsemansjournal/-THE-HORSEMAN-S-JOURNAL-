@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Admin Login - The Horseman's Journal</title>
+  <title>Admin Login - The Horseman's Journal CMS</title>
+  <meta name="description" content="Content Management System login for The Horseman's Journal">
+  <meta name="robots" content="noindex, nofollow">
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -87,6 +90,11 @@
     }
     .error { color: #ff8888; margin-top: 15px; font-size: 0.75rem; display: none; }
     .lock-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .security-note {
+      margin-top: 1rem;
+      font-size: 0.55rem;
+      color: rgba(240,230,200,0.15);
+    }
     
     @media (max-width: 480px) {
       .login-container { padding: 1.8rem; }
@@ -103,12 +111,12 @@
     <input type="password" id="adminPassword" placeholder="Enter Admin Password" autocomplete="off">
     <button onclick="login()">ACCESS PORTAL ✦</button>
     <div class="error" id="errorMsg">Incorrect password. Please try again.</div>
-    <p style="margin-top: 1rem; font-size: 0.55rem; color: rgba(240,230,200,0.15);">⚠️ Change default password after first login</p>
+    <p class="security-note">⚠️ Secure area. Authorized access only.</p>
   </div>
   <script>
-    // ⚠️ IMPORTANT: CHANGE THIS PASSWORD TO YOUR OWN AND REMEMBER IT!
-    // Change "Horseman2024" to your own secure password
-    const CORRECT_PASSWORD = "Horseman2024";
+    // ⚠️ IMPORTANT: CHANGE THIS PASSWORD TO YOUR OWN SECURE PASSWORD
+    // Replace "Horseman2024" with a strong password you will remember
+    const CORRECT_PASSWORD = "[ADD YOUR ADMIN PASSWORD HERE]";
     
     function login() {
       const pwd = document.getElementById('adminPassword').value;
