@@ -590,21 +590,198 @@
 </head>
 <body>
 
-  <!-- 3D NAVIGATION BAR -->
-  <div class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">THE HORSEMAN'S JOURNAL<small>EST. MMXXVI</small></a>
-      <ul class="nav-links">
-        <li><a href="genesis.html">GENESIS</a></li>
-        <li><a href="awakening.html">AWAKENING</a></li>
-        <li><a href="chronicles.html" class="active">CHRONICLES</a></li>
-        <li><a href="companions.html">COMPANIONS</a></li>
-        <li><a href="essays.html">VERSES</a></li>
-        <li><a href="questions.html">QUESTIONS</a></li>
-      </ul>
-      <button class="portal-button" id="portalBtn">PORTAL ✦</button>
-    </div>
-  </div>
+  /* ===== 3D NAVIGATION BAR ===== */
+    .navbar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 2rem 0;
+      pointer-events: none;
+    }
+    .navbar-wrapper * { pointer-events: auto; }
+    .scene {
+      perspective: 700px;
+      perspective-origin: 50% 60%;
+      width: 100%;
+      max-width: 1020px;
+    }
+    .nav3d {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(28deg) rotateY(0deg);
+      transition: transform .5s cubic-bezier(.23,1,.32,1);
+      height: 64px;
+    }
+    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
+    .face { position: absolute; border-radius: 18px; }
+    .face-top {
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(200,155,60,0.08) 40%, rgba(255,255,255,0.04) 100%);
+      border: 1px solid rgba(200,155,60,0.45);
+      border-bottom-color: rgba(200,155,60,0.15);
+      backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(180,140,50,0.06);
+      z-index: 4;
+    }
+    .face-back {
+      inset: 0;
+      background: rgba(180,130,40,0.04);
+      border: 1px solid rgba(200,155,60,0.2);
+      transform: translateZ(-36px);
+      z-index: 1;
+    }
+    .face-bottom-wall {
+      left: 18px;
+      right: 18px;
+      bottom: -36px;
+      height: 36px;
+      background: linear-gradient(180deg, rgba(180,130,50,0.18) 0%, rgba(80,50,10,0.08) 60%, rgba(0,0,0,0.02) 100%);
+      border-left: 1px solid rgba(200,155,60,0.15);
+      border-right: 1px solid rgba(200,155,60,0.15);
+      border-bottom: 1px solid rgba(200,155,60,0.1);
+      border-radius: 0 0 12px 12px;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+      z-index: 2;
+    }
+    .face-top-wall {
+      left: 18px;
+      right: 18px;
+      top: -5px;
+      height: 5px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(200,155,60,0.2));
+      border-radius: 18px 18px 0 0;
+      transform-origin: bottom center;
+      transform: rotateX(90deg);
+      z-index: 3;
+    }
+    .face-left-wall {
+      top: 4px;
+      bottom: 4px;
+      left: -36px;
+      width: 36px;
+      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1);
+      border-radius: 12px 0 0 12px;
+      transform-origin: right center;
+      transform: rotateY(-90deg);
+      z-index: 2;
+    }
+    .face-right-wall {
+      top: 4px;
+      bottom: 4px;
+      right: -36px;
+      width: 36px;
+      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(180,130,50,0.1) 100%);
+      border: 1px solid rgba(200,155,60,0.1);
+      border-radius: 0 12px 12px 0;
+      transform-origin: left center;
+      transform: rotateY(90deg);
+      z-index: 2;
+    }
+    .nav-content {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.8rem;
+      transform: translateZ(1px);
+    }
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.25;
+      text-shadow: 0 0 24px rgba(200,150,50,0.8), 0 0 60px rgba(200,150,50,0.3);
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .brand small {
+      display: block;
+      font-size: .52rem;
+      letter-spacing: 4px;
+      color: rgba(200,150,50,0.4);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+    .links { display: flex; gap: .05rem; list-style: none; }
+    .links li a {
+      display: block;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: rgba(255,240,180,0.5);
+      text-decoration: none;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: all .25s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      white-space: nowrap;
+    }
+    .links li a:hover,
+    .links li a.active {
+      color: #FFF8DC;
+      background: rgba(255,255,255,0.07);
+      text-shadow: 0 0 16px rgba(200,150,50,0.9);
+    }
+    .portal-scene { perspective: 300px; flex-shrink: 0; }
+    .portal-btn {
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(22deg);
+      transition: transform .25s;
+      display: inline-block;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+    }
+    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
+    .portal-top {
+      display: block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(200,150,50,0.7);
+      border-radius: 100px;
+      font-family: 'Raleway', sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      color: #FFF8DC;
+      text-shadow: 0 0 12px rgba(200,150,50,0.9);
+      position: relative;
+      z-index: 3;
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+    .portal-wall {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(120,80,20,0.6), rgba(50,30,5,0.4));
+      border-radius: 100px;
+      transform: translateZ(-14px);
+      z-index: 2;
+      border: 1px solid rgba(100,60,15,0.5);
+    }
+    .portal-glow {
+      position: absolute;
+      inset: -4px;
+      border-radius: 100px;
+      background: transparent;
+      box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
+      transform: translateZ(-7px);
+      z-index: 1;
+    }
 
   <!-- HERO SECTION -->
   <section class="hero">
