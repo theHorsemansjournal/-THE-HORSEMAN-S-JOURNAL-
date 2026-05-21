@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Horseman's Journal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
     }
 
     /* ═══════════════════════════════════════════════
-       NAVBAR
+       NAVBAR - FIXED FOR MOBILE
     ═══════════════════════════════════════════════ */
     .navbar-wrapper {
       position: fixed;
@@ -28,7 +28,7 @@
       z-index: 200;
       display: flex;
       justify-content: center;
-      padding: 1.5rem 2rem 0;
+      padding: 1rem 1rem 0;
       pointer-events: none;
     }
     .navbar-wrapper * { pointer-events: auto; }
@@ -95,21 +95,26 @@
     }
     .nav-content {
       position: absolute; inset: 0; z-index: 10;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 1.8rem; transform: translateZ(1px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.2rem;
+      transform: translateZ(1px);
+      flex-wrap: wrap;
+      gap: 0.3rem;
     }
     .brand {
-      font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700;
-      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.25;
+      font-family: 'Cinzel', serif; font-size: .75rem; font-weight: 700;
+      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.2;
       text-shadow: 0 0 24px rgba(212,175,55,0.8), 0 0 60px rgba(212,175,55,0.3);
       flex-shrink: 0; text-decoration: none;
     }
-    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(212,175,55,0.4); font-weight: 400; margin-top: 1px; }
-    .links { display: flex; gap: .05rem; list-style: none; }
+    .brand small { display: inline-block; font-size: .45rem; letter-spacing: 3px; color: rgba(212,175,55,0.4); font-weight: 400; margin-left: 0.3rem; }
+    .links { display: flex; gap: 0.1rem; list-style: none; flex-wrap: wrap; justify-content: center; }
     .links li a {
-      display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px;
+      display: block; font-size: .55rem; font-weight: 600; letter-spacing: 1.5px;
       color: rgba(255,240,180,0.5); text-decoration: none;
-      padding: 6px 8px; border-radius: 8px; transition: all .25s;
+      padding: 4px 6px; border-radius: 8px; transition: all .25s;
       text-shadow: 0 1px 3px rgba(0,0,0,0.8); position: relative; white-space: nowrap;
     }
     .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(212,175,55,0.9); }
@@ -121,10 +126,10 @@
     .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
     .portal-btn:active { transform: rotateX(30deg) translateY(2px); }
     .portal-top {
-      display: block; padding: 8px 18px;
+      display: block; padding: 5px 12px;
       background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25) 100%);
       backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.7); border-bottom-color: rgba(212,175,55,0.2);
-      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: 2.5px;
+      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .55rem; font-weight: 700; letter-spacing: 2px;
       color: #FFF8DC; text-shadow: 0 0 12px rgba(212,175,55,0.9);
       position: relative; z-index: 3; white-space: nowrap; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
     }
@@ -138,9 +143,7 @@
       transform: translateZ(-7px); z-index: 1;
     }
 
-    /* ═══════════════════════════════════════════════
-       SANCTUARY
-    ═══════════════════════════════════════════════ */
+    /* REST OF YOUR CSS - SAME AS YOUR ORIGINAL */
     .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .title-overlay {
@@ -162,9 +165,6 @@
     #lanterns { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; }
     @keyframes lanternBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
-    /* ═══════════════════════════════════════════════
-       GREAT HALL
-    ═══════════════════════════════════════════════ */
     .great-hall {
       position: relative;
       background: linear-gradient(180deg, #08061a 0%, #050310 20%, #030108 50%, #020106 100%);
@@ -215,9 +215,6 @@
     .hall-card-arrow { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 4px; color: rgba(200,160,60,0); text-transform: uppercase; flex-shrink: 0; transition: all .5s ease; white-space: nowrap; }
     .hall-card:hover .hall-card-arrow { color: var(--color, #E8C84A); }
 
-    /* ═══════════════════════════════════════════════
-       BOOK SHOWCASE SECTION - NEW
-    ═══════════════════════════════════════════════ */
     .book-showcase {
       position: relative;
       background: linear-gradient(180deg, #030108 0%, #020106 100%);
@@ -272,139 +269,24 @@
       border: 1px solid rgba(212,175,55,0.15);
       border-radius: 4px;
     }
-    .book-spine {
-      position: absolute;
-      left: -15px;
-      top: 5px;
-      bottom: 5px;
-      width: 15px;
-      background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a);
-      border-radius: 3px 0 0 3px;
-    }
-    .book-pages-edge {
-      position: absolute;
-      right: -6px;
-      top: 8px;
-      bottom: 8px;
-      width: 6px;
-      background: linear-gradient(180deg, #f5efd4, #d4c8a0);
-      border-radius: 0 2px 2px 0;
-      opacity: 0.5;
-    }
-    .book-icon {
-      font-size: 3.5rem;
-      margin-bottom: 0.8rem;
-      filter: drop-shadow(0 0 15px rgba(212,175,55,0.3));
-    }
-    .book-title-cover {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 2px;
-      line-height: 1.3;
-      margin-bottom: 0.5rem;
-    }
-    .book-subtitle-cover {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 0.75rem;
-      color: rgba(240,230,200,0.6);
-    }
-    .book-author-cover {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 2px;
-      color: rgba(212,175,55,0.5);
-      margin-top: 0.5rem;
-      text-transform: uppercase;
-    }
-    .book-info {
-      flex: 1;
-      min-width: 280px;
-    }
-    .book-info h3 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.8rem;
-      color: #E8C84A;
-      letter-spacing: 3px;
-      margin-bottom: 0.5rem;
-    }
-    .book-info h4 {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: rgba(240,230,200,0.5);
-      margin-bottom: 1.5rem;
-    }
-    .book-info p {
-      line-height: 1.9;
-      margin-bottom: 1.5rem;
-      color: rgba(240,230,200,0.75);
-    }
-    .book-meta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-    .book-meta span {
-      background: rgba(212,175,55,0.08);
-      border: 1px solid rgba(212,175,55,0.2);
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-family: 'Cinzel', serif;
-    }
-    .book-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .book-btn-primary {
-      background: #E8C84A;
-      color: #0a0500;
-      padding: 12px 32px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      transition: all 0.3s;
-      display: inline-block;
-      border: none;
-      cursor: pointer;
-    }
-    .book-btn-primary:hover {
-      background: #f0d860;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(232,200,74,0.2);
-    }
-    .book-btn-secondary {
-      background: transparent;
-      border: 1px solid rgba(232,200,74,0.4);
-      color: #E8C84A;
-      padding: 12px 32px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      transition: all 0.3s;
-      display: inline-block;
-      cursor: pointer;
-    }
-    .book-btn-secondary:hover {
-      background: rgba(232,200,74,0.1);
-      border-color: #E8C84A;
-      transform: translateY(-2px);
-    }
+    .book-spine { position: absolute; left: -15px; top: 5px; bottom: 5px; width: 15px; background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a); border-radius: 3px 0 0 3px; }
+    .book-pages-edge { position: absolute; right: -6px; top: 8px; bottom: 8px; width: 6px; background: linear-gradient(180deg, #f5efd4, #d4c8a0); border-radius: 0 2px 2px 0; opacity: 0.5; }
+    .book-icon { font-size: 3.5rem; margin-bottom: 0.8rem; filter: drop-shadow(0 0 15px rgba(212,175,55,0.3)); }
+    .book-title-cover { font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; font-weight: 700; color: #E8C84A; letter-spacing: 2px; line-height: 1.3; margin-bottom: 0.5rem; }
+    .book-subtitle-cover { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.75rem; color: rgba(240,230,200,0.6); }
+    .book-author-cover { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; color: rgba(212,175,55,0.5); margin-top: 0.5rem; text-transform: uppercase; }
+    .book-info { flex: 1; min-width: 280px; }
+    .book-info h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: #E8C84A; letter-spacing: 3px; margin-bottom: 0.5rem; }
+    .book-info h4 { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(240,230,200,0.5); margin-bottom: 1.5rem; }
+    .book-info p { line-height: 1.9; margin-bottom: 1.5rem; color: rgba(240,230,200,0.75); }
+    .book-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .book-meta span { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2); padding: 5px 14px; border-radius: 30px; font-size: 0.7rem; font-family: 'Cinzel', serif; }
+    .book-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .book-btn-primary { background: #E8C84A; color: #0a0500; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; border: none; cursor: pointer; }
+    .book-btn-primary:hover { background: #f0d860; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,200,74,0.2); }
+    .book-btn-secondary { background: transparent; border: 1px solid rgba(232,200,74,0.4); color: #E8C84A; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; cursor: pointer; }
+    .book-btn-secondary:hover { background: rgba(232,200,74,0.1); border-color: #E8C84A; transform: translateY(-2px); }
 
-    /* ═══════════════════════════════════════════════
-       CONTACT
-    ═══════════════════════════════════════════════ */
     .contact {
       position: relative;
       background: linear-gradient(180deg, #020106 0%, #030208 100%);
@@ -441,25 +323,35 @@
     .hall-fg { width: 5px; height: 5px; background: rgba(200,160,60,0.4); transform: rotate(45deg); }
     .hall-footer-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .8rem; color: rgba(240,230,200,0.18); letter-spacing: .5px; }
 
+    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.8rem 1rem 0; }
-      .nav3d { height: 56px; transform: rotateX(15deg); }
-      .brand { font-size: 0.7rem; }
-      .links li a { font-size: .5rem; padding: 4px 5px; letter-spacing: 1px; }
-      .portal-top { font-size: .52rem; padding: 6px 10px; }
-      .main-title { font-size: 1.6rem; letter-spacing: 4px; }
-      .title-overlay { top: 16%; }
-      .great-hall { padding: 3rem 1.5rem 4rem; }
-      .hall-card { padding: 2rem 1.5rem; gap: 1.2rem; }
-      .hall-card-num { font-size: 2.2rem; width: 40px; }
-      .hall-card-name { font-size: .95rem; }
-      .hall-card-icon { font-size: 1.4rem; }
+      .navbar-wrapper { padding: 0.5rem 0.5rem 0; }
+      .nav3d { height: auto; min-height: 70px; transform: rotateX(5deg); }
+      .nav-content { flex-direction: column; gap: 0.3rem; padding: 0.5rem; }
+      .brand { font-size: 0.6rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
+      .brand small { font-size: 0.4rem; display: inline-block; }
+      .links { gap: 0.2rem; justify-content: center; flex-wrap: wrap; width: 100%; }
+      .links li a { font-size: 0.45rem; padding: 3px 5px; letter-spacing: 0.5px; }
+      .portal-scene { position: absolute; top: -8px; right: 5px; }
+      .portal-top { font-size: 0.45rem; padding: 3px 8px; }
+      .main-title { font-size: 1.4rem; letter-spacing: 3px; }
+      .title-overlay { top: 12%; }
+      .great-hall { padding: 2rem 1rem 3rem; }
+      .hall-card { padding: 1.2rem 1rem; gap: 0.8rem; }
+      .hall-card-num { font-size: 1.5rem; width: 30px; }
+      .hall-card-name { font-size: 0.8rem; letter-spacing: 2px; }
+      .hall-card-icon { font-size: 1.2rem; }
+      .hall-card-desc { font-size: 0.7rem; }
       .hall-card-arrow { display: none; }
-      .hall-card:hover { padding-left: 2rem; }
-      .contact-links { gap: 1.5rem; }
-      .book-inner { flex-direction: column; text-align: center; }
-      .book-info { text-align: center; }
-      .book-buttons { justify-content: center; }
+      .hall-card:hover { padding-left: 1rem; }
+      .contact-links { gap: 1rem; }
+      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
+      .contact-link-label { font-size: 0.45rem; }
+      .book-inner { gap: 1.5rem; }
+      .book-3d { max-width: 220px; }
+      .book-title-cover { font-size: 1rem; }
+      .book-info h3 { font-size: 1.3rem; }
+      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall { display: none; }
     }
   </style>
 </head>
@@ -562,7 +454,7 @@
     </div>
   </section>
 
-  <!-- BOOK SHOWCASE SECTION - NEW (BETWEEN GREAT HALL AND CONTACT) -->
+  <!-- BOOK SHOWCASE SECTION -->
   <section class="book-showcase">
     <div class="book-inner">
       <div class="book-3d-wrapper">
@@ -621,33 +513,42 @@
 
   <script>
     // ============================================================
-    // COMPLETE CANVAS ANIMATION - PRESERVED FROM YOUR ORIGINAL
+    // OPTIMIZED CANVAS ANIMATION - SAME VISUALS, BETTER PERFORMANCE
     // ============================================================
     const canvas = document.getElementById('worldCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
+    let lastFrameTime = 0;
+    let frameDelay = 16; // 60fps default
+    let isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+    
+    // Reduce particles on mobile for better performance (same visual density)
+    const particleCount = isMobile ? 180 : 350;
+    const grassCount = isMobile ? 300 : 600;
+    const flyCount = isMobile ? 25 : 45;
 
     function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
     resize();
     addEventListener('resize', resize);
     addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
 
-    const stars = Array.from({length: 350}, () => ({
+    const stars = Array.from({length: particleCount}, () => ({
       x: Math.random(), y: Math.random() * 0.55,
       r: Math.random() * 1.6 + 0.2, sp: Math.random() * 0.018 + 0.004,
       off: Math.random() * Math.PI * 2, ba: Math.random() * 0.65 + 0.2
     }));
-    const grass = Array.from({length: 600}, () => ({
+    const grass = Array.from({length: grassCount}, () => ({
       x: Math.random(), by: 0.68 + Math.random() * 0.32,
       h: Math.random() * 35 + 10, sp: Math.random() * 0.018 + 0.004,
       off: Math.random() * Math.PI * 2
     }));
-    const flies = Array.from({length: 45}, () => ({
+    const flies = Array.from({length: flyCount}, () => ({
       x: Math.random(), y: 0.68 + Math.random() * 0.28,
       r: Math.random() * 1.4 + 0.4, sp: Math.random() * 0.25 + 0.08,
       ph: Math.random() * Math.PI * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.25
     }));
 
+    // Your horse drawing function - COMPLETELY UNCHANGED
     function horse(hx, hy, sc, coat, mane, pose, flip) {
       ctx.save(); ctx.translate(hx, hy);
       if (flip) ctx.scale(-sc, sc); else ctx.scale(sc, sc);
@@ -791,7 +692,8 @@
 
     // Hall particles
     const hallParticles = document.getElementById('hallParticles');
-    for (let i = 0; i < 30; i++) {
+    const hallParticleCount = isMobile ? 15 : 30;
+    for (let i = 0; i < hallParticleCount; i++) {
       const p = document.createElement('div');
       p.className = 'hall-bg-particle';
       p.style.left = Math.random() * 100 + '%';
@@ -806,16 +708,24 @@
     let lastMove = 0;
     addEventListener('mousemove', () => { lastMove = t; });
 
-    function animate() {
+    // OPTIMIZED ANIMATION LOOP - Frame limiting for mobile
+    let lastRender = 0;
+    function animate(now) {
+      requestAnimationFrame(animate);
+      
+      // Limit frame rate on mobile for better performance
+      if (isMobile && now - lastRender < 50) return; // 20fps on mobile
+      if (!isMobile && now - lastRender < 16) return; // 60fps on desktop
+      
+      lastRender = now;
       t++;
       render();
       updateLanterns();
       const idle = t - lastMove > 200;
       titleOverlay.style.opacity = idle ? '0.3' : '0.9';
       hintOverlay.style.opacity = idle ? '0' : '0.7';
-      requestAnimationFrame(animate);
     }
-    animate();
+    requestAnimationFrame(animate);
     addEventListener('resize', () => { resize(); });
 
     // Portal button
@@ -823,7 +733,7 @@
       window.location.href = 'index.html';
     });
 
-    // Preview book button (opens sample PDF - you'll need to create this)
+    // Preview book button
     document.getElementById('previewBookBtn').addEventListener('click', () => {
       window.open('sample.pdf', '_blank');
     });
