@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The Horseman's Journal</title>
+  <title>The Horseman's Journal | Horsemanship, Trust & Training with Horses</title>
+  <meta name="description" content="Eleven years of horsemanship wisdom. Articles on horse psychology, trust, training, and the invisible bond between horse and human. Free resources for horse lovers.">
+  <meta name="keywords" content="horsemanship, horse training, horse psychology, trust with horses, equestrian, horse bond, natural horsemanship, horse articles">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="global.css">
+  
   <style>
+    /* Additional styles specific to index page */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -19,180 +26,8 @@
       overflow-x: hidden;
     }
 
-    /* ═══════════════════════════════════════════════
-       NAVBAR - FULLY VISIBLE ON MOBILE (FIXED)
-    ═══════════════════════════════════════════════ */
-    .navbar-wrapper {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex;
-      justify-content: center;
-      padding: 1rem 1rem 0;
-      pointer-events: none;
-    }
-    .navbar-wrapper * { pointer-events: auto; }
-    .scene {
-      perspective: 700px;
-      perspective-origin: 50% 60%;
-      width: 100%;
-      max-width: 1020px;
-    }
-    .nav3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(28deg) rotateY(0deg);
-      transition: transform .5s cubic-bezier(.23,1,.32,1);
-      height: 64px;
-    }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top {
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(212,175,55,0.06) 40%, rgba(255,255,255,0.04) 100%);
-      border: 1px solid rgba(212,175,55,0.45);
-      border-bottom-color: rgba(212,175,55,0.15);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(212,175,55,0.06);
-      z-index: 4;
-    }
-    .face-back {
-      inset: 0;
-      background: rgba(212,175,55,0.04);
-      border: 1px solid rgba(212,175,55,0.2);
-      transform: translateZ(-36px);
-      z-index: 1;
-    }
-    .face-bottom-wall {
-      left: 18px; right: 18px; bottom: -36px; height: 36px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.18) 0%, rgba(100,60,0,0.08) 60%, rgba(0,0,0,0.02) 100%);
-      border-left: 1px solid rgba(212,175,55,0.15);
-      border-right: 1px solid rgba(212,175,55,0.15);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 0 12px 12px;
-      transform-origin: top center; transform: rotateX(-90deg); z-index: 2;
-    }
-    .face-top-wall {
-      left: 18px; right: 18px; top: -5px; height: 5px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(212,175,55,0.2));
-      border-radius: 18px 18px 0 0;
-      transform-origin: bottom center; transform: rotateX(90deg); z-index: 3;
-    }
-    .face-left-wall {
-      top: 4px; bottom: 4px; left: -36px; width: 36px;
-      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 12px 0 0 12px;
-      transform-origin: right center; transform: rotateY(-90deg); z-index: 2;
-    }
-    .face-right-wall {
-      top: 4px; bottom: 4px; right: -36px; width: 36px;
-      background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(212,175,55,0.1) 100%);
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 12px 12px 0;
-      transform-origin: left center; transform: rotateY(90deg); z-index: 2;
-    }
-    .nav-content {
-      position: absolute; inset: 0; z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1.2rem;
-      transform: translateZ(1px);
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
-    .brand {
-      font-family: 'Cinzel', serif; font-size: .75rem; font-weight: 700;
-      color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.2;
-      text-shadow: 0 0 24px rgba(212,175,55,0.8), 0 0 60px rgba(212,175,55,0.3);
-      flex-shrink: 0; text-decoration: none;
-    }
-    .brand small { display: inline-block; font-size: .45rem; letter-spacing: 3px; color: rgba(212,175,55,0.4); font-weight: 400; margin-left: 0.3rem; }
-    .links { display: flex; gap: 0.1rem; list-style: none; flex-wrap: wrap; justify-content: center; }
-    .links li a {
-      display: block; font-size: .55rem; font-weight: 600; letter-spacing: 1.5px;
-      color: rgba(255,240,180,0.5); text-decoration: none;
-      padding: 4px 6px; border-radius: 8px; transition: all .25s;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8); position: relative; white-space: nowrap;
-    }
-    .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(212,175,55,0.9); }
-    .portal-scene { perspective: 300px; flex-shrink: 0; }
-    .portal-btn {
-      position: relative; transform-style: preserve-3d; transform: rotateX(22deg);
-      transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer;
-    }
-    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
-    .portal-btn:active { transform: rotateX(30deg) translateY(2px); }
-    .portal-top {
-      display: block; padding: 5px 12px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25) 100%);
-      backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.7); border-bottom-color: rgba(212,175,55,0.2);
-      border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .55rem; font-weight: 700; letter-spacing: 2px;
-      color: #FFF8DC; text-shadow: 0 0 12px rgba(212,175,55,0.9);
-      position: relative; z-index: 3; white-space: nowrap; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-    }
-    .portal-wall {
-      position: absolute; inset: 0; background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4));
-      border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(120,70,0,0.5);
-    }
-    .portal-glow {
-      position: absolute; inset: -4px; border-radius: 100px; background: transparent;
-      box-shadow: 0 0 20px rgba(212,175,55,0.4), 0 0 60px rgba(212,175,55,0.15);
-      transform: translateZ(-7px); z-index: 1;
-    }
-
-    /* FIXED MOBILE RESPONSIVE - NAVBAR FULLY VISIBLE */
-    @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
-      .scene { perspective: none; width: 100%; overflow-x: visible; }
-      .nav3d { 
-        height: auto; 
-        min-height: auto; 
-        transform: rotateX(0deg) !important; 
-        background: rgba(0,0,0,0.35); 
-        border-radius: 20px; 
-        backdrop-filter: blur(12px);
-        margin-bottom: 0;
-      }
-      .nav3d:hover { transform: rotateX(0deg) !important; }
-      .face-top { background: rgba(0,0,0,0.2); border: 1px solid rgba(212,175,55,0.2); backdrop-filter: blur(12px); }
-      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall, .face-back { display: none; }
-      .nav-content { 
-        position: relative; 
-        flex-direction: row; 
-        flex-wrap: wrap; 
-        gap: 0.4rem; 
-        padding: 0.6rem;
-        justify-content: center;
-      }
-      .brand { font-size: 0.55rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
-      .brand small { font-size: 0.35rem; }
-      .links { gap: 0.2rem; justify-content: center; width: 100%; }
-      .links li a { font-size: 0.45rem; padding: 3px 6px; letter-spacing: 0.5px; white-space: nowrap; }
-      .portal-scene { position: static; margin-top: 0.2rem; }
-      .portal-top { font-size: 0.45rem; padding: 3px 10px; }
-      .main-title { font-size: 1.4rem; letter-spacing: 3px; }
-      .title-overlay { top: 12%; width: 90%; }
-      .great-hall { padding: 2rem 1rem 3rem; }
-      .hall-card { padding: 1rem 0.8rem; gap: 0.5rem; flex-wrap: wrap; }
-      .hall-card-num { font-size: 1.2rem; width: 25px; }
-      .hall-card-name { font-size: 0.75rem; letter-spacing: 1px; }
-      .hall-card-icon { font-size: 1rem; }
-      .hall-card-desc { font-size: 0.65rem; }
-      .hall-card-arrow { display: none; }
-      .hall-card:hover { padding-left: 0.8rem; }
-      .contact-links { gap: 1rem; flex-wrap: wrap; }
-      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
-      .contact-link-label { font-size: 0.45rem; }
-      .book-inner { gap: 1.5rem; flex-direction: column; }
-      .book-3d { max-width: 200px; }
-      .book-title-cover { font-size: 0.9rem; }
-      .book-info h3 { font-size: 1.2rem; }
-    }
-
-    /* REST OF YOUR ORIGINAL STYLES - KEPT IDENTICAL */
+    /* NAVBAR - already in global.css */
+    
     .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .title-overlay {
@@ -336,7 +171,6 @@
     .book-btn-secondary { background: transparent; border: 1px solid rgba(232,200,74,0.4); color: #E8C84A; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; cursor: pointer; }
     .book-btn-secondary:hover { background: rgba(232,200,74,0.1); border-color: #E8C84A; transform: translateY(-2px); }
     
-    /* GLOBAL PAYMENT OPTIONS */
     .payment-options {
       display: flex;
       gap: 1rem;
@@ -360,6 +194,7 @@
       padding: 8px 16px;
       border-radius: 40px;
       border: 1px solid rgba(232,200,74,0.3);
+      cursor: pointer;
     }
 
     .contact {
@@ -397,11 +232,28 @@
     .hall-fo-r { background: linear-gradient(90deg, rgba(200,160,60,0.25), transparent); }
     .hall-fg { width: 5px; height: 5px; background: rgba(200,160,60,0.4); transform: rotate(45deg); }
     .hall-footer-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .8rem; color: rgba(240,230,200,0.18); letter-spacing: .5px; }
+
+    @media (max-width: 860px) {
+      .great-hall { padding: 2rem 1rem 3rem; }
+      .hall-card { padding: 1rem 0.8rem; gap: 0.5rem; flex-wrap: wrap; }
+      .hall-card-num { font-size: 1.2rem; width: 25px; }
+      .hall-card-name { font-size: 0.75rem; letter-spacing: 1px; }
+      .hall-card-icon { font-size: 1rem; }
+      .hall-card-desc { font-size: 0.65rem; }
+      .hall-card-arrow { display: none; }
+      .hall-card:hover { padding-left: 0.8rem; }
+      .contact-links { gap: 1rem; flex-wrap: wrap; }
+      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
+      .contact-link-label { font-size: 0.45rem; }
+      .book-inner { gap: 1.5rem; flex-direction: column; }
+      .book-3d { max-width: 200px; }
+      .book-title-cover { font-size: 0.9rem; }
+      .book-info h3 { font-size: 1.2rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -435,7 +287,6 @@
     </div>
   </div>
 
-  <!-- SANCTUARY -->
   <section class="sanctuary">
     <canvas id="worldCanvas"></canvas>
     <div class="title-overlay" id="titleOverlay">
@@ -450,7 +301,6 @@
     <div id="lanterns"></div>
   </section>
 
-  <!-- GREAT HALL -->
   <section class="great-hall">
     <div class="hall-bg-particles" id="hallParticles"></div>
     <div class="hall-inner">
@@ -498,7 +348,6 @@
     </div>
   </section>
 
-  <!-- BOOK SHOWCASE SECTION with GLOBAL PAYMENT -->
   <section class="book-showcase">
     <div class="book-inner">
       <div class="book-3d-wrapper">
@@ -526,19 +375,16 @@
           <a href="book.html" class="book-btn-primary">✦ DISCOVER THE BOOK ✦</a>
           <button class="book-btn-secondary" id="previewBookBtn">📖 Preview Sample</button>
         </div>
-        <!-- GLOBAL PAYMENT OPTIONS - Works in India and Worldwide -->
         <div class="payment-options">
-          <!-- PayPal - Works globally -->
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-form">
             <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="YOUR_PAYPAL_BUTTON_ID_HERE">
+            <input type="hidden" name="hosted_button_id" value="[ADD YOUR PAYPAL BUTTON ID HERE]">
             <button type="submit" class="paypal-btn">
               <img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" alt="Buy Now with PayPal" style="background:transparent; border-radius:30px;">
             </button>
           </form>
-          <!-- UPI for India (replace with your UPI ID) -->
           <div class="upi-text" id="upiText" style="cursor:pointer;" title="Click to copy UPI ID">
-            🇮🇳 UPI: horsemans@okhdfcbank
+            🇮🇳 UPI: [ADD YOUR UPI ID HERE]
           </div>
         </div>
         <p style="font-size:0.55rem; color:rgba(240,230,200,0.25); margin-top:0.8rem; letter-spacing:1px;">✓ Secure payments via PayPal (Global) & UPI (India)</p>
@@ -546,35 +392,32 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="contact">
     <div class="contact-inner">
       <div class="contact-ornament"><div class="contact-oln"></div><div class="contact-gem"></div><div class="contact-oln contact-oln-r"></div></div>
       <h3 class="contact-heading">Connect</h3>
       <div class="contact-links">
-        <a href="https://instagram.com/thehorsemansjournal" class="contact-link" target="_blank" rel="noopener">
+        <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener">
           <div class="contact-link-icon">📸</div>
           <span class="contact-link-label">Instagram</span>
-          <span class="contact-link-value">@thehorsemansjournal</span>
+          <span class="contact-link-value">@thehorsemans_journal</span>
         </a>
         <a href="#" class="contact-link" id="whatsappLink">
           <div class="contact-link-icon">💬</div>
           <span class="contact-link-label">WhatsApp</span>
-          <span class="contact-link-value" id="whatsappNumber">[Update Number]</span>
+          <span class="contact-link-value" id="whatsappNumber">[ADD YOUR WHATSAPP NUMBER]</span>
         </a>
-        <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
+        <a href="mailto:[ADD YOUR EMAIL HERE]" class="contact-link">
           <div class="contact-link-icon">✉️</div>
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">praveen@thehorsemansjournal.com</span>
+          <span class="contact-link-value">[ADD YOUR EMAIL HERE]</span>
         </a>
       </div>
     </div>
   </section>
 
   <script>
-    // ============================================================
-    // OPTIMIZED CANVAS ANIMATION - SMOOTH PERFORMANCE
-    // ============================================================
+    // Canvas animation
     const canvas = document.getElementById('worldCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
@@ -746,7 +589,6 @@
       lanternEls.forEach(({ el, s }) => { const px = (mx - 0.5) * 25 * s.depth; const py = (my - 0.5) * 14 * s.depth; el.style.left = (s.lx * 100) + '%'; el.style.top = (s.ly * 100) + '%'; el.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`; });
     }
 
-    // HALL PARTICLES - OPTIMIZED
     const hallParticles = document.getElementById('hallParticles');
     const hallParticleCount = isMobile ? 12 : 25;
     for (let i = 0; i < hallParticleCount; i++) {
@@ -764,23 +606,18 @@
     let lastMove = 0;
     addEventListener('mousemove', () => { lastMove = t; });
 
-    // SMOOTH ANIMATION LOOP
     let lastRender = 0;
     let frameCount = 0;
     
     function animate(now) {
       requestAnimationFrame(animate);
-      
       const targetFPS = isMobile ? 30 : 60;
       const frameInterval = 1000 / targetFPS;
-      
       if (now - lastRender < frameInterval) return;
       lastRender = now;
-      
       t++;
       render();
       updateLanterns();
-      
       frameCount++;
       if (frameCount % 2 === 0) {
         const idle = t - lastMove > 200;
@@ -791,21 +628,18 @@
     requestAnimationFrame(animate);
     addEventListener('resize', () => { resize(); });
 
-    // PORTAL BUTTON - scrolls to top of page (refreshes experience)
     document.getElementById('portalBtn').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // PREVIEW BOOK BUTTON
     document.getElementById('previewBookBtn').addEventListener('click', () => {
       window.open('sample.pdf', '_blank');
     });
 
-    // UPI COPY FUNCTIONALITY
     const upiText = document.getElementById('upiText');
     if (upiText) {
       upiText.addEventListener('click', () => {
-        const upiId = 'horsemans@okhdfcbank';
+        const upiId = '[ADD YOUR UPI ID HERE]';
         navigator.clipboard.writeText(upiId);
         const originalText = upiText.innerHTML;
         upiText.innerHTML = '✓ UPI ID Copied!';
@@ -813,15 +647,6 @@
           upiText.innerHTML = originalText;
         }, 2000);
       });
-    }
-
-    // WhatsApp placeholder - user can update later
-    const whatsappLink = document.getElementById('whatsappLink');
-    const whatsappNumber = document.getElementById('whatsappNumber');
-    // Leave blank as requested
-    if (whatsappLink) {
-      whatsappLink.href = '#';
-      whatsappNumber.textContent = '[Update Number]';
     }
   </script>
 </body>
