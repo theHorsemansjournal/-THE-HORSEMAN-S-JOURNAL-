@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Chronicles - The Horseman's Journal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
       z-index: 200;
       display: flex;
       justify-content: center;
-      padding: 1.5rem 2rem 0;
+      padding: 1rem 1rem 0;
       pointer-events: none;
     }
     .navbar-wrapper * { pointer-events: auto; }
@@ -105,42 +105,40 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.8rem;
+      padding: 0 1.2rem;
       transform: translateZ(1px);
+      flex-wrap: wrap;
+      gap: 0.3rem;
     }
     .brand {
       font-family: 'Cinzel', serif;
-      font-size: .85rem;
+      font-size: .75rem;
       font-weight: 700;
       color: #E8C84A;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      line-height: 1.25;
       text-shadow: 0 0 24px rgba(200,150,50,0.8), 0 0 60px rgba(200,150,50,0.3);
       flex-shrink: 0;
       text-decoration: none;
     }
     .brand small {
-      display: block;
-      font-size: .52rem;
-      letter-spacing: 4px;
+      display: inline-block;
+      font-size: .45rem;
+      letter-spacing: 3px;
       color: rgba(200,150,50,0.4);
-      font-weight: 400;
-      margin-top: 1px;
+      margin-left: 0.3rem;
     }
-    .links { display: flex; gap: .05rem; list-style: none; }
+    .links { display: flex; gap: 0.1rem; list-style: none; flex-wrap: wrap; justify-content: center; }
     .links li a {
       display: block;
-      font-size: .62rem;
+      font-size: .55rem;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       color: rgba(255,240,180,0.5);
       text-decoration: none;
-      padding: 6px 8px;
+      padding: 4px 6px;
       border-radius: 8px;
       transition: all .25s;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-      white-space: nowrap;
     }
     .links li a:hover,
     .links li a.active {
@@ -163,21 +161,19 @@
     .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
     .portal-top {
       display: block;
-      padding: 8px 18px;
+      padding: 5px 12px;
       background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(200,150,50,0.7);
       border-radius: 100px;
       font-family: 'Raleway', sans-serif;
-      font-size: .65rem;
+      font-size: .55rem;
       font-weight: 700;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: #FFF8DC;
-      text-shadow: 0 0 12px rgba(200,150,50,0.9);
       position: relative;
       z-index: 3;
       white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
     }
     .portal-wall {
       position: absolute;
@@ -186,16 +182,52 @@
       border-radius: 100px;
       transform: translateZ(-14px);
       z-index: 2;
-      border: 1px solid rgba(100,60,15,0.5);
     }
     .portal-glow {
       position: absolute;
       inset: -4px;
       border-radius: 100px;
-      background: transparent;
       box-shadow: 0 0 20px rgba(200,150,50,0.4), 0 0 60px rgba(200,150,50,0.15);
       transform: translateZ(-7px);
       z-index: 1;
+    }
+
+    /* FIXED MOBILE RESPONSIVE - NAVBAR FULLY VISIBLE */
+    @media (max-width: 860px) {
+      .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
+      .scene { perspective: none; width: 100%; }
+      .nav3d { 
+        height: auto; 
+        transform: rotateX(0deg) !important; 
+        background: rgba(0,0,0,0.35); 
+        border-radius: 20px; 
+        backdrop-filter: blur(12px);
+      }
+      .nav3d:hover { transform: rotateX(0deg) !important; }
+      .face-top { background: rgba(0,0,0,0.2); border: 1px solid rgba(212,175,55,0.2); }
+      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall, .face-back { display: none; }
+      .nav-content { 
+        position: relative; 
+        flex-direction: row; 
+        flex-wrap: wrap; 
+        gap: 0.4rem; 
+        padding: 0.6rem;
+        justify-content: center;
+      }
+      .brand { font-size: 0.55rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
+      .brand small { font-size: 0.35rem; }
+      .links { gap: 0.2rem; justify-content: center; width: 100%; }
+      .links li a { font-size: 0.45rem; padding: 3px 5px; letter-spacing: 0.5px; white-space: nowrap; }
+      .portal-scene { position: static; margin-top: 0.2rem; }
+      .portal-top { font-size: 0.45rem; padding: 3px 8px; }
+      .chr-title { font-size: 1.8rem; letter-spacing: 3px; }
+      .intro-headline { font-size: 1.3rem; }
+      .intro-body { font-size: 0.95rem; }
+      .books-grid { gap: 1rem; }
+      .book-title { font-size: 0.85rem; }
+      .book-excerpt { font-size: 0.7rem; }
+      .modal-body { padding: 0 20px 30px 20px; }
+      .modal-title { font-size: 1.3rem; }
     }
 
     /* ===== HERO SECTION WITH CANVAS ANIMATION ===== */
@@ -265,7 +297,7 @@
       line-height: 1.8;
     }
 
-    /* ===== HORSE INTRO (unchanged) ===== */
+    /* ===== HORSE INTRO ===== */
     .horse-intro {
       position: relative;
       background: rgba(6, 3, 8, 0.7);
@@ -401,6 +433,23 @@
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       border: 1px solid rgba(232,200,74,0.15);
+      position: relative;
+    }
+    .book-card.locked {
+      opacity: 0.5;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+    .book-card.locked::after {
+      content: '🔒';
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      z-index: 10;
+      filter: blur(0);
+      color: #E8C84A;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
     }
     .book-card:hover {
       transform: translateY(-10px) scale(1.02);
@@ -616,13 +665,27 @@
       color: rgba(232,200,74,0.4);
     }
 
-    @media (max-width: 860px) {
-      .navbar-wrapper { padding: 0.8rem 1rem 0; }
-      .nav3d { height: 56px; transform: rotateX(15deg); }
-      .brand { font-size: 0.7rem; }
-      .links li a { font-size: 0.48rem; padding: 4px 5px; }
-      .modal-body { padding: 0 20px 30px 20px; }
-      .modal-title { font-size: 1.3rem; }
+    /* ADMIN LOCK BUTTON */
+    .admin-lock-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #E8C84A;
+      padding: 6px 12px;
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+    .admin-lock-btn:hover {
+      background: rgba(212, 175, 55, 0.3);
+      border-color: rgba(212, 175, 55, 0.7);
     }
   </style>
 </head>
@@ -676,7 +739,7 @@
     </div>
   </section>
 
-  <!-- HORSE INTRO SECTION (unchanged) -->
+  <!-- HORSE INTRO SECTION -->
   <section class="horse-intro">
     <div class="intro-inner">
       <div class="intro-badge">THE KNOWLEDGE WITHIN</div>
@@ -719,6 +782,9 @@
       <div class="modal-body" id="modalBody"></div>
     </div>
   </div>
+
+  <!-- ADMIN LOCK BUTTON -->
+  <button class="admin-lock-btn" id="adminLockBtn">🔒 LOCK HALF (ADMIN)</button>
 
   <script>
     // ============================================================
@@ -1107,11 +1173,128 @@
             <div class="book-read">Read Article</div>
           </div>
         `;
-        card.addEventListener('click', () => openArticle(index));
+        
+        // Check lock state before adding click handler
+        const isLocked = localStorage.getItem('articleLock_' + index) === 'locked';
+        if (isLocked) {
+          card.classList.add('locked');
+        }
+        
+        card.addEventListener('click', () => {
+          const locked = card.classList.contains('locked');
+          if (locked) {
+            alert('🔒 This article is locked. Click the "LOCK HALF" button at bottom right to unlock all articles (admin only).');
+            return;
+          }
+          openArticle(index);
+        });
         booksGrid.appendChild(card);
       });
     }
     renderBooks();
+
+    // ============================================================
+    // ARTICLE LOCKING SYSTEM
+    // ============================================================
+    
+    function applyLockState() {
+      const totalArticles = articles.length;
+      const halfCount = Math.floor(totalArticles / 2);
+      const bookCards = document.querySelectorAll('.book-card');
+      
+      for (let i = 0; i < bookCards.length; i++) {
+        const lockState = localStorage.getItem('articleLock_' + i);
+        
+        if (lockState === 'locked') {
+          bookCards[i].classList.add('locked');
+        } else if (lockState === 'unlocked') {
+          bookCards[i].classList.remove('locked');
+        } else {
+          // Default: lock first half
+          if (i < halfCount) {
+            localStorage.setItem('articleLock_' + i, 'locked');
+            bookCards[i].classList.add('locked');
+          } else {
+            localStorage.setItem('articleLock_' + i, 'unlocked');
+            bookCards[i].classList.remove('locked');
+          }
+        }
+      }
+    }
+    
+    function lockFirstHalf() {
+      const totalArticles = articles.length;
+      const halfCount = Math.floor(totalArticles / 2);
+      const bookCards = document.querySelectorAll('.book-card');
+      
+      for (let i = 0; i < bookCards.length; i++) {
+        if (i < halfCount) {
+          localStorage.setItem('articleLock_' + i, 'locked');
+          bookCards[i].classList.add('locked');
+        } else {
+          localStorage.setItem('articleLock_' + i, 'unlocked');
+          bookCards[i].classList.remove('locked');
+        }
+      }
+      adminLockBtn.innerHTML = '🔓 UNLOCK ALL (ADMIN)';
+      adminLockBtn.style.borderColor = 'rgba(100,200,100,0.5)';
+    }
+    
+    function unlockAllArticles() {
+      const bookCards = document.querySelectorAll('.book-card');
+      for (let i = 0; i < bookCards.length; i++) {
+        localStorage.setItem('articleLock_' + i, 'unlocked');
+        bookCards[i].classList.remove('locked');
+      }
+      adminLockBtn.innerHTML = '🔒 LOCK HALF (ADMIN)';
+      adminLockBtn.style.borderColor = 'rgba(212,175,55,0.4)';
+    }
+    
+    const adminLockBtn = document.getElementById('adminLockBtn');
+    
+    function checkCurrentLockState() {
+      const bookCards = document.querySelectorAll('.book-card');
+      let anyLocked = false;
+      for (let i = 0; i < bookCards.length; i++) {
+        if (localStorage.getItem('articleLock_' + i) === 'locked') {
+          anyLocked = true;
+          break;
+        }
+      }
+      if (anyLocked) {
+        adminLockBtn.innerHTML = '🔓 UNLOCK ALL (ADMIN)';
+        adminLockBtn.style.borderColor = 'rgba(100,200,100,0.5)';
+      } else {
+        adminLockBtn.innerHTML = '🔒 LOCK HALF (ADMIN)';
+        adminLockBtn.style.borderColor = 'rgba(212,175,55,0.4)';
+      }
+    }
+    
+    if (adminLockBtn) {
+      adminLockBtn.addEventListener('click', () => {
+        const bookCards = document.querySelectorAll('.book-card');
+        let anyLocked = false;
+        for (let i = 0; i < bookCards.length; i++) {
+          if (localStorage.getItem('articleLock_' + i) === 'locked') {
+            anyLocked = true;
+            break;
+          }
+        }
+        
+        if (anyLocked) {
+          unlockAllArticles();
+        } else {
+          lockFirstHalf();
+        }
+        checkCurrentLockState();
+      });
+    }
+    
+    // Apply lock state after render
+    setTimeout(() => {
+      applyLockState();
+      checkCurrentLockState();
+    }, 100);
 
     // ============================================================
     // MODAL FUNCTIONS
@@ -1164,10 +1347,10 @@
     });
 
     // ============================================================
-    // PORTAL BUTTON
+    // PORTAL BUTTON - scroll to top
     // ============================================================
     document.getElementById('portalBtn').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
