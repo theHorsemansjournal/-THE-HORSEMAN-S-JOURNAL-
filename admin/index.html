@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - The Horseman's Journal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #060308; color: #e8dfc7; font-family: 'Cinzel', serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-box { background: linear-gradient(145deg, #1a1528, #0f0c1a); border: 1px solid rgba(232,200,74,0.3); border-radius: 16px; padding: 2.5rem; width: 350px; text-align: center; }
+    .login-box h1 { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: #E8C84A; margin-bottom: 1.5rem; }
+    .login-box input { width: 100%; padding: 12px; margin: 10px 0; background: rgba(20,15,35,0.5); border: 1px solid rgba(232,200,74,0.2); border-radius: 8px; color: #fff; font-family: 'EB Garamond', serif; }
+    .login-box button { width: 100%; padding: 12px; background: #E8C84A; border: none; border-radius: 8px; font-family: 'Cinzel', serif; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .error { color: #ff8888; margin-top: 10px; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Journal Admin</h1>
+    <input type="password" id="adminPassword" placeholder="Enter Password">
+    <button onclick="login()">Enter</button>
+    <p class="error" id="errorMsg"></p>
+  </div>
+  <script>
+    const CORRECT_PASSWORD = "YourStrongPasswordHere2024"; // CHANGE THIS
+    function login() {
+      const pwd = document.getElementById('adminPassword').value;
+      if (pwd === CORRECT_PASSWORD) {
+        localStorage.setItem('adminAuth', 'true');
+        window.location.href = 'dashboard.html';
+      } else {
+        document.getElementById('errorMsg').textContent = 'Incorrect password';
+      }
+    }
+  </script>
+</body>
+</html>
