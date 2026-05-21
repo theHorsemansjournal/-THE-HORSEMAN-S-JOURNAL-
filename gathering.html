@@ -2,43 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Gathering - The Horseman's Journal</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
+  <!-- Link to GLOBAL CSS -->
+  <link rel="stylesheet" href="global.css">
+  
   <style>
+    /* Gathering page specific styles only - navbar styles come from global.css */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #020108; color: #f0ede0; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
-
-    /* NAVBAR - FIXED */
-    .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none; }
-    .navbar-wrapper * { pointer-events: auto; }
-    .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
-    .nav3d { position: relative; transform-style: preserve-3d; transform: rotateX(28deg); transition: transform .5s cubic-bezier(.23,1,.32,1); height: 64px; }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top { inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(180,160,80,0.08) 40%, rgba(255,255,255,0.04) 100%); border: 1px solid rgba(180,160,80,0.45); border-bottom-color: rgba(180,160,80,0.15); backdrop-filter: blur(18px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 0 60px rgba(160,140,60,0.06); z-index: 4; }
-    .face-back { inset: 0; background: rgba(160,140,60,0.04); border: 1px solid rgba(180,160,80,0.2); transform: translateZ(-36px); z-index: 1; }
-    .face-bottom-wall { left: 18px; right: 18px; bottom: -36px; height: 36px; background: linear-gradient(180deg, rgba(160,140,60,0.18) 0%, rgba(80,60,20,0.08) 60%, rgba(0,0,0,0.02) 100%); border-radius: 0 0 12px 12px; transform-origin: top center; transform: rotateX(-90deg); z-index: 2; }
-    .face-top-wall { left: 18px; right: 18px; top: -5px; height: 5px; background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(180,160,80,0.2)); border-radius: 18px 18px 0 0; transform-origin: bottom center; transform: rotateX(90deg); z-index: 3; }
-    .face-left-wall { top: 4px; bottom: 4px; left: -36px; width: 36px; background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(160,140,60,0.1) 100%); border-radius: 12px 0 0 12px; transform-origin: right center; transform: rotateY(-90deg); z-index: 2; }
-    .face-right-wall { top: 4px; bottom: 4px; right: -36px; width: 36px; background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(160,140,60,0.1) 100%); border-radius: 0 12px 12px 0; transform-origin: left center; transform: rotateY(90deg); z-index: 2; }
-    .nav-content { position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 0 1.8rem; }
-    .brand { font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700; color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase; text-shadow: 0 0 24px rgba(180,160,60,0.8); text-decoration: none; }
-    .brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(180,160,60,0.4); font-weight: 400; }
-    .links { display: flex; gap: .05rem; list-style: none; }
-    .links li a { display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px; color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px; border-radius: 8px; transition: all .25s; white-space: nowrap; }
-    .links li a:hover { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(180,160,60,0.9); }
-    .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.12); text-shadow: 0 0 16px rgba(180,160,60,0.9); }
-    .portal-scene { perspective: 300px; flex-shrink: 0; }
-    .portal-btn { position: relative; transform-style: preserve-3d; transform: rotateX(22deg); transition: transform .25s; display: inline-block; border: none; background: transparent; padding: 0; cursor: pointer; }
-    .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
-    .portal-top { display: block; padding: 8px 18px; background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(180,160,80,0.38) 50%, rgba(140,100,20,0.28) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(180,160,80,0.7); border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: 2.5px; color: #FFF8DC; position: relative; z-index: 3; box-shadow: inset 0 1px 0 rgba(255,255,255,0.35); }
-    .portal-wall { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(100,70,30,0.6), rgba(40,25,10,0.4)); border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(80,50,20,0.5); }
-    .portal-glow { position: absolute; inset: -4px; border-radius: 100px; background: transparent; box-shadow: 0 0 20px rgba(180,160,80,0.4); transform: translateZ(-7px); z-index: 1; }
 
     /* DOME */
     .dome-section { position: relative; width: 100%; height: 100vh; overflow: hidden; }
@@ -81,12 +58,15 @@
     .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; background: transparent; border: 1px solid rgba(200,170,80,0.35); border-radius: 4px; cursor: pointer; text-decoration: none; transition: all .4s; }
     .share-btn:hover { background: rgba(200,170,80,0.06); border-color: rgba(200,170,80,0.6); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
-    @media(max-width:860px){.navbar-wrapper{padding:.8rem 1rem 0}.nav3d{height:56px;transform:rotateX(15deg)}.brand{font-size:.7rem}.links li a{font-size:.5rem;padding:4px 5px;letter-spacing:1px}.portal-top{font-size:.52rem;padding:6px 10px}}
+    /* FIXED MOBILE RESPONSIVE */
+    @media (max-width: 860px) {
+      .form-panel { padding: 1.8rem; margin: 1rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR - FIXED LINKS -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -106,6 +86,7 @@
             <li><a href="essays.html">VERSES</a></li>
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html" class="active">GATHERING</a></li>
+            <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
             <button class="portal-btn" id="portalBtn">
@@ -185,7 +166,10 @@
     let W, H, mx = 0.5, my = 0.5, t = 0;
     function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
     resize(); addEventListener('resize', resize);
-    document.getElementById('domeSection').addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+    const domeSection = document.getElementById('domeSection');
+    if(domeSection){
+      domeSection.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+    }
 
     const stars = Array.from({length: 200}, () => ({ x: Math.random(), y: Math.random() * 0.85, r: Math.random() * 1.4 + 0.2, sp: Math.random() * 0.015 + 0.004, off: Math.random() * Math.PI * 2, ba: Math.random() * 0.5 + 0.15 }));
     const dcx = () => W * 0.5, dcy = () => H * 0.68, drw = () => W * 0.48, drh = () => H * 0.56;
@@ -358,47 +342,45 @@
     const formOverlay = document.getElementById('formOverlay');
     function openForm() { formOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeForm() { formOverlay.classList.remove('open'); document.body.style.overflow = ''; }
-    document.getElementById('formClose').addEventListener('click', closeForm);
-    document.getElementById('formBackdrop').addEventListener('click', closeForm);
-    document.getElementById('shareBtn').addEventListener('click', openForm);
+    const formClose = document.getElementById('formClose');
+    const formBackdrop = document.getElementById('formBackdrop');
+    const shareBtn = document.getElementById('shareBtn');
+    if(formClose) formClose.addEventListener('click', closeForm);
+    if(formBackdrop) formBackdrop.addEventListener('click', closeForm);
+    if(shareBtn) shareBtn.addEventListener('click', openForm);
 
-    document.getElementById('formSubmit').addEventListener('click', () => {
-      const name = document.getElementById('formName').value.trim();
-      const horse = document.getElementById('formHorse').value.trim();
-      const story = document.getElementById('formStory').value.trim();
-      const photo = document.getElementById('formPhoto').value.trim();
-      if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
-      
-      // Build WhatsApp message
-      let msg = '📖 *New Story from The Gathering*%0A%0A';
-      msg += '*Name:* ' + name + '%0A';
-      if (horse) msg += '*Horse:* ' + horse + '%0A';
-      msg += '*Story:* ' + story + '%0A';
-      if (photo) msg += '*Photo:* ' + photo + '%0A';
-      
-      // IMPORTANT: Replace this with your actual WhatsApp number (with country code)
-      // Example: for India +91 9876543210, put '919876543210'
-      const waNumber = '919XXXXXXXXX'; // <-- CHANGE THIS TO YOUR WHATSAPP NUMBER
-      const waURL = 'https://wa.me/' + waNumber + '?text=' + msg;
-      
-      // Also build mailto fallback
-      const emailSubject = 'New Story: ' + name;
-      let emailBody = 'Name: ' + name + '\n';
-      if (horse) emailBody += 'Horse: ' + horse + '\n';
-      emailBody += 'Story: ' + story + '\n';
-      if (photo) emailBody += 'Photo: ' + photo + '\n';
-      const mailURL = 'mailto:praveen@thehorsemansjournal.com?subject=' + encodeURIComponent(emailSubject) + '&body=' + encodeURIComponent(emailBody);
-      
-      // Try WhatsApp first, fallback to email
-      window.open(waURL, '_blank');
-      
-      // Clear form
-      document.getElementById('formName').value = '';
-      document.getElementById('formHorse').value = '';
-      document.getElementById('formStory').value = '';
-      document.getElementById('formPhoto').value = '';
-      closeForm();
-    });
+    const formSubmit = document.getElementById('formSubmit');
+    if(formSubmit){
+      formSubmit.addEventListener('click', () => {
+        const name = document.getElementById('formName').value.trim();
+        const horse = document.getElementById('formHorse').value.trim();
+        const story = document.getElementById('formStory').value.trim();
+        const photo = document.getElementById('formPhoto').value.trim();
+        if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
+        
+        // Build WhatsApp message
+        let msg = '📖 *New Story from The Gathering*%0A%0A';
+        msg += '*Name:* ' + name + '%0A';
+        if (horse) msg += '*Horse:* ' + horse + '%0A';
+        msg += '*Story:* ' + story + '%0A';
+        if (photo) msg += '*Photo:* ' + photo + '%0A';
+        
+        // IMPORTANT: Replace this with your actual WhatsApp number (with country code)
+        // Example: for India +91 9876543210, put '919876543210'
+        const waNumber = '919XXXXXXXXX'; // <-- CHANGE THIS TO YOUR WHATSAPP NUMBER
+        const waURL = 'https://wa.me/' + waNumber + '?text=' + msg;
+        
+        // Try WhatsApp
+        window.open(waURL, '_blank');
+        
+        // Clear form
+        document.getElementById('formName').value = '';
+        document.getElementById('formHorse').value = '';
+        document.getElementById('formStory').value = '';
+        document.getElementById('formPhoto').value = '';
+        closeForm();
+      });
+    }
 
     const titleOverlay = document.getElementById('domeTitleOverlay');
     const hintEl = document.getElementById('domeHint');
@@ -407,18 +389,18 @@
     function animate() {
       t++; render();
       const idle = t - lastMove > 200;
-      titleOverlay.style.opacity = idle ? '0.3' : '0.9';
-      hintEl.style.opacity = idle ? '0' : '0.7';
+      if(titleOverlay) titleOverlay.style.opacity = idle ? '0.3' : '0.9';
+      if(hintEl) hintEl.style.opacity = idle ? '0' : '0.7';
       requestAnimationFrame(animate);
     }
     animate();
     addEventListener('resize', () => { resize(); });
 
-    // Portal button
+    // Portal button - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if (portalBtn) {
       portalBtn.addEventListener('click', () => {
-        window.location.href = 'index.html';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
   </script>
