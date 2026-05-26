@@ -26,8 +26,6 @@
       overflow-x: hidden;
     }
 
-    /* NAVBAR - already in global.css */
-    
     .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .title-overlay {
@@ -35,13 +33,38 @@
       z-index: 5; text-align: center; pointer-events: none; transition: opacity 1.8s ease;
     }
     .main-title {
-      font-family: 'Cinzel Decorative', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700;
-      color: #ffffff; letter-spacing: 6px;
-      text-shadow: 0 0 60px rgba(212,175,55,0.35), 0 0 120px rgba(212,175,55,0.15), 0 4px 60px rgba(0,0,0,0.5);
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #E8C84A 0%, #B87333 50%, #E8C84A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 6px;
+      text-shadow: 0 0 30px rgba(232,200,74,0.3);
       margin-bottom: .6rem;
+      animation: titleGlow 4s ease-in-out infinite;
     }
-    .main-subtitle { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 8px; color: rgba(212,175,55,0.45); text-transform: uppercase; margin-bottom: .4rem; }
-    .main-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.85rem, 1.4vw, 1rem); color: rgba(240,230,200,0.35); letter-spacing: 1px; }
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(232,200,74,0.2)); }
+      50% { filter: drop-shadow(0 0 40px rgba(232,200,74,0.4)); }
+    }
+    .main-subtitle { 
+      font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 8px; color: rgba(212,175,55,0.45); text-transform: uppercase; margin-bottom: .4rem;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .5s;
+    }
+    .main-desc { 
+      font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.85rem, 1.4vw, 1rem); color: rgba(240,230,200,0.35); letter-spacing: 1px;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      animation-delay: .7s;
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(24px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
     .hint-overlay { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 5; pointer-events: none; transition: opacity 1.2s ease; }
     .hint-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .78rem; color: rgba(240,230,200,0.3); letter-spacing: 1px; text-align: center; }
     .hint-arrow { display: block; text-align: center; margin-top: 4px; font-size: .7rem; color: rgba(212,175,55,0.3); animation: hintBounce 2.5s ease-in-out infinite; }
@@ -99,102 +122,286 @@
     .hall-card-arrow { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 4px; color: rgba(200,160,60,0); text-transform: uppercase; flex-shrink: 0; transition: all .5s ease; white-space: nowrap; }
     .hall-card:hover .hall-card-arrow { color: var(--color, #E8C84A); }
 
+    /* PROFESSIONAL BOOK SHOWCASE */
     .book-showcase {
       position: relative;
       background: linear-gradient(180deg, #030108 0%, #020106 100%);
       padding: 5rem 2rem;
-      border-top: 1px solid rgba(212,175,55,0.1);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
       z-index: 10;
     }
-    .book-inner {
+    .book-showcase-inner {
       max-width: 1100px;
       margin: 0 auto;
+    }
+    .book-showcase-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .book-header-ornament {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4rem;
-      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 1.5rem;
     }
-    .book-3d-wrapper {
-      perspective: 1200px;
+    .book-h-oln {
       flex: 1;
-      min-width: 280px;
-      display: flex;
-      justify-content: center;
+      max-width: 80px;
+      height: .5px;
+      background: linear-gradient(90deg, transparent, rgba(232,200,74,0.4));
     }
-    .book-3d {
+    .book-h-oln-r {
+      background: linear-gradient(90deg, rgba(232,200,74,0.4), transparent);
+    }
+    .book-h-gem {
+      width: 6px;
+      height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(232,200,74,0.6);
+    }
+    .book-showcase-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: #E8C84A;
+      letter-spacing: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .book-showcase-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(240,230,200,0.45);
+    }
+    
+    .book-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    
+    .book-cover-premium {
       position: relative;
       width: 100%;
       max-width: 320px;
-      transform-style: preserve-3d;
-      transform: rotateY(-15deg) rotateX(6deg);
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      margin: 0 auto;
+      perspective: 1200px;
     }
-    .book-3d:hover {
-      transform: rotateY(-8deg) rotateX(3deg) translateY(-10px);
-    }
-    .book-cover {
+    .book-premium-cover {
       background: linear-gradient(145deg, #2a1a0a, #1a0f02);
       border-radius: 8px 4px 4px 8px;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 2rem;
       text-align: center;
-      border: 1px solid rgba(212,175,55,0.4);
-      box-shadow: 0 25px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,200,74,0.15);
       position: relative;
+      transform: rotateY(-5deg) rotateX(5deg);
+      transition: transform 0.4s ease;
     }
-    .book-cover::before {
+    .book-cover-premium:hover .book-premium-cover {
+      transform: rotateY(-3deg) rotateX(3deg) translateY(-8px);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(232,200,74,0.25);
+    }
+    .book-premium-cover::before {
       content: '';
       position: absolute;
       top: 12px;
       left: 12px;
       right: 12px;
       bottom: 12px;
-      border: 1px solid rgba(212,175,55,0.15);
+      border: 1px solid rgba(232,200,74,0.12);
       border-radius: 4px;
+      pointer-events: none;
     }
-    .book-spine { position: absolute; left: -15px; top: 5px; bottom: 5px; width: 15px; background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a); border-radius: 3px 0 0 3px; }
-    .book-pages-edge { position: absolute; right: -6px; top: 8px; bottom: 8px; width: 6px; background: linear-gradient(180deg, #f5efd4, #d4c8a0); border-radius: 0 2px 2px 0; opacity: 0.5; }
-    .book-icon { font-size: 3.5rem; margin-bottom: 0.8rem; filter: drop-shadow(0 0 15px rgba(212,175,55,0.3)); }
-    .book-title-cover { font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; font-weight: 700; color: #E8C84A; letter-spacing: 2px; line-height: 1.3; margin-bottom: 0.5rem; }
-    .book-subtitle-cover { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.75rem; color: rgba(240,230,200,0.6); }
-    .book-author-cover { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; color: rgba(212,175,55,0.5); margin-top: 0.5rem; text-transform: uppercase; }
-    .book-info { flex: 1; min-width: 280px; }
-    .book-info h3 { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: #E8C84A; letter-spacing: 3px; margin-bottom: 0.5rem; }
-    .book-info h4 { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(240,230,200,0.5); margin-bottom: 1.5rem; }
-    .book-info p { line-height: 1.9; margin-bottom: 1.5rem; color: rgba(240,230,200,0.75); }
-    .book-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .book-meta span { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.2); padding: 5px 14px; border-radius: 30px; font-size: 0.7rem; font-family: 'Cinzel', serif; }
-    .book-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .book-btn-primary { background: #E8C84A; color: #0a0500; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; border: none; cursor: pointer; }
-    .book-btn-primary:hover { background: #f0d860; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,200,74,0.2); }
-    .book-btn-secondary { background: transparent; border: 1px solid rgba(232,200,74,0.4); color: #E8C84A; padding: 12px 32px; border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; transition: all 0.3s; display: inline-block; cursor: pointer; }
-    .book-btn-secondary:hover { background: rgba(232,200,74,0.1); border-color: #E8C84A; transform: translateY(-2px); }
+    .book-premium-spine {
+      position: absolute;
+      left: -12px;
+      top: 5px;
+      bottom: 5px;
+      width: 12px;
+      background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a);
+      border-radius: 2px 0 0 2px;
+    }
+    .book-premium-pages {
+      position: absolute;
+      right: -6px;
+      top: 8px;
+      bottom: 8px;
+      width: 6px;
+      background: linear-gradient(180deg, #f5efd4, #d4c8a0);
+      border-radius: 0 2px 2px 0;
+      opacity: 0.6;
+    }
+    .book-premium-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      filter: drop-shadow(0 0 12px rgba(232,200,74,0.3));
+    }
+    .book-premium-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #E8C84A;
+      letter-spacing: 3px;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .book-premium-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: rgba(240,230,200,0.5);
+    }
+    .book-premium-divider {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,200,74,0.5), transparent);
+      margin: 0.8rem auto;
+    }
+    .book-premium-author {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      color: rgba(232,200,74,0.5);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .book-premium-badge {
+      display: inline-block;
+      background: rgba(232,200,74,0.08);
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.45rem;
+      letter-spacing: 2px;
+      color: #E8C84A;
+    }
     
-    .payment-options {
+    .book-details {
+      text-align: left;
+    }
+    .book-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .stars {
+      font-size: 0.9rem;
+      color: #E8C84A;
+      letter-spacing: 2px;
+    }
+    .rating-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      color: rgba(240,230,200,0.4);
+      text-transform: uppercase;
+    }
+    .book-description-premium {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(240,230,200,0.75);
+      margin-bottom: 1.5rem;
+    }
+    .book-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .spec {
+      background: rgba(232,200,74,0.06);
+      border: 1px solid rgba(232,200,74,0.12);
+      border-radius: 30px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.7rem;
+      font-family: 'Cinzel', serif;
+      color: rgba(240,230,200,0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .spec span {
+      font-size: 0.8rem;
+    }
+    .book-price {
+      margin-bottom: 1.5rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid rgba(232,200,74,0.1);
+      border-bottom: 1px solid rgba(232,200,74,0.1);
+    }
+    .price-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #E8C84A;
+      display: block;
+    }
+    .price-note {
+      font-size: 0.6rem;
+      color: rgba(240,230,200,0.3);
+      display: block;
+    }
+    .book-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      align-items: center;
-      margin-top: 0.5rem;
+      margin-bottom: 1rem;
     }
-    .paypal-btn {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .paypal-btn:hover { transform: translateY(-2px); }
-    .upi-text {
-      font-family: 'Cinzel', serif;
-      font-size: 0.55rem;
-      color: rgba(232,200,74,0.7);
-      letter-spacing: 1px;
-      background: rgba(212,175,55,0.08);
-      padding: 8px 16px;
+    .btn-discover {
+      background: #E8C84A;
+      color: #0a0500;
+      padding: 12px 28px;
       border-radius: 40px;
-      border: 1px solid rgba(232,200,74,0.3);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-discover:hover {
+      background: #f0d860;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(232,200,74,0.3);
+    }
+    .btn-preview {
+      background: transparent;
+      border: 1px solid rgba(232,200,74,0.4);
+      color: #E8C84A;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
       cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-preview:hover {
+      background: rgba(232,200,74,0.1);
+      border-color: #E8C84A;
+      transform: translateY(-2px);
+    }
+    .payment-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .payment-badge {
+      font-size: 0.55rem;
+      color: rgba(240,230,200,0.35);
+      font-family: 'Cinzel', serif;
+    }
+    .book-guarantee {
+      font-size: 0.55rem;
+      color: rgba(240,230,200,0.25);
+      text-align: center;
+      padding-top: 0.5rem;
     }
 
     .contact {
@@ -245,10 +452,29 @@
       .contact-links { gap: 1rem; flex-wrap: wrap; }
       .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
       .contact-link-label { font-size: 0.45rem; }
-      .book-inner { gap: 1.5rem; flex-direction: column; }
-      .book-3d { max-width: 200px; }
-      .book-title-cover { font-size: 0.9rem; }
-      .book-info h3 { font-size: 1.2rem; }
+      .book-showcase-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+      .book-details {
+        text-align: center;
+      }
+      .book-specs {
+        justify-content: center;
+      }
+      .book-rating {
+        justify-content: center;
+      }
+      .book-actions {
+        justify-content: center;
+      }
+      .payment-methods {
+        justify-content: center;
+      }
+      .book-cover-premium {
+        max-width: 260px;
+      }
     }
   </style>
 </head>
@@ -266,7 +492,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="foundation.html">FOUNDATION</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -310,9 +536,9 @@
         <p class="hall-sub">Six sections. One story. Choose where to begin.</p>
       </div>
       <div class="hall-cards">
-        <a href="foundation.html" class="hall-card" style="--color:#c8922a;--glow:rgba(200,146,42,0.05);--glow-color:rgba(200,146,42,0.25);">
+        <a href="about.html" class="hall-card" style="--color:#c8922a;--glow:rgba(200,146,42,0.05);--glow-color:rgba(200,146,42,0.25);">
           <span class="hall-card-num">I</span><span class="hall-card-icon">🜂</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">FOUNDATION</h3><p class="hall-card-desc">Where the philosophy begins. The work, the shift, and the principles that guide everything.</p></div>
+          <div class="hall-card-info"><h3 class="hall-card-name">ABOUT THE HORSEMAN</h3><p class="hall-card-desc">Meet Praveen Kumar. Eleven years of horsemanship. One black stallion. A philosophy built on trust, not force.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
         <a href="awakening.html" class="hall-card" style="--color:#c97a8a;--glow:rgba(200,122,138,0.05);--glow-color:rgba(200,122,138,0.25);">
@@ -349,45 +575,69 @@
   </section>
 
   <section class="book-showcase">
-    <div class="book-inner">
-      <div class="book-3d-wrapper">
-        <div class="book-3d">
-          <div class="book-cover">
-            <div class="book-spine"></div>
-            <div class="book-pages-edge"></div>
-            <div class="book-icon">🐴</div>
-            <div class="book-title-cover">THE HORSEMAN'S<br>JOURNAL</div>
-            <div class="book-subtitle-cover">A Conversation in Silence</div>
-            <div class="book-author-cover">PRAVEEN KUMAR</div>
-          </div>
+    <div class="book-showcase-inner">
+      <div class="book-showcase-header">
+        <div class="book-header-ornament">
+          <div class="book-h-oln"></div>
+          <div class="book-h-gem"></div>
+          <div class="book-h-oln book-h-oln-r"></div>
         </div>
+        <h2 class="book-showcase-title">The Horseman's Journal</h2>
+        <p class="book-showcase-subtitle">A Conversation in Silence</p>
       </div>
-      <div class="book-info">
-        <h3>THE BOOK</h3>
-        <h4>A Conversation in Silence</h4>
-        <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
-        <div class="book-meta">
-          <span>📖 400 Pages</span>
-          <span>📚 A5 Format</span>
-          <span>✨ 15 Articles + 11 Essays</span>
-        </div>
-        <div class="book-buttons">
-          <a href="book.html" class="book-btn-primary">✦ DISCOVER THE BOOK ✦</a>
-          <button class="book-btn-secondary" id="previewBookBtn">📖 Preview Sample</button>
-        </div>
-        <div class="payment-options">
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal-form">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="[ADD YOUR PAYPAL BUTTON ID HERE]">
-            <button type="submit" class="paypal-btn">
-              <img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" alt="Buy Now with PayPal" style="background:transparent; border-radius:30px;">
-            </button>
-          </form>
-          <div class="upi-text" id="upiText" style="cursor:pointer;" title="Click to copy UPI ID">
-            🇮🇳 UPI: [ADD YOUR UPI ID HERE]
+      
+      <div class="book-showcase-grid">
+        <div class="book-cover-premium">
+          <div class="book-premium-spine"></div>
+          <div class="book-premium-cover">
+            <div class="book-premium-icon">🐴</div>
+            <h3 class="book-premium-title">THE HORSEMAN'S<br>JOURNAL</h3>
+            <p class="book-premium-subtitle">A Conversation in Silence</p>
+            <div class="book-premium-divider"></div>
+            <p class="book-premium-author">PRAVEEN KUMAR</p>
+            <div class="book-premium-badge">✦ LIMITED EDITION ✦</div>
           </div>
+          <div class="book-premium-pages"></div>
         </div>
-        <p style="font-size:0.55rem; color:rgba(240,230,200,0.25); margin-top:0.8rem; letter-spacing:1px;">✓ Secure payments via PayPal (Global) & UPI (India)</p>
+        
+        <div class="book-details">
+          <div class="book-rating">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">5.0 · Reader Reviews</span>
+          </div>
+          
+          <p class="book-description-premium">
+            Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. 
+            This is not a training manual. It is a conversation — about trust, about fear, 
+            about the invisible bond between horse and human.
+          </p>
+          
+          <div class="book-specs">
+            <div class="spec"><span>📖</span> 400 Pages</div>
+            <div class="spec"><span>📚</span> A5 Format</div>
+            <div class="spec"><span>✨</span> 15 Articles + 11 Essays</div>
+            <div class="spec"><span>🏆</span> 11 Years of Wisdom</div>
+          </div>
+          
+          <div class="book-price">
+            <span class="price-amount">$10.99 USD</span>
+            <span class="price-note">includes immediate PDF download</span>
+          </div>
+          
+          <div class="book-actions">
+            <a href="book.html" class="btn-discover">✦ DISCOVER THE BOOK ✦</a>
+            <button class="btn-preview" id="previewBookBtn">📖 FREE SAMPLE</button>
+          </div>
+          
+          <div class="payment-methods">
+            <div class="payment-badge">✓ PayPal (Global)</div>
+            <div class="payment-badge">✓ UPI (India)</div>
+            <div class="payment-badge">✓ Secure Checkout</div>
+            <div class="payment-badge">✓ Instant Download</div>
+          </div>
+          
+          <p class="book-guarantee">🔒 30-Day Money-Back Guarantee · No questions asked</p>
+        </div>
       </div>
     </div>
   </section>
@@ -407,17 +657,19 @@
           <span class="contact-link-label">WhatsApp</span>
           <span class="contact-link-value" id="whatsappNumber">[ADD YOUR WHATSAPP NUMBER]</span>
         </a>
-        <a href="mailto:[ADD YOUR EMAIL HERE]" class="contact-link">
+        <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
           <div class="contact-link-icon">✉️</div>
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">[ADD YOUR EMAIL HERE]</span>
+          <span class="contact-link-value">praveen@thehorsemansjournal.com</span>
         </a>
       </div>
     </div>
   </section>
 
   <script>
-    // Canvas animation
+    // ============================================================
+    // COMPLETE CANVAS ANIMATION - WITH REALISTIC MOON
+    // ============================================================
     const canvas = document.getElementById('worldCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
@@ -447,6 +699,78 @@
       r: Math.random() * 1.4 + 0.4, sp: Math.random() * 0.25 + 0.08,
       ph: Math.random() * Math.PI * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.25
     }));
+
+    // Function to draw realistic moon with craters
+    function drawRealisticMoon(x, y, radius, time) {
+      // Outer glow
+      const glowGrad = ctx.createRadialGradient(x, y, radius * 0.5, x, y, radius * 1.8);
+      glowGrad.addColorStop(0, 'rgba(255,240,200,0.15)');
+      glowGrad.addColorStop(0.5, 'rgba(255,220,160,0.08)');
+      glowGrad.addColorStop(1, 'rgba(255,200,120,0)');
+      ctx.fillStyle = glowGrad;
+      ctx.beginPath();
+      ctx.arc(x, y, radius * 1.8, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Moon base
+      const moonGrad = ctx.createRadialGradient(x - radius * 0.2, y - radius * 0.2, radius * 0.2, x, y, radius);
+      moonGrad.addColorStop(0, 'rgba(255,245,220,0.95)');
+      moonGrad.addColorStop(0.6, 'rgba(245,225,180,0.85)');
+      moonGrad.addColorStop(1, 'rgba(220,190,140,0.75)');
+      ctx.fillStyle = moonGrad;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Craters
+      ctx.shadowBlur = 0;
+      const craters = [
+        { cx: -radius * 0.35, cy: -radius * 0.25, r: radius * 0.12 },
+        { cx: radius * 0.4, cy: -radius * 0.15, r: radius * 0.1 },
+        { cx: radius * 0.15, cy: radius * 0.3, r: radius * 0.08 },
+        { cx: -radius * 0.2, cy: radius * 0.35, r: radius * 0.06 },
+        { cx: -radius * 0.5, cy: radius * 0.1, r: radius * 0.07 },
+        { cx: radius * 0.3, cy: radius * 0.1, r: radius * 0.05 },
+        { cx: -radius * 0.1, cy: -radius * 0.45, r: radius * 0.05 },
+        { cx: radius * 0.5, cy: -radius * 0.4, r: radius * 0.04 },
+      ];
+      
+      craters.forEach(crater => {
+        const craterX = x + crater.cx;
+        const craterY = y + crater.cy;
+        const craterR = crater.r;
+        
+        // Dark crater interior
+        ctx.fillStyle = 'rgba(180,150,100,0.4)';
+        ctx.beginPath();
+        ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Crater rim highlight
+        ctx.fillStyle = 'rgba(255,245,220,0.3)';
+        ctx.beginPath();
+        ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.4, craterR * 0.25, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Crater shadow
+        ctx.fillStyle = 'rgba(100,80,50,0.25)';
+        ctx.beginPath();
+        ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.3, craterR * 0.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      // Subtle moon texture (tiny dots)
+      for (let i = 0; i < 80; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const rad = Math.random() * radius * 0.9;
+        const dx = Math.cos(angle) * rad;
+        const dy = Math.sin(angle) * rad;
+        ctx.fillStyle = `rgba(160,130,80,${Math.random() * 0.2})`;
+        ctx.beginPath();
+        ctx.arc(x + dx, y + dy, Math.random() * 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
     function horse(hx, hy, sc, coat, mane, pose, flip) {
       ctx.save(); ctx.translate(hx, hy);
@@ -521,7 +845,7 @@
     ];
 
     const sections = [
-      { name:'Genesis', color:'#c8922a', lx:0.16, ly:0.44, depth:0.6 },
+      { name:'About', color:'#c8922a', lx:0.16, ly:0.44, depth:0.6 },
       { name:'Awakening', color:'#c97a8a', lx:0.34, ly:0.38, depth:0.7 },
       { name:'Chronicles', color:'#b8860b', lx:0.52, ly:0.34, depth:0.8 },
       { name:'Companions', color:'#8b7a3a', lx:0.68, ly:0.38, depth:0.65 },
@@ -531,7 +855,7 @@
 
     const lanternsDiv = document.getElementById('lanterns');
     const lanternEls = [];
-    const pageMap = ['genesis.html','awakening.html','chronicles.html','companions.html','essays.html','questions.html'];
+    const pageMap = ['about.html','awakening.html','chronicles.html','companions.html','essays.html','questions.html'];
     sections.forEach((s, i) => {
       const el = document.createElement('div');
       el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
@@ -559,12 +883,12 @@
         for (let i = 0; i <= 80; i++) { const nx = i / 80; ctx.lineTo(nx * W, bandY + Math.sin(nx * 4 + t * 0.008 + b * 1.5) * 25 + Math.sin(nx * 7 + t * 0.012) * 15); }
         ctx.lineTo(W, bandY + 60); ctx.lineTo(0, bandY + 60); ctx.closePath(); ctx.fill();
       }
+      
+      // Draw realistic moon with craters
       const moonX = W * 0.78, moonY = H * 0.16;
-      const moonGrad = ctx.createRadialGradient(moonX, moonY, 20, moonX, moonY, 120);
-      moonGrad.addColorStop(0, 'rgba(255,252,240,0.6)'); moonGrad.addColorStop(0.25, 'rgba(255,252,240,0.25)'); moonGrad.addColorStop(0.5, 'rgba(220,210,180,0.06)'); moonGrad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = moonGrad; ctx.beginPath(); ctx.arc(moonX, moonY, 120, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,252,240,0.85)'; ctx.shadowColor = 'rgba(255,252,240,0.5)'; ctx.shadowBlur = 40;
-      ctx.beginPath(); ctx.arc(moonX, moonY, 32, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
+      drawRealisticMoon(moonX, moonY, 38, t);
+      
+      ctx.shadowBlur = 0;
       stars.forEach(s => { const tw = Math.sin(t * s.sp + s.off) * 0.3 + 0.7; ctx.fillStyle = 'rgba(255,255,255,' + (s.ba * tw) + ')'; ctx.shadowColor = 'rgba(255,255,255,' + (s.ba*tw*0.3) + ')'; ctx.shadowBlur = s.r; ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r * tw, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0; });
       ctx.fillStyle = 'rgba(6,4,16,0.8)'; ctx.beginPath(); ctx.moveTo(0, H * 0.66);
       for (let i = 0; i <= 60; i++) { const nx = i / 60; ctx.lineTo(nx * W, H * 0.62 - Math.sin(nx * 3.5) * H * 0.018 - Math.sin(nx * 7.2) * H * 0.012); }
