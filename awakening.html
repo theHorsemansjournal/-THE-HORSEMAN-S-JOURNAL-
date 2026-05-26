@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Awakening - The Horseman's Journal</title>
+  <title>Awakening - The Horseman's Journal | The Black Stallion Story</title>
+  <meta name="description" content="Eleven years. One black stallion. One moment of surrender that changed everything. The true story of awakening through horsemanship.">
+  <meta name="keywords" content="awakening story, black stallion, horsemanship journey, trust, surrender, Praveen Kumar">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Awakening - The Horseman's Journal">
+  <meta property="og:description" content="Eleven years. One black stallion. One moment of surrender that changed everything.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Awakening - The Horseman's Journal">
+  <meta name="twitter:description" content="Eleven years. One black stallion. One moment of surrender that changed everything.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +37,13 @@
       font-family: 'EB Garamond', serif;
       overflow-x: hidden;
       line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
     }
 
     /* ORBS — cosmic violet and rose-gold */
@@ -290,6 +312,33 @@
     }
     .nav-arrow:hover svg { stroke: #E8C84A; }
 
+    /* BOOK TEASER - Add after each chapter */
+    .book-teaser {
+      margin-top: 2rem;
+      padding: 1rem 1.5rem;
+      background: rgba(200,170,150,0.05);
+      border-left: 3px solid #E8C84A;
+      border-radius: 0 8px 8px 0;
+      text-align: center;
+    }
+    .book-teaser p {
+      font-style: italic;
+      font-size: 0.85rem;
+      color: rgba(200,170,150,0.7);
+      margin-bottom: 0.5rem;
+      text-indent: 0;
+    }
+    .book-teaser a {
+      color: #E8C84A;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+    }
+    .book-teaser a:hover {
+      text-decoration: underline;
+    }
+
     /* CLOSING SECTION */
     .closing {
       position: relative; padding: 8rem 2rem 10rem;
@@ -356,7 +405,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS (genesis.html → about.html) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -369,7 +418,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html" class="active">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -445,6 +494,10 @@
         <div class="manuscript-shadow"></div>
       </div>
     </div>
+    <div class="book-teaser">
+      <p>✨ This is an excerpt from The Horseman's Journal. The full chapter explores deeper into that quiet place where rest finally found me.</p>
+      <a href="book.html">Read the full story in the book →</a>
+    </div>
     <div class="sec-nav">
       <a href="#awakeningHero" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
       <a href="#ch2" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
@@ -482,6 +535,10 @@
         <div class="manuscript-shadow"></div>
       </div>
     </div>
+    <div class="book-teaser">
+      <p>✨ The full story of how this mirror — this honest, unforgiving stallion — began to break through everything I thought I knew.</p>
+      <a href="book.html">Read the full story in the book →</a>
+    </div>
     <div class="sec-nav">
       <a href="#ch1" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
       <a href="#ch3" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
@@ -517,6 +574,10 @@
         </div>
         <div class="manuscript-shadow"></div>
       </div>
+    </div>
+    <div class="book-teaser">
+      <p>✨ The moment fear collided with surrender — and the silence that followed changed everything.</p>
+      <a href="book.html">Read the full story in the book →</a>
     </div>
     <div class="sec-nav">
       <a href="#ch2" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
@@ -554,6 +615,10 @@
         <div class="manuscript-shadow"></div>
       </div>
     </div>
+    <div class="book-teaser">
+      <p>✨ Twenty days of running. One moment of stopping. The stallion waited. The full story of what happened when I finally stood still.</p>
+      <a href="book.html">Read the full story in the book →</a>
+    </div>
     <div class="sec-nav">
       <a href="#ch3" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
       <a href="#ch5" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
@@ -589,6 +654,10 @@
         </div>
         <div class="manuscript-shadow"></div>
       </div>
+    </div>
+    <div class="book-teaser">
+      <p>✨ The surrender that changed everything. When I stopped asking, the stallion began to give. The full chapter reveals what happened next.</p>
+      <a href="book.html">Read the full story in the book →</a>
     </div>
     <div class="sec-nav">
       <a href="#ch4" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
@@ -626,6 +695,10 @@
         </div>
         <div class="manuscript-shadow"></div>
       </div>
+    </div>
+    <div class="book-teaser">
+      <p>✨ The bond that outlasts fear. The full chapter explores what it means to stand beside someone who has seen you at your worst and stayed.</p>
+      <a href="book.html">Read the full story in the book →</a>
     </div>
     <div class="sec-nav">
       <a href="#ch5" class="nav-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
