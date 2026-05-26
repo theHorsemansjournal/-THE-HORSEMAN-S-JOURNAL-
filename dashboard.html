@@ -243,12 +243,14 @@
     </div>
     <a href="index.html" class="back-to-site">← BACK TO SITE</a>
     <div class="nav-item active" data-section="book">📚 BOOK SETTINGS</div>
-    <div class="nav-item" data-section="genesis">📜 GENESIS</div>
+    <div class="nav-item" data-section="about">📜 ABOUT</div>
     <div class="nav-item" data-section="awakening">🌅 AWAKENING</div>
     <div class="nav-item" data-section="chronicles">📖 CHRONICLES</div>
     <div class="nav-item" data-section="companions">🐴 COMPANIONS</div>
     <div class="nav-item" data-section="essays">✍️ VERSES</div>
     <div class="nav-item" data-section="questions">❓ QUESTIONS</div>
+    <div class="nav-item" data-section="gathering">🤝 GATHERING</div>
+    <div class="nav-item" data-section="bookpage">📘 THE BOOK</div>
   </div>
 
   <div class="main-content">
@@ -283,12 +285,14 @@
         description: "Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This book is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.",
         aboutAuthor: "Praveen Kumar has spent eleven years working with horses across India. His approach prioritizes understanding over control, trust over obedience, and presence over technique."
       },
-      genesis: { title: "Genesis", content: "The philosophy begins here..." },
+      about: { title: "About The Horseman", content: "Meet Praveen Kumar. Eleven years of horsemanship, one black stallion, and a philosophy built on trust, not force." },
       awakening: { title: "Awakening", content: "The black stallion story..." },
       chronicles: { title: "Chronicles", articles: [] },
       companions: { title: "Companions", content: "The horses who shaped me..." },
       essays: { title: "Verses", content: "Poetry and essays..." },
-      questions: { title: "Questions", content: "Q&A section..." }
+      questions: { title: "Questions", content: "Q&A section..." },
+      gathering: { title: "The Gathering", content: "Share your story..." },
+      bookpage: { title: "The Book", content: "Book information and purchase options..." }
     };
 
     function loadContent() {
@@ -450,12 +454,14 @@
         currentSection = item.dataset.section;
         const titleMap = {
           book: 'Book Settings',
-          genesis: 'Genesis',
+          about: 'About Page',
           awakening: 'Awakening',
           chronicles: 'Chronicles (15 Articles)',
           companions: 'Companions',
           essays: 'Verses',
-          questions: 'Questions'
+          questions: 'Questions',
+          gathering: 'The Gathering',
+          bookpage: 'The Book Page'
         };
         document.getElementById('pageTitle').innerHTML = titleMap[currentSection] || currentSection.toUpperCase();
         renderEditor();
