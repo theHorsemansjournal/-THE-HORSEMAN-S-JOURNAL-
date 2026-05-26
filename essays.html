@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Verses - The Horseman's Journal</title>
+  <title>Verses - The Horseman's Journal | Poetry & Essays from the Heart</title>
+  <meta name="description" content="Eleven essays from the heart. Where thoughts become poetry, silence becomes voice, and the unspoken finds its shape in words.">
+  <meta name="keywords" content="poetry, essays, verses, horsemanship poetry, emotional essays, horse poetry">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Verses - The Horseman's Journal">
+  <meta property="og:description" content="Eleven essays from the heart. Where thoughts become poetry and silence finds its voice.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Verses - The Horseman's Journal">
+  <meta name="twitter:description" content="Eleven essays from the heart. Where thoughts become poetry and silence finds its voice.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +37,13 @@
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
     }
 
     /* ORBS */
@@ -454,9 +476,69 @@
       color: rgba(200,155,60,0.4);
     }
 
-    /* FIXED MOBILE RESPONSIVE - NO NAVBAR STYLES HERE */
+    /* CLOSING SECTION - So page doesn't feel empty */
+    .verses-closing {
+      position: relative;
+      background: linear-gradient(180deg, #06040a 0%, #0a0818 100%);
+      padding: 5rem 2rem 7rem;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.08);
+    }
+    .closing-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .closing-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+    .closing-oln {
+      flex: 1;
+      max-width: 80px;
+      height: .5px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3));
+    }
+    .closing-oln-r {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), transparent);
+    }
+    .closing-gem {
+      width: 6px;
+      height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+    }
+    .closing-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.6rem;
+      color: #E8C84A;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(220, 205, 240, 0.5);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+    .closing-quote {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.4);
+      margin-top: 2rem;
+    }
+
+    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
       .modal-body { padding: 0 1.5rem 1.5rem 1.5rem; }
+      .closing-title { font-size: 1.3rem; }
+      .closing-text { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -466,7 +548,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS (genesis.html → about.html) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -479,7 +561,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -525,6 +607,21 @@
   <!-- 3D CUBE GRID -->
   <section class="essays-section">
     <div class="essays-grid" id="essaysGrid"></div>
+  </section>
+
+  <!-- CLOSING SECTION -->
+  <section class="verses-closing">
+    <div class="closing-inner">
+      <div class="closing-ornament">
+        <div class="closing-oln"></div>
+        <div class="closing-gem"></div>
+        <div class="closing-oln closing-oln-r"></div>
+      </div>
+      <h3 class="closing-title">The Unspoken Finds Its Shape</h3>
+      <p class="closing-text">These eleven verses are fragments of a life lived honestly — in grief, in longing, in the slow excavation of a self buried under years of performance. They are not easy to read. They were not easy to write. But they are true. And sometimes, truth is the only thing worth offering.</p>
+      <p class="closing-text">✨ May you find your own words for the silences that have been holding you. ✨</p>
+      <div class="closing-quote">— Praveen Kumar</div>
+    </div>
   </section>
 
   <!-- MODAL -->
