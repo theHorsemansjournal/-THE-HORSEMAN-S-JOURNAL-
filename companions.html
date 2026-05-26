@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Companions - The Horseman's Journal</title>
+  <title>Companions - The Horseman's Journal | The Horses Who Shaped Me</title>
+  <meta name="description" content="Meet the eight horses who shaped Praveen Kumar's journey. T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Arjun, and Storm. Each a teacher. Each a story.">
+  <meta name="keywords" content="companion horses, horse stories, T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Arjun, Storm, horsemanship journey">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Companions - The Horseman's Journal">
+  <meta property="og:description" content="Meet the eight horses who shaped Praveen Kumar's journey. Each a teacher. Each a story.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Companions - The Horseman's Journal">
+  <meta name="twitter:description" content="Meet the eight horses who shaped Praveen Kumar's journey. Each a teacher. Each a story.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +37,13 @@
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
     }
 
     /* ORBS — warm amber */
@@ -638,12 +660,117 @@
       color: rgba(200, 150, 40, 0.3);
     }
 
+    /* CLOSING SECTION */
+    .companions-closing {
+      position: relative;
+      background: linear-gradient(180deg, #0d0804 0%, #1a1008 100%);
+      padding: 5rem 2rem 7rem;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      margin-top: 2rem;
+    }
+    .closing-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .closing-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+    .closing-oln {
+      flex: 1;
+      max-width: 100px;
+      height: .5px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4));
+    }
+    .closing-oln-r {
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.4), transparent);
+    }
+    .closing-gem {
+      width: 6px;
+      height: 6px;
+      background: #E8C84A;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+    }
+    .closing-star {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: starFloat 4s ease-in-out infinite;
+    }
+    @keyframes starFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .closing-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.8rem;
+      color: #E8C84A;
+      letter-spacing: 3px;
+      margin-bottom: 1.5rem;
+    }
+    .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(240, 230, 210, 0.7);
+      margin-bottom: 1.5rem;
+    }
+    .closing-quote {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .closing-quote p {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: rgba(212, 175, 55, 0.8);
+      margin-bottom: 1rem;
+      text-indent: 0;
+    }
+    .closing-quote span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.5);
+    }
+    .closing-symbols {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 2rem;
+      margin-top: 2rem;
+      opacity: 0.6;
+    }
+    .closing-symbols span {
+      animation: symbolFloat 3s ease-in-out infinite;
+    }
+    .closing-symbols span:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .closing-symbols span:nth-child(3) {
+      animation-delay: 1s;
+    }
+    @keyframes symbolFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
     /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
       .stalls-grid { gap: 1rem; }
       .hero-title { font-size: 2rem; }
       .story-magazine { grid-template-columns: 1fr; }
       .story-left { display: none; }
+      .closing-title { font-size: 1.4rem; }
+      .closing-text { font-size: 0.95rem; }
+      .closing-quote p { font-size: 1rem; }
     }
     @media (max-width: 520px) {
       .hero-title { font-size: 1.8rem; }
@@ -669,7 +796,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html" class="active">COMPANIONS</a></li>
@@ -937,6 +1064,30 @@
       <button class="story-close" id="storyClose"></button>
     </div>
   </div>
+
+  <!-- CLOSING SECTION -->
+  <section class="companions-closing">
+    <div class="closing-inner">
+      <div class="closing-ornament">
+        <div class="closing-oln"></div>
+        <div class="closing-gem"></div>
+        <div class="closing-oln closing-oln-r"></div>
+      </div>
+      <div class="closing-star">🐴</div>
+      <h3 class="closing-title">The Herd That Made Me</h3>
+      <p class="closing-text">Eight horses. Eight teachers. Each one arrived at exactly the moment I needed them — though I rarely understood it at the time. T-Rex taught me presence. Gladiator taught me that fire and softness can live in the same body. Xanthos taught me stillness. Rubin taught me patience. Highsocity taught me grace. Yuvraj taught me that wisdom deepens with age. Arjun taught me that the quiet ones carry the heaviest lessons. Storm taught me that wildness, respected, becomes trust.</p>
+      <p class="closing-text">I carry every one of them with me. Not as memories, but as living presences — voices I still hear in the arena when I am unsure, hands I still feel on my shoulder when I am tired, breath I still match when I need to slow down. They are not gone. They are here. In every horse I meet. In every lesson I write. In every moment I choose to stay when leaving would be easier.</p>
+      <div class="closing-quote">
+        <p>"A horse does not leave you when it is gone. It simply moves from the stall beside you to the space inside you. And there, it continues to teach."</p>
+        <span>— Praveen Kumar</span>
+      </div>
+      <div class="closing-symbols">
+        <span>🐎</span>
+        <span>🖤</span>
+        <span>🐴</span>
+      </div>
+    </div>
+  </section>
 
   <script>
     // ═══════════════════════════════════════════════
