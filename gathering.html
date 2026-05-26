@@ -9,6 +9,17 @@
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="The Gathering - The Horseman's Journal">
+  <meta property="og:description" content="Share your horse story. Every horse person carries a story. Join The Gathering.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Gathering - The Horseman's Journal">
+  <meta name="twitter:description" content="Share your horse story. Every horse person carries a story.">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
@@ -17,7 +28,19 @@
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #020108; color: #f0ede0; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; }
+    body { 
+      background: #020108; 
+      color: #f0ede0; 
+      font-family: 'Cormorant Garamond', serif; 
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
+    }
 
     .dome-section { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #domeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
@@ -57,14 +80,62 @@
     .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; background: transparent; border: 1px solid rgba(200,170,80,0.35); border-radius: 4px; cursor: pointer; text-decoration: none; transition: all .4s; }
     .share-btn:hover { background: rgba(200,170,80,0.06); border-color: rgba(200,170,80,0.6); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
+    /* CLOSING SECTION - So page doesn't feel empty */
+    .gathering-closing {
+      position: relative;
+      background: linear-gradient(180deg, #030108 0%, #020106 100%);
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      border-top: 1px solid rgba(200,170,80,0.08);
+    }
+    .gathering-closing .closing-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .gathering-closing .closing-star {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: starFloat 4s ease-in-out infinite;
+    }
+    @keyframes starFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .gathering-closing .closing-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: #E8C84A;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .gathering-closing .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(220, 200, 160, 0.6);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .gathering-closing .closing-quote {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.4);
+      margin-top: 1rem;
+    }
+
     @media (max-width: 860px) {
       .form-panel { padding: 1.8rem; margin: 1rem; }
       .community { padding: 3rem 1.5rem 5rem; }
+      .gathering-closing { padding: 3rem 1.5rem 5rem; }
+      .gathering-closing .closing-title { font-size: 1.2rem; }
+      .gathering-closing .closing-text { font-size: 0.9rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR - FIXED WITH ALL LINKS (genesis.html → about.html) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -77,7 +148,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -149,6 +220,16 @@
         Write it down. The herd is listening.
       </p>
       <button class="share-btn" id="shareBtn">Share Your Story ✦</button>
+    </div>
+  </section>
+
+  <!-- CLOSING SECTION - So page doesn't feel empty -->
+  <section class="gathering-closing">
+    <div class="closing-inner">
+      <div class="closing-star">🐴</div>
+      <h3 class="closing-title">The Herd Grows Here</h3>
+      <p class="closing-text">Every story shared is a thread in a larger tapestry. Every question asked is a door opened. Every experience offered becomes a lesson for someone else walking a similar path. Your voice matters. Your journey matters. Thank you for being part of The Gathering.</p>
+      <div class="closing-quote">— Praveen Kumar</div>
     </div>
   </section>
 
