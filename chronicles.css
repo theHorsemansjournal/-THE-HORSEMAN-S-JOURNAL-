@@ -10,6 +10,13 @@ body {
   font-family: 'Cormorant Garamond', serif;
   overflow-x: hidden;
   line-height: 1.6;
+  padding-top: 80px;
+}
+
+@media (max-width: 860px) {
+  body {
+    padding-top: 100px;
+  }
 }
 
 /* 3D Canvas Layer */
@@ -40,10 +47,10 @@ body {
 .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180,130,100,0.08), transparent); }
 .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(140,100,180,0.06), transparent); }
 
-/* NAVBAR */
+/* NAVBAR - FIXED WITH ALL LINKS */
 .navbar-wrapper {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: center; padding: 1.5rem 2rem 0; pointer-events: none;
+  display: flex; justify-content: center; padding: 1rem 1rem 0; pointer-events: none;
 }
 .navbar-wrapper * { pointer-events: auto; }
 .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
@@ -93,19 +100,21 @@ body {
 .nav-content {
   position: absolute; inset: 0; z-index: 10;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 1.8rem; transform: translateZ(1px);
+  padding: 0 1.2rem; transform: translateZ(1px);
+  flex-wrap: wrap;
+  gap: 0.3rem;
 }
 .brand {
-  font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 700;
+  font-family: 'Cinzel', serif; font-size: .75rem; font-weight: 700;
   color: #E8C84A; letter-spacing: 1.5px; text-transform: uppercase;
   text-shadow: 0 0 24px rgba(200,150,50,0.8);
   flex-shrink: 0; text-decoration: none;
 }
-.brand small { display: block; font-size: .52rem; letter-spacing: 4px; color: rgba(200,150,50,0.4); }
-.links { display: flex; gap: .05rem; list-style: none; }
+.brand small { display: inline-block; font-size: .45rem; letter-spacing: 3px; color: rgba(200,150,50,0.4); margin-left: 0.3rem; }
+.links { display: flex; gap: 0.1rem; list-style: none; flex-wrap: wrap; justify-content: center; }
 .links li a {
-  display: block; font-size: .62rem; font-weight: 600; letter-spacing: 2px;
-  color: rgba(255,240,180,0.5); text-decoration: none; padding: 6px 8px;
+  display: block; font-size: .55rem; font-weight: 600; letter-spacing: 1.5px;
+  color: rgba(255,240,180,0.5); text-decoration: none; padding: 4px 6px;
   border-radius: 8px; transition: all .25s;
 }
 .links li a:hover, .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.07); text-shadow: 0 0 16px rgba(200,150,50,0.9); }
@@ -116,11 +125,11 @@ body {
 }
 .portal-btn:hover { transform: rotateX(5deg) translateY(-2px); }
 .portal-top {
-  display: block; padding: 8px 18px;
+  display: block; padding: 5px 12px;
   background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(200,150,50,0.38) 50%, rgba(160,100,20,0.28) 100%);
   backdrop-filter: blur(12px); border: 1px solid rgba(200,150,50,0.7);
-  border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .65rem; font-weight: 700;
-  letter-spacing: 2.5px; color: #FFF8DC;
+  border-radius: 100px; font-family: 'Raleway', sans-serif; font-size: .55rem; font-weight: 700;
+  letter-spacing: 2px; color: #FFF8DC;
   position: relative; z-index: 3; white-space: nowrap;
 }
 .portal-wall {
@@ -253,7 +262,7 @@ body {
   border-color: #E8C84A; box-shadow: 0 0 20px rgba(200,155,60,0.3);
 }
 
-/* Books Grid - FIXED */
+/* Books Grid */
 .books-grid {
   max-width: 1300px;
   margin: 0 auto;
@@ -275,7 +284,7 @@ body {
   } 
 }
 
-/* Book Card - FIXED visibility */
+/* Book Card */
 .book-card {
   background: linear-gradient(145deg, #1a1628, #0f0c1a);
   border: 1px solid rgba(200, 155, 60, 0.3);
@@ -283,15 +292,13 @@ body {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
-  opacity: 1 !important;
-  transform: translateY(0) !important;
   position: relative;
   z-index: 25;
-  display: block !important;
+  display: block;
 }
 
 .book-card.hidden {
-  display: none !important;
+  display: none;
 }
 
 .book-card:hover {
@@ -527,11 +534,40 @@ body {
   color: rgba(200,155,60,0.4);
 }
 
+/* FIXED MOBILE RESPONSIVE - NAVBAR FULLY VISIBLE */
 @media (max-width: 860px) {
-  .navbar-wrapper { padding: 0.8rem 1rem 0; }
-  .nav3d { height: 56px; transform: rotateX(15deg); }
-  .brand { font-size: 0.7rem; }
-  .links li a { font-size: 0.48rem; padding: 4px 5px; }
+  .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
+  .scene { perspective: none; width: 100%; }
+  .nav3d { 
+    height: auto; 
+    transform: rotateX(0deg) !important; 
+    background: rgba(0,0,0,0.35); 
+    border-radius: 20px; 
+    backdrop-filter: blur(12px);
+  }
+  .nav3d:hover { transform: rotateX(0deg) !important; }
+  .face-top { background: rgba(0,0,0,0.2); border: 1px solid rgba(212,175,55,0.2); }
+  .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall, .face-back { display: none; }
+  .nav-content { 
+    position: relative; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    gap: 0.4rem; 
+    padding: 0.6rem;
+    justify-content: center;
+  }
+  .brand { font-size: 0.55rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
+  .brand small { font-size: 0.35rem; display: inline-block; }
+  .links { gap: 0.2rem; justify-content: center; width: 100%; }
+  .links li a { font-size: 0.45rem; padding: 3px 5px; letter-spacing: 0.5px; white-space: nowrap; }
+  .portal-scene { position: static; margin-top: 0.2rem; }
+  .portal-top { font-size: 0.45rem; padding: 3px 8px; }
+  .chr-title { font-size: 1.8rem; letter-spacing: 3px; }
+  .intro-headline { font-size: 1.3rem; }
+  .intro-body { font-size: 0.95rem; }
+  .books-grid { gap: 1rem; }
+  .book-title { font-size: 0.85rem; }
+  .book-excerpt { font-size: 0.7rem; }
   .modal-content { padding: 0 1.5rem 1.5rem 1.5rem; }
   .modal-content .article-title { font-size: 1.3rem; }
   .modal-content .section-heading { font-size: 1.1rem; }
