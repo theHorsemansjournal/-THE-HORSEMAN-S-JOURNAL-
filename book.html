@@ -4,11 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Book | The Horseman's Journal - A Conversation in Silence</title>
-  <meta name="description" content="Discover 'A Conversation in Silence' - a book about trust, fear, and the invisible bond between horse and human. 400 pages of horsemanship wisdom.">
-  <meta name="keywords" content="horse book, horsemanship book, equestrian book, horse training book, trust with horses">
+  <meta name="description" content="A Conversation in Silence — eleven years of horsemanship wisdom. 400 pages of trust, fear, and the invisible bond between horse and human. A premium hardcover edition.">
+  <meta name="keywords" content="horse book, horsemanship book, equestrian book, horse training book, trust with horses, hardcover, Praveen Kumar">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="The Book - The Horseman's Journal">
+  <meta property="og:description" content="A Conversation in Silence — eleven years of horsemanship wisdom. Premium hardcover edition.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Book - The Horseman's Journal">
+  <meta name="twitter:description" content="A Conversation in Silence — eleven years of horsemanship wisdom.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="global.css">
@@ -16,208 +29,453 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #060308;
+      background: #0a0a0f;
       color: #e8dfc7;
       font-family: 'EB Garamond', serif;
       overflow-x: hidden;
+      padding-top: 80px;
     }
 
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
+    }
+
+    /* Premium Book Showcase */
     .book-showcase {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px 2rem 4rem;
+      padding: 2rem 2rem 4rem;
+      background: linear-gradient(135deg, #0a0a0f 0%, #0f0f18 100%);
     }
     .book-container {
-      max-width: 1200px;
+      max-width: 1300px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
       align-items: center;
     }
     
+    /* ===== PREMIUM 3D HARDCOVER BOOK ===== */
     .book-3d-wrapper {
-      perspective: 1200px;
+      perspective: 1500px;
+      display: flex;
+      justify-content: center;
     }
-    .book-3d {
+    .premium-book {
       position: relative;
       width: 100%;
-      max-width: 380px;
-      margin: 0 auto;
+      max-width: 420px;
       transform-style: preserve-3d;
-      transform: rotateY(-15deg) rotateX(8deg);
-      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: rotateY(-18deg) rotateX(6deg);
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
     }
-    .book-3d:hover {
-      transform: rotateY(-5deg) rotateX(5deg) translateY(-10px);
+    .premium-book:hover {
+      transform: rotateY(-8deg) rotateX(4deg) translateY(-12px);
     }
-    .book-cover {
-      background: linear-gradient(145deg, #2a1a0a, #1a0f02);
-      border-radius: 8px 4px 4px 8px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 30px 50px rgba(0,0,0,0.6);
-      border: 1px solid rgba(232,200,74,0.35);
+    
+    /* Hardcover Cover */
+    .hardcover {
       position: relative;
+      background: linear-gradient(145deg, #2a1a0a, #1a0f02);
+      border-radius: 6px 3px 3px 6px;
+      padding: 2.8rem 2rem;
+      text-align: center;
+      box-shadow: 0 35px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+      border: 1px solid rgba(232,200,74,0.4);
+      z-index: 3;
     }
-    .book-cover::before {
+    .hardcover::before {
       content: '';
       position: absolute;
-      top: 15px;
-      left: 15px;
-      right: 15px;
-      bottom: 15px;
-      border: 1px solid rgba(232,200,74,0.15);
-      border-radius: 4px;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid rgba(232,200,74,0.12);
+      border-radius: 3px;
+      pointer-events: none;
     }
-    .book-icon { font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 15px rgba(232,200,74,0.3)); }
-    .book-title-cover {
+    
+    /* Embossed elements */
+    .embossed-icon {
+      font-size: 4.5rem;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+      text-shadow: 0 0 20px rgba(232,200,74,0.3);
+    }
+    .embossed-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 700;
       color: #E8C84A;
-      letter-spacing: 3px;
+      letter-spacing: 4px;
       line-height: 1.3;
+      text-shadow: 0 0 15px rgba(232,200,74,0.4);
       margin-bottom: 0.5rem;
     }
-    .book-subtitle-cover {
+    .embossed-subtitle {
       font-family: 'EB Garamond', serif;
       font-style: italic;
       font-size: 0.85rem;
-      color: rgba(240,230,200,0.6);
-      margin-bottom: 1rem;
+      color: rgba(240,230,200,0.65);
+      letter-spacing: 1px;
     }
-    .book-author-cover {
+    .embossed-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,200,74,0.5), transparent);
+      margin: 1rem auto;
+    }
+    .embossed-author {
       font-family: 'Cinzel', serif;
       font-size: 0.7rem;
-      letter-spacing: 2px;
-      color: rgba(232,200,74,0.5);
+      letter-spacing: 3px;
+      color: rgba(232,200,74,0.6);
       text-transform: uppercase;
+      margin-top: 1rem;
     }
-    .book-spine {
+    .embossed-badge {
       position: absolute;
-      left: -15px;
-      top: 5px;
-      bottom: 5px;
-      width: 15px;
-      background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a);
-      border-radius: 3px 0 0 3px;
-    }
-    .book-pages {
-      position: absolute;
-      right: -6px;
-      top: 8px;
-      bottom: 8px;
-      width: 6px;
-      background: linear-gradient(180deg, #f5efd4, #d4c8a0);
-      border-radius: 0 2px 2px 0;
-      opacity: 0.5;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(232,200,74,0.15);
+      border: 1px solid rgba(232,200,74,0.3);
+      border-radius: 30px;
+      padding: 0.2rem 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.45rem;
+      letter-spacing: 2px;
+      color: #E8C84A;
+      white-space: nowrap;
+      backdrop-filter: blur(4px);
     }
     
-    .book-info-area h1 {
+    /* Book Spine */
+    .book-spine-premium {
+      position: absolute;
+      left: -14px;
+      top: 4px;
+      bottom: 4px;
+      width: 14px;
+      background: linear-gradient(180deg, #c8922a, #6a4010, #c8922a);
+      border-radius: 2px 0 0 2px;
+      box-shadow: inset -1px 0 0 rgba(0,0,0,0.3), inset 1px 0 0 rgba(255,255,255,0.1);
+      z-index: 2;
+    }
+    .book-spine-premium::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 2px;
+      right: 2px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+    .book-spine-premium::after {
+      content: '';
+      position: absolute;
+      bottom: 20%;
+      left: 2px;
+      right: 2px;
+      height: 1px;
+      background: rgba(0,0,0,0.2);
+    }
+    
+    /* Book Pages Edge */
+    .book-pages-premium {
+      position: absolute;
+      right: -8px;
+      top: 6px;
+      bottom: 6px;
+      width: 8px;
+      background: repeating-linear-gradient(180deg, 
+        #d4c8a0 0px, #d4c8a0 2px,
+        #c4b890 2px, #c4b890 4px,
+        #d4c8a0 4px, #d4c8a0 6px,
+        #c4b890 6px, #c4b890 8px);
+      border-radius: 0 2px 2px 0;
+      opacity: 0.8;
+      z-index: 1;
+    }
+    
+    /* Book Shadow */
+    .book-shadow {
+      position: absolute;
+      bottom: -25px;
+      left: 10%;
+      right: 10%;
+      height: 25px;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+      filter: blur(8px);
+      z-index: 0;
+    }
+    
+    /* ===== BOOK DETAILS AREA ===== */
+    .book-details-premium {
+      text-align: left;
+    }
+    
+    /* Premium Badge */
+    .premium-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(232,200,74,0.15), rgba(232,200,74,0.05));
+      border: 1px solid rgba(232,200,74,0.25);
+      border-radius: 40px;
+      padding: 0.3rem 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      color: #E8C84A;
+      margin-bottom: 1.5rem;
+    }
+    
+    .book-title-premium {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
+      font-weight: 700;
       color: #E8C84A;
       letter-spacing: 4px;
+      line-height: 1.15;
       margin-bottom: 0.5rem;
     }
-    .book-info-area h2 {
+    .book-subtitle-premium {
       font-family: 'EB Garamond', serif;
       font-style: italic;
       font-size: 1.2rem;
       color: rgba(240,230,200,0.6);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      border-left: 2px solid rgba(232,200,74,0.3);
+      padding-left: 1rem;
     }
-    .book-meta {
+    
+    /* Star Rating */
+    .rating-premium {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin: 1.5rem 0;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
     }
-    .meta-badge {
-      background: rgba(232,200,74,0.08);
-      border: 1px solid rgba(232,200,74,0.2);
-      padding: 5px 12px;
-      border-radius: 30px;
-      font-size: 0.7rem;
+    .stars-premium {
+      font-size: 0.9rem;
+      color: #E8C84A;
+      letter-spacing: 3px;
+    }
+    .rating-text-premium {
       font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      color: rgba(240,230,200,0.4);
+      text-transform: uppercase;
     }
-    .book-description {
+    
+    /* Book Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+      background: rgba(20,15,35,0.3);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .spec-item {
+      text-align: center;
+      padding: 0.5rem;
+    }
+    .spec-icon {
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .spec-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      color: rgba(240,230,200,0.5);
+      text-transform: uppercase;
+    }
+    .spec-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #E8C84A;
+    }
+    
+    /* Description */
+    .description-premium {
       line-height: 1.9;
       margin: 1.5rem 0;
-      color: rgba(240,230,200,0.8);
+      color: rgba(240,230,200,0.75);
+      font-size: 1rem;
     }
-    .price {
+    
+    /* Price Section */
+    .price-section {
+      margin: 1.5rem 0;
+      padding: 1rem 0;
+      border-top: 1px solid rgba(232,200,74,0.1);
+      border-bottom: 1px solid rgba(232,200,74,0.1);
+    }
+    .price-amount-premium {
       font-family: 'Cinzel', serif;
       font-size: 2rem;
+      font-weight: 700;
       color: #E8C84A;
-      margin: 1.5rem 0;
+      display: inline-block;
     }
-    .buy-btn {
-      background: #E8C84A;
+    .price-badge {
+      display: inline-block;
+      background: rgba(232,200,74,0.1);
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.65rem;
+      margin-left: 0.8rem;
+      vertical-align: middle;
+      color: rgba(240,230,200,0.6);
+    }
+    .price-note-premium {
+      font-size: 0.6rem;
+      color: rgba(240,230,200,0.3);
+      margin-top: 0.3rem;
+    }
+    
+    /* Buttons */
+    .button-group-premium {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .btn-buy-premium {
+      background: linear-gradient(135deg, #E8C84A, #c8a82a);
       color: #0a0500;
-      padding: 14px 40px;
+      padding: 14px 36px;
       border-radius: 40px;
       border: none;
       font-family: 'Cinzel', serif;
-      font-weight: bold;
+      font-size: 0.7rem;
+      font-weight: 700;
       letter-spacing: 3px;
       cursor: pointer;
-      margin-right: 1rem;
       transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(232,200,74,0.2);
     }
-    .buy-btn:hover {
-      background: #f0d860;
+    .btn-buy-premium:hover {
       transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(232,200,74,0.3);
+      background: linear-gradient(135deg, #f0d860, #d8b840);
     }
-    .preview-btn {
+    .btn-preview-premium {
       background: transparent;
       border: 1px solid rgba(232,200,74,0.4);
       color: #E8C84A;
       padding: 14px 30px;
       border-radius: 40px;
       font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 2px;
       cursor: pointer;
       transition: all 0.3s;
     }
-    .preview-btn:hover {
+    .btn-preview-premium:hover {
       background: rgba(232,200,74,0.1);
+      border-color: #E8C84A;
+      transform: translateY(-2px);
     }
-    .secure-note {
-      margin-top: 1.5rem;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.3);
+    
+    /* Payment Methods */
+    .payment-methods-premium {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
     }
-    .upi-text {
-      display: inline-block;
-      background: rgba(232,200,74,0.08);
-      border: 1px solid rgba(232,200,74,0.2);
-      padding: 10px 20px;
-      border-radius: 40px;
+    .payment-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.6rem;
+      color: rgba(240,230,200,0.35);
       font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
       letter-spacing: 1px;
-      cursor: pointer;
-      margin-top: 1rem;
     }
-
+    .upi-clickable {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .upi-clickable:hover {
+      color: #E8C84A;
+    }
+    
+    /* Guarantee */
+    .guarantee-premium {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      background: rgba(232,200,74,0.03);
+      border-radius: 8px;
+      font-size: 0.6rem;
+      color: rgba(240,230,200,0.3);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+    
+    /* Logo Placement */
+    .logo-placement {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .author-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #2a1a0a, #1a0f02);
+      border: 2px solid rgba(232,200,74,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-family: 'Cinzel Decorative', serif;
+      color: #E8C84A;
+      box-shadow: 0 0 20px rgba(232,200,74,0.1);
+    }
+    .author-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
     @media (max-width: 860px) {
-      .book-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .book-3d { max-width: 280px; margin: 0 auto; }
-      .book-info-area h1 { font-size: 1.8rem; }
-      .book-showcase { padding: 140px 1.5rem 4rem; }
-      .buy-btn, .preview-btn { display: inline-block; margin: 0.5rem; }
+      .book-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .book-details-premium { text-align: center; }
+      .book-subtitle-premium { border-left: none; padding-left: 0; }
+      .rating-premium { justify-content: center; }
+      .specs-grid { max-width: 350px; margin-left: auto; margin-right: auto; }
+      .button-group-premium { justify-content: center; }
+      .payment-methods-premium { justify-content: center; }
+      .premium-book { max-width: 300px; margin: 0 auto; }
+      .book-title-premium { font-size: 2rem; }
     }
     @media (max-width: 520px) {
-      .price { font-size: 1.5rem; }
-      .book-info-area h1 { font-size: 1.4rem; }
+      .book-title-premium { font-size: 1.6rem; }
+      .specs-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+      .btn-buy-premium, .btn-preview-premium { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR - FIXED WITH ALL LINKS -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -230,7 +488,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -253,65 +511,122 @@
 
   <section class="book-showcase">
     <div class="book-container">
+      
+      <!-- PREMIUM 3D HARDCOVER BOOK -->
       <div class="book-3d-wrapper">
-        <div class="book-3d">
-          <div class="book-cover">
-            <div class="book-spine"></div>
-            <div class="book-pages"></div>
-            <div class="book-icon">🐴</div>
-            <div class="book-title-cover">THE HORSEMAN'S<br>JOURNAL</div>
-            <div class="book-subtitle-cover">A Conversation in Silence</div>
-            <div class="book-author-cover">PRAVEEN KUMAR</div>
+        <div class="premium-book">
+          <div class="book-spine-premium"></div>
+          <div class="hardcover">
+            <div class="embossed-icon">🐴</div>
+            <div class="embossed-title">THE HORSEMAN'S<br>JOURNAL</div>
+            <div class="embossed-subtitle">A Conversation in Silence</div>
+            <div class="embossed-divider"></div>
+            <div class="embossed-author">PRAVEEN KUMAR</div>
+            <div class="embossed-badge">✦ LIMITED FIRST EDITION ✦</div>
           </div>
+          <div class="book-pages-premium"></div>
+          <div class="book-shadow"></div>
         </div>
       </div>
-      <div class="book-info-area">
-        <h1>THE HORSEMAN'S JOURNAL</h1>
-        <h2>A Conversation in Silence</h2>
-        <div class="book-meta">
-          <span class="meta-badge">📖 400 Pages</span>
-          <span class="meta-badge">📚 A5 Format</span>
-          <span class="meta-badge">✨ 15 Articles + 11 Essays</span>
-        </div>
-        <div class="book-description">
-          <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
-          <p>This book is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
-        </div>
-        <div class="price">$10.99 USD</div>
+      
+      <!-- BOOK DETAILS AREA -->
+      <div class="book-details-premium">
         
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="[ADD YOUR PAYPAL BUTTON ID HERE]">
-            <button type="submit" class="buy-btn">✦ PayPal (Global) ✦</button>
-          </form>
-          <button class="preview-btn" id="previewBtn">📖 Preview Sample</button>
-        </div>
-        
-        <div>
-          <div class="upi-text" id="upiText" style="cursor:pointer;">
-            🇮🇳 UPI: [ADD YOUR UPI ID HERE] (Click to Copy)
+        <!-- Logo Area (your logo will appear here) -->
+        <div class="logo-placement">
+          <div class="author-logo" id="logoContainer">
+            <img src="logo.png" alt="HJ" id="authorLogo" style="display:none;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span style="display:flex;">HJ</span>
           </div>
         </div>
         
-        <div class="secure-note">🔒 Secure checkout · Instant PDF download</div>
+        <div class="premium-badge">✦ PUBLISHER'S PREMIUM EDITION ✦</div>
+        <h1 class="book-title-premium">THE HORSEMAN'S<br>JOURNAL</h1>
+        <div class="book-subtitle-premium">A Conversation in Silence</div>
+        
+        <div class="rating-premium">
+          <span class="stars-premium">★★★★★</span>
+          <span class="rating-text-premium">5.0 · Reader Approved</span>
+        </div>
+        
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-icon">📖</span>
+            <div class="spec-label">Pages</div>
+            <div class="spec-value">400</div>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">📚</span>
+            <div class="spec-label">Format</div>
+            <div class="spec-value">A5 Hardcover</div>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">✨</span>
+            <div class="spec-label">Articles</div>
+            <div class="spec-value">15 + 11 Essays</div>
+          </div>
+          <div class="spec-item">
+            <span class="spec-icon">🏆</span>
+            <div class="spec-label">Wisdom</div>
+            <div class="spec-value">11 Years</div>
+          </div>
+        </div>
+        
+        <div class="description-premium">
+          <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</p>
+          <p style="margin-top: 0.8rem;">This is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human. Between the fall and the getting back up, between the tension and the release, something shifts. This book is that shift, captured in words.</p>
+        </div>
+        
+        <div class="price-section">
+          <span class="price-amount-premium">$10.99 USD</span>
+          <span class="price-badge">✦ DIGITAL EDITION ✦</span>
+          <div class="price-note-premium">includes immediate PDF download · read on any device</div>
+        </div>
+        
+        <div class="button-group-premium">
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display: inline-block;">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="[ADD YOUR PAYPAL BUTTON ID HERE]">
+            <button type="submit" class="btn-buy-premium">✦ PURCHASE NOW ✦</button>
+          </form>
+          <button class="btn-preview-premium" id="previewBtn">📖 FREE PREVIEW</button>
+        </div>
+        
+        <div class="payment-methods-premium">
+          <div class="payment-icon">✓ PayPal (Global)</div>
+          <div class="payment-icon upi-clickable" id="upiText">✓ UPI (India) — Click to Copy</div>
+          <div class="payment-icon">✓ Secure Checkout</div>
+          <div class="payment-icon">✓ Instant Download</div>
+        </div>
+        
+        <div class="guarantee-premium">
+          🔒 30-Day Money-Back Guarantee · No questions asked · Your purchase supports independent writing
+        </div>
+        
       </div>
     </div>
   </section>
 
   <script>
-    const SAMPLE_PDF = "sample.pdf";
+    // ============================================================
+    // BOOK PAGE FUNCTIONALITY
+    // ============================================================
     
+    // Preview button - opens sample PDF
     const previewBtn = document.getElementById('previewBtn');
+    const SAMPLE_PDF = "sample.pdf";
     if (previewBtn) {
-      previewBtn.onclick = () => window.open(SAMPLE_PDF, '_blank');
+      previewBtn.addEventListener('click', () => {
+        window.open(SAMPLE_PDF, '_blank');
+      });
     }
     
+    // UPI Copy functionality
     const upiText = document.getElementById('upiText');
+    const UPI_ID = '[ADD YOUR UPI ID HERE]';
     if (upiText) {
       upiText.addEventListener('click', () => {
-        const upiId = '[ADD YOUR UPI ID HERE]';
-        navigator.clipboard.writeText(upiId);
+        navigator.clipboard.writeText(UPI_ID);
         const originalText = upiText.innerHTML;
         upiText.innerHTML = '✓ UPI ID Copied!';
         setTimeout(() => {
@@ -320,6 +635,22 @@
       });
     }
     
+    // Logo handling - if logo.png exists, it will show; otherwise shows "HJ"
+    const logoImg = document.getElementById('authorLogo');
+    if (logoImg) {
+      logoImg.onerror = function() {
+        this.style.display = 'none';
+        const nextSibling = this.nextElementSibling;
+        if (nextSibling) nextSibling.style.display = 'flex';
+      };
+      logoImg.onload = function() {
+        this.style.display = 'block';
+        const nextSibling = this.nextElementSibling;
+        if (nextSibling) nextSibling.style.display = 'none';
+      };
+    }
+    
+    // Portal button - smooth scroll to top
     const portalBtn = document.getElementById('portalBtn');
     if (portalBtn) {
       portalBtn.addEventListener('click', () => {
