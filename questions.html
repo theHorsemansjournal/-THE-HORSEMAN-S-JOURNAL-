@@ -3,7 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Questions - The Horseman's Journal</title>
+  <title>Questions - The Horseman's Journal | Answers from the Arena</title>
+  <meta name="description" content="Straight from the arena. Twelve answers to the questions horsemen ask most. No theories. Only what works.">
+  <meta name="keywords" content="horse questions, horsemanship answers, horse training FAQ, horse behavior, trust, fear, training tips">
+  <meta name="author" content="Praveen Kumar">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="Questions - The Horseman's Journal">
+  <meta property="og:description" content="Straight from the arena. Twelve answers to the questions horsemen ask most.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Questions - The Horseman's Journal">
+  <meta name="twitter:description" content="Straight from the arena. Twelve answers to the questions horsemen ask most.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +38,13 @@
       font-family: 'EB Garamond', serif;
       overflow-x: hidden;
       line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        padding-top: 100px;
+      }
     }
 
     .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; }
@@ -114,9 +136,57 @@
     .answer-nav-btn:hover { color: #E8C84A; }
     .answer-nav-count { font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: 2px; color: rgba(200,150,60,0.25); }
 
-    /* FIXED MOBILE RESPONSIVE - NO NAVBAR STYLES HERE */
+    /* CLOSING SECTION EXTRA - So page doesn't feel empty */
+    .questions-closing {
+      position: relative;
+      background: linear-gradient(180deg, #0d0804 0%, #1a1008 100%);
+      padding: 4rem 2rem 6rem;
+      text-align: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.08);
+      margin-top: 1rem;
+    }
+    .questions-closing .closing-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .questions-closing .closing-star {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: starFloat 4s ease-in-out infinite;
+    }
+    @keyframes starFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .questions-closing .closing-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: #E8C84A;
+      letter-spacing: 3px;
+      margin-bottom: 1rem;
+    }
+    .questions-closing .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(220, 200, 160, 0.6);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .questions-closing .closing-quote {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: rgba(212, 175, 55, 0.4);
+      margin-top: 1rem;
+    }
+
+    /* FIXED MOBILE RESPONSIVE */
     @media (max-width: 860px) {
       .answer-content { padding: 1.5rem 1.5rem 3rem; }
+      .questions-closing { padding: 3rem 1.5rem 5rem; }
+      .questions-closing .closing-title { font-size: 1.2rem; }
+      .questions-closing .closing-text { font-size: 0.9rem; }
     }
     @media (max-width: 520px) {
       .filter-buttons { justify-content: center; }
@@ -130,7 +200,7 @@
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS -->
+  <!-- NAVBAR - FIXED WITH ALL LINKS (genesis.html → about.html) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -143,7 +213,7 @@
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="genesis.html">GENESIS</a></li>
+            <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
@@ -196,11 +266,21 @@
   <!-- CARDS -->
   <section class="questions-section"><div class="questions-grid" id="questionsGrid"></div></section>
 
-  <!-- CLOSING -->
+  <!-- ORIGINAL CLOSING -->
   <section class="closing-invitation">
     <div class="closing-ornament"><div class="closing-oln"></div><div class="closing-gem"></div><div class="closing-oln closing-oln-r"></div></div>
     <p class="closing-text">These answers come from eleven years in the arena. Every horse is different. Every situation is unique. If your question isn't here, it is still worth asking.</p>
     <a href="chronicles.html" class="closing-link">Explore the Chronicles →</a>
+  </section>
+
+  <!-- EXTRA CLOSING SECTION - So page doesn't feel empty -->
+  <section class="questions-closing">
+    <div class="closing-inner">
+      <div class="closing-star">🐴</div>
+      <h3 class="closing-title">Still Have Questions?</h3>
+      <p class="closing-text">Every horse is a new question. Every session in the arena is an opportunity to learn something you did not know before. The answers here are not the end — they are a beginning. Keep asking. Keep listening. The horses will teach you the rest.</p>
+      <div class="closing-quote">— Praveen Kumar</div>
+    </div>
   </section>
 
   <!-- ANSWER PANEL -->
