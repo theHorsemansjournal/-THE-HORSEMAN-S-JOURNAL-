@@ -4,19 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>The Horseman's Journal | Horsemanship, Trust & Training with Horses</title>
-  <meta name="description" content="Eleven years of horsemanship wisdom. Articles on horse psychology, trust, training, and the invisible bond between horse and human. Free resources for horse lovers.">
-  <meta name="keywords" content="horsemanship, horse training, horse psychology, trust with horses, equestrian, horse bond, natural horsemanship, horse articles">
+  <meta name="description" content="Eleven years of horsemanship wisdom. Articles on horse psychology, trust, training, and the invisible bond between horse and human.">
+  <meta name="keywords" content="horsemanship, horse training, horse psychology, trust with horses, equestrian, horse bond">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
-  <!-- Open Graph / Social -->
   <meta property="og:title" content="The Horseman's Journal">
   <meta property="og:description" content="Eleven years of horsemanship. Trust, not force.">
   <meta property="og:image" content="og-image.jpg">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Structured Data (JSON-LD) -->
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,56 +21,344 @@
     "name": "The Horseman's Journal",
     "url": "https://thehorsemansjournal.com",
     "description": "Eleven years of horsemanship wisdom. Trust, psychology, and the bond with horses.",
-    "author": {
-      "@type": "Person",
-      "name": "Praveen Kumar"
-    },
-    "copyrightHolder": {
-      "@type": "Person",
-      "name": "Praveen Kumar"
-    },
-    "copyrightYear": "2026"
+    "author": { "@type": "Person", "name": "Praveen Kumar" }
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="global.css">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
   <style>
-    /* Additional glossy hero styles */
-    .main-title {
-      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 25%, #FFA500 50%, #D4AF37 75%, #FFD700 100%);
-      background-size: 200% auto;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0508;
+      color: #f0ede0;
+      font-family: 'EB Garamond', serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #heroCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(0,0,0,0.3) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    
+    /* TRANSPARENT LENS GLASS - CLEAR BACKGROUND */
+    .hero-glass {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      width: 90%;
+      max-width: 850px;
+      padding: 2.5rem 3.5rem;
+      background: rgba(10,8,12,0.25);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.3);
+      border-radius: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+      animation: glassRise 1.2s ease-out;
+    }
+    @keyframes glassRise {
+      0% { opacity: 0; transform: translate(-50%, -35%) scale(0.96); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 12px;
+      background: linear-gradient(135deg, #D4AF37, #FFD700);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: titleGlow 3s ease-in-out infinite, glossySweep 6s linear infinite;
-      text-shadow: 0 0 30px rgba(212,175,55,0.5);
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 1rem;
     }
-    @keyframes glossySweep {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 30%, #D4AF37 50%, #CD7F32 70%, #B8860B 100%);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 4px;
+      margin-bottom: 0.8rem;
+      animation: titleShine 4s ease-in-out infinite;
     }
-    @keyframes titleGlow {
-      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.5)); }
-      50% { filter: drop-shadow(0 0 40px rgba(255,200,100,0.9)); }
+    @keyframes titleShine {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.25)); }
+      50% { filter: drop-shadow(0 0 35px rgba(212,175,55,0.45)); }
     }
-    .sanctuary::after {
-      content: '';
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+    .hero-line {
+      width: 70px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #D4AF37, #D4AF37, transparent);
+    }
+    .hero-gem {
+      width: 9px;
+      height: 9px;
+      background: #D4AF37;
+      transform: rotate(45deg);
+      box-shadow: 0 0 12px #D4AF37;
+      animation: gemPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes gemPulse {
+      0%, 100% { box-shadow: 0 0 8px #D4AF37; transform: rotate(45deg) scale(1); }
+      50% { box-shadow: 0 0 25px #FFD700; transform: rotate(45deg) scale(1.15); }
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 1.6vw, 1rem);
+      color: rgba(240,230,200,0.75);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+      border-right: 1px solid rgba(212,175,55,0.25);
+      padding-right: 2rem;
+    }
+    .hero-stat:last-child { border-right: none; padding-right: 0; }
+    .hero-stat-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.2rem;
+      color: #D4AF37;
+      letter-spacing: 2px;
+    }
+    .hero-stat-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 3px;
+      color: rgba(240,230,200,0.6);
+      text-transform: uppercase;
+    }
+    .hero-scroll {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 1;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      cursor: pointer;
+      animation: scrollFloat 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollFloat {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+    }
+    .hero-scroll span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.5rem;
+      letter-spacing: 6px;
+      color: #D4AF37;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .hero-scroll svg { width: 18px; stroke: #D4AF37; }
+
+    /* ===== GREAT HALL ===== */
+    .great-hall {
+      position: relative;
+      background: linear-gradient(180deg, #0a0508 0%, #120a10 20%, #0a0508 100%);
+      padding: 5rem 2rem 4rem;
+      z-index: 10;
+    }
+    .hall-inner { max-width: 1000px; margin: 0 auto; }
+    .hall-header { text-align: center; margin-bottom: 4rem; }
+    .hall-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.6; }
+    .hall-heading { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); color: #D4AF37; letter-spacing: 4px; margin-bottom: 0.5rem; }
+    .hall-sub { font-family: 'EB Garamond', serif; font-style: italic; color: rgba(240,230,200,0.35); }
+    .hall-cards { display: flex; flex-direction: column; gap: 0; }
+    .hall-card {
+      display: flex; align-items: center; gap: 2rem; padding: 1.8rem 2rem;
+      text-decoration: none; color: inherit;
+      border-bottom: 1px solid rgba(212,175,55,0.06);
+      transition: all 0.4s ease;
+    }
+    .hall-card:hover { background: linear-gradient(90deg, rgba(212,175,55,0.06), transparent); padding-left: 2.8rem; }
+    .hall-card-num { font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: rgba(212,175,55,0.15); min-width: 65px; font-weight: 400; }
+    .hall-card-name { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #e8dfc7; letter-spacing: 2px; margin-bottom: 0.2rem; }
+    .hall-card:hover .hall-card-name { color: #D4AF37; }
+    .hall-card-desc { font-family: 'EB Garamond', serif; font-size: 0.85rem; color: rgba(240,230,200,0.4); line-height: 1.4; }
+    .hall-card-arrow { margin-left: auto; font-size: 1.2rem; opacity: 0; transition: all 0.3s; color: #D4AF37; }
+    .hall-card:hover .hall-card-arrow { opacity: 0.6; transform: translateX(5px); }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%);
+      padding: 5rem 2rem;
+      border-top: 1px solid rgba(212,175,55,0.08);
+      border-bottom: 1px solid rgba(212,175,55,0.08);
+    }
+    .testimonials-inner { max-width: 1000px; margin: 0 auto; }
+    .testimonials-header { text-align: center; margin-bottom: 3rem; }
+    .testimonials-title { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: #D4AF37; letter-spacing: 3px; }
+    .testimonials-sub { font-family: 'EB Garamond', serif; font-style: italic; color: rgba(240,230,200,0.4); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+    .testimonial-card {
+      background: rgba(20,12,18,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212,175,55,0.12);
+      border-radius: 24px;
+      padding: 1.8rem;
+      transition: all 0.4s ease;
+    }
+    .testimonial-card:hover { transform: translateY(-5px); border-color: rgba(212,175,55,0.3); background: rgba(20,12,18,0.8); }
+    .testimonial-stars { color: #D4AF37; font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 1rem; }
+    .testimonial-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; color: rgba(240,230,200,0.85); }
+    .testimonial-author { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; color: #D4AF37; margin-top: 1rem; }
+    .testimonial-role { font-family: 'EB Garamond', serif; font-size: 0.6rem; color: rgba(240,230,200,0.3); }
+
+    /* ===== BOOK SHOWCASE ===== */
+    .book-showcase {
+      background: linear-gradient(180deg, #0d060a 0%, #0a0508 100%);
+      padding: 5rem 2rem;
+    }
+    .book-showcase-inner { max-width: 1100px; margin: 0 auto; }
+    .book-showcase-header { text-align: center; margin-bottom: 3rem; }
+    .book-showcase-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: #D4AF37; letter-spacing: 4px; }
+    .book-showcase-subtitle { font-family: 'EB Garamond', serif; font-style: italic; color: rgba(240,230,200,0.45); }
+    .book-showcase-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center; }
+    .book-cover-premium {
+      position: relative;
+      max-width: 320px;
+      margin: 0 auto;
+      perspective: 1200px;
+    }
+    .book-premium-cover {
+      background: linear-gradient(145deg, #2a1a0a, #1a0f02);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 25px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.2);
+      transform: rotateY(-5deg) rotateX(5deg);
+      transition: all 0.4s ease;
+    }
+    .book-cover-premium:hover .book-premium-cover { transform: rotateY(-3deg) rotateX(3deg) translateY(-8px); }
+    .book-premium-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+    .book-premium-title { font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: #D4AF37; letter-spacing: 2px; }
+    .book-details { text-align: left; }
+    .book-rating { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .stars { font-size: 0.85rem; color: #D4AF37; letter-spacing: 2px; }
+    .book-description { font-family: 'EB Garamond', serif; font-size: 1rem; line-height: 1.7; color: rgba(240,230,200,0.75); margin-bottom: 1rem; }
+    .book-specs { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.2rem; }
+    .spec { background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.15); border-radius: 30px; padding: 0.2rem 0.8rem; font-size: 0.65rem; font-family: 'Cinzel', serif; }
+    .book-price { margin-bottom: 1rem; }
+    .price-amount { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #D4AF37; }
+    .btn-discover, .btn-preview {
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+    .btn-discover { background: #D4AF37; color: #0a0500; text-decoration: none; display: inline-block; }
+    .btn-discover:hover { background: #e6c34c; transform: translateY(-2px); }
+    .btn-preview { background: transparent; border: 1px solid rgba(212,175,55,0.4); color: #D4AF37; }
+    .btn-preview:hover { background: rgba(212,175,55,0.1); transform: translateY(-2px); }
+    .book-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+
+    .reviews-section { margin-top: 3rem; }
+    .reviews-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #D4AF37; text-align: center; letter-spacing: 2px; margin-bottom: 1.5rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .review-card {
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.08);
+      border-radius: 12px;
+      padding: 0.8rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .review-card:hover { background: rgba(212,175,55,0.08); transform: translateY(-2px); }
+    .review-stars { color: #D4AF37; font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .review-text { font-family: 'EB Garamond', serif; font-size: 0.7rem; font-style: italic; color: rgba(240,230,200,0.7); }
+    .review-author { font-family: 'Cinzel', serif; font-size: 0.55rem; color: #D4AF37; margin-top: 0.3rem; }
+
+    .extra-sections { padding: 3rem 2rem; background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%); border-top: 1px solid rgba(212,175,55,0.06); border-bottom: 1px solid rgba(212,175,55,0.06); }
+    .extra-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; }
+    .newsletter-box, .contact-form-box { flex: 1; background: rgba(20,12,18,0.5); backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(212,175,55,0.1); }
+    .newsletter-box h3, .contact-form-box h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; color: #D4AF37; margin-bottom: 1rem; letter-spacing: 2px; }
+    .newsletter-form input, .contact-form input, .contact-form textarea { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(212,175,55,0.2); padding: 0.7rem; margin-bottom: 0.8rem; color: #f0ede0; border-radius: 12px; font-family: 'EB Garamond', serif; }
+    .newsletter-form button, .contact-form button { background: #D4AF37; color: #0a0500; border: none; padding: 0.6rem 1.5rem; cursor: pointer; border-radius: 40px; font-family: 'Cinzel', serif; transition: 0.3s; }
+    .newsletter-form button:hover, .contact-form button:hover { transform: translateY(-2px); background: #e6c34c; }
+
+    .contact { padding: 4rem 2rem; text-align: center; background: #0a0508; }
+    .contact-heading { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond', serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
+
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,175,55,0.06); }
+    .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); }
+
+    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
+    .cookie-consent.show { transform: translateY(0); }
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
+
+    @media (max-width: 860px) {
+      .hero-glass { padding: 1.5rem; width: 92%; background: rgba(10,8,12,0.35); }
+      .hero-stats { gap: 1rem; }
+      .hero-stat { padding-right: 1rem; }
+      .great-hall { padding: 2rem 1rem; }
+      .hall-card { padding: 1rem; gap: 1rem; flex-wrap: wrap; }
+      .hall-card-num { font-size: 1.2rem; min-width: 35px; }
+      .hall-card-name { font-size: 0.85rem; }
+      .hall-card-arrow { display: none; }
+      .testimonials-grid { gap: 1rem; }
+      .book-showcase-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .book-details { text-align: center; }
+      .book-specs { justify-content: center; }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .extra-grid { flex-direction: column; }
     }
   </style>
 </head>
@@ -112,167 +397,144 @@
     </div>
   </div>
 
-  <section class="sanctuary">
-    <canvas id="worldCanvas"></canvas>
-    <div class="title-overlay" id="titleOverlay">
-      <h1 class="main-title">The Horseman's Journal</h1>
-      <p class="main-subtitle">Est. MMXXVI</p>
-      <p class="main-desc">A Journal of Horsemanship &amp; the Human Spirit</p>
+  <div class="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-glass">
+      <div class="hero-eyebrow">The Horseman's Journal</div>
+      <h1 class="hero-title">The Horseman's Journal</h1>
+      <div class="hero-divider">
+        <div class="hero-line"></div>
+        <div class="hero-gem"></div>
+        <div class="hero-line"></div>
+      </div>
+      <p class="hero-tagline">A Journal of Horsemanship &amp; the Human Spirit</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-number">11 Years</div><div class="hero-stat-label">Experience</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">8 Horses</div><div class="hero-stat-label">Companions</div></div>
+        <div class="hero-stat"><div class="hero-stat-number">Undeniable</div><div class="hero-stat-label">Lessons in Silence</div></div>
+      </div>
     </div>
-    <div class="hint-overlay" id="hintOverlay">
-      <p class="hint-text">Follow the lanterns or scroll to explore</p>
-      <span class="hint-arrow">↓</span>
+    <div class="hero-scroll" id="scrollHint">
+      <span>Discover</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
     </div>
-    <div id="lanterns"></div>
-  </section>
+  </div>
 
   <section class="great-hall">
-    <div class="hall-bg-particles" id="hallParticles"></div>
     <div class="hall-inner">
       <div class="hall-header">
-        <div class="hall-ornament"><div class="hall-oln"></div><div class="hall-gem"></div><div class="hall-oln hall-oln-r"></div></div>
+        <div class="hall-icon">✦</div>
         <h2 class="hall-heading">The Journal</h2>
         <p class="hall-sub">Six sections. One story. Choose where to begin.</p>
       </div>
       <div class="hall-cards">
-        <a href="about.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">I</span><span class="hall-card-icon">🜂</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">ABOUT THE HORSEMAN</h3><p class="hall-card-desc">Meet Praveen Kumar. Eleven years of horsemanship. One black stallion. A philosophy built on trust, not force.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
-        <a href="awakening.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">II</span><span class="hall-card-icon">✦</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">Awakening</h3><p class="hall-card-desc">Eleven years. One black stallion. The moment of surrender that changed everything.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
-        <a href="chronicles.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">III</span><span class="hall-card-icon">📖</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">Chronicles</h3><p class="hall-card-desc">Fifteen articles. Three paths. Foundational, Practical, and the Unique Edge.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
-        <a href="companions.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">IV</span><span class="hall-card-icon">🐴</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">Companions</h3><p class="hall-card-desc">The horses who shaped me. Eight companions. Eight stories written in dust and silence.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
-        <a href="essays.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">V</span><span class="hall-card-icon">🌙</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">Verses</h3><p class="hall-card-desc">Eleven essays from the heart. Where thoughts become poetry and silence finds its voice.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
-        <a href="questions.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
-          <span class="hall-card-num">VI</span><span class="hall-card-icon">⬡</span>
-          <div class="hall-card-info"><h3 class="hall-card-name">Questions</h3><p class="hall-card-desc">Straight from the arena. Twelve answers to the questions horsemen ask most.</p></div>
-          <span class="hall-card-arrow">Enter</span>
-        </a>
+        <a href="about.html" class="hall-card"><span class="hall-card-num">I</span><div><h3 class="hall-card-name">ABOUT THE HORSEMAN</h3><p class="hall-card-desc">Meet Praveen Kumar. Eleven years of horsemanship. A philosophy built on trust, not force.</p></div><span class="hall-card-arrow">→</span></a>
+        <a href="awakening.html" class="hall-card"><span class="hall-card-num">II</span><div><h3 class="hall-card-name">Awakening</h3><p class="hall-card-desc">The moment of surrender that changed everything.</p></div><span class="hall-card-arrow">→</span></a>
+        <a href="chronicles.html" class="hall-card"><span class="hall-card-num">III</span><div><h3 class="hall-card-name">Chronicles</h3><p class="hall-card-desc">Fifteen articles. Foundational, Practical, and the Unique Edge.</p></div><span class="hall-card-arrow">→</span></a>
+        <a href="companions.html" class="hall-card"><span class="hall-card-num">IV</span><div><h3 class="hall-card-name">Companions</h3><p class="hall-card-desc">Eight horses. Eight stories written in dust and silence.</p></div><span class="hall-card-arrow">→</span></a>
+        <a href="essays.html" class="hall-card"><span class="hall-card-num">V</span><div><h3 class="hall-card-name">Verses</h3><p class="hall-card-desc">Eleven essays from the heart. Where silence finds its voice.</p></div><span class="hall-card-arrow">→</span></a>
+        <a href="questions.html" class="hall-card"><span class="hall-card-num">VI</span><div><h3 class="hall-card-name">Questions</h3><p class="hall-card-desc">Twelve answers to the questions horsemen ask most.</p></div><span class="hall-card-arrow">→</span></a>
       </div>
-      <div class="hall-footer">
-        <div class="hall-footer-ornament"><div class="hall-fo"></div><div class="hall-fg"></div><div class="hall-fo hall-fo-r"></div></div>
-        <p class="hall-footer-text">The Horseman's Journal · Est. MMXXVI · Praveen Kumar</p>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testimonials-header">
+        <h2 class="testimonials-title">✦ Voices from the Arena ✦</h2>
+        <p class="testimonials-sub">What horses and humans have taught me</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">I was told this horse could not be ridden. Three trainers had given up. Praveen sat with him for twenty days - no pressure, no demands. On day twenty-one, the horse walked up to him and rested his head on his shoulder. That is not training. That is something else entirely.</div>
+          <div class="testimonial-author">— Shakti, 7-year-old mare</div>
+          <div class="testimonial-role">(Through Praveen's words)</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">मैंने कई ट्रेनर्स देखे हैं, लेकिन प्रवीन जैसा कोई नहीं। वो घोड़े से बात करता है, उसे सुनता है। मेरा घोड़ा डरता था - अब वो शांत है। ये कोई जादू नहीं, सिर्फ सच्चाई है।</div>
+          <div class="testimonial-author">— Vikram Singh</div>
+          <div class="testimonial-role">Horse Owner, Rajasthan</div>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="book-showcase">
-    <div class="book-inner">
-      <div class="book-3d-wrapper">
-        <div class="book-3d">
-          <div class="book-spine"></div>
-          <div class="book-cover">
-            <div class="book-pages-edge"></div>
-            <div class="book-icon">🐴</div>
-            <div class="book-title-cover">THE HORSEMAN'S<br>JOURNAL</div>
-            <div class="book-subtitle-cover">A Conversation in Silence</div>
-            <div class="book-author-cover">PRAVEEN KUMAR</div>
+    <div class="book-showcase-inner">
+      <div class="book-showcase-header">
+        <h2 class="book-showcase-title">The Horseman's Journal</h2>
+        <p class="book-showcase-subtitle">A Conversation in Silence</p>
+      </div>
+      <div class="book-showcase-grid">
+        <div class="book-cover-premium">
+          <div class="book-premium-cover">
+            <div class="book-premium-icon">🐴</div>
+            <div class="book-premium-title">THE HORSEMAN'S JOURNAL</div>
+            <div style="font-size:0.65rem; color:rgba(240,230,200,0.5); margin:0.3rem 0;">A Conversation in Silence</div>
+            <div style="font-size:0.55rem; color:#D4AF37;">PRAVEEN KUMAR</div>
           </div>
         </div>
+        <div class="book-details">
+          <div class="book-rating"><span class="stars">★★★★★</span><span style="font-size:0.6rem;">5.0 · Reader Reviews</span></div>
+          <p class="book-description">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
+          <div class="book-specs"><span class="spec">📖 400 Pages</span><span class="spec">📚 A5 Format</span><span class="spec">✨ 15 Articles + 11 Essays</span><span class="spec">🏆 11 Years of Wisdom</span></div>
+          <div class="book-price"><span class="price-amount">$10.99 USD</span><div style="font-size:0.6rem;">includes immediate PDF download</div></div>
+          <div class="book-actions"><a href="book.html" class="btn-discover">✦ DISCOVER THE BOOK ✦</a><button class="btn-preview" id="previewBookBtn">📖 FREE SAMPLE</button></div>
+        </div>
       </div>
-      <div class="book-info">
-        <h3>The Horseman's Journal</h3>
-        <h4>A Conversation in Silence</h4>
-        <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
-        <div class="book-meta">
-          <span>📖 400 Pages</span>
-          <span>📚 A5 Format</span>
-          <span>✨ 15 Articles + 11 Essays</span>
-          <span>🏆 11 Years of Wisdom</span>
-        </div>
-        <div class="book-buttons">
-          <a href="book.html" class="book-btn-primary">✦ DISCOVER THE BOOK ✦</a>
-          <button class="book-btn-secondary" id="previewBookBtn">📖 FREE SAMPLE</button>
-        </div>
-        <div style="margin-top: 1rem; font-size: 0.7rem; color: rgba(240,230,200,0.3);">
-          <span>$10.99 USD · Instant PDF Download</span>
+
+      <div class="reviews-section">
+        <div class="reviews-title">✦ What Readers Are Saying ✦</div>
+        <div class="reviews-grid">
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Life-changing. Read it in one sitting."</div><div class="review-author">— Priya M.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Finally, horsemanship without ego."</div><div class="review-author">— David C.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"The black stallion chapter broke me."</div><div class="review-author">— Anjali K.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Not just for horse people. For humans."</div><div class="review-author">— Robert T.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Every trainer should read this."</div><div class="review-author">— Meera N.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Raw. Honest. Unforgettable."</div><div class="review-author">— James W.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"A masterpiece of quiet wisdom."</div><div class="review-author">— Sarah L.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Bought copies for my whole barn."</div><div class="review-author">— Carlos R.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"The book I've been waiting for."</div><div class="review-author">— Deepa S.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Trust. Not force. Finally."</div><div class="review-author">— Michael B.</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter + Contact Form Section -->
   <div class="extra-sections">
     <div class="extra-grid">
       <div class="newsletter-box">
         <h3>✦ The Herd's Letter ✦</h3>
-        <p style="font-family: 'EB Garamond'; font-size: 0.85rem; margin-bottom: 1rem;">Weekly wisdom from the arena. No spam, only silence and hoofbeats.</p>
-        <form class="newsletter-form" action="https://formspree.io/f/YOUR_NEWSLETTER_ENDPOINT" method="POST">
+        <p style="margin-bottom:1rem; font-size:0.8rem;">Weekly wisdom from the arena. No spam, only silence.</p>
+        <form class="newsletter-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
           <input type="email" name="email" placeholder="Your email address" required>
           <button type="submit">Subscribe →</button>
         </form>
-        <p style="font-size: 0.6rem; margin-top: 1rem; opacity: 0.5;">Unsubscribe anytime.</p>
       </div>
       <div class="contact-form-box">
         <h3>✧ Send a Message ✧</h3>
         <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Your email" required>
-          <textarea name="message" rows="3" placeholder="Your message..." required></textarea>
+          <input type="text" name="name" placeholder="Your name">
+          <input type="email" name="email" placeholder="Your email">
+          <textarea rows="3" placeholder="Your message..."></textarea>
           <button type="submit">Send →</button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- Contact Section with SVG LOGOS -->
   <section class="contact">
-    <div class="contact-inner">
-      <div class="contact-ornament"><div class="contact-oln"></div><div class="contact-gem"></div><div class="contact-oln contact-oln-r"></div></div>
-      <h3 class="contact-heading">Connect</h3>
-      <div class="contact-links">
-        <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener">
-          <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
-              <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162z"/>
-              <circle cx="18.406" cy="5.595" r="1.44"/>
-            </svg>
-          </div>
-          <span class="contact-link-label">Instagram</span>
-          <span class="contact-link-value">@thehorsemans_journal</span>
-        </a>
-        <a href="#" class="contact-link" id="whatsappLink">
-          <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91z"/>
-              <path d="M16.6 13.76c-.25-.12-1.47-.73-1.7-.81-.23-.08-.4-.12-.57.12-.17.24-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.38-.78-1.89-.2-.5-.41-.42-.57-.43h-.48c-.17 0-.44.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28z"/>
-            </svg>
-          </div>
-          <span class="contact-link-label">WhatsApp</span>
-          <span class="contact-link-value" id="whatsappNumber">[ADD YOUR NUMBER]</span>
-        </a>
-        <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
-          <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            </svg>
-          </div>
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">praveen@thehorsemansjournal.com</span>
-        </a>
-      </div>
+    <h3 class="contact-heading">Connect</h3>
+    <div class="contact-links">
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
+      <a href="#" class="contact-link" id="whatsappLink">💬 WhatsApp</a>
+      <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
     </div>
   </section>
 
-  <!-- Footer -->
   <div class="footer-links">
     <a href="privacy.html">Privacy Policy</a> • 
     <a href="sitemap.xml">Sitemap</a> • 
@@ -282,58 +544,372 @@
     © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
   </div>
 
-  <!-- Cookie Consent Banner -->
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
     <button id="acceptCookies">Accept</button>
-    <button id="declineCookies" class="decline">Decline</button>
+    <button id="declineCookies" style="background:transparent; border:1px solid #D4AF37; color:#D4AF37;">Decline</button>
   </div>
 
-  <script src="global.js"></script>
+  <!-- COMPLETE HORSE ENVIRONMENT WITH CLEAR LENS GLASS -->
   <script>
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    const portalBtn = document.getElementById('portalBtn');
-    if (portalBtn) {
-      portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
-
-    const previewBtn = document.getElementById('previewBookBtn');
-    if (previewBtn) {
-      previewBtn.addEventListener('click', () => window.open('sample.pdf', '_blank'));
-    }
-
-    const whatsappLink = document.getElementById('whatsappLink');
-    if (whatsappLink) {
-      whatsappLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        const number = document.getElementById('whatsappNumber').innerText;
-        if (number && number !== '[ADD YOUR NUMBER]') {
-          window.open(`https://wa.me/${number.replace(/[^0-9]/g, '')}`, '_blank');
-        } else {
-          alert('Please add your WhatsApp number in the HTML');
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      let W, H, mouseX = 0.5, mouseY = 0.5, time = 0;
+      let isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+      
+      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', e => { mouseX = e.clientX / W; mouseY = e.clientY / H; });
+      
+      // ===== HYPER-REALISTIC BIG HORSES =====
+      const majesticHorses = [
+        { x: 0.12, y: 0.72, size: 1.15, coat: '#2a1a12', mane: '#3a2a1a', flip: false },
+        { x: 0.42, y: 0.74, size: 1.05, coat: '#1a0e08', mane: '#2a1a0a', flip: true },
+        { x: 0.72, y: 0.71, size: 1.2, coat: '#3a2a18', mane: '#4a3a28', flip: false },
+        { x: 0.88, y: 0.73, size: 1.0, coat: '#221408', mane: '#322418', flip: true },
+        { x: 0.30, y: 0.78, size: 0.9, coat: '#1a1208', mane: '#2a2018', flip: false }
+      ];
+      
+      // ===== COLOR-SHIFTING LANTERNS =====
+      const lanterns = [
+        { x: 0.14, y: 0.38, hue: 45, speed: 0.3, name: 'About' },
+        { x: 0.30, y: 0.35, hue: 350, speed: 0.4, name: 'Awakening' },
+        { x: 0.46, y: 0.33, hue: 30, speed: 0.35, name: 'Chronicles' },
+        { x: 0.62, y: 0.35, hue: 200, speed: 0.25, name: 'Companions' },
+        { x: 0.78, y: 0.39, hue: 280, speed: 0.45, name: 'Verses' },
+        { x: 0.88, y: 0.44, hue: 15, speed: 0.3, name: 'Questions' }
+      ];
+      
+      // ===== DRAW REALISTIC HORSE =====
+      function drawRealisticHorse(x, y, size, coat, mane, flip) {
+        ctx.save();
+        ctx.translate(x, y);
+        if (flip) ctx.scale(-size, size);
+        else ctx.scale(size, size);
+        
+        const breath = Math.sin(time * 0.03) * 1.2;
+        
+        // Body
+        ctx.fillStyle = coat;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 38, 19, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Muscle highlight
+        ctx.fillStyle = `rgba(255,210,160,0.06)`;
+        ctx.beginPath();
+        ctx.ellipse(-10, -5, 20, 11, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Neck
+        ctx.fillStyle = coat;
+        ctx.beginPath();
+        ctx.moveTo(24, -6);
+        ctx.quadraticCurveTo(35, -32, 30, -52);
+        ctx.quadraticCurveTo(22, -36, 14, -8);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Head
+        ctx.beginPath();
+        ctx.ellipse(32, -56, 13, 9, -0.12, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Muzzle
+        ctx.fillStyle = `rgba(100,70,50,0.5)`;
+        ctx.beginPath();
+        ctx.ellipse(37, -53, 7, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Eye
+        ctx.fillStyle = '#1a0a05';
+        ctx.beginPath();
+        ctx.arc(36, -61, 2.5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#f0e0c0';
+        ctx.beginPath();
+        ctx.arc(35.5, -62, 1, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(35, -62.5, 0.4, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Nostril
+        ctx.fillStyle = '#4a3020';
+        ctx.beginPath();
+        ctx.arc(41, -51, 1.2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Ears
+        ctx.fillStyle = coat;
+        ctx.beginPath();
+        ctx.moveTo(25, -65);
+        ctx.lineTo(21, -78);
+        ctx.lineTo(17, -66);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(33, -65);
+        ctx.lineTo(38, -78);
+        ctx.lineTo(36, -65);
+        ctx.fill();
+        
+        // Legs with movement
+        const legMove = Math.sin(time * 0.05) * 4;
+        ctx.fillStyle = coat;
+        [-22, -8, 8, 22].forEach((lx, idx) => {
+          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.6;
+          ctx.fillRect(lx, 14 + offset, 7, 32);
+          ctx.fillStyle = `rgba(70,50,30,0.4)`;
+          ctx.fillRect(lx, 36 + offset, 7, 7);
+          ctx.fillStyle = coat;
+        });
+        
+        // Hooves
+        ctx.fillStyle = '#1a0a05';
+        [-22, -8, 8, 22].forEach((lx, idx) => {
+          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.6;
+          ctx.fillRect(lx, 44 + offset, 7, 5);
+        });
+        
+        // Tail
+        ctx.fillStyle = mane;
+        ctx.beginPath();
+        ctx.moveTo(-36, -2);
+        ctx.quadraticCurveTo(-48, 8, -44, 24);
+        ctx.lineTo(-34, 14);
+        ctx.fill();
+        
+        // Mane
+        for (let i = 0; i < 9; i++) {
+          ctx.fillStyle = mane;
+          ctx.fillRect(18 + i * 2, -16 - i * 3, 6, 7);
         }
-      });
-    }
+        
+        ctx.restore();
+      }
+      
+      // ===== DRAW LANTERN =====
+      function drawLantern(x, y, hue, name, proximity) {
+        const pulse = 0.7 + Math.sin(time * 0.06) * 0.2;
+        const glowSize = 30 + (proximity > 0.6 ? 15 : 0);
+        
+        // Outer glow
+        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.12 + pulse * 0.08})`;
+        ctx.beginPath();
+        ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Inner glow
+        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.25 + pulse * 0.15})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Lantern body
+        ctx.fillStyle = `hsla(${hue}, 75%, 55%, 0.9)`;
+        ctx.shadowColor = `hsla(${hue}, 75%, 55%, 0.8)`;
+        ctx.shadowBlur = 15;
+        ctx.beginPath();
+        ctx.rect(x - 10, y - 15, 20, 24);
+        ctx.fill();
+        
+        // Lantern top
+        ctx.fillStyle = `hsla(${hue}, 75%, 45%, 0.95)`;
+        ctx.beginPath();
+        ctx.moveTo(x - 6, y - 17);
+        ctx.lineTo(x, y - 24);
+        ctx.lineTo(x + 6, y - 17);
+        ctx.fill();
+        
+        // Core light
+        ctx.fillStyle = `hsla(${hue}, 85%, 70%, 1)`;
+        ctx.beginPath();
+        ctx.rect(x - 5, y - 10, 10, 14);
+        ctx.fill();
+        
+        ctx.shadowBlur = 0;
+        
+        // Label on hover
+        if (proximity > 0.4) {
+          ctx.font = `bold ${11 + proximity * 5}px 'Cinzel'`;
+          ctx.fillStyle = `hsla(${hue}, 75%, 65%, 1)`;
+          ctx.shadowBlur = 6;
+          ctx.fillText(name, x - 18, y - 30);
+          ctx.shadowBlur = 0;
+        }
+      }
+      
+      // ===== STARS =====
+      const stars = Array.from({length: isMobile ? 120 : 220}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H * 0.5,
+        size: Math.random() * 2 + 0.5,
+        twinkle: Math.random() * Math.PI * 2
+      }));
+      
+      function drawStars() {
+        stars.forEach(star => {
+          const brightness = 0.4 + Math.sin(time * 0.02 + star.twinkle) * 0.3;
+          ctx.fillStyle = `rgba(255,240,200,${brightness * 0.5})`;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+      
+      // ===== MOON =====
+      function drawMoon() {
+        const moonX = W * 0.88;
+        const moonY = H * 0.12;
+        const pulse = 0.92 + Math.sin(time * 0.02) * 0.04;
+        
+        ctx.fillStyle = `rgba(255,235,190,0.1)`;
+        ctx.beginPath();
+        ctx.arc(moonX, moonY, 55 * pulse, 0, Math.PI * 2);
+        ctx.fill();
+        
+        const moonGrad = ctx.createRadialGradient(moonX - 6, moonY - 6, 6, moonX, moonY, 38);
+        moonGrad.addColorStop(0, `rgba(255,245,215,0.95)`);
+        moonGrad.addColorStop(0.6, `rgba(245,215,160,0.8)`);
+        moonGrad.addColorStop(1, `rgba(200,150,85,0.5)`);
+        ctx.fillStyle = moonGrad;
+        ctx.beginPath();
+        ctx.arc(moonX, moonY, 38, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      
+      // ===== GRASS =====
+      const grassBlades = Array.from({length: isMobile ? 180 : 350}, () => ({
+        x: Math.random() * W,
+        y: H * (0.72 + Math.random() * 0.24),
+        height: Math.random() * 22 + 10,
+        sway: Math.random() * Math.PI * 2
+      }));
+      
+      function drawGrass() {
+        grassBlades.forEach(grass => {
+          const offset = Math.sin(time * 0.025 + grass.sway) * 4;
+          ctx.beginPath();
+          ctx.moveTo(grass.x, grass.y);
+          ctx.quadraticCurveTo(grass.x + offset, grass.y - grass.height * 0.5, grass.x + offset * 0.6, grass.y - grass.height);
+          ctx.strokeStyle = `rgba(110,90,60,${0.35 + Math.sin(grass.sway) * 0.1})`;
+          ctx.lineWidth = 1.3;
+          ctx.stroke();
+        });
+      }
+      
+      // ===== DUST =====
+      const dust = Array.from({length: isMobile ? 40 : 70}, () => ({
+        x: Math.random() * W,
+        y: H * (0.76 + Math.random() * 0.14),
+        size: Math.random() * 3 + 1,
+        life: Math.random() * 100
+      }));
+      
+      function drawDust() {
+        dust.forEach(d => {
+          d.life -= 1;
+          d.y -= 0.4;
+          if (d.y < H * 0.71 || d.life < 0) {
+            d.y = H * (0.79 + Math.random() * 0.11);
+            d.x = Math.random() * W;
+            d.life = 100 + Math.random() * 60;
+          }
+          ctx.fillStyle = `rgba(170,130,90,${0.08 * (d.life / 100)})`;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+      
+      // ===== RENDER =====
+      function render() {
+        ctx.clearRect(0, 0, W, H);
+        
+        // Sky
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.6);
+        skyGrad.addColorStop(0, '#0a0a22');
+        skyGrad.addColorStop(0.4, '#151232');
+        skyGrad.addColorStop(0.7, '#201535');
+        skyGrad.addColorStop(1, '#2a1a22');
+        ctx.fillStyle = skyGrad;
+        ctx.fillRect(0, 0, W, H);
+        
+        drawStars();
+        drawMoon();
+        
+        // Hills
+        ctx.fillStyle = '#151222';
+        ctx.beginPath();
+        ctx.moveTo(0, H * 0.56);
+        for (let i = 0; i <= 100; i++) {
+          const x = (i / 100) * W;
+          const y = H * (0.56 + Math.sin(i * 0.09) * 0.035 + Math.cos(i * 0.04) * 0.02);
+          ctx.lineTo(x, y);
+        }
+        ctx.lineTo(W, H);
+        ctx.lineTo(0, H);
+        ctx.fill();
+        
+        // Ground
+        const groundGrad = ctx.createLinearGradient(0, H * 0.6, 0, H);
+        groundGrad.addColorStop(0, '#2a1a14');
+        groundGrad.addColorStop(0.5, '#1a0f0c');
+        groundGrad.addColorStop(1, '#0a0605');
+        ctx.fillStyle = groundGrad;
+        ctx.fillRect(0, H * 0.6, W, H * 0.4);
+        
+        // Arena track
+        ctx.strokeStyle = 'rgba(212,175,55,0.1)';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.ellipse(W * 0.5, H * 0.79, W * 0.42, H * 0.09, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        drawGrass();
+        drawDust();
+        
+        // Horses
+        majesticHorses.forEach(horse => {
+          const horseX = horse.x * W;
+          const horseY = horse.y * H;
+          drawRealisticHorse(horseX, horseY, horse.size, horse.coat, horse.mane, horse.flip);
+        });
+        
+        // Lanterns with proximity
+        lanterns.forEach(lantern => {
+          const lx = lantern.x * W;
+          const ly = lantern.y * H;
+          const dx = (mouseX - lantern.x) * W;
+          const dy = (mouseY - lantern.y) * H;
+          const proximity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 120);
+          const currentHue = (lantern.hue + time * 0.45 * lantern.speed) % 360;
+          drawLantern(lx, ly, currentHue, lantern.name, proximity);
+        });
+        
+        time++;
+        requestAnimationFrame(render);
+      }
+      
+      render();
+    })();
+    
+    // Additional functionality
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.getElementById('scrollHint')?.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
+    document.getElementById('previewBookBtn')?.addEventListener('click', () => window.open('sample.pdf', '_blank'));
+    document.getElementById('whatsappLink')?.addEventListener('click', (e) => { e.preventDefault(); alert('WhatsApp: [ADD YOUR NUMBER]'); });
 
     const cookieConsent = document.getElementById('cookieConsent');
-    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
-      cookieConsent.classList.add('show');
-    }
-    const acceptBtn = document.getElementById('acceptCookies');
-    const declineBtn = document.getElementById('declineCookies');
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('cookiesAccepted', 'true');
-        cookieConsent.classList.remove('show');
-      });
-    }
-    if (declineBtn) {
-      declineBtn.addEventListener('click', () => {
-        localStorage.setItem('cookiesDeclined', 'true');
-        cookieConsent.classList.remove('show');
-      });
-    }
+    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
+    document.getElementById('acceptCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
+    document.getElementById('declineCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
   </script>
 </body>
 </html>
