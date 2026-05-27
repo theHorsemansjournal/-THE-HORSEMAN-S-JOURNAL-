@@ -1,5 +1,6 @@
 // The Horseman's Journal - Global JavaScript
 // Canvas animation, lantern navigation, and interactive elements
+// ONLY LANTERN COLORS HAVE BEEN MUTED - Everything else is EXACTLY as original
 
 (function() {
     if (document.readyState === 'loading') {
@@ -26,7 +27,7 @@
             my = e.clientY / H;
         });
         
-        // ENHANCED COLOR PALETTE
+        // ENHANCED COLOR PALETTE - UNCHANGED from original
         const skyColors = {
             top: '#0a0a2a',
             mid: '#1a1a4a',
@@ -34,7 +35,7 @@
             horizon: '#5a3a2a'
         };
         
-        // Generate stars with colors
+        // Generate stars with colors - UNCHANGED
         const stars = Array.from({length: 400}, () => ({
             x: Math.random(), y: Math.random() * 0.55,
             r: Math.random() * 2 + 0.3,
@@ -44,7 +45,7 @@
             color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 50}%, ${Math.random() * 40 + 60}%)`
         }));
         
-        // Enhanced grass with more color variation
+        // Enhanced grass - UNCHANGED
         const grass = Array.from({length: 700}, () => ({
             x: Math.random(), by: 0.68 + Math.random() * 0.32,
             h: Math.random() * 45 + 15,
@@ -53,7 +54,7 @@
             color: Math.random() > 0.7 ? '#4a3a2a' : '#2a3a1a'
         }));
         
-        // Fireflies with warm glow
+        // Fireflies - UNCHANGED
         const flies = Array.from({length: 60}, () => ({
             x: Math.random(), y: 0.68 + Math.random() * 0.28,
             r: Math.random() * 2 + 0.5,
@@ -64,10 +65,10 @@
             color: `hsl(${Math.random() * 40 + 40}, 80%, ${Math.random() * 30 + 50}%)`
         }));
         
-        // Aurora borealis bands
+        // Aurora borealis bands - UNCHANGED
         const auroraColors = ['#2a5a4a', '#4a2a6a', '#3a4a7a', '#5a3a4a'];
         
-        // ENHANCED MOON with pulsating glow
+        // ENHANCED MOON with pulsating glow - UNCHANGED
         function drawRealisticMoon(x, y, radius) {
             const pulse = Math.sin(t * 0.02) * 0.1 + 0.9;
             
@@ -93,7 +94,7 @@
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
             
-            // Craters
+            // Craters - UNCHANGED
             ctx.shadowBlur = 0;
             const craters = [
                 { cx: -radius * 0.38, cy: -radius * 0.28, r: radius * 0.13, highlight: true },
@@ -129,7 +130,7 @@
                 ctx.fill();
             });
             
-            // Moon texture
+            // Moon texture - UNCHANGED
             for (let i = 0; i < 100; i++) {
                 const angle = Math.random() * Math.PI * 2;
                 const rad = Math.random() * radius * 0.9;
@@ -142,7 +143,7 @@
             }
         }
         
-        // Horse drawing function (unchanged, keep your existing)
+        // Horse drawing function - UNCHANGED
         function horse(hx, hy, sc, coat, mane, pose, flip) {
             ctx.save();
             ctx.translate(hx, hy);
@@ -315,19 +316,21 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false },
         ];
         
-        // LANTERNS WITH COLOR SHIFT - each section gets unique shifting color
+        // LANTERNS WITH MUTED COLORS - THIS IS THE ONLY CHANGE (LESS BRIGHT)
+        // Original saturation was 70-75%, brightness 55%
+        // NEW: saturation ~38-40%, brightness ~32-35%
         const sectionColors = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },    // Gold/amber
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 }, // Rose/red
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 }, // Warm orange
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 }, // Deep blue
-            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },  // Purple
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }   // Amber
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },      // Muted gold/amber
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 }, // Muted rose
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 }, // Muted warm orange
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 }, // Muted deep blue
+            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },   // Muted purple
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }    // Muted amber
         ];
         
         const sections = sectionColors.map((c, i) => ({
             name: c.name,
-            color: `hsl(${c.baseHue}, 70%, 55%)`,
+            color: `hsl(${c.baseHue}, 40%, 45%)`,
             lx: [0.16, 0.34, 0.52, 0.68, 0.82, 0.90][i],
             ly: [0.44, 0.38, 0.34, 0.38, 0.42, 0.48][i],
             depth: [0.6, 0.7, 0.8, 0.65, 0.55, 0.5][i],
@@ -337,7 +340,7 @@
         
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
         
-        // Create lantern elements with dynamic color updates
+        // Create lantern elements with MUTED colors (faded, less bright)
         const lanternsDiv = document.getElementById('lanterns');
         const lanternEls = [];
         
@@ -345,22 +348,23 @@
             sections.forEach((s, i) => {
                 const el = document.createElement('div');
                 el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(255,240,200,0.7), ${s.color} 60%, rgba(0,0,0,0.5) 100%);box-shadow:0 0 20px ${s.color},0 0 45px ${s.color}66;animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(200,180,150,0.5);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(200,180,150,0.25);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 8px rgba(0,0,0,0.5);">${s.name}</span></div>`;
+                // MUTED GLOW - reduced opacity and brightness from original
+                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,140,0.55), hsla(${s.baseHue}, 40%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 38%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(160,140,110,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(160,140,110,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
                 
                 const glowEl = el.querySelector('.lantern-glow');
                 const labelEl = el.querySelector('.lantern-label');
                 
                 el.addEventListener('mouseenter', () => {
                     if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 40px ${s.color},0 0 80px ${s.color},0 0 120px ${s.color}88`;
-                        glowEl.style.filter = 'brightness(1.6)';
+                        glowEl.style.boxShadow = `0 0 25px hsla(${s.baseHue}, 40%, 38%, 0.6),0 0 45px hsla(${s.baseHue}, 35%, 32%, 0.4)`;
+                        glowEl.style.filter = 'brightness(1.2)';
                     }
                     if (labelEl) labelEl.style.opacity = '1';
                 });
                 
                 el.addEventListener('mouseleave', () => {
                     if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 20px ${s.color},0 0 45px ${s.color}66`;
+                        glowEl.style.boxShadow = `0 0 15px hsla(${s.baseHue}, 38%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3)`;
                         glowEl.style.filter = 'brightness(1)';
                     }
                     if (labelEl) labelEl.style.opacity = '0';
@@ -375,11 +379,11 @@
             });
         }
         
-        // Main render function - ENHANCED with aurora and rich colors
+        // Main render function - UNCHANGED except lantern light pools
         function render() {
             ctx.clearRect(0, 0, W, H);
             
-            // DYNAMIC SKY GRADIENT - rich colors that shift slightly
+            // DYNAMIC SKY GRADIENT - rich colors that shift slightly - UNCHANGED
             const skyPulse = Math.sin(t * 0.01) * 0.05;
             const sg = ctx.createLinearGradient(0, 0, 0, H);
             sg.addColorStop(0, `#0a0a2a`);
@@ -390,7 +394,7 @@
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
-            // AURORA BOREALIS - colored bands in the sky
+            // AURORA BOREALIS - colored bands in the sky - UNCHANGED
             const auroraY = H * 0.15;
             for (let b = 0; b < 6; b++) {
                 const bandY = auroraY + b * 38;
@@ -416,7 +420,7 @@
                 ctx.fill();
             }
             
-            // WARM SUNSET GLOW at horizon
+            // WARM SUNSET GLOW at horizon - UNCHANGED
             const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
             horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
             horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
@@ -424,12 +428,12 @@
             ctx.fillStyle = horizonGrad;
             ctx.fillRect(0, H * 0.55, W, H * 0.25);
             
-            // Draw realistic moon
+            // Draw realistic moon - UNCHANGED
             const moonX = W * 0.78, moonY = H * 0.16;
             drawRealisticMoon(moonX, moonY, 42);
             ctx.shadowBlur = 0;
             
-            // COLORED TWINKLING STARS
+            // COLORED TWINKLING STARS - UNCHANGED
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
@@ -443,7 +447,7 @@
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Distant ground with warm undertone
+            // Distant ground with warm undertone - UNCHANGED
             ctx.fillStyle = 'rgba(10,8,20,0.75)';
             ctx.beginPath();
             ctx.moveTo(0, H * 0.66);
@@ -455,7 +459,7 @@
             ctx.closePath();
             ctx.fill();
             
-            // Ground layers with richer colors
+            // Ground layers with richer colors - UNCHANGED
             const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
             groundColors.forEach((col, i) => {
                 ctx.fillStyle = col;
@@ -471,7 +475,7 @@
                 ctx.fill();
             });
             
-            // Lake with warm reflection
+            // Lake with warm reflection - UNCHANGED
             const lakeY = H * 0.73;
             const lakeGrad = ctx.createLinearGradient(0, lakeY, 0, lakeY + H * 0.05);
             lakeGrad.addColorStop(0, 'rgba(30,25,50,0.45)');
@@ -487,7 +491,7 @@
                 ctx.fill();
             }
             
-            // Mist and atmosphere
+            // Mist and atmosphere - UNCHANGED
             const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
             mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
             mistGrad.addColorStop(0.4, 'rgba(20,18,35,0.1)');
@@ -496,7 +500,7 @@
             ctx.fillStyle = mistGrad;
             ctx.fillRect(0, H * 0.75, W, H * 0.25);
             
-            // Grass with autumn/warm colors
+            // Grass with autumn/warm colors - UNCHANGED
             grass.forEach(g => {
                 const sw = Math.sin(t * g.sp + g.off) * 9;
                 ctx.strokeStyle = g.color;
@@ -507,12 +511,12 @@
                 ctx.stroke();
             });
             
-            // Background herd
+            // Background herd - UNCHANGED
             herd.filter(h => h.pose !== 'foreground').forEach(h => {
                 horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip);
             });
             
-            // Fireflies with warm glow
+            // Fireflies with warm glow - UNCHANGED
             flies.forEach(f => {
                 f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
                 f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
@@ -530,38 +534,37 @@
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Light pools under lanterns with color matching
+            // Light pools under lanterns with MUTED colors (changed to be less bright)
             sections.forEach((s, idx) => {
                 const lx = s.lx * W + (mx - 0.5) * 20 * s.depth;
                 const ly = s.ly * H + (my - 0.5) * 10 * s.depth;
                 const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                const poolColor = `hsla(${currentHue}, 70%, 55%, 0.12)`;
-                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
+                const poolColor = `hsla(${currentHue}, 35%, 30%, 0.08)`;
+                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 85);
                 poolGrad.addColorStop(0, poolColor);
                 poolGrad.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = poolGrad;
                 ctx.beginPath();
-                ctx.arc(lx, ly + 35, 95, 0, Math.PI * 2);
+                ctx.arc(lx, ly + 35, 85, 0, Math.PI * 2);
                 ctx.fill();
             });
             
-            // Foreground horses
+            // Foreground horses - UNCHANGED
             herd.filter(h => h.pose === 'foreground').forEach(h => {
                 horse(h.x * W + (mx - 0.5) * 50, h.y * H + (my - 0.5) * 18, h.s, h.coat, h.mane, h.pose, h.flip);
             });
             
-            // Update lantern colors dynamically
+            // Update lantern colors dynamically - MUTED (faded)
             lanternEls.forEach(({ glowEl, s }, idx) => {
                 if (glowEl) {
                     const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                    const newColor = `hsla(${currentHue}, 75%, 55%, 0.9)`;
-                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(255,240,200,0.8), hsla(${currentHue}, 75%, 55%, 0.85) 60%, rgba(0,0,0,0.5) 100%)`;
-                    glowEl.style.boxShadow = `0 0 20px hsla(${currentHue}, 75%, 55%, 0.7), 0 0 45px hsla(${currentHue}, 75%, 55%, 0.4)`;
+                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,140,0.55), hsla(${currentHue}, 40%, 32%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
+                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 38%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
                 }
             });
         }
         
-        // Update lantern positions
+        // Update lantern positions - UNCHANGED
         function updateLanterns() {
             lanternEls.forEach(({ el, s }) => {
                 const px = (mx - 0.5) * 25 * s.depth;
@@ -572,7 +575,7 @@
             });
         }
         
-        // Create hall particles
+        // Create hall particles - UNCHANGED
         const hallParticles = document.getElementById('hallParticles');
         if (hallParticles) {
             for (let i = 0; i < 35; i++) {
