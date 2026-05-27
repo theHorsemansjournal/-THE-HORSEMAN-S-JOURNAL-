@@ -9,11 +9,40 @@
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="The Horseman's Journal">
+  <meta property="og:description" content="Eleven years of horsemanship. Trust, not force.">
+  <meta property="og:image" content="og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Horseman's Journal",
+    "url": "https://thehorsemansjournal.com",
+    "description": "Eleven years of horsemanship wisdom. Trust, psychology, and the bond with horses.",
+    "author": {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    },
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    },
+    "copyrightYear": "2026"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="global.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
   <style>
     /* Additional styles specific to index page */
@@ -26,40 +55,69 @@
       overflow-x: hidden;
     }
 
+    /* GLOSSY HERO SECTION - GOLD + AMBER (NO YELLOW) */
     .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
     #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .title-overlay {
       position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
       z-index: 5; text-align: center; pointer-events: none; transition: opacity 1.8s ease;
+      filter: drop-shadow(0 0 40px rgba(212,175,55,0.25));
     }
     .main-title {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(2.2rem, 5vw, 3.8rem);
       font-weight: 700;
-      background: linear-gradient(135deg, #E8C84A 0%, #B87333 50%, #E8C84A 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #B8860B 25%, #FFD700 50%, #CD7F32 75%, #D4AF37 100%);
+      background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       letter-spacing: 6px;
-      text-shadow: 0 0 30px rgba(232,200,74,0.3);
+      text-shadow: 0 0 20px rgba(212,175,55,0.5);
+      animation: titleGlow 3s ease-in-out infinite, glossySweep 8s linear infinite;
       margin-bottom: .6rem;
-      animation: titleGlow 4s ease-in-out infinite;
+    }
+    @keyframes glossySweep {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     @keyframes titleGlow {
-      0%, 100% { filter: drop-shadow(0 0 20px rgba(232,200,74,0.2)); }
-      50% { filter: drop-shadow(0 0 40px rgba(232,200,74,0.4)); }
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); text-shadow: 0 0 8px rgba(212,175,55,0.5); }
+      50% { filter: drop-shadow(0 0 35px rgba(212,175,55,0.8)); text-shadow: 0 0 20px rgba(212,175,55,0.9); }
     }
     .main-subtitle { 
-      font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 8px; color: rgba(212,175,55,0.45); text-transform: uppercase; margin-bottom: .4rem;
+      font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 10px;
+      background: linear-gradient(120deg, rgba(212,175,55,0.9), rgba(184,134,11,0.7));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-transform: uppercase;
       animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
       animation-delay: .5s;
     }
     .main-desc { 
-      font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.85rem, 1.4vw, 1rem); color: rgba(240,230,200,0.35); letter-spacing: 1px;
+      font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.85rem, 1.4vw, 1rem);
+      background: linear-gradient(135deg, #D4AF37, #B8860B);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
       animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
       animation-delay: .7s;
+    }
+    .sanctuary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
     }
     @keyframes fadeInUp {
       0% { opacity: 0; transform: translateY(24px); }
@@ -72,6 +130,7 @@
     #lanterns { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; }
     @keyframes lanternBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
+    /* GREAT HALL SECTION - unchanged */
     .great-hall {
       position: relative;
       background: linear-gradient(180deg, #08061a 0%, #050310 20%, #030108 50%, #020106 100%);
@@ -94,7 +153,7 @@
     .hall-ornament { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 2rem; }
     .hall-oln { flex: 1; max-width: 100px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,160,60,0.45)); }
     .hall-oln-r { background: linear-gradient(90deg, rgba(200,160,60,0.45), transparent); }
-    .hall-gem { width: 7px; height: 7px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 14px rgba(212,175,55,0.7); flex-shrink: 0; }
+    .hall-gem { width: 7px; height: 7px; background: #D4AF37; transform: rotate(45deg); box-shadow: 0 0 14px rgba(212,175,55,0.7); flex-shrink: 0; }
     .hall-heading { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; color: #ffffff; letter-spacing: 4px; text-shadow: 0 0 50px rgba(212,175,55,0.2); margin-bottom: 1rem; }
     .hall-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: .95rem; color: rgba(240,230,200,0.3); letter-spacing: .5px; }
 
@@ -106,7 +165,7 @@
       border-bottom: .5px solid rgba(200,160,60,0.06); overflow: hidden;
     }
     .hall-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 50%, var(--glow, rgba(200,150,50,0.03)), transparent 80%); opacity: 0; transition: opacity .5s ease; }
-    .hall-card::after { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--color, #E8C84A); transition: height .4s ease; box-shadow: 0 0 10px var(--color, #E8C84A); }
+    .hall-card::after { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--color, #D4AF37); transition: height .4s ease; box-shadow: 0 0 10px var(--color, #D4AF37); }
     .hall-card:hover::before { opacity: 1; }
     .hall-card:hover::after { height: 60%; }
     .hall-card:hover { background: rgba(20,15,40,0.3); padding-left: 3.5rem; }
@@ -114,15 +173,15 @@
     .hall-card:hover .hall-card-num { color: var(--color, rgba(200,160,60,0.3)); text-shadow: 0 0 30px var(--glow-color, rgba(200,150,50,0.2)); transform: scale(1.1); }
     .hall-card-info { flex: 1; }
     .hall-card-name { font-family: 'Cinzel', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; color: #e8dfc7; letter-spacing: 3px; margin-bottom: .5rem; transition: all .5s ease; }
-    .hall-card:hover .hall-card-name { color: var(--color, #E8C84A); text-shadow: 0 0 20px var(--glow-color, rgba(200,150,50,0.3)); letter-spacing: 4px; }
+    .hall-card:hover .hall-card-name { color: var(--color, #D4AF37); text-shadow: 0 0 20px var(--glow-color, rgba(200,150,50,0.3)); letter-spacing: 4px; }
     .hall-card-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: .9rem; color: rgba(240,230,200,0.35); letter-spacing: .3px; line-height: 1.5; transition: color .5s ease; }
     .hall-card:hover .hall-card-desc { color: rgba(240,230,200,0.55); }
     .hall-card-icon { font-size: 2rem; opacity: 0.2; flex-shrink: 0; transition: all .5s ease; }
     .hall-card:hover .hall-card-icon { opacity: 0.6; transform: scale(1.2); }
     .hall-card-arrow { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 4px; color: rgba(200,160,60,0); text-transform: uppercase; flex-shrink: 0; transition: all .5s ease; white-space: nowrap; }
-    .hall-card:hover .hall-card-arrow { color: var(--color, #E8C84A); }
+    .hall-card:hover .hall-card-arrow { color: var(--color, #D4AF37); }
 
-    /* PROFESSIONAL BOOK SHOWCASE */
+    /* BOOK SHOWCASE */
     .book-showcase {
       position: relative;
       background: linear-gradient(180deg, #030108 0%, #020106 100%);
@@ -148,22 +207,22 @@
       flex: 1;
       max-width: 80px;
       height: .5px;
-      background: linear-gradient(90deg, transparent, rgba(232,200,74,0.4));
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4));
     }
     .book-h-oln-r {
-      background: linear-gradient(90deg, rgba(232,200,74,0.4), transparent);
+      background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
     }
     .book-h-gem {
       width: 6px;
       height: 6px;
-      background: #E8C84A;
+      background: #D4AF37;
       transform: rotate(45deg);
-      box-shadow: 0 0 12px rgba(232,200,74,0.6);
+      box-shadow: 0 0 12px rgba(212,175,55,0.6);
     }
     .book-showcase-title {
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: #E8C84A;
+      color: #D4AF37;
       letter-spacing: 4px;
       margin-bottom: 0.5rem;
     }
@@ -193,14 +252,14 @@
       border-radius: 8px 4px 4px 8px;
       padding: 2.5rem 2rem;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(232,200,74,0.15);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.15);
       position: relative;
       transform: rotateY(-5deg) rotateX(5deg);
       transition: transform 0.4s ease;
     }
     .book-cover-premium:hover .book-premium-cover {
       transform: rotateY(-3deg) rotateX(3deg) translateY(-8px);
-      box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(232,200,74,0.25);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.25);
     }
     .book-premium-cover::before {
       content: '';
@@ -209,7 +268,7 @@
       left: 12px;
       right: 12px;
       bottom: 12px;
-      border: 1px solid rgba(232,200,74,0.12);
+      border: 1px solid rgba(212,175,55,0.12);
       border-radius: 4px;
       pointer-events: none;
     }
@@ -219,7 +278,7 @@
       top: 5px;
       bottom: 5px;
       width: 12px;
-      background: linear-gradient(180deg, #c8922a, #8a6010, #c8922a);
+      background: linear-gradient(180deg, #D4AF37, #8a6010, #D4AF37);
       border-radius: 2px 0 0 2px;
     }
     .book-premium-pages {
@@ -235,13 +294,13 @@
     .book-premium-icon {
       font-size: 3.5rem;
       margin-bottom: 0.8rem;
-      filter: drop-shadow(0 0 12px rgba(232,200,74,0.3));
+      filter: drop-shadow(0 0 12px rgba(212,175,55,0.3));
     }
     .book-premium-title {
       font-family: 'Cinzel Decorative', serif;
       font-size: 1.3rem;
       font-weight: 700;
-      color: #E8C84A;
+      color: #D4AF37;
       letter-spacing: 3px;
       line-height: 1.3;
       margin-bottom: 0.5rem;
@@ -255,27 +314,27 @@
     .book-premium-divider {
       width: 40px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232,200,74,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
       margin: 0.8rem auto;
     }
     .book-premium-author {
       font-family: 'Cinzel', serif;
       font-size: 0.6rem;
       letter-spacing: 3px;
-      color: rgba(232,200,74,0.5);
+      color: rgba(212,175,55,0.5);
       text-transform: uppercase;
       margin-bottom: 0.8rem;
     }
     .book-premium-badge {
       display: inline-block;
-      background: rgba(232,200,74,0.08);
-      border: 1px solid rgba(232,200,74,0.2);
+      background: rgba(212,175,55,0.08);
+      border: 1px solid rgba(212,175,55,0.2);
       border-radius: 20px;
       padding: 0.2rem 0.8rem;
       font-family: 'Cinzel', serif;
       font-size: 0.45rem;
       letter-spacing: 2px;
-      color: #E8C84A;
+      color: #D4AF37;
     }
     
     .book-details {
@@ -289,7 +348,7 @@
     }
     .stars {
       font-size: 0.9rem;
-      color: #E8C84A;
+      color: #D4AF37;
       letter-spacing: 2px;
     }
     .rating-text {
@@ -312,8 +371,8 @@
       margin-bottom: 1.5rem;
     }
     .spec {
-      background: rgba(232,200,74,0.06);
-      border: 1px solid rgba(232,200,74,0.12);
+      background: rgba(212,175,55,0.06);
+      border: 1px solid rgba(212,175,55,0.12);
       border-radius: 30px;
       padding: 0.3rem 0.8rem;
       font-size: 0.7rem;
@@ -329,14 +388,14 @@
     .book-price {
       margin-bottom: 1.5rem;
       padding: 0.8rem 0;
-      border-top: 1px solid rgba(232,200,74,0.1);
-      border-bottom: 1px solid rgba(232,200,74,0.1);
+      border-top: 1px solid rgba(212,175,55,0.1);
+      border-bottom: 1px solid rgba(212,175,55,0.1);
     }
     .price-amount {
       font-family: 'Cinzel', serif;
       font-size: 1.8rem;
       font-weight: 700;
-      color: #E8C84A;
+      color: #D4AF37;
       display: block;
     }
     .price-note {
@@ -351,7 +410,7 @@
       margin-bottom: 1rem;
     }
     .btn-discover {
-      background: #E8C84A;
+      background: #D4AF37;
       color: #0a0500;
       padding: 12px 28px;
       border-radius: 40px;
@@ -364,14 +423,14 @@
       display: inline-block;
     }
     .btn-discover:hover {
-      background: #f0d860;
+      background: #e6c34c;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(232,200,74,0.3);
+      box-shadow: 0 8px 20px rgba(212,175,55,0.3);
     }
     .btn-preview {
       background: transparent;
-      border: 1px solid rgba(232,200,74,0.4);
-      color: #E8C84A;
+      border: 1px solid rgba(212,175,55,0.4);
+      color: #D4AF37;
       padding: 12px 28px;
       border-radius: 40px;
       font-family: 'Cinzel', serif;
@@ -382,8 +441,8 @@
       transition: all 0.3s;
     }
     .btn-preview:hover {
-      background: rgba(232,200,74,0.1);
-      border-color: #E8C84A;
+      background: rgba(212,175,55,0.1);
+      border-color: #D4AF37;
       transform: translateY(-2px);
     }
     .payment-methods {
@@ -404,6 +463,7 @@
       padding-top: 0.5rem;
     }
 
+    /* CONTACT SECTION WITH CORRECT LOGOS */
     .contact {
       position: relative;
       background: linear-gradient(180deg, #020106 0%, #030208 100%);
@@ -417,17 +477,22 @@
     .contact-oln { flex: 1; max-width: 60px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,160,60,0.3)); }
     .contact-oln-r { background: linear-gradient(90deg, rgba(200,160,60,0.3), transparent); }
     .contact-gem { width: 5px; height: 5px; background: rgba(200,160,60,0.5); transform: rotate(45deg); }
-    .contact-heading { font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 600; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; margin-bottom: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.2); }
+    .contact-heading { font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 600; letter-spacing: 4px; color: #D4AF37; text-transform: uppercase; margin-bottom: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.2); }
     .contact-links { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
     .contact-link {
       display: flex; flex-direction: column; align-items: center; gap: .8rem;
       text-decoration: none; color: rgba(240,230,200,0.4); transition: all .4s ease;
     }
-    .contact-link:hover { color: #E8C84A; transform: translateY(-4px); }
+    .contact-link:hover { color: #D4AF37; transform: translateY(-4px); }
     .contact-link-icon {
       width: 52px; height: 52px; border-radius: 50%;
       border: 1px solid rgba(200,160,60,0.2); display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; transition: all .4s ease; background: rgba(20,15,40,0.4);
+      transition: all .4s ease; background: rgba(20,15,40,0.4);
+    }
+    .contact-link-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: currentColor;
     }
     .contact-link:hover .contact-link-icon { border-color: rgba(200,160,60,0.5); box-shadow: 0 0 25px rgba(200,160,60,0.15); background: rgba(30,20,50,0.5); }
     .contact-link-label { font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 3px; text-transform: uppercase; }
@@ -440,6 +505,122 @@
     .hall-fg { width: 5px; height: 5px; background: rgba(200,160,60,0.4); transform: rotate(45deg); }
     .hall-footer-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .8rem; color: rgba(240,230,200,0.18); letter-spacing: .5px; }
 
+    /* NEW SECTIONS */
+    .extra-sections {
+      background: linear-gradient(180deg, #030108 0%, #020106 100%);
+      padding: 3rem 2rem;
+      border-top: 0.5px solid rgba(200,160,60,0.1);
+      border-bottom: 0.5px solid rgba(200,160,60,0.1);
+    }
+    .extra-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      justify-content: space-between;
+    }
+    .newsletter-box, .contact-form-box {
+      flex: 1;
+      min-width: 260px;
+      background: rgba(20,15,40,0.3);
+      backdrop-filter: blur(4px);
+      padding: 1.8rem;
+      border-radius: 8px;
+      border: 1px solid rgba(212,175,55,0.15);
+    }
+    .newsletter-box h3, .contact-form-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      color: #D4AF37;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .newsletter-form input, .contact-form input, .contact-form textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(212,175,55,0.3);
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      color: #f0ede0;
+      font-family: 'EB Garamond', serif;
+      border-radius: 4px;
+    }
+    .newsletter-form button, .contact-form button {
+      background: #D4AF37;
+      color: #0a0500;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.3s;
+      border-radius: 40px;
+    }
+    .newsletter-form button:hover, .contact-form button:hover {
+      background: #e6c34c;
+      transform: translateY(-2px);
+    }
+    .cookie-consent {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0a0718e6;
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      text-align: center;
+      z-index: 1000;
+      font-family: 'EB Garamond', serif;
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(212,175,55,0.3);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .cookie-consent.show {
+      transform: translateY(0);
+    }
+    .cookie-consent a {
+      color: #D4AF37;
+    }
+    .cookie-consent button {
+      background: #D4AF37;
+      border: none;
+      margin-left: 0.5rem;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+    }
+    .cookie-consent .decline {
+      background: transparent;
+      border: 1px solid rgba(212,175,55,0.5);
+      color: #D4AF37;
+    }
+    .footer-links {
+      text-align: center;
+      margin-top: 2rem;
+      padding-bottom: 2rem;
+      font-size: 0.7rem;
+      color: rgba(240,230,200,0.3);
+    }
+    .footer-links a {
+      color: #D4AF37;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 1rem;
+      padding-bottom: 2rem;
+      font-size: 0.65rem;
+      color: rgba(240,230,200,0.2);
+      border-top: 0.5px solid rgba(212,175,55,0.08);
+      padding-top: 1.5rem;
+    }
+
     @media (max-width: 860px) {
       .great-hall { padding: 2rem 1rem 3rem; }
       .hall-card { padding: 1rem 0.8rem; gap: 0.5rem; flex-wrap: wrap; }
@@ -450,7 +631,8 @@
       .hall-card-arrow { display: none; }
       .hall-card:hover { padding-left: 0.8rem; }
       .contact-links { gap: 1rem; flex-wrap: wrap; }
-      .contact-link-icon { width: 40px; height: 40px; font-size: 1rem; }
+      .contact-link-icon { width: 40px; height: 40px; }
+      .contact-link-icon svg { width: 20px; height: 20px; }
       .contact-link-label { font-size: 0.45rem; }
       .book-showcase-grid {
         grid-template-columns: 1fr;
@@ -475,6 +657,7 @@
       .book-cover-premium {
         max-width: 260px;
       }
+      .extra-grid { flex-direction: column; gap: 1.5rem; }
     }
   </style>
 </head>
@@ -536,32 +719,32 @@
         <p class="hall-sub">Six sections. One story. Choose where to begin.</p>
       </div>
       <div class="hall-cards">
-        <a href="about.html" class="hall-card" style="--color:#c8922a;--glow:rgba(200,146,42,0.05);--glow-color:rgba(200,146,42,0.25);">
+        <a href="about.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">I</span><span class="hall-card-icon">🜂</span>
           <div class="hall-card-info"><h3 class="hall-card-name">ABOUT THE HORSEMAN</h3><p class="hall-card-desc">Meet Praveen Kumar. Eleven years of horsemanship. One black stallion. A philosophy built on trust, not force.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
-        <a href="awakening.html" class="hall-card" style="--color:#c97a8a;--glow:rgba(200,122,138,0.05);--glow-color:rgba(200,122,138,0.25);">
+        <a href="awakening.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">II</span><span class="hall-card-icon">✦</span>
           <div class="hall-card-info"><h3 class="hall-card-name">Awakening</h3><p class="hall-card-desc">Eleven years. One black stallion. The moment of surrender that changed everything.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
-        <a href="chronicles.html" class="hall-card" style="--color:#b8860b;--glow:rgba(184,134,11,0.05);--glow-color:rgba(184,134,11,0.25);">
+        <a href="chronicles.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">III</span><span class="hall-card-icon">📖</span>
           <div class="hall-card-info"><h3 class="hall-card-name">Chronicles</h3><p class="hall-card-desc">Fifteen articles. Three paths. Foundational, Practical, and the Unique Edge.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
-        <a href="companions.html" class="hall-card" style="--color:#8b7a3a;--glow:rgba(139,122,58,0.05);--glow-color:rgba(139,122,58,0.25);">
+        <a href="companions.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">IV</span><span class="hall-card-icon">🐴</span>
           <div class="hall-card-info"><h3 class="hall-card-name">Companions</h3><p class="hall-card-desc">The horses who shaped me. Eight companions. Eight stories written in dust and silence.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
-        <a href="essays.html" class="hall-card" style="--color:#a080d0;--glow:rgba(160,128,208,0.05);--glow-color:rgba(160,128,208,0.25);">
+        <a href="essays.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">V</span><span class="hall-card-icon">🌙</span>
           <div class="hall-card-info"><h3 class="hall-card-name">Verses</h3><p class="hall-card-desc">Eleven essays from the heart. Where thoughts become poetry and silence finds its voice.</p></div>
           <span class="hall-card-arrow">Enter</span>
         </a>
-        <a href="questions.html" class="hall-card" style="--color:#c8963a;--glow:rgba(200,150,58,0.05);--glow-color:rgba(200,150,58,0.25);">
+        <a href="questions.html" class="hall-card" style="--color:#D4AF37;--glow:rgba(212,175,55,0.05);--glow-color:rgba(212,175,55,0.25);">
           <span class="hall-card-num">VI</span><span class="hall-card-icon">⬡</span>
           <div class="hall-card-info"><h3 class="hall-card-name">Questions</h3><p class="hall-card-desc">Straight from the arena. Twelve answers to the questions horsemen ask most.</p></div>
           <span class="hall-card-arrow">Enter</span>
@@ -642,23 +825,60 @@
     </div>
   </section>
 
+  <!-- Newsletter + Contact Form Section -->
+  <div class="extra-sections">
+    <div class="extra-grid">
+      <div class="newsletter-box">
+        <h3>✦ The Herd's Letter ✦</h3>
+        <p style="font-family: 'EB Garamond'; font-size: 0.85rem; margin-bottom: 1rem;">Weekly wisdom from the arena. No spam, only silence and hoofbeats.</p>
+        <form class="newsletter-form" action="https://formspree.io/f/YOUR_NEWSLETTER_ENDPOINT" method="POST">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
+          <button type="submit">Subscribe →</button>
+        </form>
+        <p style="font-size: 0.6rem; margin-top: 1rem; opacity: 0.5;">Unsubscribe anytime.</p>
+      </div>
+      <div class="contact-form-box">
+        <h3>✧ Send a Message ✧</h3>
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Your email" required>
+          <textarea name="message" rows="3" placeholder="Your message..." required></textarea>
+          <button type="submit">Send →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section with CORRECT SVG LOGOS -->
   <section class="contact">
     <div class="contact-inner">
       <div class="contact-ornament"><div class="contact-oln"></div><div class="contact-gem"></div><div class="contact-oln contact-oln-r"></div></div>
       <h3 class="contact-heading">Connect</h3>
       <div class="contact-links">
         <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener">
-          <div class="contact-link-icon">📸</div>
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </div>
           <span class="contact-link-label">Instagram</span>
           <span class="contact-link-value">@thehorsemans_journal</span>
         </a>
         <a href="#" class="contact-link" id="whatsappLink">
-          <div class="contact-link-icon">💬</div>
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zm0 18.23c-1.5 0-2.98-.4-4.26-1.17l-.31-.18-3.11.82.83-3.04-.2-.32c-.82-1.35-1.25-2.89-1.25-4.47 0-4.59 3.74-8.33 8.33-8.33 4.59 0 8.33 3.74 8.33 8.33 0 4.59-3.74 8.33-8.33 8.33zm4.56-6.24c-.25-.12-1.47-.73-1.7-.81-.23-.08-.4-.12-.57.12-.17.24-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.38-.78-1.89-.2-.5-.41-.42-.57-.43h-.48c-.17 0-.44.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28z"/>
+            </svg>
+          </div>
           <span class="contact-link-label">WhatsApp</span>
-          <span class="contact-link-value" id="whatsappNumber">[ADD YOUR WHATSAPP NUMBER]</span>
+          <span class="contact-link-value" id="whatsappNumber">[ADD YOUR NUMBER]</span>
         </a>
         <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
-          <div class="contact-link-icon">✉️</div>
+          <div class="contact-link-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
           <span class="contact-link-label">Email</span>
           <span class="contact-link-value">praveen@thehorsemansjournal.com</span>
         </a>
@@ -666,9 +886,29 @@
     </div>
   </section>
 
+  <!-- Footer with Copyright, Privacy Policy, Sitemap -->
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a> • 
+    <a href="sitemap.xml">Sitemap</a> • 
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="copyright">
+    © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
+  </div>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookieConsent" class="cookie-consent">
+    <span>🍪 This website uses cookies to improve your experience.</span>
+    <button id="acceptCookies">Accept</button>
+    <button id="declineCookies" class="decline">Decline</button>
+  </div>
+
   <script>
+    // Current year for copyright
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
     // ============================================================
-    // COMPLETE CANVAS ANIMATION - WITH REALISTIC MOON
+    // COMPLETE CANVAS ANIMATION - WITH LIGHTER SKY
     // ============================================================
     const canvas = document.getElementById('worldCanvas');
     const ctx = canvas.getContext('2d');
@@ -700,9 +940,7 @@
       ph: Math.random() * Math.PI * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.25
     }));
 
-    // Function to draw realistic moon with craters
     function drawRealisticMoon(x, y, radius, time) {
-      // Outer glow
       const glowGrad = ctx.createRadialGradient(x, y, radius * 0.5, x, y, radius * 1.8);
       glowGrad.addColorStop(0, 'rgba(255,240,200,0.15)');
       glowGrad.addColorStop(0.5, 'rgba(255,220,160,0.08)');
@@ -712,7 +950,6 @@
       ctx.arc(x, y, radius * 1.8, 0, Math.PI * 2);
       ctx.fill();
       
-      // Moon base
       const moonGrad = ctx.createRadialGradient(x - radius * 0.2, y - radius * 0.2, radius * 0.2, x, y, radius);
       moonGrad.addColorStop(0, 'rgba(255,245,220,0.95)');
       moonGrad.addColorStop(0.6, 'rgba(245,225,180,0.85)');
@@ -722,7 +959,6 @@
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fill();
       
-      // Craters
       ctx.shadowBlur = 0;
       const craters = [
         { cx: -radius * 0.35, cy: -radius * 0.25, r: radius * 0.12 },
@@ -739,27 +975,19 @@
         const craterX = x + crater.cx;
         const craterY = y + crater.cy;
         const craterR = crater.r;
-        
-        // Dark crater interior
         ctx.fillStyle = 'rgba(180,150,100,0.4)';
         ctx.beginPath();
         ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
         ctx.fill();
-        
-        // Crater rim highlight
         ctx.fillStyle = 'rgba(255,245,220,0.3)';
         ctx.beginPath();
         ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.4, craterR * 0.25, 0, 0, Math.PI * 2);
         ctx.fill();
-        
-        // Crater shadow
         ctx.fillStyle = 'rgba(100,80,50,0.25)';
         ctx.beginPath();
         ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.3, craterR * 0.2, 0, 0, Math.PI * 2);
         ctx.fill();
       });
-      
-      // Subtle moon texture (tiny dots)
       for (let i = 0; i < 80; i++) {
         const angle = Math.random() * Math.PI * 2;
         const rad = Math.random() * radius * 0.9;
@@ -845,12 +1073,12 @@
     ];
 
     const sections = [
-      { name:'About', color:'#c8922a', lx:0.16, ly:0.44, depth:0.6 },
-      { name:'Awakening', color:'#c97a8a', lx:0.34, ly:0.38, depth:0.7 },
-      { name:'Chronicles', color:'#b8860b', lx:0.52, ly:0.34, depth:0.8 },
-      { name:'Companions', color:'#8b7a3a', lx:0.68, ly:0.38, depth:0.65 },
-      { name:'Verses', color:'#a080d0', lx:0.82, ly:0.42, depth:0.55 },
-      { name:'Questions', color:'#c8963a', lx:0.90, ly:0.48, depth:0.5 },
+      { name:'About', color:'#D4AF37', lx:0.16, ly:0.44, depth:0.6 },
+      { name:'Awakening', color:'#D4AF37', lx:0.34, ly:0.38, depth:0.7 },
+      { name:'Chronicles', color:'#D4AF37', lx:0.52, ly:0.34, depth:0.8 },
+      { name:'Companions', color:'#D4AF37', lx:0.68, ly:0.38, depth:0.65 },
+      { name:'Verses', color:'#D4AF37', lx:0.82, ly:0.42, depth:0.55 },
+      { name:'Questions', color:'#D4AF37', lx:0.90, ly:0.48, depth:0.5 },
     ];
 
     const lanternsDiv = document.getElementById('lanterns');
@@ -859,7 +1087,7 @@
     sections.forEach((s, i) => {
       const el = document.createElement('div');
       el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
-      el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:28px;border-radius:12px 12px 6px 6px;background:radial-gradient(circle at 50% 40%,rgba(255,240,200,0.5),${s.color} 70%,rgba(0,0,0,0.6) 100%);box-shadow:0 0 18px ${s.color},0 0 40px ${s.color}44;animation:lanternBob ${3+i*0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s;"></div><div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:rgba(200,180,150,0.4);"></div><div style="position:absolute;top:34px;left:50%;transform:translateX(-50%);width:1px;height:16px;background:rgba(200,180,150,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:2px;color:#E8C84A;display:block;">${s.name}</span></div>`;
+      el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:28px;border-radius:12px 12px 6px 6px;background:radial-gradient(circle at 50% 40%,rgba(255,240,200,0.5),${s.color} 70%,rgba(0,0,0,0.6) 100%);box-shadow:0 0 18px ${s.color},0 0 40px ${s.color}44;animation:lanternBob ${3+i*0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s;"></div><div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:rgba(200,180,150,0.4);"></div><div style="position:absolute;top:34px;left:50%;transform:translateX(-50%);width:1px;height:16px;background:rgba(200,180,150,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;">${s.name}</span></div>`;
       const glowEl = el.querySelector('.lantern-glow');
       const labelEl = el.querySelector('.lantern-label');
       el.addEventListener('mouseenter', () => { glowEl.style.boxShadow = `0 0 35px ${s.color},0 0 70px ${s.color},0 0 100px ${s.color}66`; glowEl.style.filter = 'brightness(1.5)'; labelEl.style.opacity = '1'; });
@@ -871,9 +1099,15 @@
 
     function render() {
       ctx.clearRect(0, 0, W, H);
+      // LIGHTER SKY GRADIENT
       const sg = ctx.createLinearGradient(0, 0, 0, H);
-      sg.addColorStop(0, '#020108'); sg.addColorStop(0.3, '#04031a'); sg.addColorStop(0.55, '#070522'); sg.addColorStop(0.72, '#0a0824'); sg.addColorStop(1, '#0c0a1c');
+      sg.addColorStop(0, '#1a1628');
+      sg.addColorStop(0.3, '#201c30');
+      sg.addColorStop(0.55, '#2a2540');
+      sg.addColorStop(0.72, '#2f2a45');
+      sg.addColorStop(1, '#201e30');
       ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
+      
       const ax = W * 0.45, ay = H * 0.2;
       for (let b = 0; b < 5; b++) {
         const bandY = ay + b * 35, bandAlpha = 0.04 - b * 0.006;
@@ -884,7 +1118,6 @@
         ctx.lineTo(W, bandY + 60); ctx.lineTo(0, bandY + 60); ctx.closePath(); ctx.fill();
       }
       
-      // Draw realistic moon with craters
       const moonX = W * 0.78, moonY = H * 0.16;
       drawRealisticMoon(moonX, moonY, 38, t);
       
@@ -960,18 +1193,19 @@
       window.open('sample.pdf', '_blank');
     });
 
-    const upiText = document.getElementById('upiText');
-    if (upiText) {
-      upiText.addEventListener('click', () => {
-        const upiId = '[ADD YOUR UPI ID HERE]';
-        navigator.clipboard.writeText(upiId);
-        const originalText = upiText.innerHTML;
-        upiText.innerHTML = '✓ UPI ID Copied!';
-        setTimeout(() => {
-          upiText.innerHTML = originalText;
-        }, 2000);
-      });
+    // Cookie consent with Accept and Decline
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
+      cookieConsent.classList.add('show');
     }
+    document.getElementById('acceptCookies').addEventListener('click', () => {
+      localStorage.setItem('cookiesAccepted', 'true');
+      cookieConsent.classList.remove('show');
+    });
+    document.getElementById('declineCookies').addEventListener('click', () => {
+      localStorage.setItem('cookiesDeclined', 'true');
+      cookieConsent.classList.remove('show');
+    });
   </script>
 </body>
 </html>
