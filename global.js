@@ -1,6 +1,6 @@
 // The Horseman's Journal - Global JavaScript
 // Canvas animation, lantern navigation, and interactive elements
-// MODIFIED: Lantern colors are LESS BRIGHT, added 2 GUARDIAN HORSES
+// FIXED: Correct canvas ID 'heroCanvas' - horses will now appear!
 
 (function() {
     if (document.readyState === 'loading') {
@@ -10,8 +10,12 @@
     }
 
     function init() {
-        const canvas = document.getElementById('worldCanvas');
-        if (!canvas) return;
+        // FIXED: Changed from 'worldCanvas' to 'heroCanvas' to match your HTML
+        const canvas = document.getElementById('heroCanvas');
+        if (!canvas) {
+            console.error('heroCanvas not found!');
+            return;
+        }
         
         const ctx = canvas.getContext('2d');
         let W, H, mx = 0.5, my = 0.5, t = 0;
@@ -373,7 +377,7 @@
             ctx.restore();
         }
         
-        // THE HERD - WITH 2 NEW GUARDIAN HORSES (left and right)
+        // THE HERD - WITH 2 NEW GUARDIAN HORSES (left and right) + original small horses
         const herd = [
             // NEW GUARDIAN HORSE - LEFT SIDE (large, stands still)
             { x: 0.05, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
@@ -403,7 +407,7 @@
         
         const sections = sectionColors.map((c, i) => ({
             name: c.name,
-            color: `hsl(${c.baseHue}, 45%, 45%)`, // MUTED: 70% -> 45% saturation, 55% -> 45% lightness
+            color: `hsl(${c.baseHue}, 45%, 45%)`, // MUTED
             lx: [0.16, 0.34, 0.52, 0.68, 0.82, 0.90][i],
             ly: [0.44, 0.38, 0.34, 0.38, 0.42, 0.48][i],
             depth: [0.6, 0.7, 0.8, 0.65, 0.55, 0.5][i],
