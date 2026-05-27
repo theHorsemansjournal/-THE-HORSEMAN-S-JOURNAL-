@@ -1,5 +1,5 @@
 // The Horseman's Journal - Global JavaScript
-// DREAMLIME FLOATING PARADISE with Guardian Horses
+// Canvas animation, lantern navigation, and interactive elements
 
 (function() {
     if (document.readyState === 'loading') {
@@ -26,223 +26,168 @@
             my = e.clientY / H;
         });
         
-        // DREAMLIKE COLOR PALETTE - Ethereal, mystical
+        // ENHANCED COLOR PALETTE
         const skyColors = {
             top: '#0a0a2a',
             mid: '#1a1a4a',
-            bottom: '#2a1a3a',
-            horizon: '#3a2a4a'
+            bottom: '#3a2a3a',
+            horizon: '#5a3a2a'
         };
         
-        // Floating clouds particles
-        const clouds = Array.from({length: 35}, () => ({
-            x: Math.random(), y: Math.random() * 0.5,
-            size: Math.random() * 80 + 40,
-            opacity: Math.random() * 0.3 + 0.1,
-            speed: Math.random() * 0.002 + 0.001,
-            phase: Math.random() * Math.PI * 2
-        }));
-        
-        // Floating islands/ground fragments
-        const floatingIslands = [
-            { x: 0.15, y: 0.72, width: 0.28, height: 0.08, texture: '#2a1a2a' },
-            { x: 0.55, y: 0.74, width: 0.32, height: 0.09, texture: '#1a152a' },
-            { x: 0.82, y: 0.70, width: 0.22, height: 0.07, texture: '#251a30' },
-            { x: 0.35, y: 0.78, width: 0.20, height: 0.06, texture: '#1f1a2a' },
-            { x: 0.70, y: 0.79, width: 0.18, height: 0.06, texture: '#2a1f35' }
-        ];
-        
-        // DREAMLIKE STARS with pastel colors
-        const stars = Array.from({length: 500}, () => ({
-            x: Math.random(), y: Math.random() * 0.6,
-            r: Math.random() * 2.5 + 0.3,
+        // Generate stars with colors
+        const stars = Array.from({length: 400}, () => ({
+            x: Math.random(), y: Math.random() * 0.55,
+            r: Math.random() * 2 + 0.3,
             sp: Math.random() * 0.015 + 0.003,
             off: Math.random() * Math.PI * 2,
-            ba: Math.random() * 0.6 + 0.3,
-            color: `hsl(${Math.random() * 60 + 200}, ${Math.random() * 50 + 40}%, ${Math.random() * 30 + 60}%)`
+            ba: Math.random() * 0.7 + 0.2,
+            color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 50}%, ${Math.random() * 40 + 60}%)`
         }));
         
-        // Ethereal grass
-        const grass = Array.from({length: 600}, () => ({
+        // Enhanced grass with more color variation
+        const grass = Array.from({length: 700}, () => ({
             x: Math.random(), by: 0.68 + Math.random() * 0.32,
-            h: Math.random() * 35 + 12,
+            h: Math.random() * 45 + 15,
             sp: Math.random() * 0.02 + 0.005,
             off: Math.random() * Math.PI * 2,
-            color: `hsl(${Math.random() * 40 + 260}, ${Math.random() * 30 + 40}%, ${Math.random() * 20 + 35}%)`
+            color: Math.random() > 0.7 ? '#4a3a2a' : '#2a3a1a'
         }));
         
-        // Mystical floating particles
-        const mysticalParticles = Array.from({length: 150}, () => ({
-            x: Math.random(), y: Math.random(),
+        // Fireflies with warm glow
+        const flies = Array.from({length: 60}, () => ({
+            x: Math.random(), y: 0.68 + Math.random() * 0.28,
             r: Math.random() * 2 + 0.5,
-            sp: Math.random() * 0.02 + 0.005,
+            sp: Math.random() * 0.3 + 0.1,
             ph: Math.random() * Math.PI * 2,
-            dx: (Math.random() - 0.5) * 0.2,
-            dy: (Math.random() - 0.5) * 0.15,
-            color: `hsl(${Math.random() * 60 + 220}, ${Math.random() * 40 + 50}%, ${Math.random() * 30 + 55}%)`
+            dx: (Math.random() - 0.5) * 0.35,
+            dy: (Math.random() - 0.5) * 0.2,
+            color: `hsl(${Math.random() * 40 + 40}, 80%, ${Math.random() * 30 + 50}%)`
         }));
         
-        // Dreamlike drifting sparkles
-        const sparkles = Array.from({length: 200}, () => ({
-            x: Math.random(), y: Math.random(),
-            size: Math.random() * 1.5 + 0.3,
-            life: Math.random(),
-            speed: 0.003 + Math.random() * 0.007,
-            color: `hsl(${Math.random() * 40 + 260}, 70%, 65%)`
-        }));
+        // Aurora borealis bands
+        const auroraColors = ['#2a5a4a', '#4a2a6a', '#3a4a7a', '#5a3a4a'];
         
-        // Floating waterfall mist
-        const mistParticles = Array.from({length: 80}, () => ({
-            x: Math.random(), y: Math.random() * 0.5 + 0.4,
-            size: Math.random() * 3 + 1,
-            alpha: Math.random() * 0.2,
-            driftX: (Math.random() - 0.5) * 0.01,
-            driftY: Math.random() * 0.01 + 0.005
-        }));
-        
-        // DREAMLIT MOON - larger, more magical
-        function drawDreamMoon(x, y, radius) {
-            const pulse = Math.sin(t * 0.015) * 0.08 + 0.92;
+        // ENHANCED MOON with pulsating glow
+        function drawRealisticMoon(x, y, radius) {
+            const pulse = Math.sin(t * 0.02) * 0.1 + 0.9;
             
-            // Outer ethereal glow
-            const glowGrad = ctx.createRadialGradient(x, y, radius * 0.2, x, y, radius * 2.8);
-            glowGrad.addColorStop(0, `rgba(180,150,220,${0.2 * pulse})`);
-            glowGrad.addColorStop(0.3, `rgba(140,110,200,${0.1 * pulse})`);
-            glowGrad.addColorStop(0.6, `rgba(100,70,160,0.04)`);
-            glowGrad.addColorStop(1, 'rgba(60,40,100,0)');
+            // Outer glow - warm golden
+            const glowGrad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, radius * 2.2);
+            glowGrad.addColorStop(0, `rgba(255,220,120,${0.25 * pulse})`);
+            glowGrad.addColorStop(0.4, `rgba(255,180,80,${0.12 * pulse})`);
+            glowGrad.addColorStop(0.7, `rgba(200,120,40,0.05)`);
+            glowGrad.addColorStop(1, 'rgba(100,50,20,0)');
             ctx.fillStyle = glowGrad;
             ctx.beginPath();
-            ctx.arc(x, y, radius * 2.5, 0, Math.PI * 2);
+            ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
             ctx.fill();
             
-            // Moon base - lavender/purple dream hue
-            const moonGrad = ctx.createRadialGradient(x - radius * 0.3, y - radius * 0.3, radius * 0.15, x, y, radius);
-            moonGrad.addColorStop(0, `rgba(220,200,255,0.95)`);
-            moonGrad.addColorStop(0.4, `rgba(190,160,230,0.9)`);
-            moonGrad.addColorStop(0.7, `rgba(150,120,200,0.85)`);
-            moonGrad.addColorStop(1, `rgba(110,80,170,0.8)`);
+            // Moon base - warm amber/gold
+            const moonGrad = ctx.createRadialGradient(x - radius * 0.25, y - radius * 0.25, radius * 0.2, x, y, radius);
+            moonGrad.addColorStop(0, `rgba(255,235,180,0.98)`);
+            moonGrad.addColorStop(0.4, `rgba(245,210,140,0.9)`);
+            moonGrad.addColorStop(0.7, `rgba(220,170,100,0.85)`);
+            moonGrad.addColorStop(1, `rgba(180,130,70,0.8)`);
             ctx.fillStyle = moonGrad;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
             
-            // Ethereal craters
+            // Craters
             ctx.shadowBlur = 0;
             const craters = [
-                { cx: -radius * 0.35, cy: -radius * 0.3, r: radius * 0.12 },
-                { cx: radius * 0.4, cy: -radius * 0.2, r: radius * 0.1 },
-                { cx: radius * 0.2, cy: radius * 0.3, r: radius * 0.08 },
-                { cx: -radius * 0.25, cy: radius * 0.35, r: radius * 0.07 },
-                { cx: -radius * 0.5, cy: radius * 0.1, r: radius * 0.09 },
-                { cx: radius * 0.35, cy: radius * 0.1, r: radius * 0.06 }
+                { cx: -radius * 0.38, cy: -radius * 0.28, r: radius * 0.13, highlight: true },
+                { cx: radius * 0.42, cy: -radius * 0.18, r: radius * 0.11, highlight: false },
+                { cx: radius * 0.18, cy: radius * 0.32, r: radius * 0.09, highlight: true },
+                { cx: -radius * 0.22, cy: radius * 0.38, r: radius * 0.07, highlight: false },
+                { cx: -radius * 0.52, cy: radius * 0.12, r: radius * 0.08, highlight: true },
+                { cx: radius * 0.32, cy: radius * 0.12, r: radius * 0.06, highlight: false },
+                { cx: -radius * 0.12, cy: -radius * 0.48, r: radius * 0.06, highlight: true },
+                { cx: radius * 0.52, cy: -radius * 0.42, r: radius * 0.05, highlight: false },
             ];
             
             craters.forEach(crater => {
-                ctx.fillStyle = 'rgba(80,60,120,0.35)';
+                const craterX = x + crater.cx;
+                const craterY = y + crater.cy;
+                const craterR = crater.r;
+                
+                ctx.fillStyle = 'rgba(140,90,40,0.45)';
                 ctx.beginPath();
-                ctx.ellipse(x + crater.cx, y + crater.cy, crater.r, crater.r * 0.85, 0, 0, Math.PI * 2);
+                ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
                 ctx.fill();
                 
-                ctx.fillStyle = 'rgba(220,200,255,0.15)';
+                if (crater.highlight) {
+                    ctx.fillStyle = 'rgba(255,235,180,0.3)';
+                    ctx.beginPath();
+                    ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.35, craterR * 0.22, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                ctx.fillStyle = 'rgba(80,50,20,0.25)';
                 ctx.beginPath();
-                ctx.ellipse(x + crater.cx - crater.r * 0.2, y + crater.cy - crater.r * 0.15, crater.r * 0.3, crater.r * 0.2, 0, 0, Math.PI * 2);
+                ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.28, craterR * 0.18, 0, 0, Math.PI * 2);
                 ctx.fill();
             });
+            
+            // Moon texture
+            for (let i = 0; i < 100; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const rad = Math.random() * radius * 0.9;
+                const dx = Math.cos(angle) * rad;
+                const dy = Math.sin(angle) * rad;
+                ctx.fillStyle = `rgba(160,110,50,${Math.random() * 0.2})`;
+                ctx.beginPath();
+                ctx.arc(x + dx, y + dy, Math.random() * 2 + 0.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
         
-        // ENHANCED HORSE DRAWING with guardian size option
-        function drawHorse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false) {
+        // Horse drawing function (unchanged, keep your existing)
+        function horse(hx, hy, sc, coat, mane, pose, flip) {
             ctx.save();
             ctx.translate(hx, hy);
-            const actualScale = isGuardian ? sc * 2.2 : sc;
-            if (flip) ctx.scale(-actualScale, actualScale);
-            else ctx.scale(actualScale, actualScale);
+            if (flip) ctx.scale(-sc, sc);
+            else ctx.scale(sc, sc);
             
             const br = Math.sin(t * 0.018 + hx * 0.01) * 1.5;
-            
-            // Guardian horses have ethereal glow
-            if (isGuardian) {
-                ctx.shadowColor = 'rgba(155,89,182,0.5)';
-                ctx.shadowBlur = 15;
-            }
             
             if (pose === 'sentinel') {
                 ctx.fillStyle = coat;
                 [-15, -3, 7, 17].forEach((lx, i) => ctx.fillRect(lx, 14, 4, 24));
                 ctx.beginPath();
-                ctx.ellipse(0, 4, 32, 15, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 4, 28, 13, 0, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.moveTo(20, 0);
-                ctx.quadraticCurveTo(30, -30, 26, -44);
-                ctx.quadraticCurveTo(20, -30, 10, -2);
+                ctx.moveTo(18, 0);
+                ctx.quadraticCurveTo(28, -28, 24, -40);
+                ctx.quadraticCurveTo(18, -28, 8, -2);
                 ctx.closePath();
                 ctx.fill();
                 ctx.beginPath();
-                ctx.ellipse(26, -46, 9, 6, -0.1, 0, Math.PI * 2);
+                ctx.ellipse(24, -42, 8, 5, -0.1, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.moveTo(26, -50);
-                ctx.lineTo(24, -58);
-                ctx.lineTo(22, -50);
+                ctx.moveTo(24, -46);
+                ctx.lineTo(22, -54);
+                ctx.lineTo(20, -46);
                 ctx.fill();
                 ctx.beginPath();
-                ctx.moveTo(28, -50);
-                ctx.lineTo(30, -58);
-                ctx.lineTo(28, -50);
+                ctx.moveTo(26, -46);
+                ctx.lineTo(28, -54);
+                ctx.lineTo(26, -46);
                 ctx.fill();
                 ctx.strokeStyle = mane;
-                ctx.lineWidth = 2.5;
+                ctx.lineWidth = 2.2;
                 ctx.beginPath();
-                ctx.moveTo(20, -4);
-                ctx.quadraticCurveTo(24, -20, 28, -35);
+                ctx.moveTo(18, -4);
+                ctx.quadraticCurveTo(22, -18, 26, -32);
                 ctx.stroke();
-                const ts = Math.sin(t * 0.025) * 2.5;
+                const ts = Math.sin(t * 0.025) * 2;
                 ctx.strokeStyle = mane;
-                ctx.lineWidth = 1.8;
+                ctx.lineWidth = 1.6;
                 ctx.beginPath();
-                ctx.moveTo(-28, 2);
-                ctx.quadraticCurveTo(-36, -6, -34 + ts, -16);
-                ctx.stroke();
-            } else if (pose === 'guardian') {
-                // Guardian pose - majestic standing tall
-                ctx.fillStyle = coat;
-                [-18, -4, 8, 22].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 30));
-                ctx.beginPath();
-                ctx.ellipse(0, 3, 36, 17, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(24, -1);
-                ctx.quadraticCurveTo(36, -34, 30, -50);
-                ctx.quadraticCurveTo(22, -34, 12, -4);
-                ctx.closePath();
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(30, -52, 10, 7, -0.1, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(30, -57);
-                ctx.lineTo(27, -66);
-                ctx.lineTo(24, -57);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(32, -57);
-                ctx.lineTo(35, -66);
-                ctx.lineTo(32, -57);
-                ctx.fill();
-                // Majestic mane flowing
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 3.5;
-                ctx.beginPath();
-                ctx.moveTo(24, -5);
-                ctx.quadraticCurveTo(30, -24, 34, -42);
-                ctx.stroke();
-                const ts = Math.sin(t * 0.02) * 3;
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 2.5;
-                ctx.beginPath();
-                ctx.moveTo(-34, 1);
-                ctx.quadraticCurveTo(-44, -8, -40 + ts, -20);
+                ctx.moveTo(-26, 2);
+                ctx.quadraticCurveTo(-34, -5, -32 + ts, -14);
                 ctx.stroke();
             } else if (pose === 'foreground') {
                 ctx.fillStyle = coat;
@@ -281,6 +226,39 @@
                 ctx.beginPath();
                 ctx.moveTo(-32, 1);
                 ctx.quadraticCurveTo(-42, -6, -38 + ts, -16);
+                ctx.stroke();
+            } else if (pose === 'nuzzle') {
+                ctx.fillStyle = coat;
+                [-14, -2, 8, 18].forEach((lx, i) => ctx.fillRect(lx, 16 + (i % 2 ? br : -br), 4, 20));
+                ctx.beginPath();
+                ctx.ellipse(0, 5, 26, 12, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(16, 1);
+                ctx.quadraticCurveTo(28, -14, 26, -24);
+                ctx.quadraticCurveTo(18, -18, 6, 3);
+                ctx.closePath();
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(26, -26, 7, 5, -0.15, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(26, -30);
+                ctx.lineTo(25, -37);
+                ctx.lineTo(23, -30);
+                ctx.fill();
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(16, -2);
+                ctx.quadraticCurveTo(20, -10, 24, -20);
+                ctx.stroke();
+                const ts = Math.sin(t * 0.02) * 2;
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 1.4;
+                ctx.beginPath();
+                ctx.moveTo(-24, 3);
+                ctx.quadraticCurveTo(-30, -4, -28 + ts, -12);
                 ctx.stroke();
             } else {
                 ctx.fillStyle = coat;
@@ -321,44 +299,37 @@
                 ctx.quadraticCurveTo(-34, -3, -32 + ts, -12);
                 ctx.stroke();
             }
-            
-            ctx.shadowBlur = 0;
             ctx.restore();
         }
         
-        // THE HERD - with 2 GUARDIAN HORSES on left and right (large)
         const herd = [
-            // Left Guardian (large, majestic)
-            { x: 0.08, y: 0.75, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: false, isGuardian: true },
-            // Right Guardian (large, majestic)
-            { x: 0.92, y: 0.75, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: true, isGuardian: true },
-            // Inner horses (normal size)
-            { x: 0.18, y: 0.82, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.30, y: 0.80, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'sentinel', flip: true, isGuardian: false },
-            { x: 0.42, y: 0.83, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.52, y: 0.81, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false, isGuardian: false },
-            { x: 0.60, y: 0.83, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true, isGuardian: false },
-            { x: 0.72, y: 0.81, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'sentinel', flip: false, isGuardian: false },
-            { x: 0.84, y: 0.82, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false, isGuardian: false },
-            // Foreground horse
-            { x: 0.50, y: 0.92, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: false, isGuardian: false },
+            { x: 0.06, y: 0.83, s: 0.88, coat: '#0d0a0e', mane: '#1a1418', pose: 'sentinel', flip: false },
+            { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false },
+            { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true },
+            { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false },
+            { x: 0.50, y: 0.83, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false },
+            { x: 0.56, y: 0.84, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true },
+            { x: 0.68, y: 0.83, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'graze', flip: false },
+            { x: 0.82, y: 0.85, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false },
+            { x: 0.90, y: 0.78, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: true },
+            { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false },
         ];
         
-        // LANTERNS with mystical colors
+        // LANTERNS WITH COLOR SHIFT - each section gets unique shifting color
         const sectionColors = [
-            { name: 'About', baseHue: 280, shiftSpeed: 0.25 },
-            { name: 'Awakening', baseHue: 260, shiftSpeed: 0.3 },
-            { name: 'Chronicles', baseHue: 290, shiftSpeed: 0.28 },
-            { name: 'Companions', baseHue: 270, shiftSpeed: 0.22 },
-            { name: 'Verses', baseHue: 300, shiftSpeed: 0.32 },
-            { name: 'Questions', baseHue: 285, shiftSpeed: 0.25 }
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },    // Gold/amber
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 }, // Rose/red
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 }, // Warm orange
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 }, // Deep blue
+            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },  // Purple
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }   // Amber
         ];
         
         const sections = sectionColors.map((c, i) => ({
             name: c.name,
-            color: `hsl(${c.baseHue}, 45%, 50%)`,
+            color: `hsl(${c.baseHue}, 70%, 55%)`,
             lx: [0.16, 0.34, 0.52, 0.68, 0.82, 0.90][i],
-            ly: [0.38, 0.34, 0.30, 0.34, 0.38, 0.42][i],
+            ly: [0.44, 0.38, 0.34, 0.38, 0.42, 0.48][i],
             depth: [0.6, 0.7, 0.8, 0.65, 0.55, 0.5][i],
             baseHue: c.baseHue,
             shiftSpeed: c.shiftSpeed
@@ -366,7 +337,7 @@
         
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
         
-        // Create lantern elements
+        // Create lantern elements with dynamic color updates
         const lanternsDiv = document.getElementById('lanterns');
         const lanternEls = [];
         
@@ -374,22 +345,22 @@
             sections.forEach((s, i) => {
                 const el = document.createElement('div');
                 el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,220,0.5), hsla(${s.baseHue}, 45%, 40%, 0.7) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 50%, 35%, 0.5),0 0 30px hsla(${s.baseHue}, 45%, 30%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(180,160,200,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(180,160,200,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#A569BD;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
+                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(255,240,200,0.7), ${s.color} 60%, rgba(0,0,0,0.5) 100%);box-shadow:0 0 20px ${s.color},0 0 45px ${s.color}66;animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(200,180,150,0.5);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(200,180,150,0.25);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 8px rgba(0,0,0,0.5);">${s.name}</span></div>`;
                 
                 const glowEl = el.querySelector('.lantern-glow');
                 const labelEl = el.querySelector('.lantern-label');
                 
                 el.addEventListener('mouseenter', () => {
                     if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 25px hsla(${s.baseHue}, 50%, 45%, 0.6),0 0 45px hsla(${s.baseHue}, 45%, 40%, 0.4)`;
-                        glowEl.style.filter = 'brightness(1.2)';
+                        glowEl.style.boxShadow = `0 0 40px ${s.color},0 0 80px ${s.color},0 0 120px ${s.color}88`;
+                        glowEl.style.filter = 'brightness(1.6)';
                     }
                     if (labelEl) labelEl.style.opacity = '1';
                 });
                 
                 el.addEventListener('mouseleave', () => {
                     if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 15px hsla(${s.baseHue}, 45%, 35%, 0.5),0 0 30px hsla(${s.baseHue}, 40%, 30%, 0.3)`;
+                        glowEl.style.boxShadow = `0 0 20px ${s.color},0 0 45px ${s.color}66`;
                         glowEl.style.filter = 'brightness(1)';
                     }
                     if (labelEl) labelEl.style.opacity = '0';
@@ -404,178 +375,193 @@
             });
         }
         
-        // Draw floating ground/clouds beneath
-        function drawFloatingGround() {
-            // Floating islands
-            floatingIslands.forEach(island => {
-                const islandX = island.x * W;
-                const islandY = island.y * H;
-                const islandW = island.width * W;
-                const islandH = island.height * H;
-                
-                // Island base
-                ctx.fillStyle = island.texture;
-                ctx.beginPath();
-                ctx.ellipse(islandX + islandW/2, islandY + islandH/2, islandW/2, islandH/2, 0, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Island edge glow
-                ctx.fillStyle = 'rgba(100,70,140,0.15)';
-                ctx.beginPath();
-                ctx.ellipse(islandX + islandW/2, islandY + islandH/2 - 3, islandW/2 - 5, islandH/2 - 3, 0, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            
-            // Dream clouds beneath the floating islands
-            clouds.forEach(cloud => {
-                const cloudX = cloud.x * W;
-                const cloudY = cloud.y * H + H * 0.65;
-                const drift = Math.sin(t * cloud.speed + cloud.phase) * 5;
-                
-                ctx.fillStyle = `rgba(180,160,210,${cloud.opacity * 0.4})`;
-                ctx.beginPath();
-                ctx.ellipse(cloudX + drift, cloudY, cloud.size, cloud.size * 0.4, 0, 0, Math.PI * 2);
-                ctx.ellipse(cloudX + drift - cloud.size * 0.4, cloudY - 5, cloud.size * 0.7, cloud.size * 0.35, 0, 0, Math.PI * 2);
-                ctx.ellipse(cloudX + drift + cloud.size * 0.4, cloudY - 5, cloud.size * 0.7, cloud.size * 0.35, 0, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-        
+        // Main render function - ENHANCED with aurora and rich colors
         function render() {
             ctx.clearRect(0, 0, W, H);
             
-            // Dreamy sky gradient
+            // DYNAMIC SKY GRADIENT - rich colors that shift slightly
+            const skyPulse = Math.sin(t * 0.01) * 0.05;
             const sg = ctx.createLinearGradient(0, 0, 0, H);
             sg.addColorStop(0, `#0a0a2a`);
             sg.addColorStop(0.25, `#151540`);
-            sg.addColorStop(0.5, `#1a1545`);
-            sg.addColorStop(0.75, `#251a45`);
-            sg.addColorStop(1, `#2a1a4a`);
+            sg.addColorStop(0.5, `#2a1a3a`);
+            sg.addColorStop(0.75, `#3a2a3a`);
+            sg.addColorStop(1, `#4a352a`);
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
-            // Distant nebula/aurora effect
-            for (let b = 0; b < 5; b++) {
-                const bandY = H * 0.1 + b * 50;
-                const bandGrad = ctx.createLinearGradient(0, bandY, 0, bandY + 80);
-                bandGrad.addColorStop(0, `rgba(100,70,150,${0.03 - b * 0.005})`);
-                bandGrad.addColorStop(0.5, `rgba(140,100,180,${0.05 - b * 0.008})`);
+            // AURORA BOREALIS - colored bands in the sky
+            const auroraY = H * 0.15;
+            for (let b = 0; b < 6; b++) {
+                const bandY = auroraY + b * 38;
+                const bandAlpha = 0.06 - b * 0.008;
+                const bandColor = auroraColors[b % auroraColors.length];
+                const bandGrad = ctx.createLinearGradient(0, bandY, 0, bandY + 70);
+                bandGrad.addColorStop(0, `rgba(80,140,120,${bandAlpha * 0.5})`);
+                bandGrad.addColorStop(0.3, `rgba(${b % 2 === 0 ? '140,100,180' : '100,140,180'},${bandAlpha})`);
+                bandGrad.addColorStop(0.6, `rgba(180,120,160,${bandAlpha * 0.7})`);
                 bandGrad.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = bandGrad;
-                ctx.fillRect(0, bandY - 20, W, 100);
+                ctx.beginPath();
+                ctx.moveTo(0, bandY - 15);
+                for (let i = 0; i <= 100; i++) {
+                    const nx = i / 100;
+                    const wave1 = Math.sin(nx * 3.5 + t * 0.008 + b * 1.2) * 28;
+                    const wave2 = Math.sin(nx * 8 + t * 0.012 + b * 2) * 15;
+                    ctx.lineTo(nx * W, bandY + wave1 + wave2);
+                }
+                ctx.lineTo(W, bandY + 70);
+                ctx.lineTo(0, bandY + 70);
+                ctx.closePath();
+                ctx.fill();
             }
             
-            // Draw moon
-            const moonX = W * 0.82, moonY = H * 0.12;
-            drawDreamMoon(moonX, moonY, 48);
+            // WARM SUNSET GLOW at horizon
+            const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
+            horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
+            horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
+            horizonGrad.addColorStop(1, 'rgba(160,80,40,0.25)');
+            ctx.fillStyle = horizonGrad;
+            ctx.fillRect(0, H * 0.55, W, H * 0.25);
+            
+            // Draw realistic moon
+            const moonX = W * 0.78, moonY = H * 0.16;
+            drawRealisticMoon(moonX, moonY, 42);
             ctx.shadowBlur = 0;
             
-            // Stars
+            // COLORED TWINKLING STARS
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
-                ctx.globalAlpha = s.ba * tw * 0.7;
-                ctx.shadowColor = `rgba(200,180,255,${0.2 * tw})`;
+                ctx.globalAlpha = s.ba * tw * 0.8;
+                ctx.shadowColor = `rgba(255,200,100,${0.3 * tw})`;
                 ctx.shadowBlur = s.r * 1.5;
                 ctx.beginPath();
-                ctx.arc(s.x * W, s.y * H, s.r * tw * 0.5, 0, Math.PI * 2);
+                ctx.arc(s.x * W, s.y * H, s.r * tw * 0.6, 0, Math.PI * 2);
                 ctx.fill();
             });
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Draw floating ground (the paradise ground)
-            drawFloatingGround();
+            // Distant ground with warm undertone
+            ctx.fillStyle = 'rgba(10,8,20,0.75)';
+            ctx.beginPath();
+            ctx.moveTo(0, H * 0.66);
+            for (let i = 0; i <= 70; i++) {
+                const nx = i / 70;
+                ctx.lineTo(nx * W, H * 0.62 - Math.sin(nx * 3.8) * H * 0.022 - Math.sin(nx * 8) * H * 0.015);
+            }
+            ctx.lineTo(W, H * 0.66);
+            ctx.closePath();
+            ctx.fill();
             
-            // Draw mist particles
-            mistParticles.forEach(m => {
-                m.x += m.driftX;
-                m.y += m.driftY;
-                if (m.x < 0) m.x = 1;
-                if (m.x > 1) m.x = 0;
-                if (m.y > 0.7) m.y = 0.4;
-                
-                ctx.fillStyle = `rgba(180,160,220,${m.alpha * 0.3})`;
+            // Ground layers with richer colors
+            const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
+            groundColors.forEach((col, i) => {
+                ctx.fillStyle = col;
                 ctx.beginPath();
-                ctx.arc(m.x * W, m.y * H, m.size, 0, Math.PI * 2);
+                ctx.moveTo(0, H);
+                for (let j = 0; j <= 90; j++) {
+                    const nx = j / 90;
+                    const h = H * (0.72 + i * 0.055 - Math.sin(nx * (2.5 + i * 1.3) + i) * 0.045 - Math.sin(nx * (6 + i * 2.5)) * 0.025);
+                    ctx.lineTo(nx * W, h);
+                }
+                ctx.lineTo(W, H);
+                ctx.closePath();
                 ctx.fill();
             });
             
-            // Ethereal grass on floating islands
+            // Lake with warm reflection
+            const lakeY = H * 0.73;
+            const lakeGrad = ctx.createLinearGradient(0, lakeY, 0, lakeY + H * 0.05);
+            lakeGrad.addColorStop(0, 'rgba(30,25,50,0.45)');
+            lakeGrad.addColorStop(0.5, 'rgba(25,20,45,0.25)');
+            lakeGrad.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = lakeGrad;
+            ctx.fillRect(0, lakeY, W, H * 0.05);
+            
+            for (let i = 0; i < 60; i++) {
+                ctx.fillStyle = `rgba(255,220,150,${0.05 * (0.5 + 0.5 * Math.sin(t * 0.03 + i))})`;
+                ctx.beginPath();
+                ctx.arc((Math.sin(i * 131.7) * 0.5 + 0.5) * W, lakeY + 3 + Math.random() * H * 0.025, 0.6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            // Mist and atmosphere
+            const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
+            mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
+            mistGrad.addColorStop(0.4, 'rgba(20,18,35,0.1)');
+            mistGrad.addColorStop(0.7, 'rgba(30,25,45,0.2)');
+            mistGrad.addColorStop(1, 'rgba(20,15,35,0.35)');
+            ctx.fillStyle = mistGrad;
+            ctx.fillRect(0, H * 0.75, W, H * 0.25);
+            
+            // Grass with autumn/warm colors
             grass.forEach(g => {
-                const sw = Math.sin(t * g.sp + g.off) * 7;
+                const sw = Math.sin(t * g.sp + g.off) * 9;
                 ctx.strokeStyle = g.color;
                 ctx.lineWidth = 0.6;
                 ctx.beginPath();
-                ctx.moveTo(g.x * W, g.by * H - 15);
-                ctx.quadraticCurveTo(g.x * W + sw * 0.4, g.by * H - 25 - g.h * 0.4, g.x * W + sw, g.by * H - 25 - g.h);
+                ctx.moveTo(g.x * W, g.by * H);
+                ctx.quadraticCurveTo(g.x * W + sw * 0.45, g.by * H - g.h * 0.5, g.x * W + sw, g.by * H - g.h);
                 ctx.stroke();
             });
             
-            // Draw all horses (including guardians)
-            herd.forEach(h => {
-                drawHorse(h.x * W + (mx - 0.5) * 25 * h.s, 
-                         h.y * H + (my - 0.5) * 10 * h.s, 
-                         h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
+            // Background herd
+            herd.filter(h => h.pose !== 'foreground').forEach(h => {
+                horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip);
             });
             
-            // Sparkles
-            sparkles.forEach(s => {
-                s.life += s.speed;
-                if (s.life > 1) {
-                    s.life = 0;
-                    s.x = Math.random();
-                    s.y = Math.random() * 0.5 + 0.3;
-                }
-                ctx.fillStyle = s.color;
-                ctx.globalAlpha = (1 - s.life) * 0.5;
+            // Fireflies with warm glow
+            flies.forEach(f => {
+                f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
+                f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
+                f.x = ((f.x % 1) + 1) % 1;
+                f.y = Math.max(0.66, Math.min(0.96, f.y));
+                const a = Math.abs(Math.sin(t * f.sp + f.ph)) * 0.6;
+                ctx.fillStyle = f.color;
+                ctx.globalAlpha = a;
+                ctx.shadowColor = 'rgba(255,200,100,0.6)';
+                ctx.shadowBlur = 8;
                 ctx.beginPath();
-                ctx.arc(s.x * W, s.y * H, s.size * (1 - s.life), 0, Math.PI * 2);
+                ctx.arc(f.x * W, f.y * H, f.r, 0, Math.PI * 2);
                 ctx.fill();
             });
             ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
             
-            // Mystical floating particles
-            mysticalParticles.forEach(p => {
-                p.x += p.dx * 0.005;
-                p.y += p.dy * 0.005;
-                if (p.x < 0) p.x = 1;
-                if (p.x > 1) p.x = 0;
-                if (p.y < 0) p.y = 1;
-                if (p.y > 1) p.y = 0;
-                
-                const pulse = 0.5 + Math.sin(t * p.sp + p.ph) * 0.3;
-                ctx.fillStyle = p.color;
-                ctx.globalAlpha = 0.3 * pulse;
-                ctx.beginPath();
-                ctx.arc(p.x * W, p.y * H, p.r * pulse, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            ctx.globalAlpha = 1;
-            
-            // Light pools under lanterns
+            // Light pools under lanterns with color matching
             sections.forEach((s, idx) => {
                 const lx = s.lx * W + (mx - 0.5) * 20 * s.depth;
                 const ly = s.ly * H + (my - 0.5) * 10 * s.depth;
-                const poolGrad = ctx.createRadialGradient(lx, ly + 25, 5, lx, ly + 25, 70);
-                poolGrad.addColorStop(0, `hsla(${s.baseHue}, 40%, 40%, 0.08)`);
+                const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
+                const poolColor = `hsla(${currentHue}, 70%, 55%, 0.12)`;
+                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
+                poolGrad.addColorStop(0, poolColor);
                 poolGrad.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = poolGrad;
                 ctx.beginPath();
-                ctx.arc(lx, ly + 25, 70, 0, Math.PI * 2);
+                ctx.arc(lx, ly + 35, 95, 0, Math.PI * 2);
                 ctx.fill();
             });
             
-            // Update lantern colors
+            // Foreground horses
+            herd.filter(h => h.pose === 'foreground').forEach(h => {
+                horse(h.x * W + (mx - 0.5) * 50, h.y * H + (my - 0.5) * 18, h.s, h.coat, h.mane, h.pose, h.flip);
+            });
+            
+            // Update lantern colors dynamically
             lanternEls.forEach(({ glowEl, s }, idx) => {
                 if (glowEl) {
-                    const currentHue = (s.baseHue + t * 0.4 * s.shiftSpeed) % 360;
-                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,220,0.5), hsla(${currentHue}, 45%, 38%, 0.7) 60%, rgba(0,0,0,0.65) 100%)`;
-                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 45%, 35%, 0.5), 0 0 30px hsla(${currentHue}, 40%, 30%, 0.35)`;
+                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
+                    const newColor = `hsla(${currentHue}, 75%, 55%, 0.9)`;
+                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(255,240,200,0.8), hsla(${currentHue}, 75%, 55%, 0.85) 60%, rgba(0,0,0,0.5) 100%)`;
+                    glowEl.style.boxShadow = `0 0 20px hsla(${currentHue}, 75%, 55%, 0.7), 0 0 45px hsla(${currentHue}, 75%, 55%, 0.4)`;
                 }
             });
         }
         
+        // Update lantern positions
         function updateLanterns() {
             lanternEls.forEach(({ el, s }) => {
                 const px = (mx - 0.5) * 25 * s.depth;
@@ -615,7 +601,7 @@
             
             const idle = t - lastMove > 200;
             if (titleOverlay) titleOverlay.style.opacity = idle ? '0.3' : '0.95';
-            if (hintOverlay) hintOverlay.style.opacity = idle ? '0' : '0.6';
+            if (hintOverlay) hintOverlay.style.opacity = idle ? '0' : '0.7';
             
             requestAnimationFrame(animate);
         }
