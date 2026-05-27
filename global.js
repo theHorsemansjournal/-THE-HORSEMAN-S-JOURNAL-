@@ -39,14 +39,12 @@
             ctx.scale(size, size);
             ctx.globalAlpha = opacity;
             
-            // Golden/bronze color for the logo
             ctx.fillStyle = '#D4AF37';
             ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
             ctx.shadowBlur = 15;
             
-            // === HORSE BODY ===
+            // Horse body
             ctx.beginPath();
-            // Main body
             ctx.ellipse(0, 0, 28, 14, 0, 0, Math.PI * 2);
             ctx.fill();
             
@@ -68,23 +66,20 @@
             ctx.ellipse(32, -44, 6, 5, 0, 0, Math.PI * 2);
             ctx.fill();
             
-            // Ear
+            // Ears
             ctx.beginPath();
             ctx.moveTo(22, -54);
             ctx.lineTo(19, -64);
             ctx.lineTo(16, -54);
             ctx.fill();
-            
             ctx.beginPath();
             ctx.moveTo(28, -54);
             ctx.lineTo(30, -64);
             ctx.lineTo(26, -54);
             ctx.fill();
             
-            // === RIDER SILHOUETTE ===
+            // Rider
             ctx.fillStyle = '#B8860B';
-            
-            // Rider body (torso leaning forward)
             ctx.beginPath();
             ctx.ellipse(12, -28, 6, 10, -0.2, 0, Math.PI * 2);
             ctx.fill();
@@ -94,7 +89,7 @@
             ctx.arc(10, -42, 5, 0, Math.PI * 2);
             ctx.fill();
             
-            // Rider hat (wide brim)
+            // Hat
             ctx.fillStyle = '#8B6914';
             ctx.beginPath();
             ctx.ellipse(10, -47, 8, 3, 0, 0, Math.PI * 2);
@@ -103,7 +98,7 @@
             ctx.ellipse(10, -45, 5, 4, 0, 0, Math.PI * 2);
             ctx.fill();
             
-            // Rider arm reaching forward (holding reins)
+            // Arm
             ctx.fillStyle = '#B8860B';
             ctx.beginPath();
             ctx.moveTo(16, -32);
@@ -112,14 +107,13 @@
             ctx.closePath();
             ctx.fill();
             
-            // Rider leg
+            // Legs
             ctx.beginPath();
             ctx.moveTo(10, -22);
             ctx.lineTo(14, -12);
             ctx.lineTo(8, -10);
             ctx.closePath();
             ctx.fill();
-            
             ctx.beginPath();
             ctx.moveTo(6, -24);
             ctx.lineTo(2, -14);
@@ -127,12 +121,10 @@
             ctx.closePath();
             ctx.fill();
             
-            // === HORSE LEGS ===
+            // Horse legs
             ctx.fillStyle = '#D4AF37';
-            // Front legs
             ctx.fillRect(16, 8, 5, 18);
             ctx.fillRect(24, 6, 5, 18);
-            // Back legs
             ctx.fillRect(-18, 6, 5, 18);
             ctx.fillRect(-26, 8, 5, 18);
             
@@ -143,7 +135,7 @@
             ctx.fillRect(-18, 22, 5, 4);
             ctx.fillRect(-26, 24, 5, 4);
             
-            // === TAIL ===
+            // Tail
             ctx.fillStyle = '#B8860B';
             ctx.beginPath();
             ctx.moveTo(-30, -4);
@@ -151,13 +143,12 @@
             ctx.quadraticCurveTo(-34, 8, -28, 2);
             ctx.fill();
             
-            // === MANE ===
-            ctx.fillStyle = '#B8860B';
+            // Mane
             for (let i = 0; i < 6; i++) {
                 ctx.fillRect(14 + i * 2, -18 - i * 2, 3, 6);
             }
             
-            // === REINS ===
+            // Reins
             ctx.beginPath();
             ctx.moveTo(28, -40);
             ctx.lineTo(22, -36);
@@ -166,7 +157,7 @@
             ctx.lineWidth = 1.2;
             ctx.stroke();
             
-            // === SPARKLE EFFECTS around logo ===
+            // Sparkle effects
             ctx.shadowBlur = 8;
             for (let i = 0; i < 8; i++) {
                 const angle = (t * 0.02 + i * Math.PI / 4) % (Math.PI * 2);
@@ -184,7 +175,7 @@
             ctx.restore();
         }
         
-        // Generate stars with colors
+        // Stars
         const stars = Array.from({length: 400}, () => ({
             x: Math.random(), y: Math.random() * 0.55,
             r: Math.random() * 2 + 0.3,
@@ -274,7 +265,7 @@
             });
         }
         
-        // Horse drawing function with guardian support
+        // Horse drawing function
         function horse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false) {
             ctx.save();
             ctx.translate(hx, hy);
@@ -439,35 +430,26 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
         ];
         
-        // LANTERNS
-        const sectionColors = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 },
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 },
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 },
-            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }
+        // LANTERNS - FIXED POSITIONING ON SCREEN (no scrolling)
+        const sections = [
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
+            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45, screenX: 76, screenY: 28, depth: 0.55 },
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
         ];
-        
-        const sections = sectionColors.map((c, i) => ({
-            name: c.name,
-            lx: [0.16, 0.34, 0.52, 0.68, 0.82, 0.90][i],
-            ly: [0.44, 0.38, 0.34, 0.38, 0.42, 0.48][i],
-            depth: [0.6, 0.7, 0.8, 0.65, 0.55, 0.5][i],
-            baseHue: c.baseHue,
-            shiftSpeed: c.shiftSpeed
-        }));
         
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
         
-        // Create lanterns
+        // Create lanterns with FIXED positioning
         const lanternsDiv = document.getElementById('lanterns');
         const lanternEls = [];
         
         if (lanternsDiv) {
             sections.forEach((s, i) => {
                 const el = document.createElement('div');
-                el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
+                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
                 el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(160,140,110,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(160,140,110,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
                 
                 const glowEl = el.querySelector('.lantern-glow');
@@ -495,6 +477,17 @@
                 
                 lanternsDiv.appendChild(el);
                 lanternEls.push({ el, glowEl, s });
+            });
+        }
+        
+        // Update lantern colors only (positions are fixed)
+        function updateLanternColors() {
+            lanternEls.forEach(({ glowEl, s }) => {
+                if (glowEl) {
+                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
+                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${currentHue}, 42%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
+                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 40%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
+                }
             });
         }
         
@@ -630,10 +623,10 @@
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Light pools
+            // Light pools (these move with mouse but lanterns are fixed)
             sections.forEach((s) => {
-                const lx = s.lx * W + (mx - 0.5) * 20 * s.depth;
-                const ly = s.ly * H + (my - 0.5) * 10 * s.depth;
+                const lx = s.screenX / 100 * W + (mx - 0.5) * 20 * s.depth;
+                const ly = s.screenY / 100 * H + (my - 0.5) * 10 * s.depth;
                 const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
                 const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
                 poolGrad.addColorStop(0, `hsla(${currentHue}, 40%, 35%, 0.08)`);
@@ -644,31 +637,13 @@
                 ctx.fill();
             });
             
-            // ===== DRAW THE LOGO in the center =====
-            // Logo fades out when user moves mouse, fades back when idle
+            // Draw the logo
             const idle = t - lastMove > 200;
             logoOpacity = idle ? 0.95 : 0.15;
-            // Draw logo at center of canvas
             drawLogo(W * 0.5, H * 0.35, 1.2, logoOpacity);
             
             // Update lantern colors
-            lanternEls.forEach(({ glowEl, s }) => {
-                if (glowEl) {
-                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${currentHue}, 42%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
-                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 40%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
-                }
-            });
-        }
-        
-        function updateLanterns() {
-            lanternEls.forEach(({ el, s }) => {
-                const px = (mx - 0.5) * 25 * s.depth;
-                const py = (my - 0.5) * 14 * s.depth;
-                el.style.left = (s.lx * 100) + '%';
-                el.style.top = (s.ly * 100) + '%';
-                el.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
-            });
+            updateLanternColors();
         }
         
         // Hall particles
@@ -706,7 +681,6 @@
         function animate() {
             t++;
             render();
-            updateLanterns();
             requestAnimationFrame(animate);
         }
         
