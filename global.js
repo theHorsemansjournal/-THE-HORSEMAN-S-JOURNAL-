@@ -10,7 +10,7 @@
     }
 
     function init() {
-        // FIXED: Changed from 'worldCanvas' to 'heroCanvas' to match your HTML
+        // FIXED: Using 'heroCanvas' to match HTML
         const canvas = document.getElementById('heroCanvas');
         if (!canvas) {
             console.error('heroCanvas not found!');
@@ -377,12 +377,12 @@
             ctx.restore();
         }
         
-        // THE HERD - WITH 2 NEW GUARDIAN HORSES (left and right) + original small horses
+        // THE HERD - WITH 2 GUARDIAN HORSES (left and right) + original small horses
         const herd = [
-            // NEW GUARDIAN HORSE - LEFT SIDE (large, stands still)
-            { x: 0.05, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
-            // NEW GUARDIAN HORSE - RIGHT SIDE (large, stands still)
-            { x: 0.95, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: true, isGuardian: true },
+            // GUARDIAN HORSE - LEFT SIDE (large, stands still)
+            { x: 0.07, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
+            // GUARDIAN HORSE - RIGHT SIDE (large, stands still)
+            { x: 0.93, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: true, isGuardian: true },
             // Original small horses (will move)
             { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false, isGuardian: false },
             { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true, isGuardian: false },
@@ -661,6 +661,24 @@
             }
         }
         
+        // Additional functionality
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        const portalBtn = document.getElementById('portalBtn');
+        if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        const scrollHint = document.getElementById('scrollHint');
+        if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
+        const previewBtn = document.getElementById('previewBookBtn');
+        if (previewBtn) previewBtn.addEventListener('click', () => window.open('sample.pdf', '_blank'));
+        const whatsappLink = document.getElementById('whatsappLink');
+        if (whatsappLink) whatsappLink.addEventListener('click', (e) => { e.preventDefault(); alert('WhatsApp: [ADD YOUR NUMBER]'); });
+        
+        const cookieConsent = document.getElementById('cookieConsent');
+        if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
+        const acceptCookies = document.getElementById('acceptCookies');
+        if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
+        const declineCookies = document.getElementById('declineCookies');
+        if (declineCookies) declineCookies.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
+        
         const titleOverlay = document.getElementById('titleOverlay');
         const hintOverlay = document.getElementById('hintOverlay');
         let lastMove = 0;
@@ -675,6 +693,7 @@
             updateLanterns();
             
             const idle = t - lastMove > 200;
+            // Note: titleOverlay and hintOverlay don't exist in index.html, but keeping for compatibility
             if (titleOverlay) titleOverlay.style.opacity = idle ? '0.3' : '0.95';
             if (hintOverlay) hintOverlay.style.opacity = idle ? '0' : '0.7';
             
