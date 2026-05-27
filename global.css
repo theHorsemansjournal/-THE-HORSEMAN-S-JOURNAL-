@@ -982,7 +982,7 @@ body {
     font-family: 'Cinzel', serif;
 }
 
-/* ===== LANTERNS CONTAINER ===== */
+/* ===== LANTERNS CONTAINER - FIXED ON SCREEN ===== */
 #lanterns {
     position: fixed;
     top: 0;
@@ -991,11 +991,22 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 15;
+    overflow: visible;
 }
 
+/* Lantern glow animation */
 @keyframes lanternBob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
+}
+
+/* Individual lantern glow elements */
+.lantern-glow {
+    transition: box-shadow 0.4s, filter 0.4s, background 0.2s;
+}
+
+.lantern-label {
+    transition: opacity 0.35s;
 }
 
 /* ===== HALL PARTICLES ===== */
@@ -1128,5 +1139,15 @@ body {
     }
     .extra-grid {
         flex-direction: column;
+    }
+    
+    /* Adjust lantern positions for mobile */
+    #lanterns .lantern-glow {
+        width: 18px !important;
+        height: 24px !important;
+    }
+    #lanterns .lantern-label span {
+        font-size: 0.45rem !important;
+        letter-spacing: 1px !important;
     }
 }
