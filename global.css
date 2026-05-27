@@ -10,16 +10,9 @@ body {
     color: #f0ede0;
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
-    padding-top: 80px;
 }
 
-@media (max-width: 860px) {
-    body {
-        padding-top: 100px;
-    }
-}
-
-/* ===== NAVBAR 3D STYLES ===== */
+/* ===== NAVBAR WITH CLOUDS ===== */
 .navbar-wrapper {
     position: fixed;
     top: 0;
@@ -34,6 +27,34 @@ body {
 
 .navbar-wrapper * {
     pointer-events: auto;
+}
+
+/* Clouds behind navbar */
+.navbar-clouds {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    z-index: 199;
+    pointer-events: none;
+    background: linear-gradient(180deg, 
+        rgba(10,10,42,0.8) 0%,
+        rgba(20,20,60,0.6) 40%,
+        transparent 100%);
+}
+
+.navbar-cloud {
+    position: absolute;
+    background: radial-gradient(ellipse, rgba(180,160,210,0.15) 0%, rgba(180,160,210,0.05) 60%, transparent 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: cloudFloat 20s ease-in-out infinite;
+}
+
+@keyframes cloudFloat {
+    0%, 100% { transform: translateX(0); opacity: 0.6; }
+    50% { transform: translateX(20px); opacity: 0.9; }
 }
 
 .scene {
@@ -878,7 +899,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* ===== REVIEWS SECTION - ENHANCED ===== */
+/* ===== REVIEWS SECTION ===== */
 .reviews-section { 
     margin-top: 4rem;
     padding-top: 2rem;
@@ -1199,33 +1220,41 @@ body {
     color: #D4AF37;
 }
 
-/* ===== FOOTER ===== */
+/* ===== FOOTER WITH BORDERS ===== */
 .footer-links {
     text-align: center;
-    margin-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 1.5rem 2rem;
     font-size: 0.7rem;
-    color: rgba(240, 230, 200, 0.3);
+    color: rgba(240, 230, 200, 0.4);
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    margin-top: 1rem;
 }
 
 .footer-links a {
     color: #D4AF37;
     text-decoration: none;
-    margin: 0 0.5rem;
+    margin: 0 0.8rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #e6c34c;
 }
 
 .copyright {
     text-align: center;
-    margin-top: 1rem;
-    padding-bottom: 2rem;
+    padding: 1.2rem 2rem;
     font-size: 0.65rem;
-    color: rgba(240, 230, 200, 0.2);
-    border-top: 0.5px solid rgba(212, 175, 55, 0.08);
-    padding-top: 1.5rem;
+    color: rgba(240, 230, 200, 0.25);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 /* ===== RESPONSIVE FIXES ===== */
 @media (max-width: 860px) {
+    body {
+        padding-top: 100px;
+    }
     .navbar-wrapper {
         padding: 0.5rem;
         overflow-x: visible;
@@ -1364,5 +1393,8 @@ body {
     }
     .reviews-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .navbar-clouds {
+        height: 80px;
     }
 }
