@@ -1,5 +1,6 @@
 // The Horseman's Journal - Global JavaScript
 // Canvas animation, lantern navigation, and interactive elements
+// ADDED: 2 larger guardian horses on left and right sides
 
 (function() {
     if (document.readyState === 'loading') {
@@ -142,14 +143,21 @@
             }
         }
         
-        // Horse drawing function (unchanged, keep your existing)
-        function horse(hx, hy, sc, coat, mane, pose, flip) {
+        // Horse drawing function with guardian support
+        function drawHorse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false) {
             ctx.save();
             ctx.translate(hx, hy);
-            if (flip) ctx.scale(-sc, sc);
-            else ctx.scale(sc, sc);
+            const actualScale = isGuardian ? sc * 2.2 : sc;
+            if (flip) ctx.scale(-actualScale, actualScale);
+            else ctx.scale(actualScale, actualScale);
             
             const br = Math.sin(t * 0.018 + hx * 0.01) * 1.5;
+            
+            // Guardian horses get a subtle ethereal glow
+            if (isGuardian) {
+                ctx.shadowColor = 'rgba(212,175,55,0.3)';
+                ctx.shadowBlur = 12;
+            }
             
             if (pose === 'sentinel') {
                 ctx.fillStyle = coat;
@@ -188,6 +196,53 @@
                 ctx.beginPath();
                 ctx.moveTo(-26, 2);
                 ctx.quadraticCurveTo(-34, -5, -32 + ts, -14);
+                ctx.stroke();
+            } else if (pose === 'guardian') {
+                // Special guardian pose - standing tall and majestic
+                ctx.fillStyle = coat;
+                [-18, -4, 8, 22].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 28));
+                ctx.beginPath();
+                ctx.ellipse(0, 3, 34, 16, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(22, -1);
+                ctx.quadraticCurveTo(34, -32, 28, -46);
+                ctx.quadraticCurveTo(20, -32, 10, -4);
+                ctx.closePath();
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(28, -48, 10, 6, -0.1, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(28, -53);
+                ctx.lineTo(25, -62);
+                ctx.lineTo(22, -53);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(30, -53);
+                ctx.lineTo(33, -62);
+                ctx.lineTo(30, -53);
+                ctx.fill();
+                // Longer, flowing mane for guardians
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 3.2;
+                ctx.beginPath();
+                ctx.moveTo(22, -5);
+                ctx.quadraticCurveTo(28, -22, 32, -38);
+                ctx.stroke();
+                const ts = Math.sin(t * 0.022) * 2.8;
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 2.2;
+                ctx.beginPath();
+                ctx.moveTo(-32, 1);
+                ctx.quadraticCurveTo(-42, -6, -38 + ts, -16);
+                ctx.stroke();
+                // Add flowing tail
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(-28, 5);
+                ctx.quadraticCurveTo(-38, 10, -36 + ts * 0.5, 22);
                 ctx.stroke();
             } else if (pose === 'foreground') {
                 ctx.fillStyle = coat;
@@ -299,30 +354,37 @@
                 ctx.quadraticCurveTo(-34, -3, -32 + ts, -12);
                 ctx.stroke();
             }
+            
+            ctx.shadowBlur = 0;
             ctx.restore();
         }
         
+        // THE HERD - ORIGINAL HORSES + 2 NEW GUARDIAN HORSES (larger size)
         const herd = [
-            { x: 0.06, y: 0.83, s: 0.88, coat: '#0d0a0e', mane: '#1a1418', pose: 'sentinel', flip: false },
-            { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false },
-            { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true },
-            { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false },
-            { x: 0.50, y: 0.83, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false },
-            { x: 0.56, y: 0.84, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true },
-            { x: 0.68, y: 0.83, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'graze', flip: false },
-            { x: 0.82, y: 0.85, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false },
-            { x: 0.90, y: 0.78, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: true },
-            { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false },
+            // NEW GUARDIAN HORSE - LEFT SIDE (large)
+            { x: 0.07, y: 0.74, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: false, isGuardian: true },
+            // NEW GUARDIAN HORSE - RIGHT SIDE (large)
+            { x: 0.93, y: 0.74, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: true, isGuardian: true },
+            // Original horses
+            { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false, isGuardian: false },
+            { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true, isGuardian: false },
+            { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false, isGuardian: false },
+            { x: 0.50, y: 0.83, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false, isGuardian: false },
+            { x: 0.56, y: 0.84, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true, isGuardian: false },
+            { x: 0.68, y: 0.83, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'graze', flip: false, isGuardian: false },
+            { x: 0.82, y: 0.85, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false, isGuardian: false },
+            { x: 0.90, y: 0.78, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: true, isGuardian: false },
+            { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
         ];
         
-        // LANTERNS WITH COLOR SHIFT - each section gets unique shifting color
+        // LANTERNS WITH COLOR SHIFT
         const sectionColors = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },    // Gold/amber
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 }, // Rose/red
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 }, // Warm orange
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 }, // Deep blue
-            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },  // Purple
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }   // Amber
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3 },
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 },
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35 },
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25 },
+            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45 },
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3 }
         ];
         
         const sections = sectionColors.map((c, i) => ({
@@ -337,7 +399,7 @@
         
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
         
-        // Create lantern elements with dynamic color updates
+        // Create lantern elements
         const lanternsDiv = document.getElementById('lanterns');
         const lanternEls = [];
         
@@ -375,11 +437,11 @@
             });
         }
         
-        // Main render function - ENHANCED with aurora and rich colors
+        // Main render function
         function render() {
             ctx.clearRect(0, 0, W, H);
             
-            // DYNAMIC SKY GRADIENT - rich colors that shift slightly
+            // DYNAMIC SKY GRADIENT
             const skyPulse = Math.sin(t * 0.01) * 0.05;
             const sg = ctx.createLinearGradient(0, 0, 0, H);
             sg.addColorStop(0, `#0a0a2a`);
@@ -390,12 +452,11 @@
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
-            // AURORA BOREALIS - colored bands in the sky
+            // AURORA BOREALIS
             const auroraY = H * 0.15;
             for (let b = 0; b < 6; b++) {
                 const bandY = auroraY + b * 38;
                 const bandAlpha = 0.06 - b * 0.008;
-                const bandColor = auroraColors[b % auroraColors.length];
                 const bandGrad = ctx.createLinearGradient(0, bandY, 0, bandY + 70);
                 bandGrad.addColorStop(0, `rgba(80,140,120,${bandAlpha * 0.5})`);
                 bandGrad.addColorStop(0.3, `rgba(${b % 2 === 0 ? '140,100,180' : '100,140,180'},${bandAlpha})`);
@@ -416,7 +477,7 @@
                 ctx.fill();
             }
             
-            // WARM SUNSET GLOW at horizon
+            // WARM SUNSET GLOW
             const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
             horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
             horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
@@ -424,12 +485,12 @@
             ctx.fillStyle = horizonGrad;
             ctx.fillRect(0, H * 0.55, W, H * 0.25);
             
-            // Draw realistic moon
+            // Draw moon
             const moonX = W * 0.78, moonY = H * 0.16;
             drawRealisticMoon(moonX, moonY, 42);
             ctx.shadowBlur = 0;
             
-            // COLORED TWINKLING STARS
+            // Stars
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
@@ -443,7 +504,7 @@
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Distant ground with warm undertone
+            // Distant ground
             ctx.fillStyle = 'rgba(10,8,20,0.75)';
             ctx.beginPath();
             ctx.moveTo(0, H * 0.66);
@@ -455,7 +516,7 @@
             ctx.closePath();
             ctx.fill();
             
-            // Ground layers with richer colors
+            // Ground layers
             const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
             groundColors.forEach((col, i) => {
                 ctx.fillStyle = col;
@@ -471,7 +532,7 @@
                 ctx.fill();
             });
             
-            // Lake with warm reflection
+            // Lake
             const lakeY = H * 0.73;
             const lakeGrad = ctx.createLinearGradient(0, lakeY, 0, lakeY + H * 0.05);
             lakeGrad.addColorStop(0, 'rgba(30,25,50,0.45)');
@@ -487,7 +548,7 @@
                 ctx.fill();
             }
             
-            // Mist and atmosphere
+            // Mist
             const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
             mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
             mistGrad.addColorStop(0.4, 'rgba(20,18,35,0.1)');
@@ -496,7 +557,7 @@
             ctx.fillStyle = mistGrad;
             ctx.fillRect(0, H * 0.75, W, H * 0.25);
             
-            // Grass with autumn/warm colors
+            // Grass
             grass.forEach(g => {
                 const sw = Math.sin(t * g.sp + g.off) * 9;
                 ctx.strokeStyle = g.color;
@@ -507,12 +568,14 @@
                 ctx.stroke();
             });
             
-            // Background herd
-            herd.filter(h => h.pose !== 'foreground').forEach(h => {
-                horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip);
+            // Draw ALL horses (including new guardian horses)
+            herd.forEach(h => {
+                drawHorse(h.x * W + (mx - 0.5) * (h.isGuardian ? 30 : 35) * h.s, 
+                         h.y * H + (my - 0.5) * (h.isGuardian ? 12 : 12) * h.s, 
+                         h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
             });
             
-            // Fireflies with warm glow
+            // Fireflies
             flies.forEach(f => {
                 f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
                 f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
@@ -530,7 +593,7 @@
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
-            // Light pools under lanterns with color matching
+            // Light pools under lanterns
             sections.forEach((s, idx) => {
                 const lx = s.lx * W + (mx - 0.5) * 20 * s.depth;
                 const ly = s.ly * H + (my - 0.5) * 10 * s.depth;
@@ -545,12 +608,7 @@
                 ctx.fill();
             });
             
-            // Foreground horses
-            herd.filter(h => h.pose === 'foreground').forEach(h => {
-                horse(h.x * W + (mx - 0.5) * 50, h.y * H + (my - 0.5) * 18, h.s, h.coat, h.mane, h.pose, h.flip);
-            });
-            
-            // Update lantern colors dynamically
+            // Update lantern colors
             lanternEls.forEach(({ glowEl, s }, idx) => {
                 if (glowEl) {
                     const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
