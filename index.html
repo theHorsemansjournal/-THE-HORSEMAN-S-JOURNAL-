@@ -30,7 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="global.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   
   <style>
@@ -300,6 +300,22 @@
     .btn-preview:hover { background: rgba(212,175,55,0.1); transform: translateY(-2px); }
     .book-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
 
+    .reviews-section { margin-top: 3rem; }
+    .reviews-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #D4AF37; text-align: center; letter-spacing: 2px; margin-bottom: 1.5rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .review-card {
+      background: rgba(212,175,55,0.04);
+      border: 1px solid rgba(212,175,55,0.08);
+      border-radius: 12px;
+      padding: 0.8rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .review-card:hover { background: rgba(212,175,55,0.08); transform: translateY(-2px); }
+    .review-stars { color: #D4AF37; font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+    .review-text { font-family: 'EB Garamond', serif; font-size: 0.7rem; font-style: italic; color: rgba(240,230,200,0.7); }
+    .review-author { font-family: 'Cinzel', serif; font-size: 0.55rem; color: #D4AF37; margin-top: 0.3rem; }
+
     .extra-sections { padding: 3rem 2rem; background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%); border-top: 1px solid rgba(212,175,55,0.06); border-bottom: 1px solid rgba(212,175,55,0.06); }
     .extra-grid { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 2rem; }
     .newsletter-box, .contact-form-box { flex: 1; background: rgba(20,12,18,0.5); backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(212,175,55,0.1); }
@@ -314,37 +330,13 @@
     .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond', serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
     .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
 
-    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,175,55,0.2); border-bottom: 1px solid rgba(212,175,55,0.15); }
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,175,55,0.06); }
     .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
-    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.2); border-bottom: 1px solid rgba(212,175,55,0.1); }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); }
 
     .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
     .cookie-consent.show { transform: translateY(0); }
     .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
-
-    /* Navbar Clouds - Seamless Connection */
-    .navbar-clouds {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 140px;
-      z-index: 199;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(10,10,42,0.95) 0%, rgba(20,20,60,0.6) 30%, rgba(30,25,55,0.2) 60%, transparent 100%);
-    }
-    .navbar-cloud {
-      position: absolute;
-      background: radial-gradient(ellipse, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.03) 50%, transparent 100%);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: cloudFloatNav 25s ease-in-out infinite;
-      filter: blur(6px);
-    }
-    @keyframes cloudFloatNav {
-      0%, 100% { transform: translateX(0) translateY(0); opacity: 0.4; }
-      50% { transform: translateX(30px) translateY(-10px); opacity: 0.7; }
-    }
 
     @media (max-width: 860px) {
       .hero-stats { gap: 1rem; }
@@ -360,15 +352,12 @@
       .book-showcase-grid { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
       .book-details { text-align: center; }
       .book-specs { justify-content: center; }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
       .extra-grid { flex-direction: column; }
-      .navbar-clouds { height: 100px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- Navbar Clouds - Seamless Connection -->
-  <div class="navbar-clouds" id="navbarClouds"></div>
 
   <div class="navbar-wrapper">
     <div class="scene">
@@ -454,15 +443,15 @@
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
-          <div class="testimonial-text">"I was told this horse could not be ridden. Three trainers had given up. Praveen sat with him for twenty days - no pressure, no demands. On day twenty-one, the horse walked up to him and rested his head on his shoulder. That is not training. That is something else entirely."</div>
+          <div class="testimonial-text">I was told this horse could not be ridden. Three trainers had given up. Praveen sat with him for twenty days - no pressure, no demands. On day twenty-one, the horse walked up to him and rested his head on his shoulder. That is not training. That is something else entirely.</div>
           <div class="testimonial-author">— Shakti, 7-year-old mare</div>
           <div class="testimonial-role">(Through Praveen's words)</div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">★★★★★</div>
-          <div class="testimonial-text">"I have worked with horses for over thirty years. I thought I knew everything about trust and partnership. Then I watched Praveen spend three hours just sitting in a round pen with a traumatized gelding. No ropes. No pressure. Just presence. By sunset, the horse was following him like a shadow. That day, I realized I knew nothing at all."</div>
-          <div class="testimonial-author">— Margaret Chen</div>
-          <div class="testimonial-role">Equine Behaviorist, Oregon</div>
+          <div class="testimonial-text">मैंने कई ट्रेनर्स देखे हैं, लेकिन प्रवीन जैसा कोई नहीं। वो घोड़े से बात करता है, उसे सुनता है। मेरा घोड़ा डरता था - अब वो शांत है। ये कोई जादू नहीं, सिर्फ सच्चाई है।</div>
+          <div class="testimonial-author">— Vikram Singh</div>
+          <div class="testimonial-role">Horse Owner, Rajasthan</div>
         </div>
       </div>
     </div>
@@ -491,7 +480,22 @@
           <div class="book-actions"><a href="book.html" class="btn-discover">✦ DISCOVER THE BOOK ✦</a><button class="btn-preview" id="previewBookBtn">📖 FREE SAMPLE</button></div>
         </div>
       </div>
-      <!-- REVIEWS SECTION REMOVED - Will be on book.html only -->
+
+      <div class="reviews-section">
+        <div class="reviews-title">✦ What Readers Are Saying ✦</div>
+        <div class="reviews-grid">
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Life-changing. Read it in one sitting."</div><div class="review-author">— Priya M.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Finally, horsemanship without ego."</div><div class="review-author">— David C.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"The black stallion chapter broke me."</div><div class="review-author">— Anjali K.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Not just for horse people. For humans."</div><div class="review-author">— Robert T.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Every trainer should read this."</div><div class="review-author">— Meera N.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Raw. Honest. Unforgettable."</div><div class="review-author">— James W.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"A masterpiece of quiet wisdom."</div><div class="review-author">— Sarah L.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Bought copies for my whole barn."</div><div class="review-author">— Carlos R.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"The book I've been waiting for."</div><div class="review-author">— Deepa S.</div></div>
+          <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Trust. Not force. Finally."</div><div class="review-author">— Michael B.</div></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -541,36 +545,9 @@
     <button id="declineCookies" style="background:transparent; border:1px solid #D4AF37; color:#D4AF37;">Decline</button>
   </div>
 
+  <div id="lanterns"></div>
+  <div id="hallParticles"></div>
+
   <script src="global.js"></script>
-
-  <script>
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-    document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    document.getElementById('scrollHint')?.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
-    document.getElementById('previewBookBtn')?.addEventListener('click', () => window.open('sample.pdf', '_blank'));
-    document.getElementById('whatsappLink')?.addEventListener('click', (e) => { e.preventDefault(); alert('WhatsApp: [ADD YOUR NUMBER]'); });
-
-    const cookieConsent = document.getElementById('cookieConsent');
-    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
-    document.getElementById('acceptCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
-    document.getElementById('declineCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
-
-    // Create navbar clouds for seamless connection
-    const cloudContainer = document.getElementById('navbarClouds');
-    if (cloudContainer) {
-      for (let i = 0; i < 12; i++) {
-        const cloud = document.createElement('div');
-        cloud.className = 'navbar-cloud';
-        cloud.style.width = (80 + Math.random() * 120) + 'px';
-        cloud.style.height = (40 + Math.random() * 50) + 'px';
-        cloud.style.left = (Math.random() * 100) + '%';
-        cloud.style.top = (Math.random() * 80) + 'px';
-        cloud.style.animationDelay = (Math.random() * 15) + 's';
-        cloud.style.animationDuration = (20 + Math.random() * 20) + 's';
-        cloudContainer.appendChild(cloud);
-      }
-    }
-  </script>
-
 </body>
 </html>
