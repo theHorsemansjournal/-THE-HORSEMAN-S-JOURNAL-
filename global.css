@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+  /* ===== RESET & BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -288,6 +288,7 @@ body {
     transition: opacity 1.8s ease;
 }
 
+/* REMOVED color: #ffffff to allow gradient from inline style */
 .main-title {
     font-family: 'Cinzel Decorative', serif;
     font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -361,6 +362,7 @@ body {
     z-index: 8;
 }
 
+/* Lantern Animation */
 @keyframes lanternBob {
     0%, 100% {
         transform: translateY(0);
@@ -963,7 +965,7 @@ body {
     letter-spacing: .5px;
 }
 
-/* ===== EXTRA SECTIONS ===== */
+/* ===== NEW GLOBAL STYLES (for index.html additions) ===== */
 .extra-sections {
     background: linear-gradient(180deg, #030108 0%, #020106 100%);
     padding: 3rem 2rem;
@@ -1034,7 +1036,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* ===== COOKIE CONSENT ===== */
 .cookie-consent {
     position: fixed;
     bottom: 0;
@@ -1076,7 +1077,6 @@ body {
     color: #D4AF37;
 }
 
-/* ===== FOOTER ===== */
 .footer-links {
     text-align: center;
     margin-top: 2rem;
@@ -1101,7 +1101,7 @@ body {
     padding-top: 1.5rem;
 }
 
-/* ===== RESPONSIVE FIXES ===== */
+/* ===== RESPONSIVE - FIXED MOBILE NAVBAR ===== */
 @media (max-width: 860px) {
     .navbar-wrapper {
         padding: 0.5rem;
