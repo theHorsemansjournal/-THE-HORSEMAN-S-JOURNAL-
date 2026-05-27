@@ -9,11 +9,32 @@
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
+  <!-- Open Graph / Social -->
   <meta property="og:title" content="The Horseman's Journal">
   <meta property="og:description" content="Eleven years of horsemanship. Trust, not force.">
   <meta property="og:image" content="og-image.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Horseman's Journal",
+    "url": "https://thehorsemansjournal.com",
+    "description": "Eleven years of horsemanship wisdom. Trust, psychology, and the bond with horses.",
+    "author": {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    },
+    "copyrightHolder": {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    },
+    "copyrightYear": "2026"
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +43,39 @@
   <link rel="stylesheet" href="global.css">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <style>
+    /* Additional glossy hero styles */
+    .main-title {
+      background: linear-gradient(135deg, #D4AF37 0%, #FFD700 25%, #FFA500 50%, #D4AF37 75%, #FFD700 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: titleGlow 3s ease-in-out infinite, glossySweep 6s linear infinite;
+      text-shadow: 0 0 30px rgba(212,175,55,0.5);
+    }
+    @keyframes glossySweep {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.5)); }
+      50% { filter: drop-shadow(0 0 40px rgba(255,200,100,0.9)); }
+    }
+    .sanctuary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
 </head>
 <body>
 
@@ -154,6 +208,7 @@
     </div>
   </section>
 
+  <!-- Newsletter + Contact Form Section -->
   <div class="extra-sections">
     <div class="extra-grid">
       <div class="newsletter-box">
@@ -177,6 +232,7 @@
     </div>
   </div>
 
+  <!-- Contact Section with SVG LOGOS -->
   <section class="contact">
     <div class="contact-inner">
       <div class="contact-ornament"><div class="contact-oln"></div><div class="contact-gem"></div><div class="contact-oln contact-oln-r"></div></div>
@@ -216,6 +272,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <div class="footer-links">
     <a href="privacy.html">Privacy Policy</a> • 
     <a href="sitemap.xml">Sitemap</a> • 
@@ -225,6 +282,7 @@
     © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
   </div>
 
+  <!-- Cookie Consent Banner -->
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
     <button id="acceptCookies">Accept</button>
