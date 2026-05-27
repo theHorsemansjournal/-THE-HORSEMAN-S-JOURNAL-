@@ -35,6 +35,9 @@
 </head>
 <body>
 
+<!-- Navbar Clouds -->
+<div class="navbar-clouds" id="navbarClouds"></div>
+
 <div class="navbar-wrapper">
     <div class="scene">
         <nav class="nav3d">
@@ -168,9 +171,9 @@
             </div>
             <div class="testimonial-card">
                 <div class="testimonial-stars">★★★★★</div>
-                <div class="testimonial-text">"मैंने कई ट्रेनर्स देखे हैं, लेकिन प्रवीन जैसा कोई नहीं। वो घोड़े से बात करता है, उसे सुनता है। मेरा घोड़ा डरता था - अब वो शांत है। ये कोई जादू नहीं, सिर्फ सच्चाई है।"</div>
-                <div class="testimonial-author">— Vikram Singh</div>
-                <div class="testimonial-role">Horse Owner, Rajasthan</div>
+                <div class="testimonial-text">"I have worked with horses for over thirty years. I thought I knew everything about trust and partnership. Then I watched Praveen spend three hours just sitting in a round pen with a traumatized gelding. No ropes. No pressure. Just presence. By sunset, the horse was following him like a shadow. That day, I realized I knew nothing at all."</div>
+                <div class="testimonial-author">— Margaret Chen</div>
+                <div class="testimonial-role">Equine Behaviorist, Oregon</div>
             </div>
         </div>
     </div>
@@ -323,6 +326,22 @@
         localStorage.setItem('cookiesDeclined', 'true'); 
         cookieConsent.classList.remove('show'); 
     });
+
+    // Create navbar clouds
+    const cloudContainer = document.getElementById('navbarClouds');
+    if (cloudContainer) {
+        for (let i = 0; i < 8; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'navbar-cloud';
+            cloud.style.width = (60 + Math.random() * 80) + 'px';
+            cloud.style.height = (30 + Math.random() * 40) + 'px';
+            cloud.style.left = (Math.random() * 100) + '%';
+            cloud.style.top = (Math.random() * 60) + 'px';
+            cloud.style.animationDelay = (Math.random() * 10) + 's';
+            cloud.style.animationDuration = (15 + Math.random() * 15) + 's';
+            cloudContainer.appendChild(cloud);
+        }
+    }
 </script>
 
 </body>
