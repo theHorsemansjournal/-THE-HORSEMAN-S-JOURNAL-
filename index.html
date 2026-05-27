@@ -43,7 +43,7 @@
       overflow-x: hidden;
     }
 
-    /* ===== HERO SECTION ===== */
+    /* ===== HERO SECTION - NO GLASS BLOCK ===== */
     .hero {
       position: relative;
       width: 100%;
@@ -61,13 +61,13 @@
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(0,0,0,0.3) 100%);
+      background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.4) 100%);
       z-index: 1;
       pointer-events: none;
     }
     
-    /* TRANSPARENT LENS GLASS - CLEAR BACKGROUND */
-    .hero-glass {
+    /* TITLE DIRECTLY ON ENVIRONMENT - NO BLOCK */
+    .hero-title-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -75,105 +75,99 @@
       z-index: 10;
       text-align: center;
       width: 90%;
-      max-width: 850px;
-      padding: 2.5rem 3.5rem;
-      background: rgba(10,8,12,0.25);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(212,175,55,0.3);
-      border-radius: 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
-      animation: glassRise 1.2s ease-out;
-    }
-    @keyframes glassRise {
-      0% { opacity: 0; transform: translate(-50%, -35%) scale(0.96); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      max-width: 900px;
+      pointer-events: none;
     }
     .hero-eyebrow {
       font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 12px;
-      background: linear-gradient(135deg, #D4AF37, #FFD700);
+      font-size: 0.8rem;
+      letter-spacing: 14px;
+      background: linear-gradient(135deg, #D4AF37, #CD7F32);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       text-transform: uppercase;
       display: inline-block;
       margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
     .hero-title {
       font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2rem, 5.5vw, 4.2rem);
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
       font-weight: 700;
-      background: linear-gradient(135deg, #D4AF37 0%, #F5E7B2 30%, #D4AF37 50%, #CD7F32 70%, #B8860B 100%);
+      background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 25%, #8B6914 50%, #D4AF37 75%, #B8860B 100%);
       background-size: 300% auto;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       margin-bottom: 0.8rem;
-      animation: titleShine 4s ease-in-out infinite;
+      animation: titleShine 5s ease-in-out infinite;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
     }
     @keyframes titleShine {
-      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.25)); }
-      50% { filter: drop-shadow(0 0 35px rgba(212,175,55,0.45)); }
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)); background-position: 0% 50%; }
+      50% { filter: drop-shadow(0 0 40px rgba(212,175,55,0.4)); background-position: 100% 50%; }
     }
     .hero-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.2rem;
       margin: 1.2rem 0;
     }
     .hero-line {
-      width: 70px;
+      width: 80px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, #D4AF37, #D4AF37, transparent);
+      background: linear-gradient(90deg, transparent, #D4AF37, #CD7F32, transparent);
     }
     .hero-gem {
-      width: 9px;
-      height: 9px;
+      width: 10px;
+      height: 10px;
       background: #D4AF37;
       transform: rotate(45deg);
-      box-shadow: 0 0 12px #D4AF37;
+      box-shadow: 0 0 15px #D4AF37;
       animation: gemPulse 2.5s ease-in-out infinite;
     }
     @keyframes gemPulse {
       0%, 100% { box-shadow: 0 0 8px #D4AF37; transform: rotate(45deg) scale(1); }
-      50% { box-shadow: 0 0 25px #FFD700; transform: rotate(45deg) scale(1.15); }
+      50% { box-shadow: 0 0 30px #FFD700; transform: rotate(45deg) scale(1.2); }
     }
     .hero-tagline {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(0.85rem, 1.6vw, 1rem);
-      color: rgba(240,230,200,0.75);
-      max-width: 500px;
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(240,230,200,0.85);
+      max-width: 550px;
       margin: 0 auto;
       line-height: 1.6;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
     }
     .hero-stats {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 1.8rem;
+      gap: 2.5rem;
+      margin-top: 2rem;
       flex-wrap: wrap;
     }
     .hero-stat {
       text-align: center;
-      border-right: 1px solid rgba(212,175,55,0.25);
-      padding-right: 2rem;
+      border-right: 1px solid rgba(212,175,55,0.3);
+      padding-right: 2.5rem;
     }
     .hero-stat:last-child { border-right: none; padding-right: 0; }
     .hero-stat-number {
       font-family: 'Cinzel Decorative', serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: #D4AF37;
       letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(212,175,55,0.3);
     }
     .hero-stat-label {
       font-family: 'Cinzel', serif;
-      font-size: 0.5rem;
-      letter-spacing: 3px;
-      color: rgba(240,230,200,0.6);
+      font-size: 0.55rem;
+      letter-spacing: 4px;
+      color: rgba(240,230,200,0.7);
       text-transform: uppercase;
     }
     .hero-scroll {
@@ -187,19 +181,19 @@
       animation: scrollFloat 2.5s ease-in-out infinite;
     }
     @keyframes scrollFloat {
-      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
-      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+      50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
     }
     .hero-scroll span {
       font-family: 'Cinzel', serif;
-      font-size: 0.5rem;
-      letter-spacing: 6px;
+      font-size: 0.55rem;
+      letter-spacing: 8px;
       color: #D4AF37;
       text-transform: uppercase;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
-    .hero-scroll svg { width: 18px; stroke: #D4AF37; }
+    .hero-scroll svg { width: 20px; stroke: #D4AF37; }
 
     /* ===== GREAT HALL ===== */
     .great-hall {
@@ -220,7 +214,7 @@
       border-bottom: 1px solid rgba(212,175,55,0.06);
       transition: all 0.4s ease;
     }
-    .hall-card:hover { background: linear-gradient(90deg, rgba(212,175,55,0.06), transparent); padding-left: 2.8rem; }
+    .hall-card:hover { background: linear-gradient(90deg, rgba(212,175,55,0.08), transparent); padding-left: 2.8rem; }
     .hall-card-num { font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: rgba(212,175,55,0.15); min-width: 65px; font-weight: 400; }
     .hall-card-name { font-family: 'Cinzel', serif; font-size: 1.2rem; color: #e8dfc7; letter-spacing: 2px; margin-bottom: 0.2rem; }
     .hall-card:hover .hall-card-name { color: #D4AF37; }
@@ -345,9 +339,10 @@
     .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
 
     @media (max-width: 860px) {
-      .hero-glass { padding: 1.5rem; width: 92%; background: rgba(10,8,12,0.35); }
       .hero-stats { gap: 1rem; }
       .hero-stat { padding-right: 1rem; }
+      .hero-stat-number { font-size: 1rem; }
+      .hero-stat-label { font-size: 0.45rem; letter-spacing: 2px; }
       .great-hall { padding: 2rem 1rem; }
       .hall-card { padding: 1rem; gap: 1rem; flex-wrap: wrap; }
       .hall-card-num { font-size: 1.2rem; min-width: 35px; }
@@ -400,7 +395,7 @@
   <div class="hero">
     <canvas id="heroCanvas"></canvas>
     <div class="hero-overlay"></div>
-    <div class="hero-glass">
+    <div class="hero-title-container">
       <div class="hero-eyebrow">The Horseman's Journal</div>
       <h1 class="hero-title">The Horseman's Journal</h1>
       <div class="hero-divider">
@@ -550,7 +545,7 @@
     <button id="declineCookies" style="background:transparent; border:1px solid #D4AF37; color:#D4AF37;">Decline</button>
   </div>
 
-  <!-- COMPLETE HORSE ENVIRONMENT WITH CLEAR LENS GLASS -->
+  <!-- LIVING, BREATHING 3D ENVIRONMENT WITH ACTIVE HORSES AND LANTERNS -->
   <script>
     (function() {
       const canvas = document.getElementById('heroCanvas');
@@ -565,104 +560,158 @@
       window.addEventListener('resize', resize);
       window.addEventListener('mousemove', e => { mouseX = e.clientX / W; mouseY = e.clientY / H; });
       
-      // ===== HYPER-REALISTIC BIG HORSES =====
-      const majesticHorses = [
-        { x: 0.12, y: 0.72, size: 1.15, coat: '#2a1a12', mane: '#3a2a1a', flip: false },
-        { x: 0.42, y: 0.74, size: 1.05, coat: '#1a0e08', mane: '#2a1a0a', flip: true },
-        { x: 0.72, y: 0.71, size: 1.2, coat: '#3a2a18', mane: '#4a3a28', flip: false },
-        { x: 0.88, y: 0.73, size: 1.0, coat: '#221408', mane: '#322418', flip: true },
-        { x: 0.30, y: 0.78, size: 0.9, coat: '#1a1208', mane: '#2a2018', flip: false }
+      // ===== LIVING HORSES - with individual personalities and movements =====
+      const livingHorses = [
+        { x: 0.12, y: 0.72, size: 1.15, coat: '#2a1a12', mane: '#3a2a1a', flip: false, 
+          breathPhase: 0, legPhase: 0, tailSway: 0, headBob: 0, name: 'Thunder' },
+        { x: 0.38, y: 0.74, size: 1.05, coat: '#1a0e08', mane: '#2a1a0a', flip: true,
+          breathPhase: 1.2, legPhase: 0.8, tailSway: 2.1, headBob: 1.5, name: 'Shadow' },
+        { x: 0.65, y: 0.71, size: 1.2, coat: '#3a2a18', mane: '#4a3a28', flip: false,
+          breathPhase: 2.5, legPhase: 1.5, tailSway: 0.7, headBob: 0.3, name: 'Ember' },
+        { x: 0.88, y: 0.73, size: 1.0, coat: '#221408', mane: '#322418', flip: true,
+          breathPhase: 3.8, legPhase: 2.2, tailSway: 1.8, headBob: 2.1, name: 'Storm' },
+        { x: 0.25, y: 0.78, size: 0.92, coat: '#1a1208', mane: '#2a2018', flip: false,
+          breathPhase: 4.1, legPhase: 3.0, tailSway: 3.2, headBob: 1.8, name: 'Whisper' }
       ];
       
-      // ===== COLOR-SHIFTING LANTERNS =====
-      const lanterns = [
-        { x: 0.14, y: 0.38, hue: 45, speed: 0.3, name: 'About' },
-        { x: 0.30, y: 0.35, hue: 350, speed: 0.4, name: 'Awakening' },
-        { x: 0.46, y: 0.33, hue: 30, speed: 0.35, name: 'Chronicles' },
-        { x: 0.62, y: 0.35, hue: 200, speed: 0.25, name: 'Companions' },
-        { x: 0.78, y: 0.39, hue: 280, speed: 0.45, name: 'Verses' },
-        { x: 0.88, y: 0.44, hue: 15, speed: 0.3, name: 'Questions' }
+      // ===== LIVING LANTERNS - color-shifting, swaying, pulsing =====
+      const livingLanterns = [
+        { x: 0.14, y: 0.38, hue: 45, speed: 0.3, swayAmp: 4, swaySpeed: 0.6, name: 'About', pulsePhase: 0 },
+        { x: 0.30, y: 0.35, hue: 350, speed: 0.4, swayAmp: 3, swaySpeed: 0.8, name: 'Awakening', pulsePhase: 1 },
+        { x: 0.46, y: 0.33, hue: 30, speed: 0.35, swayAmp: 5, swaySpeed: 0.5, name: 'Chronicles', pulsePhase: 2 },
+        { x: 0.62, y: 0.35, hue: 200, speed: 0.25, swayAmp: 4, swaySpeed: 0.7, name: 'Companions', pulsePhase: 3 },
+        { x: 0.78, y: 0.39, hue: 280, speed: 0.45, swayAmp: 3, swaySpeed: 0.9, name: 'Verses', pulsePhase: 4 },
+        { x: 0.88, y: 0.44, hue: 15, speed: 0.3, swayAmp: 5, swaySpeed: 0.6, name: 'Questions', pulsePhase: 5 }
       ];
       
-      // ===== DRAW REALISTIC HORSE =====
-      function drawRealisticHorse(x, y, size, coat, mane, flip) {
+      // ===== ANIMATED STARS =====
+      const animatedStars = Array.from({length: isMobile ? 150 : 280}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H * 0.5,
+        size: Math.random() * 2.5 + 0.5,
+        twinkleSpeed: 0.01 + Math.random() * 0.03,
+        twinklePhase: Math.random() * Math.PI * 2,
+        driftX: (Math.random() - 0.5) * 0.05,
+        driftY: (Math.random() - 0.5) * 0.02
+      }));
+      
+      // ===== FLOATING PARTICLES (magic/dust) =====
+      const floatParticles = Array.from({length: isMobile ? 60 : 120}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        size: Math.random() * 2 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.2,
+        phase: Math.random() * Math.PI * 2,
+        color: `hsl(${30 + Math.random() * 20}, 70%, ${50 + Math.random() * 30}%)`
+      }));
+      
+      // ===== SWAYING GRASS =====
+      const swayingGrass = Array.from({length: isMobile ? 200 : 400}, () => ({
+        x: Math.random() * W,
+        y: H * (0.72 + Math.random() * 0.24),
+        height: Math.random() * 25 + 12,
+        swayPhase: Math.random() * Math.PI * 2,
+        swaySpeed: 0.02 + Math.random() * 0.03,
+        color: `rgba(${60 + Math.random() * 40}, ${70 + Math.random() * 30}, ${30 + Math.random() * 20}, 0.4)`
+      }));
+      
+      // ===== DRAW LIVING HORSE WITH ANIMATION =====
+      function drawLivingHorse(x, y, size, coat, mane, flip, breathPhase, legPhase, tailSway, headBob, mouseProximity) {
         ctx.save();
         ctx.translate(x, y);
         if (flip) ctx.scale(-size, size);
         else ctx.scale(size, size);
         
-        const breath = Math.sin(time * 0.03) * 1.2;
+        // Breathing - body expands/contracts
+        const breath = Math.sin(time * 0.03 + breathPhase) * 1.5;
+        const bodyWidth = 38 + breath * 0.5;
+        const bodyHeight = 19 + breath * 0.3;
+        
+        // Leg movement (walking/galloping in place)
+        const legMove = Math.sin(time * 0.05 + legPhase) * 5;
+        
+        // Tail sway
+        const tailOffset = Math.sin(time * 0.04 + tailSway) * 6;
+        
+        // Head bob
+        const headOffsetY = Math.sin(time * 0.04 + headBob) * 2;
+        const headOffsetX = Math.sin(time * 0.05 + headBob) * 1.5;
         
         // Body
         ctx.fillStyle = coat;
         ctx.beginPath();
-        ctx.ellipse(0, 0, 38, 19, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, bodyWidth, bodyHeight, 0, 0, Math.PI * 2);
         ctx.fill();
         
-        // Muscle highlight
-        ctx.fillStyle = `rgba(255,210,160,0.06)`;
+        // Muscle highlight (breathing)
+        ctx.fillStyle = `rgba(255,210,160,${0.05 + breath * 0.02})`;
         ctx.beginPath();
-        ctx.ellipse(-10, -5, 20, 11, 0, 0, Math.PI * 2);
+        ctx.ellipse(-10, -5, 22, 12, 0, 0, Math.PI * 2);
         ctx.fill();
         
         // Neck
         ctx.fillStyle = coat;
         ctx.beginPath();
         ctx.moveTo(24, -6);
-        ctx.quadraticCurveTo(35, -32, 30, -52);
-        ctx.quadraticCurveTo(22, -36, 14, -8);
+        ctx.quadraticCurveTo(35, -32 + headOffsetY * 0.5, 30 + headOffsetX, -52 + headOffsetY);
+        ctx.quadraticCurveTo(22, -36 + headOffsetY * 0.3, 14, -8);
         ctx.closePath();
         ctx.fill();
         
         // Head
         ctx.beginPath();
-        ctx.ellipse(32, -56, 13, 9, -0.12, 0, Math.PI * 2);
+        ctx.ellipse(32 + headOffsetX, -56 + headOffsetY, 13, 9, -0.12, 0, Math.PI * 2);
         ctx.fill();
         
         // Muzzle
-        ctx.fillStyle = `rgba(100,70,50,0.5)`;
+        ctx.fillStyle = `rgba(100,70,50,0.6)`;
         ctx.beginPath();
-        ctx.ellipse(37, -53, 7, 6, 0, 0, Math.PI * 2);
+        ctx.ellipse(37 + headOffsetX, -53 + headOffsetY, 7, 6, 0, 0, Math.PI * 2);
         ctx.fill();
         
-        // Eye
+        // Eye (blinking)
+        const isBlinking = Math.sin(time * 2) > 0.98;
         ctx.fillStyle = '#1a0a05';
         ctx.beginPath();
-        ctx.arc(36, -61, 2.5, 0, Math.PI * 2);
+        ctx.arc(36 + headOffsetX, -61 + headOffsetY, 2.5, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = '#f0e0c0';
-        ctx.beginPath();
-        ctx.arc(35.5, -62, 1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(35, -62.5, 0.4, 0, Math.PI * 2);
-        ctx.fill();
+        if (!isBlinking) {
+          ctx.fillStyle = '#f0e0c0';
+          ctx.beginPath();
+          ctx.arc(35.5 + headOffsetX, -62 + headOffsetY, 1, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(35 + headOffsetX, -62.5 + headOffsetY, 0.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
         
-        // Nostril
+        // Nostril flare
+        const nostrilFlare = 0.8 + Math.sin(time * 0.08) * 0.3;
         ctx.fillStyle = '#4a3020';
         ctx.beginPath();
-        ctx.arc(41, -51, 1.2, 0, Math.PI * 2);
+        ctx.ellipse(41 + headOffsetX, -51 + headOffsetY, 1.2 * nostrilFlare, 0.8, 0, 0, Math.PI * 2);
         ctx.fill();
         
-        // Ears
+        // Ears (pinned or perked)
+        const earAngle = Math.sin(time * 0.06) * 0.1;
         ctx.fillStyle = coat;
         ctx.beginPath();
-        ctx.moveTo(25, -65);
-        ctx.lineTo(21, -78);
-        ctx.lineTo(17, -66);
+        ctx.moveTo(25 + headOffsetX, -65 + headOffsetY);
+        ctx.lineTo(21 + earAngle, -78 + headOffsetY);
+        ctx.lineTo(17 - earAngle * 0.5, -66 + headOffsetY);
         ctx.fill();
         ctx.beginPath();
-        ctx.moveTo(33, -65);
-        ctx.lineTo(38, -78);
-        ctx.lineTo(36, -65);
+        ctx.moveTo(33 + headOffsetX, -65 + headOffsetY);
+        ctx.lineTo(38 - earAngle, -78 + headOffsetY);
+        ctx.lineTo(36 + earAngle * 0.5, -65 + headOffsetY);
         ctx.fill();
         
-        // Legs with movement
-        const legMove = Math.sin(time * 0.05) * 4;
+        // Legs
         ctx.fillStyle = coat;
         [-22, -8, 8, 22].forEach((lx, idx) => {
-          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.6;
+          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.7;
           ctx.fillRect(lx, 14 + offset, 7, 32);
           ctx.fillStyle = `rgba(70,50,30,0.4)`;
           ctx.fillRect(lx, 36 + offset, 7, 7);
@@ -672,166 +721,127 @@
         // Hooves
         ctx.fillStyle = '#1a0a05';
         [-22, -8, 8, 22].forEach((lx, idx) => {
-          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.6;
+          const offset = (idx % 2 === 0) ? legMove : -legMove * 0.7;
           ctx.fillRect(lx, 44 + offset, 7, 5);
         });
         
-        // Tail
+        // Tail (swaying)
         ctx.fillStyle = mane;
         ctx.beginPath();
         ctx.moveTo(-36, -2);
-        ctx.quadraticCurveTo(-48, 8, -44, 24);
+        ctx.quadraticCurveTo(-48 + tailOffset * 0.3, 8 + tailOffset * 0.2, -44 + tailOffset, 24);
         ctx.lineTo(-34, 14);
         ctx.fill();
         
-        // Mane
+        // Mane (flowing)
         for (let i = 0; i < 9; i++) {
+          const maneFlow = Math.sin(time * 0.05 + i) * 2;
           ctx.fillStyle = mane;
-          ctx.fillRect(18 + i * 2, -16 - i * 3, 6, 7);
+          ctx.fillRect(18 + i * 2 + maneFlow * 0.3, -16 - i * 3 + maneFlow * 0.2, 6, 7);
+        }
+        
+        // Mouse proximity highlight
+        if (mouseProximity > 0.6) {
+          ctx.fillStyle = `rgba(255,220,150,${0.12 * mouseProximity})`;
+          ctx.beginPath();
+          ctx.ellipse(0, -5, 40, 20, 0, 0, Math.PI * 2);
+          ctx.fill();
         }
         
         ctx.restore();
       }
       
-      // ===== DRAW LANTERN =====
-      function drawLantern(x, y, hue, name, proximity) {
-        const pulse = 0.7 + Math.sin(time * 0.06) * 0.2;
-        const glowSize = 30 + (proximity > 0.6 ? 15 : 0);
+      // ===== DRAW LIVING LANTERN =====
+      function drawLivingLantern(x, y, hue, name, swayAmp, swaySpeed, pulsePhase, mouseProximity) {
+        // Swaying motion
+        const swayX = Math.sin(time * 0.04 * swaySpeed + pulsePhase) * swayAmp;
+        const swayY = Math.cos(time * 0.035 * swaySpeed + pulsePhase) * swayAmp * 0.6;
+        const lx = x + swayX;
+        const ly = y + swayY;
+        
+        // Pulsing glow
+        const pulse = 0.7 + Math.sin(time * 0.08 + pulsePhase) * 0.25;
+        const glowSize = 35 + (mouseProximity > 0.5 ? 15 : 0) + pulse * 5;
         
         // Outer glow
-        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.12 + pulse * 0.08})`;
+        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.1 + pulse * 0.08})`;
         ctx.beginPath();
-        ctx.arc(x, y, glowSize, 0, Math.PI * 2);
+        ctx.arc(lx, ly, glowSize, 0, Math.PI * 2);
         ctx.fill();
         
         // Inner glow
-        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.25 + pulse * 0.15})`;
+        ctx.fillStyle = `hsla(${hue}, 75%, 55%, ${0.2 + pulse * 0.15})`;
         ctx.beginPath();
-        ctx.arc(x, y, 20, 0, Math.PI * 2);
+        ctx.arc(lx, ly, 25, 0, Math.PI * 2);
         ctx.fill();
         
-        // Lantern body
+        // Lantern body (swaying)
         ctx.fillStyle = `hsla(${hue}, 75%, 55%, 0.9)`;
-        ctx.shadowColor = `hsla(${hue}, 75%, 55%, 0.8)`;
-        ctx.shadowBlur = 15;
+        ctx.shadowColor = `hsla(${hue}, 75%, 55%, 0.9)`;
+        ctx.shadowBlur = 20;
         ctx.beginPath();
-        ctx.rect(x - 10, y - 15, 20, 24);
+        ctx.rect(lx - 11, ly - 16, 22, 26);
         ctx.fill();
         
         // Lantern top
         ctx.fillStyle = `hsla(${hue}, 75%, 45%, 0.95)`;
         ctx.beginPath();
-        ctx.moveTo(x - 6, y - 17);
-        ctx.lineTo(x, y - 24);
-        ctx.lineTo(x + 6, y - 17);
+        ctx.moveTo(lx - 7, ly - 18);
+        ctx.lineTo(lx, ly - 26);
+        ctx.lineTo(lx + 7, ly - 18);
         ctx.fill();
         
-        // Core light
-        ctx.fillStyle = `hsla(${hue}, 85%, 70%, 1)`;
+        // Lantern bottom
         ctx.beginPath();
-        ctx.rect(x - 5, y - 10, 10, 14);
+        ctx.moveTo(lx - 7, ly + 12);
+        ctx.lineTo(lx, ly + 18);
+        ctx.lineTo(lx + 7, ly + 12);
+        ctx.fill();
+        
+        // Core light (flickering)
+        const flicker = 0.7 + Math.random() * 0.6;
+        ctx.fillStyle = `hsla(${hue}, 85%, 70%, ${0.9 * flicker})`;
+        ctx.beginPath();
+        ctx.rect(lx - 6, ly - 10, 12, 16);
         ctx.fill();
         
         ctx.shadowBlur = 0;
         
-        // Label on hover
-        if (proximity > 0.4) {
-          ctx.font = `bold ${11 + proximity * 5}px 'Cinzel'`;
+        // Label with mouse proximity
+        if (mouseProximity > 0.3) {
+          ctx.font = `bold ${10 + mouseProximity * 6}px 'Cinzel'`;
           ctx.fillStyle = `hsla(${hue}, 75%, 65%, 1)`;
-          ctx.shadowBlur = 6;
-          ctx.fillText(name, x - 18, y - 30);
+          ctx.shadowBlur = 8;
+          ctx.fillText(name, lx - 25, ly - 35);
           ctx.shadowBlur = 0;
         }
       }
       
-      // ===== STARS =====
-      const stars = Array.from({length: isMobile ? 120 : 220}, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H * 0.5,
-        size: Math.random() * 2 + 0.5,
-        twinkle: Math.random() * Math.PI * 2
-      }));
-      
-      function drawStars() {
-        stars.forEach(star => {
-          const brightness = 0.4 + Math.sin(time * 0.02 + star.twinkle) * 0.3;
-          ctx.fillStyle = `rgba(255,240,200,${brightness * 0.5})`;
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-      
-      // ===== MOON =====
-      function drawMoon() {
+      // ===== DRAW MOON =====
+      function drawLivingMoon() {
         const moonX = W * 0.88;
         const moonY = H * 0.12;
         const pulse = 0.92 + Math.sin(time * 0.02) * 0.04;
+        const driftX = Math.sin(time * 0.01) * 3;
+        const driftY = Math.cos(time * 0.008) * 2;
         
-        ctx.fillStyle = `rgba(255,235,190,0.1)`;
+        ctx.fillStyle = `rgba(255,235,190,0.08)`;
         ctx.beginPath();
-        ctx.arc(moonX, moonY, 55 * pulse, 0, Math.PI * 2);
+        ctx.arc(moonX + driftX, moonY + driftY, 60 * pulse, 0, Math.PI * 2);
         ctx.fill();
         
-        const moonGrad = ctx.createRadialGradient(moonX - 6, moonY - 6, 6, moonX, moonY, 38);
+        const moonGrad = ctx.createRadialGradient(moonX - 6 + driftX, moonY - 6 + driftY, 6, moonX + driftX, moonY + driftY, 40);
         moonGrad.addColorStop(0, `rgba(255,245,215,0.95)`);
         moonGrad.addColorStop(0.6, `rgba(245,215,160,0.8)`);
         moonGrad.addColorStop(1, `rgba(200,150,85,0.5)`);
         ctx.fillStyle = moonGrad;
         ctx.beginPath();
-        ctx.arc(moonX, moonY, 38, 0, Math.PI * 2);
+        ctx.arc(moonX + driftX, moonY + driftY, 40, 0, Math.PI * 2);
         ctx.fill();
       }
       
-      // ===== GRASS =====
-      const grassBlades = Array.from({length: isMobile ? 180 : 350}, () => ({
-        x: Math.random() * W,
-        y: H * (0.72 + Math.random() * 0.24),
-        height: Math.random() * 22 + 10,
-        sway: Math.random() * Math.PI * 2
-      }));
-      
-      function drawGrass() {
-        grassBlades.forEach(grass => {
-          const offset = Math.sin(time * 0.025 + grass.sway) * 4;
-          ctx.beginPath();
-          ctx.moveTo(grass.x, grass.y);
-          ctx.quadraticCurveTo(grass.x + offset, grass.y - grass.height * 0.5, grass.x + offset * 0.6, grass.y - grass.height);
-          ctx.strokeStyle = `rgba(110,90,60,${0.35 + Math.sin(grass.sway) * 0.1})`;
-          ctx.lineWidth = 1.3;
-          ctx.stroke();
-        });
-      }
-      
-      // ===== DUST =====
-      const dust = Array.from({length: isMobile ? 40 : 70}, () => ({
-        x: Math.random() * W,
-        y: H * (0.76 + Math.random() * 0.14),
-        size: Math.random() * 3 + 1,
-        life: Math.random() * 100
-      }));
-      
-      function drawDust() {
-        dust.forEach(d => {
-          d.life -= 1;
-          d.y -= 0.4;
-          if (d.y < H * 0.71 || d.life < 0) {
-            d.y = H * (0.79 + Math.random() * 0.11);
-            d.x = Math.random() * W;
-            d.life = 100 + Math.random() * 60;
-          }
-          ctx.fillStyle = `rgba(170,130,90,${0.08 * (d.life / 100)})`;
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-      
-      // ===== RENDER =====
-      function render() {
-        ctx.clearRect(0, 0, W, H);
-        
-        // Sky
+      // ===== DRAW SKY =====
+      function drawSky() {
         const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.6);
         skyGrad.addColorStop(0, '#0a0a22');
         skyGrad.addColorStop(0.4, '#151232');
@@ -839,11 +849,78 @@
         skyGrad.addColorStop(1, '#2a1a22');
         ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, W, H);
+      }
+      
+      // ===== DRAW ANIMATED STARS =====
+      function drawAnimatedStars() {
+        animatedStars.forEach(star => {
+          star.x += star.driftX;
+          star.y += star.driftY;
+          if (star.x < 0) star.x = W;
+          if (star.x > W) star.x = 0;
+          if (star.y < 0) star.y = H * 0.5;
+          if (star.y > H * 0.5) star.y = 0;
+          
+          const twinkle = 0.4 + Math.sin(time * star.twinkleSpeed + star.twinklePhase) * 0.3;
+          ctx.fillStyle = `rgba(255,240,200,${twinkle * 0.6})`;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.size * twinkle, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+      
+      // ===== DRAW GROUND =====
+      function drawGround() {
+        const groundGrad = ctx.createLinearGradient(0, H * 0.6, 0, H);
+        groundGrad.addColorStop(0, '#2a1a14');
+        groundGrad.addColorStop(0.5, '#1a0f0c');
+        groundGrad.addColorStop(1, '#0a0605');
+        ctx.fillStyle = groundGrad;
+        ctx.fillRect(0, H * 0.6, W, H * 0.4);
         
-        drawStars();
-        drawMoon();
-        
-        // Hills
+        // Arena track (subtle)
+        ctx.strokeStyle = 'rgba(212,175,55,0.1)';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.ellipse(W * 0.5, H * 0.79, W * 0.44, H * 0.09, 0, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      
+      // ===== DRAW SWAYING GRASS =====
+      function drawSwayingGrass() {
+        swayingGrass.forEach(grass => {
+          const swayOffset = Math.sin(time * grass.swaySpeed + grass.swayPhase) * 5;
+          ctx.beginPath();
+          ctx.moveTo(grass.x, grass.y);
+          ctx.quadraticCurveTo(grass.x + swayOffset, grass.y - grass.height * 0.5, grass.x + swayOffset * 0.6, grass.y - grass.height);
+          ctx.strokeStyle = grass.color;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        });
+      }
+      
+      // ===== DRAW FLOATING PARTICLES =====
+      function drawFloatingParticles() {
+        floatParticles.forEach(p => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          if (p.x < -50) p.x = W + 50;
+          if (p.x > W + 50) p.x = -50;
+          if (p.y < -50) p.y = H + 50;
+          if (p.y > H + 50) p.y = -50;
+          
+          const alpha = 0.3 + Math.sin(time * 0.05 + p.phase) * 0.2;
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = alpha * 0.5;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        ctx.globalAlpha = 1;
+      }
+      
+      // ===== DRAW DISTANT HILLS =====
+      function drawHills() {
         ctx.fillStyle = '#151222';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.56);
@@ -855,41 +932,40 @@
         ctx.lineTo(W, H);
         ctx.lineTo(0, H);
         ctx.fill();
+      }
+      
+      // ===== MAIN RENDER LOOP =====
+      function render() {
+        ctx.clearRect(0, 0, W, H);
         
-        // Ground
-        const groundGrad = ctx.createLinearGradient(0, H * 0.6, 0, H);
-        groundGrad.addColorStop(0, '#2a1a14');
-        groundGrad.addColorStop(0.5, '#1a0f0c');
-        groundGrad.addColorStop(1, '#0a0605');
-        ctx.fillStyle = groundGrad;
-        ctx.fillRect(0, H * 0.6, W, H * 0.4);
+        drawSky();
+        drawAnimatedStars();
+        drawLivingMoon();
+        drawHills();
+        drawGround();
+        drawSwayingGrass();
+        drawFloatingParticles();
         
-        // Arena track
-        ctx.strokeStyle = 'rgba(212,175,55,0.1)';
-        ctx.lineWidth = 2.5;
-        ctx.beginPath();
-        ctx.ellipse(W * 0.5, H * 0.79, W * 0.42, H * 0.09, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        drawGrass();
-        drawDust();
-        
-        // Horses
-        majesticHorses.forEach(horse => {
+        // Draw horses with mouse proximity
+        livingHorses.forEach(horse => {
           const horseX = horse.x * W;
           const horseY = horse.y * H;
-          drawRealisticHorse(horseX, horseY, horse.size, horse.coat, horse.mane, horse.flip);
+          const dx = (mouseX - horse.x) * W;
+          const dy = (mouseY - horse.y) * H;
+          const proximity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 150);
+          drawLivingHorse(horseX, horseY, horse.size, horse.coat, horse.mane, horse.flip,
+            horse.breathPhase, horse.legPhase, horse.tailSway, horse.headBob, proximity);
         });
         
-        // Lanterns with proximity
-        lanterns.forEach(lantern => {
+        // Draw lanterns with mouse proximity
+        livingLanterns.forEach(lantern => {
           const lx = lantern.x * W;
           const ly = lantern.y * H;
           const dx = (mouseX - lantern.x) * W;
           const dy = (mouseY - lantern.y) * H;
-          const proximity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 120);
-          const currentHue = (lantern.hue + time * 0.45 * lantern.speed) % 360;
-          drawLantern(lx, ly, currentHue, lantern.name, proximity);
+          const proximity = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy) / 100);
+          const currentHue = (lantern.hue + time * 0.4 * lantern.speed) % 360;
+          drawLivingLantern(lx, ly, currentHue, lantern.name, lantern.swayAmp, lantern.swaySpeed, lantern.pulsePhase, proximity);
         });
         
         time++;
