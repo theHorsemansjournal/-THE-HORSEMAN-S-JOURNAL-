@@ -35,7 +35,7 @@
 </head>
 <body>
 
-<!-- Navbar Clouds -->
+<!-- Navbar Clouds - SEAMLESS CONNECTION -->
 <div class="navbar-clouds" id="navbarClouds"></div>
 
 <div class="navbar-wrapper">
@@ -327,18 +327,18 @@
         cookieConsent.classList.remove('show'); 
     });
 
-    // Create navbar clouds
+    // Create navbar clouds - SEAMLESS CONNECTION
     const cloudContainer = document.getElementById('navbarClouds');
     if (cloudContainer) {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 12; i++) {
             const cloud = document.createElement('div');
             cloud.className = 'navbar-cloud';
-            cloud.style.width = (60 + Math.random() * 80) + 'px';
-            cloud.style.height = (30 + Math.random() * 40) + 'px';
+            cloud.style.width = (80 + Math.random() * 120) + 'px';
+            cloud.style.height = (40 + Math.random() * 50) + 'px';
             cloud.style.left = (Math.random() * 100) + '%';
-            cloud.style.top = (Math.random() * 60) + 'px';
-            cloud.style.animationDelay = (Math.random() * 10) + 's';
-            cloud.style.animationDuration = (15 + Math.random() * 15) + 's';
+            cloud.style.top = (Math.random() * 80) + 'px';
+            cloud.style.animationDelay = (Math.random() * 15) + 's';
+            cloud.style.animationDuration = (20 + Math.random() * 20) + 's';
             cloudContainer.appendChild(cloud);
         }
     }
