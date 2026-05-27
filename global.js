@@ -1,5 +1,5 @@
 // The Horseman's Journal - Global JavaScript
-// OPTIMIZED for smooth performance | Small horses MOVE | Guardian horses STAND STILL
+// HORSES MOVE CORRECTLY: Small horses graze & move | Guardian horses stand still
 
 (function() {
     if (document.readyState === 'loading') {
@@ -14,7 +14,6 @@
         
         const ctx = canvas.getContext('2d');
         let W, H, mx = 0.5, my = 0.5, t = 0;
-        let animationId = null;
         
         function resize() {
             W = canvas.width = canvas.offsetWidth;
@@ -27,45 +26,48 @@
             my = e.clientY / H;
         });
         
-        // Optimized particle counts for smooth performance
-        const stars = Array.from({length: 200}, () => ({
+        // Stars
+        const stars = Array.from({length: 250}, () => ({
             x: Math.random(), y: Math.random() * 0.55,
-            r: Math.random() * 1.5 + 0.3,
+            r: Math.random() * 1.8 + 0.3,
             sp: Math.random() * 0.015 + 0.003,
             off: Math.random() * Math.PI * 2,
-            ba: Math.random() * 0.6 + 0.2,
+            ba: Math.random() * 0.7 + 0.2,
             color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 40}%, ${Math.random() * 40 + 55}%)`
         }));
         
-        const grass = Array.from({length: 350}, () => ({
+        // Grass
+        const grass = Array.from({length: 400}, () => ({
             x: Math.random(), by: 0.68 + Math.random() * 0.32,
-            h: Math.random() * 30 + 12,
+            h: Math.random() * 35 + 12,
             sp: Math.random() * 0.02 + 0.005,
             off: Math.random() * Math.PI * 2,
             color: Math.random() > 0.7 ? '#4a3a2a' : '#2a3a1a'
         }));
         
-        const flies = Array.from({length: 35}, () => ({
+        // Fireflies
+        const flies = Array.from({length: 40}, () => ({
             x: Math.random(), y: 0.68 + Math.random() * 0.28,
-            r: Math.random() * 1.5 + 0.5,
+            r: Math.random() * 1.8 + 0.5,
             sp: Math.random() * 0.3 + 0.1,
             ph: Math.random() * Math.PI * 2,
-            dx: (Math.random() - 0.5) * 0.3,
-            dy: (Math.random() - 0.5) * 0.15,
+            dx: (Math.random() - 0.5) * 0.35,
+            dy: (Math.random() - 0.5) * 0.2,
             color: `hsl(${Math.random() * 40 + 40}, 75%, ${Math.random() * 30 + 50}%)`
         }));
         
+        // Draw moon
         function drawRealisticMoon(x, y, radius) {
             const pulse = Math.sin(t * 0.02) * 0.08 + 0.92;
             
-            const glowGrad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, radius * 2);
-            glowGrad.addColorStop(0, `rgba(255,220,120,${0.2 * pulse})`);
+            const glowGrad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, radius * 2.2);
+            glowGrad.addColorStop(0, `rgba(255,220,120,${0.22 * pulse})`);
             glowGrad.addColorStop(0.4, `rgba(255,180,80,${0.1 * pulse})`);
             glowGrad.addColorStop(0.7, `rgba(200,120,40,0.04)`);
             glowGrad.addColorStop(1, 'rgba(100,50,20,0)');
             ctx.fillStyle = glowGrad;
             ctx.beginPath();
-            ctx.arc(x, y, radius * 2, 0, Math.PI * 2);
+            ctx.arc(x, y, radius * 2.1, 0, Math.PI * 2);
             ctx.fill();
             
             const moonGrad = ctx.createRadialGradient(x - radius * 0.25, y - radius * 0.25, radius * 0.2, x, y, radius);
@@ -81,21 +83,20 @@
             ctx.shadowBlur = 0;
         }
         
-        // Horse drawing function - with movement for small horses
-        function drawHorse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false, customPhase = 0) {
+        // Horse drawing - MOVEMENT: only small horses (isGuardian: false)
+        function drawHorse(hx, hy, sc, coat, mane, pose, flip, isGuardian, phase) {
             ctx.save();
             ctx.translate(hx, hy);
             const actualScale = isGuardian ? sc * 2.2 : sc;
             if (flip) ctx.scale(-actualScale, actualScale);
             else ctx.scale(actualScale, actualScale);
             
-            // MOVEMENT: Only small horses (isGuardian = false) have movement
-            // Guardian horses (isGuardian = true) have NO movement
-            const hasMovement = !isGuardian;
-            const breath = hasMovement ? Math.sin(t * 0.02 + customPhase) * 1.2 : 0;
-            const legSway = hasMovement ? Math.sin(t * 0.03 + customPhase) * 2.5 : 0;
-            const tailSway = hasMovement ? Math.sin(t * 0.025 + customPhase) * 2 : 0;
-            const headBob = hasMovement ? Math.sin(t * 0.028 + customPhase) * 1.2 : 0;
+            // ONLY NON-GUARDIAN horses move
+            const moving = !isGuardian;
+            const breath = moving ? Math.sin(t * 0.018 + phase) * 1.2 : 0;
+            const legSway = moving ? Math.sin(t * 0.03 + phase) * 2.5 : 0;
+            const tailSway = moving ? Math.sin(t * 0.025 + phase) * 2 : 0;
+            const headBob = moving ? Math.sin(t * 0.028 + phase) * 1.2 : 0;
             
             if (isGuardian) {
                 ctx.shadowColor = 'rgba(212,175,55,0.15)';
@@ -104,7 +105,7 @@
             
             if (pose === 'guardian') {
                 ctx.fillStyle = coat;
-                [-18, -4, 8, 22].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 28));
+                [-18, -4, 8, 22].forEach(lx => ctx.fillRect(lx, 12, 5, 28));
                 ctx.beginPath();
                 ctx.ellipse(0, 3, 34, 16, 0, 0, Math.PI * 2);
                 ctx.fill();
@@ -133,25 +134,16 @@
                 ctx.moveTo(22, -5);
                 ctx.quadraticCurveTo(28, -22, 32, -38);
                 ctx.stroke();
-                if (hasMovement) {
-                    ctx.strokeStyle = mane;
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(-32, 1);
-                    ctx.quadraticCurveTo(-42, -6, -38 + tailSway, -16);
-                    ctx.stroke();
-                } else {
-                    ctx.strokeStyle = mane;
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(-32, 1);
-                    ctx.quadraticCurveTo(-42, -6, -38, -16);
-                    ctx.stroke();
-                }
+                ctx.strokeStyle = mane;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(-32, 1);
+                ctx.quadraticCurveTo(-42, -6, -38 + (moving ? tailSway : 0), -16);
+                ctx.stroke();
             } else if (pose === 'sentinel') {
                 ctx.fillStyle = coat;
                 [-15, -3, 7, 17].forEach((lx, i) => {
-                    const legOffset = (hasMovement && i % 2) ? legSway : 0;
+                    const legOffset = (moving && i % 2) ? legSway : 0;
                     ctx.fillRect(lx, 14 + legOffset, 4, 24);
                 });
                 ctx.beginPath();
@@ -186,12 +178,12 @@
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
                 ctx.moveTo(-26, 2);
-                ctx.quadraticCurveTo(-34, -5, -32 + tailSway, -14);
+                ctx.quadraticCurveTo(-34, -5, -32 + (moving ? tailSway : 0), -14);
                 ctx.stroke();
             } else if (pose === 'foreground') {
                 ctx.fillStyle = coat;
                 [-18, -4, 8, 20].forEach((lx, i) => {
-                    const legOffset = (hasMovement && i % 2) ? legSway : 0;
+                    const legOffset = (moving && i % 2) ? legSway : 0;
                     ctx.fillRect(lx, 12 + legOffset, 5, 28);
                 });
                 ctx.beginPath();
@@ -226,12 +218,12 @@
                 ctx.lineWidth = 1.8;
                 ctx.beginPath();
                 ctx.moveTo(-32, 1);
-                ctx.quadraticCurveTo(-42, -6, -38 + tailSway, -16);
+                ctx.quadraticCurveTo(-42, -6, -38 + (moving ? tailSway : 0), -16);
                 ctx.stroke();
             } else if (pose === 'nuzzle') {
                 ctx.fillStyle = coat;
                 [-14, -2, 8, 18].forEach((lx, i) => {
-                    const legOffset = (hasMovement && i % 2) ? legSway * 0.8 : 0;
+                    const legOffset = (moving && i % 2) ? legSway * 0.8 : 0;
                     ctx.fillRect(lx, 16 + legOffset, 4, 20);
                 });
                 ctx.beginPath();
@@ -261,13 +253,13 @@
                 ctx.lineWidth = 1.3;
                 ctx.beginPath();
                 ctx.moveTo(-24, 3);
-                ctx.quadraticCurveTo(-30, -4, -28 + tailSway, -12);
+                ctx.quadraticCurveTo(-30, -4, -28 + (moving ? tailSway : 0), -12);
                 ctx.stroke();
             } else {
                 // graze pose
                 ctx.fillStyle = coat;
                 [-14, -2, 8, 18].forEach((lx, i) => {
-                    const legOffset = (hasMovement && i % 2) ? legSway : 0;
+                    const legOffset = (moving && i % 2) ? legSway : 0;
                     ctx.fillRect(lx, 16 + legOffset, 4, 20);
                 });
                 ctx.beginPath();
@@ -302,7 +294,7 @@
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
                 ctx.moveTo(-26, 3);
-                ctx.quadraticCurveTo(-34, -3, -32 + tailSway, -12);
+                ctx.quadraticCurveTo(-34, -3, -32 + (moving ? tailSway : 0), -12);
                 ctx.stroke();
             }
             
@@ -310,13 +302,11 @@
             ctx.restore();
         }
         
-        // HERD: Guardian horses (isGuardian: true) - NO movement
-        // Small horses (isGuardian: false) - WILL move and graze
+        // HERD: Guardian horses (isGuardian: true) - NO MOVEMENT
+        // Small horses (isGuardian: false) - WILL MOVE
         const herd = [
-            // GUARDIAN HORSES - STAND COMPLETELY STILL
             { x: 0.07, y: 0.74, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: false, isGuardian: true, phase: 0 },
             { x: 0.93, y: 0.74, s: 0.95, coat: '#1a0a0e', mane: '#2a1420', pose: 'guardian', flip: true, isGuardian: true, phase: 0 },
-            // SMALL HORSES - WILL MOVE AND GRAZE
             { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false, isGuardian: false, phase: 0.2 },
             { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'sentinel', flip: true, isGuardian: false, phase: 0.5 },
             { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false, isGuardian: false, phase: 0.8 },
@@ -327,6 +317,7 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false, phase: 2.3 },
         ];
         
+        // Lantern colors
         const sectionColors = [
             { name: 'About', baseHue: 45, shiftSpeed: 0.3 },
             { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4 },
@@ -385,11 +376,11 @@
             });
         }
         
-        // OPTIMIZED RENDER FUNCTION
+        // RENDER FUNCTION
         function render() {
             ctx.clearRect(0, 0, W, H);
             
-            // Sky gradient
+            // Sky
             const sg = ctx.createLinearGradient(0, 0, 0, H);
             sg.addColorStop(0, `#0a0a2a`);
             sg.addColorStop(0.3, `#151540`);
@@ -398,14 +389,14 @@
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
-            // Simplified aurora for performance
+            // Aurora
             for (let b = 0; b < 3; b++) {
                 const bandY = H * 0.15 + b * 50;
                 ctx.fillStyle = `rgba(100,70,150,${0.04 - b * 0.01})`;
                 ctx.fillRect(0, bandY - 15, W, 50);
             }
             
-            // Draw moon
+            // Moon
             const moonX = W * 0.78, moonY = H * 0.16;
             drawRealisticMoon(moonX, moonY, 40);
             ctx.shadowBlur = 0;
@@ -414,7 +405,7 @@
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
-                ctx.globalAlpha = s.ba * tw * 0.5;
+                ctx.globalAlpha = s.ba * tw * 0.6;
                 ctx.beginPath();
                 ctx.arc(s.x * W, s.y * H, s.r * tw * 0.5, 0, Math.PI * 2);
                 ctx.fill();
@@ -431,7 +422,7 @@
             
             // Grass
             grass.forEach(g => {
-                const sw = Math.sin(t * g.sp + g.off) * 6;
+                const sw = Math.sin(t * g.sp + g.off) * 7;
                 ctx.strokeStyle = g.color;
                 ctx.lineWidth = 0.6;
                 ctx.beginPath();
@@ -440,7 +431,7 @@
                 ctx.stroke();
             });
             
-            // Draw ALL horses - Guardians stand still, small horses move
+            // Draw ALL horses
             herd.forEach(h => {
                 drawHorse(h.x * W + (mx - 0.5) * 25 * h.s, 
                          h.y * H + (my - 0.5) * 10 * h.s, 
@@ -526,7 +517,7 @@
             if (titleOverlay) titleOverlay.style.opacity = idle ? '0.3' : '0.95';
             if (hintOverlay) hintOverlay.style.opacity = idle ? '0' : '0.7';
             
-            animationId = requestAnimationFrame(animate);
+            requestAnimationFrame(animate);
         }
         
         animate();
