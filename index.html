@@ -9,32 +9,11 @@
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
-  <!-- Open Graph / Social -->
   <meta property="og:title" content="The Horseman's Journal">
   <meta property="og:description" content="Eleven years of horsemanship. Trust, not force.">
   <meta property="og:image" content="og-image.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "The Horseman's Journal",
-    "url": "https://thehorsemansjournal.com",
-    "description": "Eleven years of horsemanship wisdom. Trust, psychology, and the bond with horses.",
-    "author": {
-      "@type": "Person",
-      "name": "Praveen Kumar"
-    },
-    "copyrightHolder": {
-      "@type": "Person",
-      "name": "Praveen Kumar"
-    },
-    "copyrightYear": "2026"
-  }
-  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,623 +22,6 @@
   <link rel="stylesheet" href="global.css">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  
-  <style>
-    /* Additional styles specific to index page */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #020108;
-      color: #f0ede0;
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-    }
-
-    /* GLOSSY HERO SECTION - GOLD + AMBER (NO YELLOW) */
-    .sanctuary { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-    #worldCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .title-overlay {
-      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
-      z-index: 5; text-align: center; pointer-events: none; transition: opacity 1.8s ease;
-      filter: drop-shadow(0 0 40px rgba(212,175,55,0.25));
-    }
-    .main-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700;
-      background: linear-gradient(135deg, #D4AF37 0%, #B8860B 25%, #FFD700 50%, #CD7F32 75%, #D4AF37 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 6px;
-      text-shadow: 0 0 20px rgba(212,175,55,0.5);
-      animation: titleGlow 3s ease-in-out infinite, glossySweep 8s linear infinite;
-      margin-bottom: .6rem;
-    }
-    @keyframes glossySweep {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes titleGlow {
-      0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); text-shadow: 0 0 8px rgba(212,175,55,0.5); }
-      50% { filter: drop-shadow(0 0 35px rgba(212,175,55,0.8)); text-shadow: 0 0 20px rgba(212,175,55,0.9); }
-    }
-    .main-subtitle { 
-      font-family: 'Cinzel', serif; font-size: .6rem; letter-spacing: 10px;
-      background: linear-gradient(120deg, rgba(212,175,55,0.9), rgba(184,134,11,0.7));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-transform: uppercase;
-      animation: fadeInUp 1.2s ease forwards;
-      opacity: 0;
-      animation-delay: .5s;
-    }
-    .main-desc { 
-      font-family: 'EB Garamond', serif; font-style: italic; font-size: clamp(.85rem, 1.4vw, 1rem);
-      background: linear-gradient(135deg, #D4AF37, #B8860B);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 1px;
-      animation: fadeInUp 1.2s ease forwards;
-      opacity: 0;
-      animation-delay: .7s;
-    }
-    .sanctuary::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(24px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    .hint-overlay { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 5; pointer-events: none; transition: opacity 1.2s ease; }
-    .hint-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .78rem; color: rgba(240,230,200,0.3); letter-spacing: 1px; text-align: center; }
-    .hint-arrow { display: block; text-align: center; margin-top: 4px; font-size: .7rem; color: rgba(212,175,55,0.3); animation: hintBounce 2.5s ease-in-out infinite; }
-    @keyframes hintBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
-    #lanterns { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 8; }
-    @keyframes lanternBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-    /* GREAT HALL SECTION - unchanged */
-    .great-hall {
-      position: relative;
-      background: linear-gradient(180deg, #08061a 0%, #050310 20%, #030108 50%, #020106 100%);
-      padding: 5rem 2rem 4rem;
-      z-index: 10;
-    }
-    .hall-bg-particles { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-    .hall-bg-particle {
-      position: absolute; width: 1px; height: 1px; background: rgba(212,175,55,0.15); border-radius: 50%;
-      animation: hallParticleRise 12s linear infinite;
-    }
-    @keyframes hallParticleRise {
-      0% { transform: translateY(0) translateX(0); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 0.5; }
-      100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
-    }
-    .hall-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
-    .hall-header { text-align: center; margin-bottom: 5rem; }
-    .hall-ornament { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 2rem; }
-    .hall-oln { flex: 1; max-width: 100px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,160,60,0.45)); }
-    .hall-oln-r { background: linear-gradient(90deg, rgba(200,160,60,0.45), transparent); }
-    .hall-gem { width: 7px; height: 7px; background: #D4AF37; transform: rotate(45deg); box-shadow: 0 0 14px rgba(212,175,55,0.7); flex-shrink: 0; }
-    .hall-heading { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; color: #ffffff; letter-spacing: 4px; text-shadow: 0 0 50px rgba(212,175,55,0.2); margin-bottom: 1rem; }
-    .hall-sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: .95rem; color: rgba(240,230,200,0.3); letter-spacing: .5px; }
-
-    .hall-cards { display: flex; flex-direction: column; gap: 0; }
-    .hall-card {
-      position: relative; display: flex; align-items: center; gap: 2.5rem;
-      padding: 2.8rem 3rem; cursor: pointer; text-decoration: none; color: inherit;
-      transition: all .5s cubic-bezier(.23,1,.32,1);
-      border-bottom: .5px solid rgba(200,160,60,0.06); overflow: hidden;
-    }
-    .hall-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 50%, var(--glow, rgba(200,150,50,0.03)), transparent 80%); opacity: 0; transition: opacity .5s ease; }
-    .hall-card::after { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 2px; height: 0; background: var(--color, #D4AF37); transition: height .4s ease; box-shadow: 0 0 10px var(--color, #D4AF37); }
-    .hall-card:hover::before { opacity: 1; }
-    .hall-card:hover::after { height: 60%; }
-    .hall-card:hover { background: rgba(20,15,40,0.3); padding-left: 3.5rem; }
-    .hall-card-num { font-family: 'Cinzel Decorative', serif; font-size: 3.5rem; color: rgba(200,160,60,0.08); flex-shrink: 0; width: 70px; text-align: center; transition: all .5s ease; line-height: 1; }
-    .hall-card:hover .hall-card-num { color: var(--color, rgba(200,160,60,0.3)); text-shadow: 0 0 30px var(--glow-color, rgba(200,150,50,0.2)); transform: scale(1.1); }
-    .hall-card-info { flex: 1; }
-    .hall-card-name { font-family: 'Cinzel', serif; font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 600; color: #e8dfc7; letter-spacing: 3px; margin-bottom: .5rem; transition: all .5s ease; }
-    .hall-card:hover .hall-card-name { color: var(--color, #D4AF37); text-shadow: 0 0 20px var(--glow-color, rgba(200,150,50,0.3)); letter-spacing: 4px; }
-    .hall-card-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: .9rem; color: rgba(240,230,200,0.35); letter-spacing: .3px; line-height: 1.5; transition: color .5s ease; }
-    .hall-card:hover .hall-card-desc { color: rgba(240,230,200,0.55); }
-    .hall-card-icon { font-size: 2rem; opacity: 0.2; flex-shrink: 0; transition: all .5s ease; }
-    .hall-card:hover .hall-card-icon { opacity: 0.6; transform: scale(1.2); }
-    .hall-card-arrow { font-family: 'Cinzel', serif; font-size: .55rem; letter-spacing: 4px; color: rgba(200,160,60,0); text-transform: uppercase; flex-shrink: 0; transition: all .5s ease; white-space: nowrap; }
-    .hall-card:hover .hall-card-arrow { color: var(--color, #D4AF37); }
-
-    /* BOOK SHOWCASE */
-    .book-showcase {
-      position: relative;
-      background: linear-gradient(180deg, #030108 0%, #020106 100%);
-      padding: 5rem 2rem;
-      z-index: 10;
-    }
-    .book-showcase-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .book-showcase-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .book-header-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 1.5rem;
-    }
-    .book-h-oln {
-      flex: 1;
-      max-width: 80px;
-      height: .5px;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4));
-    }
-    .book-h-oln-r {
-      background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
-    }
-    .book-h-gem {
-      width: 6px;
-      height: 6px;
-      background: #D4AF37;
-      transform: rotate(45deg);
-      box-shadow: 0 0 12px rgba(212,175,55,0.6);
-    }
-    .book-showcase-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: #D4AF37;
-      letter-spacing: 4px;
-      margin-bottom: 0.5rem;
-    }
-    .book-showcase-subtitle {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: rgba(240,230,200,0.45);
-    }
-    
-    .book-showcase-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    
-    .book-cover-premium {
-      position: relative;
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto;
-      perspective: 1200px;
-    }
-    .book-premium-cover {
-      background: linear-gradient(145deg, #2a1a0a, #1a0f02);
-      border-radius: 8px 4px 4px 8px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,175,55,0.15);
-      position: relative;
-      transform: rotateY(-5deg) rotateX(5deg);
-      transition: transform 0.4s ease;
-    }
-    .book-cover-premium:hover .book-premium-cover {
-      transform: rotateY(-3deg) rotateX(3deg) translateY(-8px);
-      box-shadow: 0 30px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(212,175,55,0.25);
-    }
-    .book-premium-cover::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      border: 1px solid rgba(212,175,55,0.12);
-      border-radius: 4px;
-      pointer-events: none;
-    }
-    .book-premium-spine {
-      position: absolute;
-      left: -12px;
-      top: 5px;
-      bottom: 5px;
-      width: 12px;
-      background: linear-gradient(180deg, #D4AF37, #8a6010, #D4AF37);
-      border-radius: 2px 0 0 2px;
-    }
-    .book-premium-pages {
-      position: absolute;
-      right: -6px;
-      top: 8px;
-      bottom: 8px;
-      width: 6px;
-      background: linear-gradient(180deg, #f5efd4, #d4c8a0);
-      border-radius: 0 2px 2px 0;
-      opacity: 0.6;
-    }
-    .book-premium-icon {
-      font-size: 3.5rem;
-      margin-bottom: 0.8rem;
-      filter: drop-shadow(0 0 12px rgba(212,175,55,0.3));
-    }
-    .book-premium-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #D4AF37;
-      letter-spacing: 3px;
-      line-height: 1.3;
-      margin-bottom: 0.5rem;
-    }
-    .book-premium-subtitle {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.5);
-    }
-    .book-premium-divider {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
-      margin: 0.8rem auto;
-    }
-    .book-premium-author {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 3px;
-      color: rgba(212,175,55,0.5);
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
-    .book-premium-badge {
-      display: inline-block;
-      background: rgba(212,175,55,0.08);
-      border: 1px solid rgba(212,175,55,0.2);
-      border-radius: 20px;
-      padding: 0.2rem 0.8rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.45rem;
-      letter-spacing: 2px;
-      color: #D4AF37;
-    }
-    
-    .book-details {
-      text-align: left;
-    }
-    .book-rating {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-    .stars {
-      font-size: 0.9rem;
-      color: #D4AF37;
-      letter-spacing: 2px;
-    }
-    .rating-text {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      color: rgba(240,230,200,0.4);
-      text-transform: uppercase;
-    }
-    .book-description-premium {
-      font-family: 'EB Garamond', serif;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(240,230,200,0.75);
-      margin-bottom: 1.5rem;
-    }
-    .book-specs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .spec {
-      background: rgba(212,175,55,0.06);
-      border: 1px solid rgba(212,175,55,0.12);
-      border-radius: 30px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.7rem;
-      font-family: 'Cinzel', serif;
-      color: rgba(240,230,200,0.6);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .spec span {
-      font-size: 0.8rem;
-    }
-    .book-price {
-      margin-bottom: 1.5rem;
-      padding: 0.8rem 0;
-      border-top: 1px solid rgba(212,175,55,0.1);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
-    }
-    .price-amount {
-      font-family: 'Cinzel', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #D4AF37;
-      display: block;
-    }
-    .price-note {
-      font-size: 0.6rem;
-      color: rgba(240,230,200,0.3);
-      display: block;
-    }
-    .book-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .btn-discover {
-      background: #D4AF37;
-      color: #0a0500;
-      padding: 12px 28px;
-      border-radius: 40px;
-      text-decoration: none;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      transition: all 0.3s;
-      display: inline-block;
-    }
-    .btn-discover:hover {
-      background: #e6c34c;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(212,175,55,0.3);
-    }
-    .btn-preview {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.4);
-      color: #D4AF37;
-      padding: 12px 28px;
-      border-radius: 40px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .btn-preview:hover {
-      background: rgba(212,175,55,0.1);
-      border-color: #D4AF37;
-      transform: translateY(-2px);
-    }
-    .payment-methods {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-    }
-    .payment-badge {
-      font-size: 0.55rem;
-      color: rgba(240,230,200,0.35);
-      font-family: 'Cinzel', serif;
-    }
-    .book-guarantee {
-      font-size: 0.55rem;
-      color: rgba(240,230,200,0.25);
-      text-align: center;
-      padding-top: 0.5rem;
-    }
-
-    /* CONTACT SECTION WITH CORRECT LOGOS */
-    .contact {
-      position: relative;
-      background: linear-gradient(180deg, #020106 0%, #030208 100%);
-      padding: 5rem 2rem 6rem;
-      z-index: 10;
-      text-align: center;
-      border-top: .5px solid rgba(200,160,60,0.06);
-    }
-    .contact-inner { max-width: 600px; margin: 0 auto; }
-    .contact-ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 2rem; }
-    .contact-oln { flex: 1; max-width: 60px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,160,60,0.3)); }
-    .contact-oln-r { background: linear-gradient(90deg, rgba(200,160,60,0.3), transparent); }
-    .contact-gem { width: 5px; height: 5px; background: rgba(200,160,60,0.5); transform: rotate(45deg); }
-    .contact-heading { font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 600; letter-spacing: 4px; color: #D4AF37; text-transform: uppercase; margin-bottom: 2.5rem; text-shadow: 0 0 15px rgba(212,175,55,0.2); }
-    .contact-links { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-    .contact-link {
-      display: flex; flex-direction: column; align-items: center; gap: .8rem;
-      text-decoration: none; color: rgba(240,230,200,0.4); transition: all .4s ease;
-    }
-    .contact-link:hover { color: #D4AF37; transform: translateY(-4px); }
-    .contact-link-icon {
-      width: 52px; height: 52px; border-radius: 50%;
-      border: 1px solid rgba(200,160,60,0.2); display: flex; align-items: center; justify-content: center;
-      transition: all .4s ease; background: rgba(20,15,40,0.4);
-    }
-    .contact-link-icon svg {
-      width: 26px;
-      height: 26px;
-      fill: currentColor;
-    }
-    .contact-link:hover .contact-link-icon { border-color: rgba(200,160,60,0.5); box-shadow: 0 0 25px rgba(200,160,60,0.15); background: rgba(30,20,50,0.5); }
-    .contact-link-label { font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 3px; text-transform: uppercase; }
-    .contact-link-value { font-family: 'EB Garamond', serif; font-style: italic; font-size: .75rem; color: rgba(240,230,200,0.3); }
-
-    .hall-footer { text-align: center; margin-top: 2rem; padding-top: 2rem; }
-    .hall-footer-ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 1.5rem; }
-    .hall-fo { flex: 1; max-width: 60px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,160,60,0.25)); }
-    .hall-fo-r { background: linear-gradient(90deg, rgba(200,160,60,0.25), transparent); }
-    .hall-fg { width: 5px; height: 5px; background: rgba(200,160,60,0.4); transform: rotate(45deg); }
-    .hall-footer-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: .8rem; color: rgba(240,230,200,0.18); letter-spacing: .5px; }
-
-    /* NEW SECTIONS */
-    .extra-sections {
-      background: linear-gradient(180deg, #030108 0%, #020106 100%);
-      padding: 3rem 2rem;
-      border-top: 0.5px solid rgba(200,160,60,0.1);
-      border-bottom: 0.5px solid rgba(200,160,60,0.1);
-    }
-    .extra-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 3rem;
-      justify-content: space-between;
-    }
-    .newsletter-box, .contact-form-box {
-      flex: 1;
-      min-width: 260px;
-      background: rgba(20,15,40,0.3);
-      backdrop-filter: blur(4px);
-      padding: 1.8rem;
-      border-radius: 8px;
-      border: 1px solid rgba(212,175,55,0.15);
-    }
-    .newsletter-box h3, .contact-form-box h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      letter-spacing: 3px;
-      color: #D4AF37;
-      margin-bottom: 1.2rem;
-      text-transform: uppercase;
-    }
-    .newsletter-form input, .contact-form input, .contact-form textarea {
-      width: 100%;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(212,175,55,0.3);
-      padding: 0.8rem;
-      margin-bottom: 1rem;
-      color: #f0ede0;
-      font-family: 'EB Garamond', serif;
-      border-radius: 4px;
-    }
-    .newsletter-form button, .contact-form button {
-      background: #D4AF37;
-      color: #0a0500;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-family: 'Cinzel', serif;
-      font-weight: bold;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.3s;
-      border-radius: 40px;
-    }
-    .newsletter-form button:hover, .contact-form button:hover {
-      background: #e6c34c;
-      transform: translateY(-2px);
-    }
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #0a0718e6;
-      backdrop-filter: blur(10px);
-      padding: 1rem;
-      text-align: center;
-      z-index: 1000;
-      font-family: 'EB Garamond', serif;
-      font-size: 0.8rem;
-      border-top: 1px solid rgba(212,175,55,0.3);
-      transform: translateY(100%);
-      transition: transform 0.4s ease;
-    }
-    .cookie-consent.show {
-      transform: translateY(0);
-    }
-    .cookie-consent a {
-      color: #D4AF37;
-    }
-    .cookie-consent button {
-      background: #D4AF37;
-      border: none;
-      margin-left: 0.5rem;
-      padding: 0.3rem 1rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .cookie-consent .decline {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.5);
-      color: #D4AF37;
-    }
-    .footer-links {
-      text-align: center;
-      margin-top: 2rem;
-      padding-bottom: 2rem;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.3);
-    }
-    .footer-links a {
-      color: #D4AF37;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    .copyright {
-      text-align: center;
-      margin-top: 1rem;
-      padding-bottom: 2rem;
-      font-size: 0.65rem;
-      color: rgba(240,230,200,0.2);
-      border-top: 0.5px solid rgba(212,175,55,0.08);
-      padding-top: 1.5rem;
-    }
-
-    @media (max-width: 860px) {
-      .great-hall { padding: 2rem 1rem 3rem; }
-      .hall-card { padding: 1rem 0.8rem; gap: 0.5rem; flex-wrap: wrap; }
-      .hall-card-num { font-size: 1.2rem; width: 25px; }
-      .hall-card-name { font-size: 0.75rem; letter-spacing: 1px; }
-      .hall-card-icon { font-size: 1rem; }
-      .hall-card-desc { font-size: 0.65rem; }
-      .hall-card-arrow { display: none; }
-      .hall-card:hover { padding-left: 0.8rem; }
-      .contact-links { gap: 1rem; flex-wrap: wrap; }
-      .contact-link-icon { width: 40px; height: 40px; }
-      .contact-link-icon svg { width: 20px; height: 20px; }
-      .contact-link-label { font-size: 0.45rem; }
-      .book-showcase-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
-      }
-      .book-details {
-        text-align: center;
-      }
-      .book-specs {
-        justify-content: center;
-      }
-      .book-rating {
-        justify-content: center;
-      }
-      .book-actions {
-        justify-content: center;
-      }
-      .payment-methods {
-        justify-content: center;
-      }
-      .book-cover-premium {
-        max-width: 260px;
-      }
-      .extra-grid { flex-direction: column; gap: 1.5rem; }
-    }
-  </style>
 </head>
 <body>
 
@@ -758,81 +120,47 @@
   </section>
 
   <section class="book-showcase">
-    <div class="book-showcase-inner">
-      <div class="book-showcase-header">
-        <div class="book-header-ornament">
-          <div class="book-h-oln"></div>
-          <div class="book-h-gem"></div>
-          <div class="book-h-oln book-h-oln-r"></div>
+    <div class="book-inner">
+      <div class="book-3d-wrapper">
+        <div class="book-3d">
+          <div class="book-spine"></div>
+          <div class="book-cover">
+            <div class="book-pages-edge"></div>
+            <div class="book-icon">🐴</div>
+            <div class="book-title-cover">THE HORSEMAN'S<br>JOURNAL</div>
+            <div class="book-subtitle-cover">A Conversation in Silence</div>
+            <div class="book-author-cover">PRAVEEN KUMAR</div>
+          </div>
         </div>
-        <h2 class="book-showcase-title">The Horseman's Journal</h2>
-        <p class="book-showcase-subtitle">A Conversation in Silence</p>
       </div>
-      
-      <div class="book-showcase-grid">
-        <div class="book-cover-premium">
-          <div class="book-premium-spine"></div>
-          <div class="book-premium-cover">
-            <div class="book-premium-icon">🐴</div>
-            <h3 class="book-premium-title">THE HORSEMAN'S<br>JOURNAL</h3>
-            <p class="book-premium-subtitle">A Conversation in Silence</p>
-            <div class="book-premium-divider"></div>
-            <p class="book-premium-author">PRAVEEN KUMAR</p>
-            <div class="book-premium-badge">✦ LIMITED EDITION ✦</div>
-          </div>
-          <div class="book-premium-pages"></div>
+      <div class="book-info">
+        <h3>The Horseman's Journal</h3>
+        <h4>A Conversation in Silence</h4>
+        <p>Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. This is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human.</p>
+        <div class="book-meta">
+          <span>📖 400 Pages</span>
+          <span>📚 A5 Format</span>
+          <span>✨ 15 Articles + 11 Essays</span>
+          <span>🏆 11 Years of Wisdom</span>
         </div>
-        
-        <div class="book-details">
-          <div class="book-rating">
-            <span class="stars">★★★★★</span>
-            <span class="rating-text">5.0 · Reader Reviews</span>
-          </div>
-          
-          <p class="book-description-premium">
-            Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses. 
-            This is not a training manual. It is a conversation — about trust, about fear, 
-            about the invisible bond between horse and human.
-          </p>
-          
-          <div class="book-specs">
-            <div class="spec"><span>📖</span> 400 Pages</div>
-            <div class="spec"><span>📚</span> A5 Format</div>
-            <div class="spec"><span>✨</span> 15 Articles + 11 Essays</div>
-            <div class="spec"><span>🏆</span> 11 Years of Wisdom</div>
-          </div>
-          
-          <div class="book-price">
-            <span class="price-amount">$10.99 USD</span>
-            <span class="price-note">includes immediate PDF download</span>
-          </div>
-          
-          <div class="book-actions">
-            <a href="book.html" class="btn-discover">✦ DISCOVER THE BOOK ✦</a>
-            <button class="btn-preview" id="previewBookBtn">📖 FREE SAMPLE</button>
-          </div>
-          
-          <div class="payment-methods">
-            <div class="payment-badge">✓ PayPal (Global)</div>
-            <div class="payment-badge">✓ UPI (India)</div>
-            <div class="payment-badge">✓ Secure Checkout</div>
-            <div class="payment-badge">✓ Instant Download</div>
-          </div>
-          
-          <p class="book-guarantee">🔒 30-Day Money-Back Guarantee · No questions asked</p>
+        <div class="book-buttons">
+          <a href="book.html" class="book-btn-primary">✦ DISCOVER THE BOOK ✦</a>
+          <button class="book-btn-secondary" id="previewBookBtn">📖 FREE SAMPLE</button>
+        </div>
+        <div style="margin-top: 1rem; font-size: 0.7rem; color: rgba(240,230,200,0.3);">
+          <span>$10.99 USD · Instant PDF Download</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter + Contact Form Section -->
   <div class="extra-sections">
     <div class="extra-grid">
       <div class="newsletter-box">
         <h3>✦ The Herd's Letter ✦</h3>
         <p style="font-family: 'EB Garamond'; font-size: 0.85rem; margin-bottom: 1rem;">Weekly wisdom from the arena. No spam, only silence and hoofbeats.</p>
         <form class="newsletter-form" action="https://formspree.io/f/YOUR_NEWSLETTER_ENDPOINT" method="POST">
-          <input type="email" name="email" placeholder="Your email address" required aria-label="Email for newsletter">
+          <input type="email" name="email" placeholder="Your email address" required>
           <button type="submit">Subscribe →</button>
         </form>
         <p style="font-size: 0.6rem; margin-top: 1rem; opacity: 0.5;">Unsubscribe anytime.</p>
@@ -849,7 +177,6 @@
     </div>
   </div>
 
-  <!-- Contact Section with CORRECT SVG LOGOS -->
   <section class="contact">
     <div class="contact-inner">
       <div class="contact-ornament"><div class="contact-oln"></div><div class="contact-gem"></div><div class="contact-oln contact-oln-r"></div></div>
@@ -857,8 +184,10 @@
       <div class="contact-links">
         <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener">
           <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+              <path d="M12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162z"/>
+              <circle cx="18.406" cy="5.595" r="1.44"/>
             </svg>
           </div>
           <span class="contact-link-label">Instagram</span>
@@ -866,8 +195,9 @@
         </a>
         <a href="#" class="contact-link" id="whatsappLink">
           <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24">
-              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91zm0 18.23c-1.5 0-2.98-.4-4.26-1.17l-.31-.18-3.11.82.83-3.04-.2-.32c-.82-1.35-1.25-2.89-1.25-4.47 0-4.59 3.74-8.33 8.33-8.33 4.59 0 8.33 3.74 8.33 8.33 0 4.59-3.74 8.33-8.33 8.33zm4.56-6.24c-.25-.12-1.47-.73-1.7-.81-.23-.08-.4-.12-.57.12-.17.24-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.38-.78-1.89-.2-.5-.41-.42-.57-.43h-.48c-.17 0-.44.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28z"/>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.91-9.91-9.91z"/>
+              <path d="M16.6 13.76c-.25-.12-1.47-.73-1.7-.81-.23-.08-.4-.12-.57.12-.17.24-.66.81-.81.98-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.51.11-.11.25-.29.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.38-.78-1.89-.2-.5-.41-.42-.57-.43h-.48c-.17 0-.44.06-.66.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.64 4.19 3.7.59.25 1.04.4 1.4.51.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28z"/>
             </svg>
           </div>
           <span class="contact-link-label">WhatsApp</span>
@@ -875,7 +205,7 @@
         </a>
         <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">
           <div class="contact-link-icon">
-            <svg viewBox="0 0 24 24" width="24" height="24">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
           </div>
@@ -886,7 +216,6 @@
     </div>
   </section>
 
-  <!-- Footer with Copyright, Privacy Policy, Sitemap -->
   <div class="footer-links">
     <a href="privacy.html">Privacy Policy</a> • 
     <a href="sitemap.xml">Sitemap</a> • 
@@ -896,316 +225,57 @@
     © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
   </div>
 
-  <!-- Cookie Consent Banner -->
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
     <button id="acceptCookies">Accept</button>
     <button id="declineCookies" class="decline">Decline</button>
   </div>
 
+  <script src="global.js"></script>
   <script>
-    // Current year for copyright
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // ============================================================
-    // COMPLETE CANVAS ANIMATION - WITH LIGHTER SKY
-    // ============================================================
-    const canvas = document.getElementById('worldCanvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, mx = 0.5, my = 0.5, t = 0;
-    let isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
-    
-    const particleCount = isMobile ? 180 : 350;
-    const grassCount = isMobile ? 300 : 600;
-    const flyCount = isMobile ? 25 : 45;
+    const portalBtn = document.getElementById('portalBtn');
+    if (portalBtn) {
+      portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
-    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-    resize();
-    addEventListener('resize', resize);
-    addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+    const previewBtn = document.getElementById('previewBookBtn');
+    if (previewBtn) {
+      previewBtn.addEventListener('click', () => window.open('sample.pdf', '_blank'));
+    }
 
-    const stars = Array.from({length: particleCount}, () => ({
-      x: Math.random(), y: Math.random() * 0.55,
-      r: Math.random() * 1.6 + 0.2, sp: Math.random() * 0.018 + 0.004,
-      off: Math.random() * Math.PI * 2, ba: Math.random() * 0.65 + 0.2
-    }));
-    const grass = Array.from({length: grassCount}, () => ({
-      x: Math.random(), by: 0.68 + Math.random() * 0.32,
-      h: Math.random() * 35 + 10, sp: Math.random() * 0.018 + 0.004,
-      off: Math.random() * Math.PI * 2
-    }));
-    const flies = Array.from({length: flyCount}, () => ({
-      x: Math.random(), y: 0.68 + Math.random() * 0.28,
-      r: Math.random() * 1.4 + 0.4, sp: Math.random() * 0.25 + 0.08,
-      ph: Math.random() * Math.PI * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.25
-    }));
-
-    function drawRealisticMoon(x, y, radius, time) {
-      const glowGrad = ctx.createRadialGradient(x, y, radius * 0.5, x, y, radius * 1.8);
-      glowGrad.addColorStop(0, 'rgba(255,240,200,0.15)');
-      glowGrad.addColorStop(0.5, 'rgba(255,220,160,0.08)');
-      glowGrad.addColorStop(1, 'rgba(255,200,120,0)');
-      ctx.fillStyle = glowGrad;
-      ctx.beginPath();
-      ctx.arc(x, y, radius * 1.8, 0, Math.PI * 2);
-      ctx.fill();
-      
-      const moonGrad = ctx.createRadialGradient(x - radius * 0.2, y - radius * 0.2, radius * 0.2, x, y, radius);
-      moonGrad.addColorStop(0, 'rgba(255,245,220,0.95)');
-      moonGrad.addColorStop(0.6, 'rgba(245,225,180,0.85)');
-      moonGrad.addColorStop(1, 'rgba(220,190,140,0.75)');
-      ctx.fillStyle = moonGrad;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fill();
-      
-      ctx.shadowBlur = 0;
-      const craters = [
-        { cx: -radius * 0.35, cy: -radius * 0.25, r: radius * 0.12 },
-        { cx: radius * 0.4, cy: -radius * 0.15, r: radius * 0.1 },
-        { cx: radius * 0.15, cy: radius * 0.3, r: radius * 0.08 },
-        { cx: -radius * 0.2, cy: radius * 0.35, r: radius * 0.06 },
-        { cx: -radius * 0.5, cy: radius * 0.1, r: radius * 0.07 },
-        { cx: radius * 0.3, cy: radius * 0.1, r: radius * 0.05 },
-        { cx: -radius * 0.1, cy: -radius * 0.45, r: radius * 0.05 },
-        { cx: radius * 0.5, cy: -radius * 0.4, r: radius * 0.04 },
-      ];
-      
-      craters.forEach(crater => {
-        const craterX = x + crater.cx;
-        const craterY = y + crater.cy;
-        const craterR = crater.r;
-        ctx.fillStyle = 'rgba(180,150,100,0.4)';
-        ctx.beginPath();
-        ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = 'rgba(255,245,220,0.3)';
-        ctx.beginPath();
-        ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.4, craterR * 0.25, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = 'rgba(100,80,50,0.25)';
-        ctx.beginPath();
-        ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.3, craterR * 0.2, 0, 0, Math.PI * 2);
-        ctx.fill();
+    const whatsappLink = document.getElementById('whatsappLink');
+    if (whatsappLink) {
+      whatsappLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        const number = document.getElementById('whatsappNumber').innerText;
+        if (number && number !== '[ADD YOUR NUMBER]') {
+          window.open(`https://wa.me/${number.replace(/[^0-9]/g, '')}`, '_blank');
+        } else {
+          alert('Please add your WhatsApp number in the HTML');
+        }
       });
-      for (let i = 0; i < 80; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const rad = Math.random() * radius * 0.9;
-        const dx = Math.cos(angle) * rad;
-        const dy = Math.sin(angle) * rad;
-        ctx.fillStyle = `rgba(160,130,80,${Math.random() * 0.2})`;
-        ctx.beginPath();
-        ctx.arc(x + dx, y + dy, Math.random() * 2, 0, Math.PI * 2);
-        ctx.fill();
-      }
     }
 
-    function horse(hx, hy, sc, coat, mane, pose, flip) {
-      ctx.save(); ctx.translate(hx, hy);
-      if (flip) ctx.scale(-sc, sc); else ctx.scale(sc, sc);
-      const br = Math.sin(t * 0.018 + hx * 0.01) * 1.5;
-      if (pose === 'sentinel') {
-        ctx.fillStyle = coat;
-        [-15, -3, 7, 17].forEach((lx, i) => ctx.fillRect(lx, 14, 4, 24));
-        ctx.beginPath(); ctx.ellipse(0, 4, 28, 13, 0, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(18, 0); ctx.quadraticCurveTo(28, -28, 24, -40); ctx.quadraticCurveTo(18, -28, 8, -2); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(24, -42, 8, 5, -0.1, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(24, -46); ctx.lineTo(22, -54); ctx.lineTo(20, -46); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(26, -46); ctx.lineTo(28, -54); ctx.lineTo(26, -46); ctx.fill();
-        ctx.strokeStyle = mane; ctx.lineWidth = 2.2;
-        ctx.beginPath(); ctx.moveTo(18, -4); ctx.quadraticCurveTo(22, -18, 26, -32); ctx.stroke();
-        const ts = Math.sin(t * 0.025) * 2;
-        ctx.strokeStyle = mane; ctx.lineWidth = 1.6;
-        ctx.beginPath(); ctx.moveTo(-26, 2); ctx.quadraticCurveTo(-34, -5, -32 + ts, -14); ctx.stroke();
-      } else if (pose === 'foreground') {
-        ctx.fillStyle = coat;
-        [-18, -4, 8, 20].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 28));
-        ctx.beginPath(); ctx.ellipse(0, 3, 34, 16, 0, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(22, -1); ctx.quadraticCurveTo(34, -32, 28, -46); ctx.quadraticCurveTo(20, -32, 10, -4); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(28, -48, 10, 6, -0.1, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(28, -53); ctx.lineTo(25, -62); ctx.lineTo(22, -53); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(30, -53); ctx.lineTo(33, -62); ctx.lineTo(30, -53); ctx.fill();
-        ctx.strokeStyle = mane; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(22, -5); ctx.quadraticCurveTo(28, -22, 32, -38); ctx.stroke();
-        const ts = Math.sin(t * 0.022) * 2.5;
-        ctx.strokeStyle = mane; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(-32, 1); ctx.quadraticCurveTo(-42, -6, -38 + ts, -16); ctx.stroke();
-      } else if (pose === 'nuzzle') {
-        ctx.fillStyle = coat;
-        [-14, -2, 8, 18].forEach((lx, i) => ctx.fillRect(lx, 16 + (i%2?br:-br), 4, 20));
-        ctx.beginPath(); ctx.ellipse(0, 5, 26, 12, 0, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(16, 1); ctx.quadraticCurveTo(28, -14, 26, -24); ctx.quadraticCurveTo(18, -18, 6, 3); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(26, -26, 7, 5, -0.15, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(26, -30); ctx.lineTo(25, -37); ctx.lineTo(23, -30); ctx.fill();
-        ctx.strokeStyle = mane; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(16, -2); ctx.quadraticCurveTo(20, -10, 24, -20); ctx.stroke();
-        const ts = Math.sin(t * 0.02) * 2;
-        ctx.strokeStyle = mane; ctx.lineWidth = 1.4;
-        ctx.beginPath(); ctx.moveTo(-24, 3); ctx.quadraticCurveTo(-30, -4, -28 + ts, -12); ctx.stroke();
-      } else {
-        ctx.fillStyle = coat;
-        [-14, -2, 8, 18].forEach((lx, i) => ctx.fillRect(lx, 16 + (i%2?br:-br), 4, 20));
-        ctx.beginPath(); ctx.ellipse(0, 5, 28, 13, 0, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(18, 1); ctx.quadraticCurveTo(32, 12, 26, 26); ctx.quadraticCurveTo(18, 20, 7, 3); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(28, 30, 8, 5, 0.25, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(30, 25); ctx.lineTo(32, 19); ctx.lineTo(27, 24); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(27, 26); ctx.lineTo(25, 20); ctx.lineTo(24, 26); ctx.fill();
-        ctx.strokeStyle = mane; ctx.lineWidth = 2.2;
-        ctx.beginPath(); ctx.moveTo(18, -3); ctx.quadraticCurveTo(24, 6, 28, 18); ctx.stroke();
-        const ts = Math.sin(t * 0.025 + hx * 0.03) * 3;
-        ctx.strokeStyle = mane; ctx.lineWidth = 1.6;
-        ctx.beginPath(); ctx.moveTo(-26, 3); ctx.quadraticCurveTo(-34, -3, -32 + ts, -12); ctx.stroke();
-      }
-      ctx.restore();
-    }
-
-    const herd = [
-      { x: 0.06, y: 0.83, s: 0.88, coat: '#0d0a0e', mane: '#1a1418', pose: 'sentinel', flip: false },
-      { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false },
-      { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true },
-      { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false },
-      { x: 0.50, y: 0.83, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false },
-      { x: 0.56, y: 0.84, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true },
-      { x: 0.68, y: 0.83, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'graze', flip: false },
-      { x: 0.82, y: 0.85, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false },
-      { x: 0.90, y: 0.78, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: true },
-      { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false },
-    ];
-
-    const sections = [
-      { name:'About', color:'#D4AF37', lx:0.16, ly:0.44, depth:0.6 },
-      { name:'Awakening', color:'#D4AF37', lx:0.34, ly:0.38, depth:0.7 },
-      { name:'Chronicles', color:'#D4AF37', lx:0.52, ly:0.34, depth:0.8 },
-      { name:'Companions', color:'#D4AF37', lx:0.68, ly:0.38, depth:0.65 },
-      { name:'Verses', color:'#D4AF37', lx:0.82, ly:0.42, depth:0.55 },
-      { name:'Questions', color:'#D4AF37', lx:0.90, ly:0.48, depth:0.5 },
-    ];
-
-    const lanternsDiv = document.getElementById('lanterns');
-    const lanternEls = [];
-    const pageMap = ['about.html','awakening.html','chronicles.html','companions.html','essays.html','questions.html'];
-    sections.forEach((s, i) => {
-      const el = document.createElement('div');
-      el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
-      el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:28px;border-radius:12px 12px 6px 6px;background:radial-gradient(circle at 50% 40%,rgba(255,240,200,0.5),${s.color} 70%,rgba(0,0,0,0.6) 100%);box-shadow:0 0 18px ${s.color},0 0 40px ${s.color}44;animation:lanternBob ${3+i*0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s;"></div><div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:rgba(200,180,150,0.4);"></div><div style="position:absolute;top:34px;left:50%;transform:translateX(-50%);width:1px;height:16px;background:rgba(200,180,150,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;">${s.name}</span></div>`;
-      const glowEl = el.querySelector('.lantern-glow');
-      const labelEl = el.querySelector('.lantern-label');
-      el.addEventListener('mouseenter', () => { glowEl.style.boxShadow = `0 0 35px ${s.color},0 0 70px ${s.color},0 0 100px ${s.color}66`; glowEl.style.filter = 'brightness(1.5)'; labelEl.style.opacity = '1'; });
-      el.addEventListener('mouseleave', () => { glowEl.style.boxShadow = `0 0 18px ${s.color},0 0 40px ${s.color}44`; glowEl.style.filter = 'brightness(1)'; labelEl.style.opacity = '0'; });
-      el.addEventListener('click', () => { location.href = pageMap[i]; });
-      lanternsDiv.appendChild(el);
-      lanternEls.push({ el, s });
-    });
-
-    function render() {
-      ctx.clearRect(0, 0, W, H);
-      // LIGHTER SKY GRADIENT
-      const sg = ctx.createLinearGradient(0, 0, 0, H);
-      sg.addColorStop(0, '#1a1628');
-      sg.addColorStop(0.3, '#201c30');
-      sg.addColorStop(0.55, '#2a2540');
-      sg.addColorStop(0.72, '#2f2a45');
-      sg.addColorStop(1, '#201e30');
-      ctx.fillStyle = sg; ctx.fillRect(0, 0, W, H);
-      
-      const ax = W * 0.45, ay = H * 0.2;
-      for (let b = 0; b < 5; b++) {
-        const bandY = ay + b * 35, bandAlpha = 0.04 - b * 0.006;
-        const bandGrad = ctx.createLinearGradient(0, bandY, 0, bandY + 60);
-        bandGrad.addColorStop(0, 'rgba(100,180,160,' + bandAlpha + ')'); bandGrad.addColorStop(0.3, 'rgba(160,120,200,' + bandAlpha + ')'); bandGrad.addColorStop(0.6, 'rgba(80,140,180,' + bandAlpha + ')'); bandGrad.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = bandGrad; ctx.beginPath(); ctx.moveTo(0, bandY - 20);
-        for (let i = 0; i <= 80; i++) { const nx = i / 80; ctx.lineTo(nx * W, bandY + Math.sin(nx * 4 + t * 0.008 + b * 1.5) * 25 + Math.sin(nx * 7 + t * 0.012) * 15); }
-        ctx.lineTo(W, bandY + 60); ctx.lineTo(0, bandY + 60); ctx.closePath(); ctx.fill();
-      }
-      
-      const moonX = W * 0.78, moonY = H * 0.16;
-      drawRealisticMoon(moonX, moonY, 38, t);
-      
-      ctx.shadowBlur = 0;
-      stars.forEach(s => { const tw = Math.sin(t * s.sp + s.off) * 0.3 + 0.7; ctx.fillStyle = 'rgba(255,255,255,' + (s.ba * tw) + ')'; ctx.shadowColor = 'rgba(255,255,255,' + (s.ba*tw*0.3) + ')'; ctx.shadowBlur = s.r; ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r * tw, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0; });
-      ctx.fillStyle = 'rgba(6,4,16,0.8)'; ctx.beginPath(); ctx.moveTo(0, H * 0.66);
-      for (let i = 0; i <= 60; i++) { const nx = i / 60; ctx.lineTo(nx * W, H * 0.62 - Math.sin(nx * 3.5) * H * 0.018 - Math.sin(nx * 7.2) * H * 0.012); }
-      ctx.lineTo(W, H * 0.66); ctx.closePath(); ctx.fill();
-      ['#0a0718','#0c0920','#0e0b22'].forEach((col, i) => { ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(0, H); for (let j = 0; j <= 80; j++) { const nx = j / 80; ctx.lineTo(nx * W, H * (0.72 + i * 0.06 - Math.sin(nx * (2 + i * 1.2) + i) * 0.04 - Math.sin(nx * (5 + i * 2)) * 0.02)); } ctx.lineTo(W, H); ctx.closePath(); ctx.fill(); });
-      const lakeY = H * 0.74;
-      const lakeGrad = ctx.createLinearGradient(0, lakeY, 0, lakeY + H * 0.04);
-      lakeGrad.addColorStop(0, 'rgba(15,20,40,0.5)'); lakeGrad.addColorStop(0.5, 'rgba(12,15,30,0.3)'); lakeGrad.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = lakeGrad; ctx.fillRect(0, lakeY, W, H * 0.04);
-      for (let i = 0; i < 50; i++) { ctx.fillStyle = 'rgba(255,255,255,' + (0.06 * (0.5 + 0.5 * Math.sin(t * 0.025 + i))) + ')'; ctx.beginPath(); ctx.arc((Math.sin(i * 127.3) * 0.5 + 0.5) * W, lakeY + 2 + Math.random() * H * 0.02, 0.5, 0, Math.PI*2); ctx.fill(); }
-      const mistGrad = ctx.createLinearGradient(0, H * 0.76, 0, H);
-      mistGrad.addColorStop(0, 'rgba(20,18,35,0)'); mistGrad.addColorStop(0.5, 'rgba(20,18,35,0.15)'); mistGrad.addColorStop(1, 'rgba(20,18,35,0.35)');
-      ctx.fillStyle = mistGrad; ctx.fillRect(0, H * 0.76, W, H * 0.24);
-      grass.forEach(g => { const sw = Math.sin(t * g.sp + g.off) * 7; const gr = 16 + Math.floor(Math.sin(g.x * 0.3) * 8); ctx.strokeStyle = 'rgba(' + (10 + Math.floor(Math.random() * 5)) + ',' + gr + ',8,' + (0.2 + Math.sin(t * 0.012 + g.off) * 0.1) + ')'; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.moveTo(g.x * W, g.by * H); ctx.quadraticCurveTo(g.x * W + sw * 0.4, g.by * H - g.h * 0.5, g.x * W + sw, g.by * H - g.h); ctx.stroke(); });
-      herd.filter(h => h.pose !== 'foreground').forEach(h => { horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip); });
-      flies.forEach(f => { f.x += Math.sin(t * 0.02 + f.ph) * f.dx; f.y += Math.cos(t * 0.022 + f.ph) * f.dy; f.x = ((f.x % 1) + 1) % 1; f.y = Math.max(0.66, Math.min(0.98, f.y)); const a = Math.abs(Math.sin(t * f.sp + f.ph)) * 0.5; ctx.fillStyle = 'rgba(220,255,180,' + a + ')'; ctx.shadowColor = 'rgba(180,255,120,' + (a * 0.5) + ')'; ctx.shadowBlur = 5; ctx.beginPath(); ctx.arc(f.x * W, f.y * H, f.r, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0; });
-      sections.forEach(s => { const lx = s.lx * W + (mx - 0.5) * 20 * s.depth; const ly = s.ly * H + (my - 0.5) * 10 * s.depth; const poolGrad = ctx.createRadialGradient(lx, ly + 30, 5, lx, ly + 30, 80); poolGrad.addColorStop(0, s.color + '22'); poolGrad.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = poolGrad; ctx.beginPath(); ctx.arc(lx, ly + 30, 80, 0, Math.PI*2); ctx.fill(); });
-      herd.filter(h => h.pose === 'foreground').forEach(h => { horse(h.x * W + (mx - 0.5) * 50, h.y * H + (my - 0.5) * 18, h.s, h.coat, h.mane, h.pose, h.flip); });
-    }
-
-    function updateLanterns() {
-      lanternEls.forEach(({ el, s }) => { const px = (mx - 0.5) * 25 * s.depth; const py = (my - 0.5) * 14 * s.depth; el.style.left = (s.lx * 100) + '%'; el.style.top = (s.ly * 100) + '%'; el.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`; });
-    }
-
-    const hallParticles = document.getElementById('hallParticles');
-    const hallParticleCount = isMobile ? 12 : 25;
-    for (let i = 0; i < hallParticleCount; i++) {
-      const p = document.createElement('div');
-      p.className = 'hall-bg-particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.top = Math.random() * 100 + '%';
-      p.style.animationDuration = (Math.random() * 12 + 10) + 's';
-      p.style.animationDelay = Math.random() * 15 + 's';
-      hallParticles.appendChild(p);
-    }
-
-    const titleOverlay = document.getElementById('titleOverlay');
-    const hintOverlay = document.getElementById('hintOverlay');
-    let lastMove = 0;
-    addEventListener('mousemove', () => { lastMove = t; });
-
-    let lastRender = 0;
-    let frameCount = 0;
-    
-    function animate(now) {
-      requestAnimationFrame(animate);
-      const targetFPS = isMobile ? 30 : 60;
-      const frameInterval = 1000 / targetFPS;
-      if (now - lastRender < frameInterval) return;
-      lastRender = now;
-      t++;
-      render();
-      updateLanterns();
-      frameCount++;
-      if (frameCount % 2 === 0) {
-        const idle = t - lastMove > 200;
-        titleOverlay.style.opacity = idle ? '0.3' : '0.9';
-        hintOverlay.style.opacity = idle ? '0' : '0.7';
-      }
-    }
-    requestAnimationFrame(animate);
-    addEventListener('resize', () => { resize(); });
-
-    document.getElementById('portalBtn').addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    document.getElementById('previewBookBtn').addEventListener('click', () => {
-      window.open('sample.pdf', '_blank');
-    });
-
-    // Cookie consent with Accept and Decline
     const cookieConsent = document.getElementById('cookieConsent');
-    if (!localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
+    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
       cookieConsent.classList.add('show');
     }
-    document.getElementById('acceptCookies').addEventListener('click', () => {
-      localStorage.setItem('cookiesAccepted', 'true');
-      cookieConsent.classList.remove('show');
-    });
-    document.getElementById('declineCookies').addEventListener('click', () => {
-      localStorage.setItem('cookiesDeclined', 'true');
-      cookieConsent.classList.remove('show');
-    });
+    const acceptBtn = document.getElementById('acceptCookies');
+    const declineBtn = document.getElementById('declineCookies');
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieConsent.classList.remove('show');
+      });
+    }
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesDeclined', 'true');
+        cookieConsent.classList.remove('show');
+      });
+    }
   </script>
 </body>
 </html>
