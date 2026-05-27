@@ -53,7 +53,7 @@
         function drawRealisticMoon(x, y, radius) {
             // Outer glow
             const glowGrad = ctx.createRadialGradient(x, y, radius * 0.5, x, y, radius * 1.8);
-            glowGrad.addColorStop(0, 'rgba(232,200,74,0.12)');
+            glowGrad.addColorStop(0, 'rgba(212,175,55,0.12)');
             glowGrad.addColorStop(0.5, 'rgba(200,150,50,0.06)');
             glowGrad.addColorStop(1, 'rgba(180,100,30,0)');
             ctx.fillStyle = glowGrad;
@@ -295,17 +295,17 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false },
         ];
         
-        // Sections for lanterns - UPDATED (Genesis → About)
+        // Sections for lanterns - UPDATED with gold color
         const sections = [
-            { name: 'About', color: '#c8922a', lx: 0.16, ly: 0.44, depth: 0.6 },
-            { name: 'Awakening', color: '#c97a8a', lx: 0.34, ly: 0.38, depth: 0.7 },
-            { name: 'Chronicles', color: '#b8860b', lx: 0.52, ly: 0.34, depth: 0.8 },
-            { name: 'Companions', color: '#8b7a3a', lx: 0.68, ly: 0.38, depth: 0.65 },
-            { name: 'Verses', color: '#a080d0', lx: 0.82, ly: 0.42, depth: 0.55 },
-            { name: 'Questions', color: '#c8963a', lx: 0.90, ly: 0.48, depth: 0.5 },
+            { name: 'About', color: '#D4AF37', lx: 0.16, ly: 0.44, depth: 0.6 },
+            { name: 'Awakening', color: '#D4AF37', lx: 0.34, ly: 0.38, depth: 0.7 },
+            { name: 'Chronicles', color: '#D4AF37', lx: 0.52, ly: 0.34, depth: 0.8 },
+            { name: 'Companions', color: '#D4AF37', lx: 0.68, ly: 0.38, depth: 0.65 },
+            { name: 'Verses', color: '#D4AF37', lx: 0.82, ly: 0.42, depth: 0.55 },
+            { name: 'Questions', color: '#D4AF37', lx: 0.90, ly: 0.48, depth: 0.5 },
         ];
         
-        // Page map - UPDATED (genesis.html → about.html)
+        // Page map
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
         
         // Create lantern elements
@@ -316,7 +316,7 @@
             sections.forEach((s, i) => {
                 const el = document.createElement('div');
                 el.style.cssText = `position:absolute;z-index:8;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:28px;border-radius:12px 12px 6px 6px;background:radial-gradient(circle at 50% 40%,rgba(255,240,200,0.5),${s.color} 70%,rgba(0,0,0,0.6) 100%);box-shadow:0 0 18px ${s.color},0 0 40px ${s.color}44;animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s;"></div><div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:rgba(200,180,150,0.4);"></div><div style="position:absolute;top:34px;left:50%;transform:translateX(-50%);width:1px;height:16px;background:rgba(200,180,150,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:2px;color:#E8C84A;display:block;">${s.name}</span></div>`;
+                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:28px;border-radius:12px 12px 6px 6px;background:radial-gradient(circle at 50% 40%,rgba(255,240,200,0.5),${s.color} 70%,rgba(0,0,0,0.6) 100%);box-shadow:0 0 18px ${s.color},0 0 40px ${s.color}44;animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s;"></div><div style="position:absolute;top:26px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:rgba(200,180,150,0.4);"></div><div style="position:absolute;top:34px;left:50%;transform:translateX(-50%);width:1px;height:16px;background:rgba(200,180,150,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.58rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;">${s.name}</span></div>`;
                 
                 const glowEl = el.querySelector('.lantern-glow');
                 const labelEl = el.querySelector('.lantern-label');
@@ -352,11 +352,11 @@
             
             // Sky gradient
             const sg = ctx.createLinearGradient(0, 0, 0, H);
-            sg.addColorStop(0, '#020108');
-            sg.addColorStop(0.3, '#04031a');
-            sg.addColorStop(0.55, '#070522');
-            sg.addColorStop(0.72, '#0a0824');
-            sg.addColorStop(1, '#0c0a1c');
+            sg.addColorStop(0, '#1a1628');
+            sg.addColorStop(0.3, '#201c30');
+            sg.addColorStop(0.55, '#2a2540');
+            sg.addColorStop(0.72, '#2f2a45');
+            sg.addColorStop(1, '#201e30');
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
