@@ -1,6 +1,5 @@
 // The Horseman's Journal - Global JavaScript
 // Canvas animation, lantern navigation, and interactive elements
-// FIXED: Correct canvas ID 'heroCanvas' - horses will now appear!
 
 (function() {
     if (document.readyState === 'loading') {
@@ -10,7 +9,6 @@
     }
 
     function init() {
-        // FIXED: Using 'heroCanvas' to match HTML
         const canvas = document.getElementById('heroCanvas');
         if (!canvas) {
             console.error('heroCanvas not found!');
@@ -19,6 +17,8 @@
         
         const ctx = canvas.getContext('2d');
         let W, H, mx = 0.5, my = 0.5, t = 0;
+        let logoOpacity = 0.95;
+        let lastMove = 0;
         
         function resize() {
             W = canvas.width = canvas.offsetWidth;
@@ -29,7 +29,160 @@
         window.addEventListener('mousemove', e => {
             mx = e.clientX / W;
             my = e.clientY / H;
+            lastMove = t;
         });
+        
+        // ===== LOGO DRAWING FUNCTION - Horse and Rider Silhouette =====
+        function drawLogo(x, y, size, opacity) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(size, size);
+            ctx.globalAlpha = opacity;
+            
+            // Golden/bronze color for the logo
+            ctx.fillStyle = '#D4AF37';
+            ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
+            ctx.shadowBlur = 15;
+            
+            // === HORSE BODY ===
+            ctx.beginPath();
+            // Main body
+            ctx.ellipse(0, 0, 28, 14, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Neck
+            ctx.beginPath();
+            ctx.moveTo(18, -6);
+            ctx.quadraticCurveTo(28, -28, 24, -42);
+            ctx.quadraticCurveTo(16, -28, 8, -8);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Head
+            ctx.beginPath();
+            ctx.ellipse(26, -46, 10, 7, -0.1, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Muzzle
+            ctx.beginPath();
+            ctx.ellipse(32, -44, 6, 5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Ear
+            ctx.beginPath();
+            ctx.moveTo(22, -54);
+            ctx.lineTo(19, -64);
+            ctx.lineTo(16, -54);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(28, -54);
+            ctx.lineTo(30, -64);
+            ctx.lineTo(26, -54);
+            ctx.fill();
+            
+            // === RIDER SILHOUETTE ===
+            ctx.fillStyle = '#B8860B';
+            
+            // Rider body (torso leaning forward)
+            ctx.beginPath();
+            ctx.ellipse(12, -28, 6, 10, -0.2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Rider head
+            ctx.beginPath();
+            ctx.arc(10, -42, 5, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Rider hat (wide brim)
+            ctx.fillStyle = '#8B6914';
+            ctx.beginPath();
+            ctx.ellipse(10, -47, 8, 3, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(10, -45, 5, 4, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Rider arm reaching forward (holding reins)
+            ctx.fillStyle = '#B8860B';
+            ctx.beginPath();
+            ctx.moveTo(16, -32);
+            ctx.lineTo(28, -38);
+            ctx.lineTo(24, -35);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Rider leg
+            ctx.beginPath();
+            ctx.moveTo(10, -22);
+            ctx.lineTo(14, -12);
+            ctx.lineTo(8, -10);
+            ctx.closePath();
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.moveTo(6, -24);
+            ctx.lineTo(2, -14);
+            ctx.lineTo(-2, -12);
+            ctx.closePath();
+            ctx.fill();
+            
+            // === HORSE LEGS ===
+            ctx.fillStyle = '#D4AF37';
+            // Front legs
+            ctx.fillRect(16, 8, 5, 18);
+            ctx.fillRect(24, 6, 5, 18);
+            // Back legs
+            ctx.fillRect(-18, 6, 5, 18);
+            ctx.fillRect(-26, 8, 5, 18);
+            
+            // Hooves
+            ctx.fillStyle = '#8B6914';
+            ctx.fillRect(16, 24, 5, 4);
+            ctx.fillRect(24, 22, 5, 4);
+            ctx.fillRect(-18, 22, 5, 4);
+            ctx.fillRect(-26, 24, 5, 4);
+            
+            // === TAIL ===
+            ctx.fillStyle = '#B8860B';
+            ctx.beginPath();
+            ctx.moveTo(-30, -4);
+            ctx.quadraticCurveTo(-42, 0, -38, 16);
+            ctx.quadraticCurveTo(-34, 8, -28, 2);
+            ctx.fill();
+            
+            // === MANE ===
+            ctx.fillStyle = '#B8860B';
+            for (let i = 0; i < 6; i++) {
+                ctx.fillRect(14 + i * 2, -18 - i * 2, 3, 6);
+            }
+            
+            // === REINS ===
+            ctx.beginPath();
+            ctx.moveTo(28, -40);
+            ctx.lineTo(22, -36);
+            ctx.lineTo(18, -32);
+            ctx.strokeStyle = '#8B6914';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            
+            // === SPARKLE EFFECTS around logo ===
+            ctx.shadowBlur = 8;
+            for (let i = 0; i < 8; i++) {
+                const angle = (t * 0.02 + i * Math.PI / 4) % (Math.PI * 2);
+                const rad = 45;
+                const sx = Math.cos(angle) * rad;
+                const sy = Math.sin(angle) * rad;
+                ctx.fillStyle = `rgba(212, 175, 55, ${0.3 + Math.sin(t * 0.05 + i) * 0.15})`;
+                ctx.beginPath();
+                ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+            ctx.restore();
+        }
         
         // Generate stars with colors
         const stars = Array.from({length: 400}, () => ({
@@ -41,7 +194,7 @@
             color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 50}%, ${Math.random() * 40 + 60}%)`
         }));
         
-        // Grass with color variation
+        // Grass
         const grass = Array.from({length: 700}, () => ({
             x: Math.random(), by: 0.68 + Math.random() * 0.32,
             h: Math.random() * 45 + 15,
@@ -232,7 +385,6 @@
                 ctx.quadraticCurveTo(20, -10, 24, -20);
                 ctx.stroke();
             } else {
-                // graze pose
                 ctx.fillStyle = coat;
                 [-14, -2, 8, 18].forEach((lx, i) => {
                     const offset = useMovement ? (i % 2 ? br : -br) : 0;
@@ -272,7 +424,7 @@
             ctx.restore();
         }
         
-        // THE HERD - 2 Guardian horses + moving horses
+        // THE HERD
         const herd = [
             { x: 0.07, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
             { x: 0.93, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: true, isGuardian: true },
@@ -492,6 +644,13 @@
                 ctx.fill();
             });
             
+            // ===== DRAW THE LOGO in the center =====
+            // Logo fades out when user moves mouse, fades back when idle
+            const idle = t - lastMove > 200;
+            logoOpacity = idle ? 0.95 : 0.15;
+            // Draw logo at center of canvas
+            drawLogo(W * 0.5, H * 0.35, 1.2, logoOpacity);
+            
             // Update lantern colors
             lanternEls.forEach(({ glowEl, s }) => {
                 if (glowEl) {
@@ -543,9 +702,6 @@
         if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
         const declineCookies = document.getElementById('declineCookies');
         if (declineCookies) declineCookies.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
-        
-        let lastMove = 0;
-        window.addEventListener('mousemove', () => { lastMove = t; });
         
         function animate() {
             t++;
