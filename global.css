@@ -1,4 +1,4 @@
-  /* ===== RESET & BASE ===== */
+/* ===== RESET & BASE ===== */
 * {
     margin: 0;
     padding: 0;
@@ -288,7 +288,6 @@ body {
     transition: opacity 1.8s ease;
 }
 
-/* REMOVED color: #ffffff to allow gradient from inline style */
 .main-title {
     font-family: 'Cinzel Decorative', serif;
     font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -362,7 +361,6 @@ body {
     z-index: 8;
 }
 
-/* Lantern Animation */
 @keyframes lanternBob {
     0%, 100% {
         transform: translateY(0);
@@ -605,6 +603,32 @@ body {
     color: var(--color, #D4AF37);
 }
 
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+    background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%);
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.08);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+}
+.testimonials-inner { max-width: 1000px; margin: 0 auto; }
+.testimonials-header { text-align: center; margin-bottom: 3rem; }
+.testimonials-title { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: #D4AF37; letter-spacing: 3px; }
+.testimonials-sub { font-family: 'EB Garamond', serif; font-style: italic; color: rgba(240, 230, 200, 0.4); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.testimonial-card {
+    background: rgba(20,12,18,0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212,175,55,0.12);
+    border-radius: 24px;
+    padding: 1.8rem;
+    transition: all 0.4s ease;
+}
+.testimonial-card:hover { transform: translateY(-5px); border-color: rgba(212,175,55,0.3); background: rgba(20,12,18,0.8); }
+.testimonial-stars { color: #D4AF37; font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 1rem; }
+.testimonial-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; color: rgba(240,230,200,0.85); }
+.testimonial-author { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; color: #D4AF37; margin-top: 1rem; }
+.testimonial-role { font-family: 'EB Garamond', serif; font-size: 0.6rem; color: rgba(240,230,200,0.3); }
+
 /* ===== BOOK SHOWCASE SECTION ===== */
 .book-showcase {
     position: relative;
@@ -813,6 +837,23 @@ body {
     transform: translateY(-2px);
 }
 
+/* ===== REVIEWS SECTION ===== */
+.reviews-section { margin-top: 3rem; }
+.reviews-title { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #D4AF37; text-align: center; letter-spacing: 2px; margin-bottom: 1.5rem; }
+.reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+.review-card {
+    background: rgba(212,175,55,0.04);
+    border: 1px solid rgba(212,175,55,0.08);
+    border-radius: 12px;
+    padding: 0.8rem;
+    text-align: center;
+    transition: all 0.3s;
+}
+.review-card:hover { background: rgba(212,175,55,0.08); transform: translateY(-2px); }
+.review-stars { color: #D4AF37; font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+.review-text { font-family: 'EB Garamond', serif; font-size: 0.7rem; font-style: italic; color: rgba(240,230,200,0.7); }
+.review-author { font-family: 'Cinzel', serif; font-size: 0.55rem; color: #D4AF37; margin-top: 0.3rem; }
+
 /* ===== CONTACT SECTION ===== */
 .contact {
     position: relative;
@@ -965,7 +1006,7 @@ body {
     letter-spacing: .5px;
 }
 
-/* ===== NEW GLOBAL STYLES (for index.html additions) ===== */
+/* ===== EXTRA SECTIONS ===== */
 .extra-sections {
     background: linear-gradient(180deg, #030108 0%, #020106 100%);
     padding: 3rem 2rem;
@@ -1036,6 +1077,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* ===== COOKIE CONSENT ===== */
 .cookie-consent {
     position: fixed;
     bottom: 0;
@@ -1077,6 +1119,7 @@ body {
     color: #D4AF37;
 }
 
+/* ===== FOOTER ===== */
 .footer-links {
     text-align: center;
     margin-top: 2rem;
@@ -1101,7 +1144,7 @@ body {
     padding-top: 1.5rem;
 }
 
-/* ===== RESPONSIVE - FIXED MOBILE NAVBAR ===== */
+/* ===== RESPONSIVE FIXES ===== */
 @media (max-width: 860px) {
     .navbar-wrapper {
         padding: 0.5rem;
@@ -1235,5 +1278,11 @@ body {
     .extra-grid {
         flex-direction: column;
         gap: 1.5rem;
+    }
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
