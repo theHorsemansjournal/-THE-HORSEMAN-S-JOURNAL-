@@ -781,11 +781,11 @@ body {
 .book-cover-logo {
     position: relative;
     z-index: 7;
-    width: 100px;
+    width: 150px;
     height: auto;
-    max-width: 70%;
-    filter: drop-shadow(0 0 6px rgba(212,175,55,0.25));
-    opacity: 0.85;
+    max-width: 90%;
+    filter: drop-shadow(0 0 12px rgba(212,175,55,0.4));
+    opacity: 0.92;
     transition: all 0.4s ease;
 }
 
@@ -991,6 +991,7 @@ body {
     transform: translateY(-2px);
     color: #D4AF37 !important;
 }
+
 /* ===== EXTRA SECTIONS ===== */
 .extra-sections {
     padding: 3rem 2rem;
@@ -1308,7 +1309,7 @@ body {
         justify-content: center;
     }
     .book-cover-logo {
-        width: 96px;
+        width: 120px;
     }
     
     .extra-grid {
