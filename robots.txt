@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /dashboard.html
 Disallow: /admin-login.html
-Sitemap: https://yourdomain.com/sitemap.xml
+Disallow: /admin-dashboard.html
+Sitemap: https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/sitemap.xml
