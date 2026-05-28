@@ -646,6 +646,22 @@
             updateLanternColors();
         }
         
+        // ===== BOOK PARTICLES =====
+        const bookParticlesContainer = document.getElementById('bookParticles');
+        if (bookParticlesContainer) {
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'book-particle';
+                particle.style.left = (Math.random() * 80 + 10) + '%';
+                particle.style.bottom = (Math.random() * 40 + 10) + '%';
+                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = (Math.random() * 3 + 1.5) + 'px';
+                particle.style.height = particle.style.width;
+                bookParticlesContainer.appendChild(particle);
+            }
+        }
+        
         // Hall particles
         const hallParticles = document.getElementById('hallParticles');
         if (hallParticles) {
