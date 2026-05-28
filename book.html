@@ -987,7 +987,6 @@
     const moonGroup = new THREE.Group();
     moonGroup.position.set(5.5, 6.5, -11);
     
-    // Large outer glow
     const outerGlowGeo = new THREE.SphereGeometry(2.2, 32, 32);
     const outerGlowMat = new THREE.ShaderMaterial({
       uniforms: { uTime: { value: 0 } },
@@ -1021,7 +1020,6 @@
     const outerGlow = new THREE.Mesh(outerGlowGeo, outerGlowMat);
     moonGroup.add(outerGlow);
 
-    // Inner glow
     const innerGlowGeo = new THREE.SphereGeometry(1.3, 32, 32);
     const innerGlowMat = new THREE.ShaderMaterial({
       uniforms: { uTime: { value: 0 } },
@@ -1055,7 +1053,6 @@
     const innerGlow = new THREE.Mesh(innerGlowGeo, innerGlowMat);
     moonGroup.add(innerGlow);
     
-    // Moon body
     const moonGeo = new THREE.SphereGeometry(0.85, 48, 48);
     const moonMat = new THREE.MeshStandardMaterial({
       color: '#fffdf5',
@@ -1067,7 +1064,6 @@
     const moonMesh = new THREE.Mesh(moonGeo, moonMat);
     moonGroup.add(moonMesh);
 
-    // Moon craters
     const craterPositions = [
       { x: -0.25, y: 0.15, r: 0.12 },
       { x: 0.3, y: -0.1, r: 0.09 },
@@ -1126,7 +1122,7 @@
       scene.add(hill);
     }
 
-    // ===== REALISTIC HORSE & BOY SILHOUETTES =====
+    // ===== HORSE & BOY SILHOUETTES =====
     const silhouettesGroup = new THREE.Group();
     silhouettesGroup.position.set(2.0, -2.35, -3.0);
     scene.add(silhouettesGroup);
@@ -1137,11 +1133,9 @@
       metalness: 0,
     });
 
-    // -- HORSE --
     const horseGroup = new THREE.Group();
     silhouettesGroup.add(horseGroup);
 
-    // Body
     const bodyGeo = new THREE.CapsuleGeometry(0.34, 0.9, 10, 18);
     const body = new THREE.Mesh(bodyGeo, silhouetteMat);
     body.position.set(0, 0.9, 0);
@@ -1150,21 +1144,18 @@
     body.receiveShadow = true;
     horseGroup.add(body);
 
-    // Chest
     const chestGeo = new THREE.SphereGeometry(0.32, 14, 12, 0, Math.PI * 2, 0, Math.PI * 0.65);
     const chest = new THREE.Mesh(chestGeo, silhouetteMat);
     chest.position.set(0.55, 0.9, 0);
     chest.rotation.z = -Math.PI / 2;
     horseGroup.add(chest);
 
-    // Hindquarters
     const hindGeo = new THREE.SphereGeometry(0.33, 14, 12, 0, Math.PI * 2, 0, Math.PI * 0.65);
     const hind = new THREE.Mesh(hindGeo, silhouetteMat);
     hind.position.set(-0.55, 0.9, 0);
     hind.rotation.z = Math.PI / 2;
     horseGroup.add(hind);
 
-    // Neck
     const neckGeo = new THREE.CapsuleGeometry(0.17, 0.6, 10, 12);
     const neck = new THREE.Mesh(neckGeo, silhouetteMat);
     neck.position.set(0.65, 1.3, 0);
@@ -1172,7 +1163,6 @@
     neck.castShadow = true;
     horseGroup.add(neck);
 
-    // Head
     const headGeo = new THREE.CapsuleGeometry(0.13, 0.34, 10, 10);
     const head = new THREE.Mesh(headGeo, silhouetteMat);
     head.position.set(1.0, 1.62, 0);
@@ -1180,20 +1170,17 @@
     head.castShadow = true;
     horseGroup.add(head);
 
-    // Muzzle
     const muzzleGeo = new THREE.SphereGeometry(0.1, 10, 10);
     const muzzle = new THREE.Mesh(muzzleGeo, silhouetteMat);
     muzzle.position.set(1.14, 1.54, 0);
     horseGroup.add(muzzle);
 
-    // Nostril indent
     const nostrilGeo = new THREE.SphereGeometry(0.03, 6, 6);
     const nostrilMat = new THREE.MeshStandardMaterial({ color: '#020202', roughness: 1 });
     const nostril = new THREE.Mesh(nostrilGeo, nostrilMat);
     nostril.position.set(1.19, 1.53, 0.05);
     horseGroup.add(nostril);
 
-    // Ears
     const earGeo = new THREE.ConeGeometry(0.04, 0.18, 8);
     const ear1 = new THREE.Mesh(earGeo, silhouetteMat);
     ear1.position.set(1.04, 1.78, 0.06);
@@ -1204,14 +1191,12 @@
     ear2.rotation.z = -0.18;
     horseGroup.add(ear2);
 
-    // Eye
     const eyeGeo = new THREE.SphereGeometry(0.03, 8, 8);
     const eyeMat = new THREE.MeshStandardMaterial({ color: '#111111', roughness: 0.3, metalness: 0.4 });
     const eye = new THREE.Mesh(eyeGeo, eyeMat);
     eye.position.set(1.08, 1.64, 0.09);
     horseGroup.add(eye);
 
-    // Legs
     function createLeg(x, y, z) {
       const legGroup = new THREE.Group();
       legGroup.position.set(x, y, z);
@@ -1255,7 +1240,6 @@
     const legBR = createLeg(-0.38, 0.42, -0.12);
     horseGroup.add(legBR);
 
-    // Tail
     const tailGroup = new THREE.Group();
     tailGroup.position.set(-0.75, 1.05, 0);
     const tailBaseGeo = new THREE.CapsuleGeometry(0.04, 0.3, 8, 8);
@@ -1274,12 +1258,10 @@
     tailGroup.add(tailEnd);
     horseGroup.add(tailGroup);
 
-    // -- BOY --
     const boyGroup = new THREE.Group();
     boyGroup.position.set(0.12, 0.58, 0.6);
     silhouettesGroup.add(boyGroup);
 
-    // Legs
     const boyLegGeo = new THREE.CapsuleGeometry(0.06, 0.45, 8, 8);
     const boyLegL = new THREE.Mesh(boyLegGeo, silhouetteMat);
     boyLegL.position.set(-0.06, 0.15, 0);
@@ -1288,14 +1270,12 @@
     boyLegR.position.set(0.06, 0.15, 0);
     boyGroup.add(boyLegR);
 
-    // Body
     const boyBodyGeo = new THREE.CapsuleGeometry(0.14, 0.55, 10, 10);
     const boyBody = new THREE.Mesh(boyBodyGeo, silhouetteMat);
     boyBody.position.y = 0.58;
     boyBody.castShadow = true;
     boyGroup.add(boyBody);
 
-    // Shoulders
     const shoulderGeo = new THREE.SphereGeometry(0.12, 8, 8);
     const shoulderL = new THREE.Mesh(shoulderGeo, silhouetteMat);
     shoulderL.position.set(-0.14, 0.72, 0);
@@ -1304,21 +1284,18 @@
     shoulderR.position.set(0.14, 0.72, 0);
     boyGroup.add(shoulderR);
 
-    // Head
     const boyHeadGeo = new THREE.SphereGeometry(0.12, 14, 14);
     const boyHead = new THREE.Mesh(boyHeadGeo, silhouetteMat);
     boyHead.position.y = 1.02;
     boyHead.castShadow = true;
     boyGroup.add(boyHead);
 
-    // Jaw
     const jawGeo = new THREE.SphereGeometry(0.08, 10, 8, 0, Math.PI * 2, 0, Math.PI * 0.6);
     const jaw = new THREE.Mesh(jawGeo, silhouetteMat);
     jaw.position.set(0, 0.96, 0.06);
     jaw.rotation.x = 0.3;
     boyGroup.add(jaw);
 
-    // Curly hair
     for (let i = 0; i < 18; i++) {
       const curlGeo = new THREE.SphereGeometry(0.038, 8, 8);
       const curl = new THREE.Mesh(curlGeo, silhouetteMat);
@@ -1332,7 +1309,6 @@
       );
       boyGroup.add(curl);
     }
-    // Extra curls on top
     for (let i = 0; i < 8; i++) {
       const curlGeo = new THREE.SphereGeometry(0.04, 8, 8);
       const curl = new THREE.Mesh(curlGeo, silhouetteMat);
@@ -1344,7 +1320,6 @@
       boyGroup.add(curl);
     }
 
-    // Arm reaching toward horse
     const upperArmGeo = new THREE.CapsuleGeometry(0.04, 0.3, 8, 8);
     const upperArm = new THREE.Mesh(upperArmGeo, silhouetteMat);
     upperArm.position.set(0.2, 0.78, -0.05);
@@ -1357,7 +1332,6 @@
     forearm.rotation.z = 0.25;
     boyGroup.add(forearm);
 
-    // Hand
     const handGeo = new THREE.SphereGeometry(0.04, 8, 8);
     const hand = new THREE.Mesh(handGeo, silhouetteMat);
     hand.position.set(0.42, 0.48, -0.08);
@@ -1417,7 +1391,7 @@
     particles.position.z = 1;
     scene.add(particles);
 
-    // ===== 3D BOOK =====
+    // ===== 3D BOOK WITH COVER TEXT & LOGO =====
     const bookGroup = new THREE.Group();
     scene.add(bookGroup);
 
@@ -1504,44 +1478,116 @@
       bookGroup.add(pageLine);
     }
 
-    const coverCanvas = document.createElement('canvas');
-    coverCanvas.width = 512;
-    coverCanvas.height = 704;
-    const ctx = coverCanvas.getContext('2d');
-    
-    ctx.fillStyle = '#0a0a0a';
-    ctx.fillRect(0, 0, 512, 704);
-    ctx.strokeStyle = '#D4AF37';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(30, 30, 452, 644);
-    ctx.lineWidth = 1;
-    ctx.strokeRect(36, 36, 440, 632);
-    
-    const coverImage = new Image();
-    coverImage.crossOrigin = 'anonymous';
-    coverImage.onload = () => {
-      const imgAspect = coverImage.width / coverImage.height;
-      const targetWidth = 440;
-      const targetHeight = 632;
+    // ===== FRONT COVER CANVAS =====
+    const frontCoverCanvas = document.createElement('canvas');
+    frontCoverCanvas.width = 1024;
+    frontCoverCanvas.height = 1408;
+    const fctx = frontCoverCanvas.getContext('2d');
+
+    fctx.fillStyle = '#0a0a0a';
+    fctx.fillRect(0, 0, 1024, 1408);
+
+    function drawFrontCoverText(ctx) {
+      // Gold border
+      ctx.strokeStyle = 'rgba(212,175,55,0.5)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(60, 60, 904, 1288);
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(72, 72, 880, 1264);
+
+      // Logo
+      const logoImg = new Image();
+      logoImg.crossOrigin = 'anonymous';
+      logoImg.onload = () => {
+        const logoSize = 180;
+        const logoX = (1024 - logoSize) / 2;
+        const logoY = 120;
+        ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+        frontCoverTexture.needsUpdate = true;
+      };
+      logoImg.src = 'logo.png';
+
+      // Title
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 78px "Cinzel Decorative", serif';
+      ctx.textAlign = 'center';
+      ctx.shadowColor = 'rgba(212,175,55,0.4)';
+      ctx.shadowBlur = 20;
+      ctx.fillText("THE HORSEMAN'S", 512, 420);
+      ctx.fillText('JOURNAL', 512, 510);
+      ctx.shadowBlur = 0;
+
+      // Ornamental divider
+      const divY = 565;
+      ctx.strokeStyle = 'rgba(212,175,55,0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(250, divY);
+      ctx.lineTo(400, divY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(624, divY);
+      ctx.lineTo(774, divY);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#D4AF37';
+      ctx.save();
+      ctx.translate(512, divY);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillRect(-5, -5, 10, 10);
+      ctx.restore();
+
+      // Subtitle
+      ctx.fillStyle = 'rgba(240,230,200,0.7)';
+      ctx.font = 'italic 400 36px "EB Garamond", serif';
+      ctx.fillText('A Conversation in Silence', 512, 635);
+
+      // Author
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '400 32px "Cinzel", serif';
+      ctx.fillText('PRAVEEN KUMAR', 512, 1280);
+
+      // Bottom ornament
+      ctx.strokeStyle = 'rgba(212,175,55,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(350, 1310);
+      ctx.lineTo(674, 1310);
+      ctx.stroke();
+    }
+
+    // Load background photo
+    const frontBgImage = new Image();
+    frontBgImage.crossOrigin = 'anonymous';
+    frontBgImage.onload = () => {
+      const imgAspect = frontBgImage.width / frontBgImage.height;
+      const targetAspect = 1024 / 1408;
       let drawWidth, drawHeight, drawX, drawY;
       
-      if (imgAspect > targetWidth / targetHeight) {
-        drawHeight = targetHeight;
-        drawWidth = targetHeight * imgAspect;
-        drawX = 36 + (targetWidth - drawWidth) / 2;
-        drawY = 36;
+      if (imgAspect > targetAspect) {
+        drawHeight = 1408;
+        drawWidth = 1408 * imgAspect;
+        drawX = (1024 - drawWidth) / 2;
+        drawY = 0;
       } else {
-        drawWidth = targetWidth;
-        drawHeight = targetWidth / imgAspect;
-        drawX = 36;
-        drawY = 36 + (targetHeight - drawHeight) / 2;
+        drawWidth = 1024;
+        drawHeight = 1024 / imgAspect;
+        drawX = 0;
+        drawY = (1408 - drawHeight) / 2;
       }
-      ctx.drawImage(coverImage, drawX, drawY, drawWidth, drawHeight);
+      fctx.drawImage(frontBgImage, drawX, drawY, drawWidth, drawHeight);
+      
+      fctx.fillStyle = 'rgba(0,0,0,0.55)';
+      fctx.fillRect(0, 0, 1024, 1408);
+      
+      drawFrontCoverText(fctx);
       frontCoverTexture.needsUpdate = true;
     };
-    coverImage.src = 'cover-front.png';
+    frontBgImage.src = 'cover-front-bg.jpg';
+
+    drawFrontCoverText(fctx);
     
-    const frontCoverTexture = new THREE.CanvasTexture(coverCanvas);
+    const frontCoverTexture = new THREE.CanvasTexture(frontCoverCanvas);
     frontCoverTexture.colorSpace = THREE.SRGBColorSpace;
     
     const frontCoverMat = new THREE.MeshStandardMaterial({
@@ -1556,39 +1602,144 @@
     frontCoverPlane.position.set(spineWidth / 2 + 0.03, 0, bookDepth / 2 + coverThickness / 2 + 0.001);
     bookGroup.add(frontCoverPlane);
 
+    // ===== BACK COVER CANVAS =====
     const backCoverCanvas = document.createElement('canvas');
-    backCoverCanvas.width = 512;
-    backCoverCanvas.height = 704;
+    backCoverCanvas.width = 1024;
+    backCoverCanvas.height = 1408;
     const bctx = backCoverCanvas.getContext('2d');
+
     bctx.fillStyle = '#0a0a0a';
-    bctx.fillRect(0, 0, 512, 704);
-    bctx.strokeStyle = '#D4AF37';
-    bctx.lineWidth = 3;
-    bctx.strokeRect(30, 30, 452, 644);
-    
-    const backCoverImage = new Image();
-    backCoverImage.crossOrigin = 'anonymous';
-    backCoverImage.onload = () => {
-      const imgAspect = backCoverImage.width / backCoverImage.height;
-      const targetWidth = 440;
-      const targetHeight = 632;
+    bctx.fillRect(0, 0, 1024, 1408);
+
+    function drawBackCoverText(ctx) {
+      // Gold border
+      ctx.strokeStyle = 'rgba(212,175,55,0.5)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(60, 60, 904, 1288);
+
+      // Blurb
+      const blurbLines = [
+        { text: 'Silence is not a lack of communication.', font: 'italic 400 30px "EB Garamond", serif', color: '#D4AF37', y: 130 },
+        { text: 'It is the highest form of it.', font: 'italic 400 30px "EB Garamond", serif', color: '#D4AF37', y: 170 },
+        { text: 'In a world filled with constant noise', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 250 },
+        { text: 'and the pressure to perform,', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 285 },
+        { text: 'we have forgotten how to be truly present.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 320 },
+        { text: 'This journal is not a book about horse training.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 400 },
+        { text: 'It is a record of human awakening.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 435 },
+        { text: 'It is an invitation to put down your masks', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 515 },
+        { text: 'and stand in the field of your own truth.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 550 },
+        { text: 'Through the eyes of a black stallion named T-Rex,', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 630 },
+        { text: 'Praveen Kumar discovers that when the human', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 665 },
+        { text: 'becomes silent, the universe begins to speak.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 700 },
+        { text: 'This is the story of a rebirth through nature', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 780 },
+        { text: 'and the immense power found in simply being.', font: '400 26px "EB Garamond", serif', color: 'rgba(240,230,200,0.75)', y: 815 },
+      ];
+
+      ctx.textAlign = 'center';
+      blurbLines.forEach(line => {
+        if (line.text) {
+          ctx.fillStyle = line.color;
+          ctx.font = line.font;
+          ctx.fillText(line.text, 512, line.y);
+        }
+      });
+
+      // Divider
+      const divY2 = 890;
+      ctx.strokeStyle = 'rgba(212,175,55,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(300, divY2);
+      ctx.lineTo(724, divY2);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#D4AF37';
+      ctx.save();
+      ctx.translate(512, divY2);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillRect(-4, -4, 8, 8);
+      ctx.restore();
+
+      // Author photo
+      const authorPhotoImg = new Image();
+      authorPhotoImg.crossOrigin = 'anonymous';
+      authorPhotoImg.onload = () => {
+        const photoSize = 160;
+        const photoY = 930;
+        
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(512, photoY + photoSize / 2, photoSize / 2, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        ctx.drawImage(authorPhotoImg, (1024 - photoSize) / 2, photoY, photoSize, photoSize);
+        ctx.restore();
+        
+        ctx.strokeStyle = '#D4AF37';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(512, photoY + photoSize / 2, photoSize / 2 + 2, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        backCoverTexture.needsUpdate = true;
+      };
+      authorPhotoImg.src = 'author-photo.jpg';
+
+      // Author name
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '400 30px "Cinzel", serif';
+      ctx.fillText('PRAVEEN KUMAR', 512, 1140);
+
+      // Book title
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 28px "Cinzel Decorative", serif';
+      ctx.fillText("THE HORSEMAN'S JOURNAL", 512, 1210);
+      ctx.fillStyle = 'rgba(240,230,200,0.6)';
+      ctx.font = 'italic 400 22px "EB Garamond", serif';
+      ctx.fillText('A Conversation in Silence', 512, 1245);
+
+      // Cover credit
+      ctx.fillStyle = 'rgba(240,230,200,0.3)';
+      ctx.font = '400 18px "EB Garamond", serif';
+      ctx.fillText('Cover: T-Rex, the black stallion', 512, 1290);
+
+      // Barcode placeholder
+      ctx.fillStyle = 'rgba(240,230,200,0.2)';
+      ctx.fillRect(362, 1320, 300, 50);
+      ctx.fillStyle = 'rgba(240,230,200,0.3)';
+      ctx.font = '400 16px "EB Garamond", serif';
+      ctx.fillText('ISBN · First Edition', 512, 1350);
+    }
+
+    const backBgImage = new Image();
+    backBgImage.crossOrigin = 'anonymous';
+    backBgImage.onload = () => {
+      const imgAspect = backBgImage.width / backBgImage.height;
+      const targetAspect = 1024 / 1408;
       let drawWidth, drawHeight, drawX, drawY;
       
-      if (imgAspect > targetWidth / targetHeight) {
-        drawHeight = targetHeight;
-        drawWidth = targetHeight * imgAspect;
-        drawX = 36 + (targetWidth - drawWidth) / 2;
-        drawY = 36;
+      if (imgAspect > targetAspect) {
+        drawHeight = 1408;
+        drawWidth = 1408 * imgAspect;
+        drawX = (1024 - drawWidth) / 2;
+        drawY = 0;
       } else {
-        drawWidth = targetWidth;
-        drawHeight = targetWidth / imgAspect;
-        drawX = 36;
-        drawY = 36 + (targetHeight - drawHeight) / 2;
+        drawWidth = 1024;
+        drawHeight = 1024 / imgAspect;
+        drawX = 0;
+        drawY = (1408 - drawHeight) / 2;
       }
-      bctx.drawImage(backCoverImage, drawX, drawY, drawWidth, drawHeight);
+      bctx.drawImage(backBgImage, drawX, drawY, drawWidth, drawHeight);
+      
+      bctx.fillStyle = 'rgba(0,0,0,0.65)';
+      bctx.fillRect(0, 0, 1024, 1408);
+      
+      drawBackCoverText(bctx);
       backCoverTexture.needsUpdate = true;
     };
-    backCoverImage.src = 'cover-back.png';
+    backBgImage.src = 'cover-back-bg.jpg';
+
+    drawBackCoverText(bctx);
     
     const backCoverTexture = new THREE.CanvasTexture(backCoverCanvas);
     backCoverTexture.colorSpace = THREE.SRGBColorSpace;
@@ -1700,48 +1851,35 @@
       bookGroup.rotation.y = currentRotationY;
       bookGroup.position.y = Math.sin(time * 0.7) * 0.08;
       
-      // === HORSE MOTION ===
-      // Head nod - gentle, like breathing
       head.rotation.z = -0.25 + Math.sin(time * 1.6) * 0.05;
       neck.rotation.z = -0.55 + Math.sin(time * 1.6) * 0.025;
       ear1.rotation.z = -0.3 + Math.sin(time * 1.6 + 0.3) * 0.06;
       ear2.rotation.z = -0.18 + Math.sin(time * 1.6 + 0.5) * 0.05;
       
-      // Tail swish
       tailGroup.rotation.z = Math.sin(time * 1.4) * 0.18;
       tailMid.rotation.z = 0.6 + Math.sin(time * 1.4 + 0.4) * 0.22;
       tailEnd.rotation.z = 0.4 + Math.sin(time * 1.4 + 0.8) * 0.28;
       
-      // Subtle weight shift in legs
       legFL.position.y = 0.42 + Math.sin(time * 1.2) * 0.02;
       legFR.position.y = 0.42 + Math.sin(time * 1.2 + Math.PI) * 0.02;
       legBL.position.y = 0.42 + Math.sin(time * 1.2 + 1.5) * 0.02;
       legBR.position.y = 0.42 + Math.sin(time * 1.2 + 4.5) * 0.02;
       
-      // === BOY MOTION ===
-      // Gentle breathing
       const breathe = Math.sin(time * 0.75) * 0.015;
       boyBody.scale.y = 1 + breathe;
       boyBody.position.y = 0.58 + breathe * 0.3;
       boyHead.position.y = 1.02 + breathe * 0.4;
-      
-      // Subtle head turn
       boyHead.rotation.y = Math.sin(time * 0.5) * 0.06;
-      
-      // Arm gentle movement
       upperArm.rotation.z = 0.6 + Math.sin(time * 0.9) * 0.03;
       forearm.rotation.z = 0.25 + Math.sin(time * 0.9 + 0.3) * 0.02;
       
-      // === SCENE MOTION ===
       silhouettesGroup.position.x = 2.0 + Math.sin(time * 0.35) * 0.08;
       
-      // Grass sway
       grassGroup.children.forEach((blade, i) => {
         blade.rotation.z += Math.sin(time * 1.6 + i * 0.08) * 0.004;
         blade.rotation.x += Math.cos(time * 1.3 + i * 0.06) * 0.003;
       });
       
-      // Particles
       const posArray = particles.geometry.attributes.position.array;
       for (let i = 0; i < particlesCount; i++) {
         const pd = particleData[i];
@@ -1751,11 +1889,9 @@
       particles.geometry.attributes.position.needsUpdate = true;
       particles.rotation.y += dt * 0.04;
       
-      // Moon glow
       outerGlow.material.uniforms.uTime.value = time;
       innerGlow.material.uniforms.uTime.value = time;
       
-      // Star twinkle
       for (let i = 0; i < 40; i++) {
         const idx = Math.floor(Math.random() * starsCount) * 3;
         const b = starBrightness[Math.floor(idx / 3)];
