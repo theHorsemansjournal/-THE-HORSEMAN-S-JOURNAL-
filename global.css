@@ -10,12 +10,10 @@ body {
     color: #f0ede0;
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
-    padding-top: 80px;
 }
 
 @media (max-width: 860px) {
     body {
-        padding-top: 100px;
     }
 }
 
