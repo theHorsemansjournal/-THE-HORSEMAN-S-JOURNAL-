@@ -9,13 +9,11 @@
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
-  <!-- Open Graph / Social Media -->
   <meta property="og:title" content="The Gathering - The Horseman's Journal">
   <meta property="og:description" content="Share your horse story. Every horse person carries a story. Join The Gathering.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Horseman's Journal">
   
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Gathering - The Horseman's Journal">
   <meta name="twitter:description" content="Share your horse story. Every horse person carries a story.">
@@ -33,13 +31,6 @@
       color: #f0ede0; 
       font-family: 'Cormorant Garamond', serif; 
       overflow-x: hidden;
-      padding-top: 80px;
-    }
-
-    @media (max-width: 860px) {
-      body {
-        padding-top: 100px;
-      }
     }
 
     .dome-section { position: relative; width: 100%; height: 100vh; overflow: hidden; }
@@ -68,7 +59,7 @@
     .form-submit:hover { background: #f0d860; box-shadow: 0 0 25px rgba(200,170,80,0.4); }
     .form-note { text-align: center; margin-top: 1rem; font-family: 'EB Garamond', serif; font-style: italic; font-size: .7rem; color: rgba(240,230,200,0.25); }
 
-    .community { position: relative; background: linear-gradient(180deg, #060310 0%, #030108 100%); padding: 5rem 2rem 7rem; z-index: 10; }
+    .community { position: relative; background: linear-gradient(180deg, #060310 0%, #030108 100%); padding: 5rem 2rem 5rem; z-index: 10; }
     .community-inner { max-width: 700px; margin: 0 auto; text-align: center; }
     .comm-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 2rem; }
     .comm-oln { flex: 1; max-width: 80px; height: .5px; background: linear-gradient(90deg, transparent, rgba(200,170,80,0.4)); }
@@ -80,54 +71,34 @@
     .share-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 14px 32px; font-family: 'Cinzel', serif; font-size: .62rem; letter-spacing: 4px; color: #E8C84A; text-transform: uppercase; background: transparent; border: 1px solid rgba(200,170,80,0.35); border-radius: 4px; cursor: pointer; text-decoration: none; transition: all .4s; }
     .share-btn:hover { background: rgba(200,170,80,0.06); border-color: rgba(200,170,80,0.6); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
-    /* CLOSING SECTION - So page doesn't feel empty */
-    .gathering-closing {
-      position: relative;
-      background: linear-gradient(180deg, #030108 0%, #020106 100%);
-      padding: 4rem 2rem 6rem;
-      text-align: center;
-      border-top: 1px solid rgba(200,170,80,0.08);
-    }
-    .gathering-closing .closing-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .gathering-closing .closing-star {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      animation: starFloat 4s ease-in-out infinite;
-    }
-    @keyframes starFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .gathering-closing .closing-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.5rem;
-      color: #E8C84A;
-      letter-spacing: 3px;
-      margin-bottom: 1rem;
-    }
-    .gathering-closing .closing-text {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: rgba(220, 200, 160, 0.6);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-    .gathering-closing .closing-quote {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 3px;
-      color: rgba(212, 175, 55, 0.4);
-      margin-top: 1rem;
-    }
+    .gathering-closing { position: relative; background: linear-gradient(180deg, #030108 0%, #020106 100%); padding: 4rem 2rem 4rem; text-align: center; border-top: 1px solid rgba(200,170,80,0.08); }
+    .gathering-closing .closing-inner { max-width: 700px; margin: 0 auto; }
+    .gathering-closing .closing-star { font-size: 2.5rem; margin-bottom: 1rem; animation: starFloat 4s ease-in-out infinite; }
+    @keyframes starFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .gathering-closing .closing-title { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: #E8C84A; letter-spacing: 3px; margin-bottom: 1rem; }
+    .gathering-closing .closing-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(220,200,160,0.6); line-height: 1.8; margin-bottom: 1.5rem; }
+    .gathering-closing .closing-quote { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 3px; color: rgba(212,175,55,0.4); margin-top: 1rem; }
+
+    /* ===== CONTACT & FOOTER ===== */
+    .contact-section { padding: 3rem 2rem; text-align: center; background: #020106; border-top: 1px solid rgba(212,175,55,0.1); }
+    .contact-heading { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond', serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,175,55,0.06); background: #020106; }
+    .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); background: #020106; }
+
+    /* ===== COOKIE CONSENT ===== */
+    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
+    .cookie-consent.show { transform: translateY(0); }
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
+    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
 
     @media (max-width: 860px) {
       .form-panel { padding: 1.8rem; margin: 1rem; }
-      .community { padding: 3rem 1.5rem 5rem; }
-      .gathering-closing { padding: 3rem 1.5rem 5rem; }
+      .community { padding: 3rem 1.5rem 3rem; }
+      .gathering-closing { padding: 3rem 1.5rem 3rem; }
       .gathering-closing .closing-title { font-size: 1.2rem; }
       .gathering-closing .closing-text { font-size: 0.9rem; }
     }
@@ -135,7 +106,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR - FIXED WITH ALL LINKS (genesis.html → about.html) -->
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
@@ -223,7 +193,6 @@
     </div>
   </section>
 
-  <!-- CLOSING SECTION - So page doesn't feel empty -->
   <section class="gathering-closing">
     <div class="closing-inner">
       <div class="closing-star">🐴</div>
@@ -233,8 +202,31 @@
     </div>
   </section>
 
+  <section class="contact-section">
+    <h3 class="contact-heading">Connect</h3>
+    <div class="contact-links">
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
+      <a href="https://wa.me/919811618824" class="contact-link" target="_blank">💬 WhatsApp</a>
+      <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
+    </div>
+  </section>
+
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a> • 
+    <a href="sitemap.xml">Sitemap</a> • 
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="copyright">
+    © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
+  </div>
+
+  <div id="cookieConsent" class="cookie-consent">
+    <span>🍪 This website uses cookies to improve your experience.</span>
+    <button id="acceptCookies">Accept</button>
+    <button id="declineCookies" class="decline-btn">Decline</button>
+  </div>
+
   <script>
-    // DOME CANVAS ANIMATION
     const canvas = document.getElementById('domeCanvas');
     const ctx = canvas.getContext('2d');
     let W, H, mx = 0.5, my = 0.5, t = 0;
@@ -412,42 +404,32 @@
     function openForm() { formOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeForm() { formOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     
-    const formClose = document.getElementById('formClose');
-    const formBackdrop = document.getElementById('formBackdrop');
-    const shareBtn = document.getElementById('shareBtn');
-    if(formClose) formClose.addEventListener('click', closeForm);
-    if(formBackdrop) formBackdrop.addEventListener('click', closeForm);
-    if(shareBtn) shareBtn.addEventListener('click', openForm);
+    document.getElementById('formClose')?.addEventListener('click', closeForm);
+    document.getElementById('formBackdrop')?.addEventListener('click', closeForm);
+    document.getElementById('shareBtn')?.addEventListener('click', openForm);
 
-    const formSubmit = document.getElementById('formSubmit');
-    if(formSubmit){
-      formSubmit.addEventListener('click', () => {
-        const name = document.getElementById('formName').value.trim();
-        const horse = document.getElementById('formHorse').value.trim();
-        const story = document.getElementById('formStory').value.trim();
-        const photo = document.getElementById('formPhoto').value.trim();
-        if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
-        
-        let msg = '📖 *New Story from The Gathering*%0A%0A';
-        msg += '*Name:* ' + name + '%0A';
-        if (horse) msg += '*Horse:* ' + horse + '%0A';
-        msg += '*Story:* ' + story + '%0A';
-        if (photo) msg += '*Photo:* ' + photo + '%0A';
-        
-        // [REPLACE WITH YOUR WHATSAPP NUMBER]
-        // For India: add 91 followed by 10-digit number (e.g., 919876543210)
-        const waNumber = '[ADD YOUR WHATSAPP NUMBER WITH COUNTRY CODE]';
-        const waURL = 'https://wa.me/' + waNumber + '?text=' + msg;
-        
-        window.open(waURL, '_blank');
-        
-        document.getElementById('formName').value = '';
-        document.getElementById('formHorse').value = '';
-        document.getElementById('formStory').value = '';
-        document.getElementById('formPhoto').value = '';
-        closeForm();
-      });
-    }
+    document.getElementById('formSubmit')?.addEventListener('click', () => {
+      const name = document.getElementById('formName').value.trim();
+      const horse = document.getElementById('formHorse').value.trim();
+      const story = document.getElementById('formStory').value.trim();
+      const photo = document.getElementById('formPhoto').value.trim();
+      if (!name || !story) { alert('Please enter your name and story at minimum.'); return; }
+      
+      let msg = '📖 *New Story from The Gathering*%0A%0A';
+      msg += '*Name:* ' + name + '%0A';
+      if (horse) msg += '*Horse:* ' + horse + '%0A';
+      msg += '*Story:* ' + story + '%0A';
+      if (photo) msg += '*Photo:* ' + photo + '%0A';
+      
+      const waURL = 'https://wa.me/919811618824?text=' + msg;
+      window.open(waURL, '_blank');
+      
+      document.getElementById('formName').value = '';
+      document.getElementById('formHorse').value = '';
+      document.getElementById('formStory').value = '';
+      document.getElementById('formPhoto').value = '';
+      closeForm();
+    });
 
     const titleOverlay = document.getElementById('domeTitleOverlay');
     const hintEl = document.getElementById('domeHint');
@@ -464,12 +446,22 @@
     animate();
     window.addEventListener('resize', () => { resize(); });
 
-    const portalBtn = document.getElementById('portalBtn');
-    if (portalBtn) {
-      portalBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+    document.getElementById('portalBtn')?.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // Cookie consent
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
+      cookieConsent.classList.add('show');
     }
+    document.getElementById('acceptCookies')?.addEventListener('click', () => { 
+      localStorage.setItem('cookiesAccepted', 'true'); 
+      cookieConsent.classList.remove('show'); 
+    });
+    document.getElementById('declineCookies')?.addEventListener('click', () => { 
+      localStorage.setItem('cookiesDeclined', 'true'); 
+      cookieConsent.classList.remove('show'); 
+    });
   </script>
 </body>
 </html>
