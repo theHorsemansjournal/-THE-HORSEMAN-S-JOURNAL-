@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>The Horseman's Journal | The Book</title>
-  <meta name="description" content="The Horseman's Journal by Praveen Kumar — 427 pages of horsemanship wisdom. Trust, not force.">
-  <meta name="keywords" content="horsemanship, horse training, horse psychology, book, Praveen Kumar">
+  <title>The Horseman's Journal | The Book — A Conversation in Silence</title>
+  <meta name="description" content="The Horseman's Journal by Praveen Kumar — A Conversation in Silence. Trust, not force. Eleven years of horsemanship wisdom.">
+  <meta name="keywords" content="horsemanship, horse training, horse psychology, book, Praveen Kumar, T-Rex, black stallion">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="The Horseman's Journal — The Book">
-  <meta property="og:description" content="427 pages. A conversation in silence. Trust, not force.">
+  <meta property="og:description" content="A Conversation in Silence. Trust, not force.">
   <meta property="og:image" content="og-image.jpg">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thehorsemansjournal.com/book.html">
+  <link rel="canonical" href="https://thehorsemansjournal.com/book.html">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +25,8 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0508; color: #f0ede0; font-family: 'EB Garamond', serif; overflow-x: hidden; }
+    
+    /* ===== NAVBAR (same as index) ===== */
     .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 1rem 1rem 0; pointer-events: none; }
     .navbar-wrapper * { pointer-events: auto; }
     .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
@@ -48,44 +52,54 @@
     .portal-wall { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4)); border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(120,70,0,0.5); }
     .portal-glow { position: absolute; inset: -4px; border-radius: 100px; background: transparent; box-shadow: 0 0 20px rgba(212,175,55,0.4),0 0 60px rgba(212,175,55,0.15); transform: translateZ(-7px); z-index: 1; }
 
-    .book-hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #1a2a3a; }
+    /* ===== BOOK HERO SECTION ===== */
+    .book-hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #0a0508; }
     #bookCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; cursor: grab; }
     #bookCanvas:active { cursor: grabbing; }
-    .book-hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, transparent 45%, rgba(0,0,0,0.2) 100%); z-index: 1; pointer-events: none; }
-    .book-hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.6); text-align: center; pointer-events: none; animation: hintPulse 3s ease-in-out infinite; }
-    @keyframes hintPulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
+    .book-hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.3) 100%); z-index: 1; pointer-events: none; }
+    .book-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; font-family: 'Cinzel',serif; font-size: 0.55rem; letter-spacing: 4px; color: rgba(212,175,55,0.5); text-align: center; pointer-events: none; animation: hintPulse 3s ease-in-out infinite; }
+    @keyframes hintPulse { 0%,100%{opacity:.3} 50%{opacity:.7} }
 
+    /* ===== OPENING POEM SECTION ===== */
     .opening-section { background: linear-gradient(180deg, #0a0508, #0d060a 50%, #0a0508); padding: 5rem 2rem; border-top: 1px solid rgba(212,175,55,0.08); border-bottom: 1px solid rgba(212,175,55,0.08); }
-    .opening-inner { max-width: 650px; margin: 0 auto; text-align: center; }
-    .opening-label { font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 5px; color: rgba(212,175,55,0.5); text-transform: uppercase; margin-bottom: 2.5rem; }
+    .opening-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .opening-label { font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 5px; color: rgba(212,175,55,0.5); text-transform: uppercase; margin-bottom: 2rem; }
     .opening-poem { font-family: 'EB Garamond',serif; font-size: 1.1rem; line-height: 2; color: rgba(240,230,200,0.7); font-style: italic; }
     .opening-poem .stanza { display: block; margin-bottom: 1.8rem; }
-    .opening-poem .line { display: block; }
     .opening-poem .highlight { color: #D4AF37; font-style: normal; font-weight: 500; }
     .opening-signature { margin-top: 2rem; font-family: 'Cinzel',serif; font-size: 0.7rem; letter-spacing: 2px; color: rgba(212,175,55,0.6); }
+
+    /* ===== BOOK DETAILS SECTION ===== */
     .book-details-section { background: linear-gradient(180deg, #0d060a, #0a0508); padding: 5rem 2rem; border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1); }
-    .book-details-inner { max-width: 900px; margin: 0 auto; text-align: center; }
-    .premium-tag { background: rgba(200,170,60,0.15); border: 1px solid rgba(220,180,60,0.4); border-radius: 30px; padding: 0.3rem 1.5rem; font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 4px; color: #e8c84a; display: inline-block; margin-bottom: 1.5rem; backdrop-filter: blur(5px); }
+    .book-details-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .premium-tag { background: rgba(200,170,60,0.12); border: 1px solid rgba(220,180,60,0.35); border-radius: 30px; padding: 0.3rem 1.5rem; font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 4px; color: #e8c84a; display: inline-block; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
     .book-main-title { font-family: 'Cinzel Decorative',serif; font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; color: #E8C84A; letter-spacing: 5px; margin-bottom: 0.5rem; }
-    .book-subtitle { font-family: 'EB Garamond',serif; font-style: italic; font-size: 1.1rem; color: rgba(240,230,200,0.5); margin-bottom: 1.5rem; }
-    .book-quote-line { font-style: italic; color: #c8b070; font-size: 1.1rem; margin-bottom: 2rem; }
-    .book-description-full { color: #ddd6b8; line-height: 1.8; font-size: 1rem; max-width: 700px; margin: 0 auto 2rem; text-align: left; }
-    .specs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; background: rgba(20,15,25,0.4); backdrop-filter: blur(10px); border-radius: 16px; padding: 1.5rem; margin: 2rem auto; max-width: 500px; border: 1px solid rgba(200,160,40,0.2); }
-    .spec-item { text-align: center; } .spec-value { font-family: 'Cinzel',serif; font-size: 1.2rem; color: #E8C84A; font-weight: 600; }
+    .book-subtitle { font-family: 'EB Garamond',serif; font-style: italic; font-size: 1rem; color: rgba(240,230,200,0.5); margin-bottom: 1.5rem; }
+    .book-quote-line { font-style: italic; color: #c8b070; font-size: 1rem; margin-bottom: 2rem; }
+    .book-description-full { color: #ddd6b8; line-height: 1.8; font-size: 1rem; max-width: 650px; margin: 0 auto 2rem; text-align: left; }
+    .book-description-full p { margin-bottom: 1rem; }
+    .specs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; background: rgba(20,15,25,0.4); backdrop-filter: blur(10px); border-radius: 16px; padding: 1.5rem; margin: 2rem auto; max-width: 450px; border: 1px solid rgba(200,160,40,0.2); }
+    .spec-item { text-align: center; }
+    .spec-value { font-family: 'Cinzel',serif; font-size: 1.2rem; color: #E8C84A; font-weight: 600; }
     .spec-label { font-size: 0.65rem; color: rgba(240,230,200,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 0.2rem; }
-    .book-price-section { margin: 2rem 0; } .book-price-large { font-family: 'Cinzel',serif; font-size: 2.2rem; color: #E8C84A; }
+    .book-price-section { margin: 2rem 0; }
+    .book-price-large { font-family: 'Cinzel',serif; font-size: 2.2rem; color: #E8C84A; }
     .book-price-note { font-size: 0.65rem; color: rgba(240,230,200,0.45); margin-top: 0.2rem; }
     .book-actions-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
-    .btn-buy-large { display: inline-block; padding: 14px 36px; background: linear-gradient(135deg, #D4AF37, #b8942e); color: #0a0500; font-family: 'Cinzel',serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-decoration: none; border-radius: 50px; transition: all 0.3s; box-shadow: 0 6px 20px rgba(212,175,55,0.35); }
-    .btn-buy-large:hover { background: linear-gradient(135deg, #e6c34c, #D4AF37); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,175,55,0.5); }
-    .btn-sample-large { display: inline-block; padding: 14px 36px; background: transparent; color: #D4AF37; font-family: 'Cinzel',serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-decoration: none; border-radius: 50px; border: 1px solid rgba(212,175,55,0.5); transition: all 0.3s; }
+    .btn-buy-large { display: inline-block; padding: 12px 32px; background: linear-gradient(135deg, #D4AF37, #b8942e); color: #0a0500; font-family: 'Cinzel',serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-decoration: none; border-radius: 50px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(212,175,55,0.3); border: none; cursor: pointer; }
+    .btn-buy-large:hover { background: linear-gradient(135deg, #e6c34c, #D4AF37); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(212,175,55,0.5); }
+    .btn-sample-large { display: inline-block; padding: 12px 32px; background: transparent; color: #D4AF37; font-family: 'Cinzel',serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-decoration: none; border-radius: 50px; border: 1px solid rgba(212,175,55,0.5); transition: all 0.3s; cursor: pointer; }
     .btn-sample-large:hover { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.8); transform: translateY(-3px); }
+
+    /* ===== TOPICS SECTION ===== */
     .topics-section { background: linear-gradient(180deg, #0a0508, #0d060a); padding: 4rem 2rem; border-top: 1px solid rgba(212,175,55,0.06); }
     .topics-inner { max-width: 800px; margin: 0 auto; }
-    .topics-heading { font-family: 'Cinzel',serif; font-size: 1.2rem; color: #D4AF37; text-align: center; letter-spacing: 4px; margin-bottom: 2rem; }
+    .topics-heading { font-family: 'Cinzel',serif; font-size: 1.1rem; color: #D4AF37; text-align: center; letter-spacing: 4px; margin-bottom: 2rem; }
     .topics-list { columns: 2; column-gap: 2rem; list-style: none; }
     .topics-list li { font-family: 'EB Garamond',serif; font-size: 0.85rem; color: rgba(240,230,200,0.55); padding: 0.4rem 0; border-bottom: 1px solid rgba(212,175,55,0.05); break-inside: avoid; }
     .topics-list li::before { content: '✦ '; color: rgba(212,175,55,0.3); font-size: 0.5rem; }
+
+    /* ===== REVIEWS SECTION ===== */
     .reviews-full-section { background: linear-gradient(180deg, #0d060a, #0a0508); padding: 4rem 2rem; border-top: 1px solid rgba(212,175,55,0.06); }
     .reviews-full-inner { max-width: 1000px; margin: 0 auto; }
     .reviews-full-title { font-family: 'Cinzel',serif; font-size: 1.1rem; color: #D4AF37; text-align: center; letter-spacing: 3px; margin-bottom: 2rem; }
@@ -95,6 +109,8 @@
     .review-full-stars { color: #D4AF37; font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 0.4rem; }
     .review-full-text { font-family: 'EB Garamond',serif; font-size: 0.75rem; font-style: italic; color: rgba(240,230,200,0.7); }
     .review-full-author { font-family: 'Cinzel',serif; font-size: 0.55rem; color: #D4AF37; margin-top: 0.4rem; }
+
+    /* ===== CONTACT & FOOTER ===== */
     .contact-section { padding: 3rem 2rem; text-align: center; background: #0a0508; border-top: 1px solid rgba(212,175,55,0.06); }
     .contact-heading { font-family: 'Cinzel',serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 1.5rem; }
     .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
@@ -113,7 +129,6 @@
       .spec-value { font-size: 1rem; } .spec-label { font-size: 0.5rem; }
       .topics-list { columns: 1; } .book-hero { height: 70vh; }
       .book-hint { bottom: 20px; font-size: 0.5rem; }
-      .book-details-section { padding: 3rem 1.5rem; }
       .opening-section { padding: 3rem 1.5rem; } .opening-poem { font-size: 0.95rem; }
       .reviews-full-grid { grid-template-columns: repeat(2,1fr); }
       .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
@@ -152,18 +167,18 @@
   <section class="book-hero">
     <canvas id="bookCanvas"></canvas>
     <div class="book-hero-overlay"></div>
-    <div class="book-hint">✧ DRAG TO ROTATE ✧</div>
+    <div class="book-hint">✧ DRAG TO ROTATE THE BOOK ✧</div>
   </section>
 
   <section class="opening-section">
     <div class="opening-inner">
       <div class="opening-label">✦ From the Beginning ✦</div>
       <div class="opening-poem">
-        <span class="stanza"><span class="line">I did not go looking for them.</span><span class="line">I was found by silence —</span><span class="line">the kind that has no need of words,</span><span class="line">no interest in performance,</span><span class="line">no capacity to be anything but here.</span></span>
-        <span class="stanza"><span class="line">Fear had been my native tongue.</span><span class="line">Then the horse turned its head</span><span class="line">and in those dark eyes</span><span class="line">there was no judgment.</span><span class="line">Only the ancient, quiet truth:</span><span class="line"><span class="highlight">You are here. That is enough.</span></span></span>
-        <span class="stanza"><span class="line">They taught me what no human could —</span><span class="line">that the thing I was hiding</span><span class="line">was the thing that was safe.</span><span class="line">That softness is not weakness.</span><span class="line">That trust is not earned through force</span><span class="line">but through a thousand small promises kept.</span></span>
-        <span class="stanza"><span class="line">This journal holds what the arena whispered</span><span class="line">across eleven years of dust and breath.</span><span class="line">The lessons that cannot be taught —</span><span class="line">only felt beside a warm flank</span><span class="line">under a sky that does not ask</span><span class="line">who you were before you arrived.</span></span>
-        <span class="stanza"><span class="line"><span class="highlight">Come. The conversation has already begun.</span></span></span>
+        <span class="stanza"><span class="line">They said T-Rex could not be ridden.</span><span class="line">Three trainers had given up.</span><span class="line">He was called dangerous, untouchable, beyond hope.</span></span>
+        <span class="stanza"><span class="line">I did not know this when I first sat with him.</span><span class="line">For twenty days, I asked for nothing.</span><span class="line">No demands. No pressure. Just presence.</span></span>
+        <span class="stanza"><span class="line">On the twenty-first day, he walked to me</span><span class="line">and rested his head on my shoulder.</span></span>
+        <span class="stanza"><span class="line">That moment changed everything I believed.</span><span class="line">About horses. About trust.</span><span class="line">About the silence that becomes a conversation.</span></span>
+        <span class="stanza"><span class="line"><span class="highlight">This is not a training manual.</span></span><span class="line"><span class="highlight">It is an invitation.</span></span></span>
       </div>
       <div class="opening-signature">The Horseman's Journal · Praveen Kumar</div>
     </div>
@@ -171,26 +186,26 @@
 
   <section class="book-details-section">
     <div class="book-details-inner">
-      <div class="premium-tag">✧ HANDCRAFTED VOLUME ✧</div>
+      <div class="premium-tag">✧ FORTHCOMING VOLUME ✧</div>
       <h1 class="book-main-title">THE HORSEMAN'S JOURNAL</h1>
       <p class="book-subtitle">A Conversation in Silence</p>
       <p class="book-quote-line">"Where silence speaks louder than words."</p>
       <div class="book-description-full">
-        <p>Eleven years with horses. Fifteen truths written in dust, silence, and the breath of horses. This is not a training manual. It is an invitation — into trust, into stillness, into the invisible bond between horse and human.</p>
-        <p style="margin-top:1rem;">Every chapter carries the weight of hoofbeats and the lightness of a horse's breath against your palm. From understanding prey animal instincts to reading the silent language of the herd, this book is a companion for anyone who seeks real partnership — not control.</p>
+        <p>They said T-Rex could not be ridden. Twenty-one days later, he chose trust. This is not a manual. It is a conversation in silence.</p>
+        <p>Eleven years with horses. Truths written in dust, silence, and the breath of horses. This is an invitation — into trust, into stillness, into the invisible bond between horse and human.</p>
       </div>
       <div class="specs-grid">
-        <div class="spec-item"><div class="spec-value">📜 427</div><div class="spec-label">Pages</div></div>
-        <div class="spec-item"><div class="spec-value">📖 A5</div><div class="spec-label">Format</div></div>
-        <div class="spec-item"><div class="spec-value">✨ 15+</div><div class="spec-label">Articles</div></div>
+        <div class="spec-item"><div class="spec-value">🐴 T-Rex</div><div class="spec-label">The Black Stallion</div></div>
+        <div class="spec-item"><div class="spec-value">✨ Trust</div><div class="spec-label">Not Force</div></div>
+        <div class="spec-item"><div class="spec-value">📖 Silence</div><div class="spec-label">The Greatest Language</div></div>
       </div>
       <div class="book-price-section">
         <div class="book-price-large">$10.99 <span style="font-size:0.9rem;color:#c0b070;">USD</span></div>
         <div class="book-price-note">Digital edition · Immediate PDF download · 30-day promise</div>
       </div>
       <div class="book-actions-row">
-        <a href="#" class="btn-buy-large" id="buyNowBtn">📥 BUY NOW — $10.99</a>
-        <a href="chronicles.html" class="btn-sample-large" id="previewBookBtn">📖 FREE SAMPLE</a>
+        <button class="btn-buy-large" id="comingSoonBtn">✦ COMING SOON ✦</button>
+        <button class="btn-sample-large" id="previewBookBtn">📖 FREE SAMPLE</button>
       </div>
     </div>
   </section>
@@ -199,7 +214,7 @@
     <div class="topics-inner">
       <h2 class="topics-heading">✦ What's Inside ✦</h2>
       <ul class="topics-list">
-        <li>They teach me patience</li><li>The horse doesn't brace</li><li>We walk together</li><li>Worth standing next to</li><li>They think about the truth of this moment</li><li>Every behavior is a message</li><li>Prey Animal Instincts in Horses</li><li>Why Fear Shapes Everything</li><li>One bad moment can last a lifetime</li><li>The lone horse is the open horse</li><li>A horse under control is waiting for its moment</li><li>Trust is something you become</li><li>Every flick of an ear is a sentence</li><li>The Eyes and Face — they never lie</li><li>How the horse carries itself</li><li>Read the conversation, not just the words</li><li>Reading the horse is a practice you live inside</li><li>Most horses do not have problems</li><li>The most common mistake is not being present</li><li>More pressure is almost never the answer</li><li>Trust is a thousand small promises kept</li><li>Why Your Horse Does Not Listen to You</li><li>Reason One: Your Signals Are Unclear</li><li>Reason Two: The Horse Is in Pain</li><li>Reason Three: The Horse Is Afraid</li><li>Reason Four: You Have Taught the Horse to Ignore You</li><li>Anxiety is not a behavior. It is a state</li><li>Simple tools for the nervous system</li><li>There is no second first meeting</li><li>The approach is everything</li><li>Safety around horses is about understanding</li><li>Your hands are the first language you speak</li><li>Signs Your Horse Trusts You</li><li>Signs It Does Not</li><li>To Feel What a Horse Feels</li><li>The greatest skill is becoming someone the horse chooses</li><li>Before your hand moves, your mind has already moved</li><li>The horse reads what the body says before it knows</li><li>The most important work happens before you pick up the rope</li><li>There is a language older than words</li><li>What you do not do, speaks as loudly</li><li>Energy is felt before it is seen</li><li>The way you move tells the horse what you are</li><li>Two ways to work with a horse</li><li>Only one of them is real</li><li>Partnership asks for two willing partners</li><li>Every decision in the arena is a sign of a deeper belief</li><li>The horse was designed by millions of years</li><li>This is about a better way of being in the world</li><li>True power is quiet</li><li>It does not need to announce itself</li>
+        <li>They teach me patience</li><li>The horse doesn't brace</li><li>We walk together</li><li>Worth standing next to</li><li>Every behavior is a message</li><li>Prey Animal Instincts in Horses</li><li>Why Fear Shapes Everything</li><li>One bad moment can last a lifetime</li><li>The lone horse is the open horse</li><li>A horse under control is waiting for its moment</li><li>Trust is something you become</li><li>Every flick of an ear is a sentence</li><li>The Eyes and Face — they never lie</li><li>Read the conversation, not just the words</li><li>Most horses do not have problems</li><li>The most common mistake is not being present</li><li>More pressure is almost never the answer</li><li>Trust is a thousand small promises kept</li><li>Why Your Horse Does Not Listen to You</li><li>Reason One: Your Signals Are Unclear</li><li>Reason Two: The Horse Is in Pain</li><li>Reason Three: The Horse Is Afraid</li><li>Anxiety is not a behavior. It is a state</li><li>Simple tools for the nervous system</li><li>There is no second first meeting</li><li>The approach is everything</li><li>Safety around horses is about understanding</li><li>Your hands are the first language you speak</li><li>Signs Your Horse Trusts You</li><li>Signs It Does Not</li><li>To Feel What a Horse Feels</li><li>The greatest skill is becoming someone the horse chooses</li>
       </ul>
     </div>
   </section>
@@ -216,14 +231,6 @@
         <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Raw. Honest. Unforgettable."</div><div class="review-full-author">— James W.</div></div>
         <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"A masterpiece of quiet wisdom."</div><div class="review-full-author">— Sarah L.</div></div>
         <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Bought copies for my whole barn."</div><div class="review-full-author">— Carlos R.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"The book I've been waiting for."</div><div class="review-full-author">— Deepa S.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Trust. Not force. Finally."</div><div class="review-full-author">— Michael B.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"I wept. Then I went to my horse and apologized."</div><div class="review-full-author">— Elena R.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Praveen doesn't just write. He sees."</div><div class="review-full-author">— Thomas K.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Gave this to my daughter. Now she teaches me."</div><div class="review-full-author">— Marcus D.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"The chapter on fear should be mandatory reading."</div><div class="review-full-author">— Dr. Nandini S.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"I've read it four times. Something new each time."</div><div class="review-full-author">— Liam O.</div></div>
-        <div class="review-full-card"><div class="review-full-stars">★★★★★</div><div class="review-full-text">"Quietly changed how I see every animal."</div><div class="review-full-author">— Amara J.</div></div>
       </div>
     </div>
   </section>
@@ -247,301 +254,399 @@
 
     const canvas = document.getElementById('bookCanvas');
     const section = canvas.parentElement;
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.15;
+    renderer.toneMappingExposure = 1.1;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#1a2a3a');
-    scene.fog = new THREE.Fog('#2a3a4a', 20, 65);
+    scene.background = new THREE.Color('#0a0508');
+    scene.fog = new THREE.FogExp2('#0a0508', 0.008);
 
-    const camera = new THREE.PerspectiveCamera(45, 2, 0.1, 80);
-    camera.position.set(0, 2.8, 10.5);
-    camera.lookAt(0, 0.6, 0);
+    const camera = new THREE.PerspectiveCamera(42, 2, 0.1, 60);
+    camera.position.set(0, 1.2, 4.8);
+    camera.lookAt(0, 0.8, 0);
 
-    // ===== CINEMATIC LIGHTING =====
-    const ambient = new THREE.AmbientLight('#304050', 0.8);
+    // ===== ATMOSPHERIC LIGHTING =====
+    const ambient = new THREE.AmbientLight('#2a2030', 0.55);
     scene.add(ambient);
-    const moonLight = new THREE.DirectionalLight('#c8d8f0', 10);
-    moonLight.position.set(10, 12, -8);
-    moonLight.castShadow = true;
-    moonLight.shadow.mapSize.width = 2048; moonLight.shadow.mapSize.height = 2048;
-    moonLight.shadow.camera.near = 0.5; moonLight.shadow.camera.far = 70;
-    moonLight.shadow.camera.left = -18; moonLight.shadow.camera.right = 18;
-    moonLight.shadow.camera.top = 18; moonLight.shadow.camera.bottom = -18;
-    moonLight.shadow.bias = -0.0003;
-    scene.add(moonLight);
-    const warmLight = new THREE.DirectionalLight('#ffe0c8', 5);
-    warmLight.position.set(-6, 4, 3);
-    scene.add(warmLight);
-    const bookLight = new THREE.SpotLight('#fff8f0', 50, 14, Math.PI/5, 0.3, 0.5);
-    bookLight.position.set(0, 3.5, 7);
-    scene.add(bookLight);
+    
+    const keyLight = new THREE.DirectionalLight('#D4AF37', 2.5);
+    keyLight.position.set(3, 5, 4);
+    keyLight.castShadow = true;
+    keyLight.receiveShadow = false;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    scene.add(keyLight);
+    
+    const fillLight = new THREE.PointLight('#4a3a5a', 0.8);
+    fillLight.position.set(-2, 2, 3);
+    scene.add(fillLight);
+    
+    const backLight = new THREE.PointLight('#D4AF37', 1.2);
+    backLight.position.set(0, 1.5, -3);
+    scene.add(backLight);
+    
+    const bookGlow = new THREE.PointLight('#D4AF37', 1.8, 8);
+    bookGlow.position.set(0, 0.8, 1.2);
+    scene.add(bookGlow);
 
-    // ===== STARRY SKY =====
-    for (let i = 0; i < 300; i++) {
-      const starGeo = new THREE.SphereGeometry(0.04 + Math.random()*0.06, 4, 4);
-      const star = new THREE.Mesh(starGeo, new THREE.MeshBasicMaterial({ color: '#ffffff' }));
-      star.position.set((Math.random()-0.5)*50, 6 + Math.random()*15, -15 - Math.random()*25);
-      scene.add(star);
+    // ===== STARRY SKY (dark mystical) =====
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 800;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount; i++) {
+      starPositions[i*3] = (Math.random() - 0.5) * 200;
+      starPositions[i*3+1] = (Math.random() - 0.5) * 80 + 10;
+      starPositions[i*3+2] = (Math.random() - 0.5) * 100 - 50;
     }
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starMaterial = new THREE.PointsMaterial({ color: '#ffffff', size: 0.08, transparent: true, opacity: 0.6 });
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+    
+    // Colored stars (golden/amber)
+    const colorStarGeo = new THREE.BufferGeometry();
+    const colorStarCount = 300;
+    const colorStarPositions = new Float32Array(colorStarCount * 3);
+    const colorStarColors = new Float32Array(colorStarCount * 3);
+    for (let i = 0; i < colorStarCount; i++) {
+      colorStarPositions[i*3] = (Math.random() - 0.5) * 180;
+      colorStarPositions[i*3+1] = (Math.random() - 0.5) * 60 + 5;
+      colorStarPositions[i*3+2] = (Math.random() - 0.5) * 80 - 40;
+      const goldness = Math.random() > 0.7 ? 1 : 0.6;
+      colorStarColors[i*3] = 1.0;
+      colorStarColors[i*3+1] = 0.7 + Math.random() * 0.3;
+      colorStarColors[i*3+2] = 0.2 + Math.random() * 0.3;
+    }
+    colorStarGeo.setAttribute('position', new THREE.BufferAttribute(colorStarPositions, 3));
+    colorStarGeo.setAttribute('color', new THREE.BufferAttribute(colorStarColors, 3));
+    const colorStarMat = new THREE.PointsMaterial({ size: 0.1, vertexColors: true, transparent: true, opacity: 0.7 });
+    const colorStars = new THREE.Points(colorStarGeo, colorStarMat);
+    scene.add(colorStars);
 
-    // ===== LARGE MOON =====
-    const moonGeo = new THREE.SphereGeometry(1.2, 32, 32);
-    const moonMat = new THREE.MeshStandardMaterial({ color: '#fffef8', roughness: 0.4, metalness: 0, emissive: '#fffef0', emissiveIntensity: 0.5 });
-    const moon = new THREE.Mesh(moonGeo, moonMat);
-    moon.position.set(8, 10, -18);
-    scene.add(moon);
-    const moonGlowGeo = new THREE.SphereGeometry(2.5, 32, 32);
-    const moonGlowMat = new THREE.ShaderMaterial({
-      uniforms: { uTime: { value: 0 } },
-      vertexShader: `varying vec3 vNormal; varying vec3 vPosition; void main() { vec4 wp = modelMatrix * vec4(position,1.0); vPosition = wp.xyz; vNormal = normalize(mat3(modelMatrix)*normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
-      fragmentShader: `varying vec3 vNormal; varying vec3 vPosition; uniform float uTime; void main() { vec3 vd = normalize(cameraPosition - vPosition); float f = 1.0 - abs(dot(vd, vNormal)); f = pow(f, 3.5); gl_FragColor = vec4(vec3(1.0,0.95,0.8), f*0.3); }`,
-      transparent: true, depthWrite: false
-    });
-    const moonGlow = new THREE.Mesh(moonGlowGeo, moonGlowMat);
-    moonGlow.position.copy(moon.position);
-    scene.add(moonGlow);
+    // ===== AURORA EFFECT (subtle bands) =====
+    const auroraGroup = new THREE.Group();
+    const auroraMat = new THREE.MeshBasicMaterial({ color: '#4a2a6a', transparent: true, opacity: 0.08, side: THREE.DoubleSide });
+    for (let i = 0; i < 5; i++) {
+      const band = new THREE.Mesh(new THREE.PlaneGeometry(25, 1.5), auroraMat);
+      band.position.set((Math.random() - 0.5) * 20, 4 + i * 1.2, -12 - i * 2);
+      band.rotation.z = (Math.random() - 0.5) * 0.5;
+      auroraGroup.add(band);
+    }
+    scene.add(auroraGroup);
 
-    // ===== GROUND - RICH CINEMATIC GREEN =====
-    const groundGeo = new THREE.PlaneGeometry(80, 80, 30, 30);
-    const ground = new THREE.Mesh(groundGeo, new THREE.MeshStandardMaterial({ color: '#1a3a1a', roughness: 0.85, metalness: 0, flatShading: true }));
-    ground.rotation.x = -Math.PI/2; ground.position.y = -3.8; ground.receiveShadow = true;
-    const gPos = ground.geometry.attributes.position;
-    for (let i = 0; i < gPos.count; i++) {
-      gPos.setZ(i, gPos.getZ(i) + Math.sin(gPos.getX(i)*0.35)*0.4 + Math.cos(gPos.getY(i)*0.35)*0.4);
+    // ===== DUST PARTICLES (atmospheric) =====
+    const dustCount = 600;
+    const dustGeo = new THREE.BufferGeometry();
+    const dustPositions = new Float32Array(dustCount * 3);
+    for (let i = 0; i < dustCount; i++) {
+      dustPositions[i*3] = (Math.random() - 0.5) * 15;
+      dustPositions[i*3+1] = Math.random() * 5;
+      dustPositions[i*3+2] = (Math.random() - 0.5) * 12 - 2;
     }
-    ground.geometry.computeVertexNormals();
-    scene.add(ground);
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+    const dustMat = new THREE.PointsMaterial({ color: '#D4AF37', size: 0.012, transparent: true, opacity: 0.25 });
+    const dust = new THREE.Points(dustGeo, dustMat);
+    scene.add(dust);
 
-    // ===== GRASS BLADES =====
-    for (let i = 0; i < 1000; i++) {
-      const bladeH = 0.25 + Math.random()*1.0;
-      const blade = new THREE.Mesh(new THREE.ConeGeometry(0.012, bladeH, 4), new THREE.MeshStandardMaterial({ color: new THREE.Color().setHSL(0.2+Math.random()*0.12, 0.6, 0.15+Math.random()*0.35), roughness: 0.9 }));
-      blade.position.set((Math.random()-0.5)*38, -3.5 + bladeH/2, (Math.random()-0.5)*28 - 5);
-      blade.rotation.x = (Math.random()-0.5)*0.5; blade.rotation.z = (Math.random()-0.5)*0.5;
-      blade.castShadow = true;
-      scene.add(blade);
-    }
+    // ===== PEDESTAL/STAND FOR BOOK =====
+    const pedestalGeo = new THREE.CylinderGeometry(1.1, 1.3, 0.15, 24);
+    const pedestalMat = new THREE.MeshStandardMaterial({ color: '#1a1218', roughness: 0.4, metalness: 0.15 });
+    const pedestal = new THREE.Mesh(pedestalGeo, pedestalMat);
+    pedestal.position.set(0, -0.85, 0);
+    pedestal.castShadow = true;
+    pedestal.receiveShadow = true;
+    scene.add(pedestal);
+    
+    const pedestalTopGeo = new THREE.CylinderGeometry(1.25, 1.1, 0.08, 24);
+    const pedestalTopMat = new THREE.MeshStandardMaterial({ color: '#2a1a20', roughness: 0.35, metalness: 0.2 });
+    const pedestalTop = new THREE.Mesh(pedestalTopGeo, pedestalTopMat);
+    pedestalTop.position.set(0, -0.77, 0);
+    pedestalTop.castShadow = true;
+    scene.add(pedestalTop);
 
-    // ===== WILDFLOWERS =====
-    for (let i = 0; i < 150; i++) {
-      const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.018, 0.4+Math.random()*0.6, 6), new THREE.MeshStandardMaterial({ color: '#3a5a2a', roughness: 0.8 }));
-      stem.position.set((Math.random()-0.5)*35, -3.35, (Math.random()-0.5)*24 - 5);
-      scene.add(stem);
-      const petal = new THREE.Mesh(new THREE.SphereGeometry(0.06+Math.random()*0.1, 6, 6), new THREE.MeshStandardMaterial({ color: new THREE.Color().setHSL(Math.random()>0.5?0.55:0.08, 0.7, 0.55+Math.random()*0.35), roughness: 0.5 }));
-      petal.position.copy(stem.position); petal.position.y += 0.4;
-      scene.add(petal);
-    }
-
-    // ===== MAJESTIC OAK TREE =====
-    const treeGroup = new THREE.Group();
-    treeGroup.position.set(0, -3.2, -6.5);
-    scene.add(treeGroup);
-    const trunkGeo = new THREE.CylinderGeometry(0.55, 0.75, 5, 20, 8);
-    const trunk = new THREE.Mesh(trunkGeo, new THREE.MeshStandardMaterial({ color: '#4a3028', roughness: 0.7, flatShading: true }));
-    trunk.position.y = 2.5; trunk.castShadow = true; trunk.receiveShadow = true; treeGroup.add(trunk);
-    for (let i = 0; i < 20; i++) {
-      const knot = new THREE.Mesh(new THREE.SphereGeometry(0.06+Math.random()*0.12, 6, 6), new THREE.MeshStandardMaterial({ color: '#3a2018', roughness: 0.9 }));
-      knot.position.set((Math.random()-0.5)*0.55, 1+Math.random()*4, (Math.random()-0.5)*0.55);
-      knot.scale.set(1, 0.3+Math.random()*0.5, 1);
-      treeGroup.add(knot);
-    }
-    for (let i = 0; i < 10; i++) {
-      const angle = (i/10)*Math.PI*2 + Math.random()*0.4;
-      const dist = 0.35 + Math.random()*0.5;
-      const bx = Math.cos(angle)*dist, bz = Math.sin(angle)*dist;
-      const by = 3.5 + Math.random()*1.5;
-      const bg = new THREE.Group(); bg.position.set(bx, by, bz);
-      const branch = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.18, 1.5+Math.random()*2.5, 8, 6), new THREE.MeshStandardMaterial({ color: '#4a3028', roughness: 0.7, flatShading: true }));
-      branch.position.y = (1.5+Math.random()*2.5)/2; branch.castShadow = true; branch.receiveShadow = true;
-      bg.add(branch);
-      bg.rotation.x = 0.3+Math.random()*0.5; bg.rotation.z = angle;
-      treeGroup.add(bg);
-    }
-    for (let i = 0; i < 60; i++) {
-      const lg = new THREE.Group();
-      const cx = (Math.random()-0.5)*5, cy = 4.5+Math.random()*4, cz = (Math.random()-0.5)*5;
-      for (let j = 0; j < 8; j++) {
-        const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.3+Math.random()*0.6, 6, 6), new THREE.MeshStandardMaterial({ color: new THREE.Color().setHSL(0.15+Math.random()*0.12, 0.55, 0.2+Math.random()*0.35), roughness: 0.7, flatShading: true }));
-        leaf.position.set(cx+(Math.random()-0.5)*1.8, cy+(Math.random()-0.5)*1.2, cz+(Math.random()-0.5)*1.8);
-        leaf.castShadow = true; leaf.receiveShadow = true;
-        lg.add(leaf);
-      }
-      treeGroup.add(lg);
-    }
-
-    // ===== CLOUDS =====
+    // ===== SINGLE BOOK (The Horseman's Journal) =====
+    const bW = 2.2, bH = 2.9, bD = 0.28, sW = 0.16;
+    
+    const bookGroup = new THREE.Group();
+    bookGroup.position.set(0, -0.25, 0);
+    scene.add(bookGroup);
+    
+    // Book covers
+    const coverMat = new THREE.MeshStandardMaterial({ color: '#0a0a0a', roughness: 0.45, metalness: 0.08 });
+    const frontCover = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.04), coverMat);
+    frontCover.position.set(sW/2 + 0.02, 0, bD/2);
+    frontCover.castShadow = true;
+    bookGroup.add(frontCover);
+    
+    const backCover = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.04), coverMat);
+    backCover.position.set(sW/2 + 0.02, 0, -bD/2);
+    backCover.castShadow = true;
+    bookGroup.add(backCover);
+    
+    // Spine
+    const spineMat = new THREE.MeshStandardMaterial({ color: '#111', roughness: 0.35, metalness: 0.15 });
+    const spine = new THREE.Mesh(new THREE.BoxGeometry(sW, bH, bD), spineMat);
+    spine.position.set(-bW/2 + sW/2, 0, 0);
+    spine.castShadow = true;
+    bookGroup.add(spine);
+    
+    // Pages
+    const pagesMat = new THREE.MeshStandardMaterial({ color: '#f0ece0', roughness: 0.7 });
+    const pages = new THREE.Mesh(new THREE.BoxGeometry(bW - sW - 0.1, bH - 0.12, bD - 0.06), pagesMat);
+    pages.position.set(sW/2 + 0.07, 0, 0);
+    pages.castShadow = true;
+    pages.receiveShadow = true;
+    bookGroup.add(pages);
+    
+    // Page lines
     for (let i = 0; i < 25; i++) {
-      const cg = new THREE.Group();
-      const cm = new THREE.MeshStandardMaterial({ color: '#e8e8f0', roughness: 1, metalness: 0, transparent: true, opacity: 0.85 });
-      for (let j = 0; j < 6; j++) {
-        const puff = new THREE.Mesh(new THREE.SphereGeometry(0.3+Math.random()*0.8, 8, 8), cm);
-        puff.position.set(j*0.5-1.5, Math.random()*0.3, Math.random()*0.4); cg.add(puff);
+      const line = new THREE.Mesh(new THREE.BoxGeometry(bW - sW - 0.08, 0.003, bD - 0.05), new THREE.MeshStandardMaterial({ color: '#d8d0b0', roughness: 0.6 }));
+      line.position.set(sW/2 + 0.07, bH/2 - 0.08 - i * 0.055, 0);
+      bookGroup.add(line);
+    }
+    
+    // Gold corner pieces
+    const cornerMat = new THREE.MeshStandardMaterial({ color: '#D4AF37', metalness: 0.85, roughness: 0.2 });
+    const corners = [
+      [-bW/2 + sW/2 + 0.1, bH/2 - 0.1, bD/2 + 0.025],
+      [bW/2 - 0.1, bH/2 - 0.1, bD/2 + 0.025],
+      [-bW/2 + sW/2 + 0.1, -bH/2 + 0.1, bD/2 + 0.025],
+      [bW/2 - 0.1, -bH/2 + 0.1, bD/2 + 0.025]
+    ];
+    corners.forEach(pos => {
+      const corner = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.012), cornerMat);
+      corner.position.set(pos[0], pos[1], pos[2]);
+      bookGroup.add(corner);
+    });
+    
+    // Front cover texture with embossed design
+    const coverCanvas = document.createElement('canvas');
+    coverCanvas.width = 1024;
+    coverCanvas.height = 1408;
+    const coverCtx = coverCanvas.getContext('2d');
+    
+    // Draw cover design
+    coverCtx.fillStyle = '#0a0508';
+    coverCtx.fillRect(0, 0, 1024, 1408);
+    
+    // Gold border
+    coverCtx.strokeStyle = '#D4AF37';
+    coverCtx.lineWidth = 6;
+    coverCtx.strokeRect(60, 60, 904, 1288);
+    coverCtx.lineWidth = 2;
+    coverCtx.strokeRect(72, 72, 880, 1264);
+    
+    // Title
+    coverCtx.fillStyle = '#D4AF37';
+    coverCtx.font = '700 85px "Cinzel Decorative", serif';
+    coverCtx.textAlign = 'center';
+    coverCtx.shadowColor = 'rgba(212,175,55,0.4)';
+    coverCtx.shadowBlur = 15;
+    coverCtx.fillText("THE HORSEMAN'S", 512, 460);
+    coverCtx.fillText('JOURNAL', 512, 560);
+    coverCtx.shadowBlur = 0;
+    
+    // Decorative divider
+    const dividerY = 620;
+    coverCtx.strokeStyle = '#D4AF37';
+    coverCtx.lineWidth = 1.5;
+    coverCtx.beginPath();
+    coverCtx.moveTo(280, dividerY);
+    coverCtx.lineTo(440, dividerY);
+    coverCtx.stroke();
+    coverCtx.beginPath();
+    coverCtx.moveTo(584, dividerY);
+    coverCtx.lineTo(744, dividerY);
+    coverCtx.stroke();
+    
+    coverCtx.fillStyle = '#D4AF37';
+    coverCtx.save();
+    coverCtx.translate(512, dividerY);
+    coverCtx.rotate(Math.PI/4);
+    coverCtx.fillRect(-6, -6, 12, 12);
+    coverCtx.restore();
+    
+    // Subtitle
+    coverCtx.fillStyle = 'rgba(240,230,200,0.7)';
+    coverCtx.font = 'italic 400 42px "EB Garamond", serif';
+    coverCtx.fillText('A Conversation in Silence', 512, 710);
+    
+    // Horse silhouette
+    coverCtx.fillStyle = '#D4AF37';
+    coverCtx.font = '700 160px "Cinzel Decorative", serif';
+    coverCtx.fillText('🐴', 512, 880);
+    
+    // Author
+    coverCtx.fillStyle = '#D4AF37';
+    coverCtx.font = '400 38px "Cinzel", serif';
+    coverCtx.fillText('PRAVEEN KUMAR', 512, 1300);
+    
+    coverCtx.strokeStyle = 'rgba(212,175,55,0.4)';
+    coverCtx.lineWidth = 1;
+    coverCtx.beginPath();
+    coverCtx.moveTo(330, 1335);
+    coverCtx.lineTo(694, 1335);
+    coverCtx.stroke();
+    
+    const coverTexture = new THREE.CanvasTexture(coverCanvas);
+    coverTexture.colorSpace = THREE.SRGBColorSpace;
+    const frontPlane = new THREE.Mesh(new THREE.PlaneGeometry(bW - sW - 0.08, bH - 0.1), new THREE.MeshStandardMaterial({ map: coverTexture, roughness: 0.45, metalness: 0.05 }));
+    frontPlane.position.set(sW/2 + 0.04, 0, bD/2 + 0.022);
+    frontPlane.castShadow = true;
+    bookGroup.add(frontPlane);
+    
+    // Spine text
+    const spineCanvas = document.createElement('canvas');
+    spineCanvas.width = 256;
+    spineCanvas.height = 1024;
+    const spineCtx = spineCanvas.getContext('2d');
+    spineCtx.fillStyle = '#111';
+    spineCtx.fillRect(0, 0, 256, 1024);
+    spineCtx.save();
+    spineCtx.translate(128, 512);
+    spineCtx.rotate(-Math.PI/2);
+    spineCtx.fillStyle = '#D4AF37';
+    spineCtx.font = '600 42px "Cinzel", serif';
+    spineCtx.textAlign = 'center';
+    spineCtx.fillText("THE HORSEMAN'S JOURNAL", 0, 0);
+    spineCtx.restore();
+    const spineTexture = new THREE.CanvasTexture(spineCanvas);
+    const spinePlane = new THREE.Mesh(new THREE.PlaneGeometry(bH - 0.2, sW - 0.02), new THREE.MeshStandardMaterial({ map: spineTexture, roughness: 0.35, metalness: 0.1 }));
+    spinePlane.position.set(-bW/2 + sW/2, 0, 0.01);
+    spinePlane.rotation.y = Math.PI/2;
+    bookGroup.add(spinePlane);
+    
+    // "COMING SOON" ribbon
+    const ribbonGroup = new THREE.Group();
+    ribbonGroup.position.set(0.8, 1.2, 0.32);
+    bookGroup.add(ribbonGroup);
+    
+    const ribbonCanvas = document.createElement('canvas');
+    ribbonCanvas.width = 512;
+    ribbonCanvas.height = 128;
+    const ribbonCtx = ribbonCanvas.getContext('2d');
+    ribbonCtx.fillStyle = '#8B0000';
+    ribbonCtx.beginPath();
+    ribbonCtx.moveTo(0, 20);
+    ribbonCtx.lineTo(512, 20);
+    ribbonCtx.lineTo(492, 64);
+    ribbonCtx.lineTo(512, 108);
+    ribbonCtx.lineTo(0, 108);
+    ribbonCtx.lineTo(20, 64);
+    ribbonCtx.closePath();
+    ribbonCtx.fill();
+    ribbonCtx.fillStyle = '#D4AF37';
+    ribbonCtx.font = '700 34px "Cinzel", serif';
+    ribbonCtx.textAlign = 'center';
+    ribbonCtx.fillText('COMING SOON', 256, 72);
+    const ribbonTexture = new THREE.CanvasTexture(ribbonCanvas);
+    const ribbon = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.3), new THREE.MeshStandardMaterial({ map: ribbonTexture, side: THREE.DoubleSide, transparent: true }));
+    ribbon.rotation.z = 0.15;
+    ribbonGroup.add(ribbon);
+
+    // Floating animation data
+    let time = 0;
+    let isDragging = false;
+    let prevX = 0, prevY = 0;
+    let targetRotX = 0.2, targetRotY = 0.3;
+    let currentRotX = 0.2, currentRotY = 0.3;
+    let rotVelocityX = 0, rotVelocityY = 0;
+    
+    canvas.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      canvas.style.cursor = 'grabbing';
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+    
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const deltaX = (e.clientX - prevX) * 0.008;
+      const deltaY = (e.clientY - prevY) * 0.006;
+      targetRotY += deltaX;
+      targetRotX += deltaY;
+      targetRotX = Math.max(-0.6, Math.min(0.8, targetRotX));
+      targetRotY = Math.max(-0.8, Math.min(0.8, targetRotY));
+      prevX = e.clientX;
+      prevY = e.clientY;
+      rotVelocityX = deltaY * 0.1;
+      rotVelocityY = deltaX * 0.1;
+    });
+    
+    window.addEventListener('pointerup', () => {
+      isDragging = false;
+      canvas.style.cursor = 'grab';
+    });
+
+    // Camera orbit for slight auto-rotation when idle
+    let autoRotateAngle = 0;
+    let idleTimer = 0;
+    let lastMoveTime = performance.now();
+    
+    window.addEventListener('mousemove', () => {
+      lastMoveTime = performance.now();
+      idleTimer = 0;
+    });
+    
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = Math.min(1/60, 0.033);
+      time += dt;
+      
+      // Idle auto-rotation
+      const now = performance.now();
+      if (now - lastMoveTime > 3000 && !isDragging) {
+        idleTimer += dt;
+        if (idleTimer > 1) {
+          autoRotateAngle += 0.002;
+          targetRotY = 0.3 + Math.sin(autoRotateAngle * 0.5) * 0.15;
+          targetRotX = 0.2 + Math.cos(autoRotateAngle * 0.3) * 0.08;
+        }
+      } else {
+        if (!isDragging) {
+          rotVelocityX *= 0.95;
+          rotVelocityY *= 0.95;
+          targetRotX += rotVelocityX * dt;
+          targetRotY += rotVelocityY * dt;
+          targetRotX = Math.max(-0.6, Math.min(0.8, targetRotX));
+          targetRotY = Math.max(-0.8, Math.min(0.8, targetRotY));
+        }
       }
-      cg.position.set((Math.random()-0.5)*45, 6+Math.random()*9, -15-Math.random()*22);
-      cg.scale.set(0.7+Math.random()*1.5, 0.3+Math.random()*0.5, 0.5+Math.random()*1);
-      scene.add(cg);
+      
+      // Smooth interpolation
+      currentRotX += (targetRotX - currentRotX) * 0.12;
+      currentRotY += (targetRotY - currentRotY) * 0.12;
+      
+      bookGroup.rotation.x = currentRotX;
+      bookGroup.rotation.y = currentRotY;
+      
+      // Animate lights
+      bookGlow.intensity = 1.5 + Math.sin(time * 2) * 0.4;
+      backLight.intensity = 1.0 + Math.sin(time * 1.3) * 0.3;
+      
+      // Animate dust particles
+      dust.rotation.y += 0.002;
+      dust.rotation.x = Math.sin(time * 0.2) * 0.05;
+      
+      // Animate stars (subtle twinkle via scaling - not possible per particle easily, so rotate group)
+      stars.rotation.y += 0.0005;
+      colorStars.rotation.x = Math.sin(time * 0.1) * 0.02;
+      
+      // Animate aurora
+      auroraGroup.children.forEach((band, idx) => {
+        band.position.x = Math.sin(time * 0.1 + idx) * 1.5;
+        band.material.opacity = 0.06 + Math.sin(time * 0.2 + idx) * 0.03;
+      });
+      
+      renderer.render(scene, camera);
     }
-
-    // ===== BIRDS =====
-    const birdsGroup = new THREE.Group(); scene.add(birdsGroup);
-    const birdData = [];
-    for (let i = 0; i < 35; i++) {
-      const bird = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.24, 4), new THREE.MeshStandardMaterial({ color: '#1a1a1a', roughness: 0.5 }));
-      bird.rotation.z = Math.PI/2;
-      bird.position.set((Math.random()-0.5)*42, 4+Math.random()*9, -8-Math.random()*22);
-      birdsGroup.add(bird);
-      birdData.push({ mesh: bird, speed: 0.2+Math.random()*0.7, off: Math.random()*Math.PI*2, bx: bird.position.x, by: bird.position.y, bz: bird.position.z });
-    }
-
-    // ===== BOOKS =====
-    const bW = 2.4, bH = 3.2, bD = 0.3, sW = 0.17, cT = 0.05;
-    const pw1 = bW-sW-0.08, ph1 = bH-0.22, pd1 = bD-cT*2-0.04;
-
-    function createBookGroup(boardColor, spineColor, accentColor, standColor) {
-      const g = new THREE.Group();
-      const stand = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.7, 0.5, 16), new THREE.MeshStandardMaterial({ color: standColor, roughness: 0.35, metalness: 0.3 }));
-      stand.position.set(0, -bH/2-0.25, 0); stand.castShadow = true; stand.receiveShadow = true; g.add(stand);
-      const stop = new THREE.Mesh(new THREE.CylinderGeometry(0.65, 0.55, 0.15, 16), new THREE.MeshStandardMaterial({ color: standColor, roughness: 0.35, metalness: 0.3 }));
-      stop.position.set(0, -bH/2, 0); g.add(stop);
-      const bm = new THREE.MeshStandardMaterial({ color: boardColor, roughness: 0.48, metalness: 0.06 });
-      const fb = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, cT), bm);
-      fb.position.set(sW/2, 0, bD/2); fb.castShadow = true; fb.receiveShadow = true; g.add(fb);
-      const bb = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, cT), bm);
-      bb.position.set(sW/2, 0, -bD/2); bb.castShadow = true; bb.receiveShadow = true; g.add(bb);
-      const sp = new THREE.Mesh(new THREE.BoxGeometry(sW, bH, bD), new THREE.MeshStandardMaterial({ color: spineColor, roughness: 0.35, metalness: 0.2 }));
-      sp.position.set(-bW/2+sW/2, 0, 0); sp.castShadow = true; g.add(sp);
-      for (let i = -2; i <= 2; i++) {
-        const sl = new THREE.Mesh(new THREE.BoxGeometry(sW+0.002, 0.02, 0.006), new THREE.MeshStandardMaterial({ color: accentColor, roughness: 0.25, metalness: 0.85, emissive: accentColor, emissiveIntensity: 0.25 }));
-        sl.position.set(-bW/2+sW/2, i*0.65, bD/2+0.002); g.add(sl);
-      }
-      const pg = new THREE.Mesh(new THREE.BoxGeometry(pw1, ph1, pd1), new THREE.MeshStandardMaterial({ color: '#f5f0e0', roughness: 0.7 }));
-      pg.position.set(sW/2+0.04, 0, 0); pg.receiveShadow = true; g.add(pg);
-      for (let i = 0; i < 28; i++) {
-        const pl = new THREE.Mesh(new THREE.BoxGeometry(pw1+0.005, 0.003, pd1+0.003), new THREE.MeshStandardMaterial({ color: '#e8e0c8', roughness: 0.6 }));
-        pl.position.set(sW/2+0.04, ph1/2-0.012-i*0.014, 0); g.add(pl);
-      }
-      const crGeo = new THREE.BoxGeometry(0.11, 0.11, 0.012);
-      const crMat = new THREE.MeshStandardMaterial({ color: accentColor, roughness: 0.18, metalness: 0.9 });
-      [[bW/2-sW/2-0.09, bH/2-0.09, bD/2+cT/2+0.004],[-bW/2+sW/2+0.09, bH/2-0.09, bD/2+cT/2+0.004],[bW/2-sW/2-0.09, -bH/2+0.09, bD/2+cT/2+0.004],[-bW/2+sW/2+0.09, -bH/2+0.09, bD/2+cT/2+0.004]].forEach(([cx,cy,cz]) => { const cr = new THREE.Mesh(crGeo, crMat); cr.position.set(cx, cy, cz); g.add(cr); });
-      return g;
-    }
-
-    function createCoverTexture(bgSrc, drawFn) {
-      const cv = document.createElement('canvas'); cv.width = 1024; cv.height = 1408;
-      const ctx = cv.getContext('2d'); ctx.fillStyle = '#0a0a0a'; ctx.fillRect(0, 0, 1024, 1408);
-      const tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace;
-      if (bgSrc) {
-        const bg = new Image(); bg.crossOrigin = 'anonymous';
-        bg.onload = () => {
-          const asp = bg.width/bg.height, tA = 1024/1408;
-          let dw,dh,dx,dy;
-          if(asp>tA){dh=1408;dw=1408*asp;dx=(1024-dw)/2;dy=0;}else{dw=1024;dh=1024/asp;dx=0;dy=(1408-dh)/2;}
-          ctx.drawImage(bg, dx, dy, dw, dh); ctx.fillStyle = 'rgba(0,0,0,0.4)'; ctx.fillRect(0, 0, 1024, 1408);
-          drawFn(ctx); tex.needsUpdate = true;
-        };
-        bg.src = bgSrc;
-      }
-      drawFn(ctx); return tex;
-    }
-
-    function addCoverToBook(bookGroup, bgSrc, drawFn, isFront) {
-      const tex = createCoverTexture(bgSrc, drawFn);
-      const plane = new THREE.Mesh(new THREE.PlaneGeometry(bW-sW-0.06, bH-0.08), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.48, metalness: 0.05 }));
-      plane.position.set(sW/2+0.04, 0, isFront ? bD/2+cT/2+0.001 : -bD/2-cT/2-0.001);
-      if (!isFront) plane.rotation.y = Math.PI;
-      bookGroup.add(plane); return tex;
-    }
-
-    // Book 1
-    const book1 = createBookGroup('#0a0a0a', '#111', '#D4AF37', '#3a3028');
-    book1.position.set(-3.5, 0.3, 1.5); scene.add(book1);
-    addCoverToBook(book1, 'cover-front-bg.jpg', (ctx) => {
-      ctx.strokeStyle = 'rgba(212,175,55,0.5)'; ctx.lineWidth = 4; ctx.strokeRect(60, 60, 904, 1288);
-      ctx.lineWidth = 1.5; ctx.strokeRect(72, 72, 880, 1264);
-      const logo = new Image(); logo.crossOrigin = 'anonymous';
-      logo.onload = () => { ctx.drawImage(logo, (1024-200)/2, 100, 200, 200); }; logo.src = 'logo.png';
-      ctx.fillStyle = '#D4AF37'; ctx.font = '700 80px "Cinzel Decorative", serif'; ctx.textAlign = 'center';
-      ctx.shadowColor = 'rgba(212,175,55,0.4)'; ctx.shadowBlur = 20;
-      ctx.fillText("THE HORSEMAN'S", 512, 440); ctx.fillText('JOURNAL', 512, 530); ctx.shadowBlur = 0;
-      const dY = 585;
-      ctx.strokeStyle = 'rgba(212,175,55,0.6)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(220, dY); ctx.lineTo(380, dY); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(644, dY); ctx.lineTo(804, dY); ctx.stroke();
-      ctx.fillStyle = '#D4AF37'; ctx.save(); ctx.translate(512, dY); ctx.rotate(Math.PI/4); ctx.fillRect(-5, -5, 10, 10); ctx.restore();
-      ctx.fillStyle = 'rgba(240,230,200,0.7)'; ctx.font = 'italic 400 38px "EB Garamond", serif'; ctx.fillText('A Conversation in Silence', 512, 660);
-      ctx.fillStyle = '#D4AF37'; ctx.font = '400 34px "Cinzel", serif'; ctx.fillText('PRAVEEN KUMAR', 512, 1300);
-      ctx.strokeStyle = 'rgba(212,175,55,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(330, 1330); ctx.lineTo(694, 1330); ctx.stroke();
-    }, true);
-    addCoverToBook(book1, 'cover-back-bg.jpg', (ctx) => {
-      ctx.strokeStyle = 'rgba(212,175,55,0.5)'; ctx.lineWidth = 4; ctx.strokeRect(60, 60, 904, 1288);
-      ctx.fillStyle = '#D4AF37'; ctx.font = 'italic 400 28px "EB Garamond", serif'; ctx.textAlign = 'center';
-      ctx.fillText('What if the thing you have been searching for', 512, 145);
-      ctx.fillText('has been searching for you too?', 512, 185);
-      ctx.fillStyle = 'rgba(240,230,200,0.75)'; ctx.font = '400 24px "EB Garamond", serif';
-      ['','This is not a book about horse training.','It is the record of a man who stopped performing','and started listening.','Eleven years in the arena.','One black stallion who refused to be','anything but honest.','And the silence that changed everything.','','Through raw, unflinching prose,','Praveen Kumar takes you into the dust','and the breath and the long, hard quiet','where trust is not taught —','it is earned, one honest moment at a time.','','The Horseman\'s Journal is an invitation','to put down your masks,','stand in the field of your own truth,','and discover what happens when a human being','finally becomes still enough','to hear the universe speak.'].forEach((l,i) => { if(l) ctx.fillText(l, 512, 258 + i*33); });
-      ctx.strokeStyle = 'rgba(212,175,55,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(300, 980); ctx.lineTo(724, 980); ctx.stroke();
-      ctx.fillStyle = '#D4AF37'; ctx.save(); ctx.translate(512, 980); ctx.rotate(Math.PI/4); ctx.fillRect(-4, -4, 8, 8); ctx.restore();
-      const aImg = new Image(); aImg.crossOrigin = 'anonymous';
-      aImg.onload = () => { ctx.save(); ctx.beginPath(); ctx.arc(512, 1060, 75, 0, Math.PI*2); ctx.closePath(); ctx.clip(); ctx.drawImage(aImg, 437, 985, 150, 150); ctx.restore(); ctx.strokeStyle = '#D4AF37'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(512, 1060, 77, 0, Math.PI*2); ctx.stroke(); };
-      aImg.src = 'author-photo.jpg';
-      ctx.fillStyle = '#D4AF37'; ctx.font = '400 28px "Cinzel", serif'; ctx.fillText('PRAVEEN KUMAR', 512, 1170);
-      ctx.font = '700 24px "Cinzel Decorative", serif'; ctx.fillText("THE HORSEMAN'S JOURNAL", 512, 1230);
-      ctx.fillStyle = 'rgba(240,230,200,0.5)'; ctx.font = 'italic 400 18px "EB Garamond", serif'; ctx.fillText('A Conversation in Silence', 512, 1265);
-      ctx.fillStyle = 'rgba(240,230,200,0.2)'; ctx.fillRect(362, 1320, 300, 50);
-      ctx.fillStyle = 'rgba(240,230,200,0.3)'; ctx.font = '400 14px "EB Garamond", serif'; ctx.fillText('ISBN · First Edition', 512, 1350);
-    }, false);
-
-    // Book 2
-    const book2 = createBookGroup('#0a0a1e', '#0a0a2e', '#8090c0', '#1a1a28');
-    book2.position.set(3.5, 0.3, 1.5); scene.add(book2);
-    addCoverToBook(book2, 'cover-front-book2.jpg', (ctx) => {
-      ctx.strokeStyle = 'rgba(140,160,210,0.5)'; ctx.lineWidth = 4; ctx.strokeRect(60, 60, 904, 1288);
-      ctx.lineWidth = 1.5; ctx.strokeRect(72, 72, 880, 1264);
-      ctx.fillStyle = '#b0c8e0'; ctx.font = '700 76px "Cinzel Decorative", serif'; ctx.textAlign = 'center';
-      ctx.shadowColor = 'rgba(150,180,220,0.4)'; ctx.shadowBlur = 20;
-      ctx.fillText('THE UNYIELDING', 512, 420); ctx.fillText('MARCH', 512, 510); ctx.shadowBlur = 0;
-      const dY2 = 565;
-      ctx.strokeStyle = 'rgba(150,180,220,0.5)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(220, dY2); ctx.lineTo(380, dY2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(644, dY2); ctx.lineTo(804, dY2); ctx.stroke();
-      ctx.fillStyle = '#b0c8e0'; ctx.save(); ctx.translate(512, dY2); ctx.rotate(Math.PI/4); ctx.fillRect(-5, -5, 10, 10); ctx.restore();
-      ctx.fillStyle = 'rgba(200,215,235,0.7)'; ctx.font = 'italic 400 36px "EB Garamond", serif';
-      ctx.fillText('A Collection of Verses', 512, 640);
-      ctx.fillStyle = '#b0c8e0'; ctx.font = '400 32px "Cinzel", serif'; ctx.fillText('PRAVEEN KUMAR', 512, 1300);
-      ctx.strokeStyle = 'rgba(150,180,220,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(330, 1330); ctx.lineTo(694, 1330); ctx.stroke();
-    }, true);
-    addCoverToBook(book2, '', (ctx) => {
-      ctx.fillStyle = '#060818'; ctx.fillRect(0, 0, 1024, 1408);
-      ctx.strokeStyle = 'rgba(140,160,210,0.5)'; ctx.lineWidth = 4; ctx.strokeRect(60, 60, 904, 1288);
-      ctx.fillStyle = '#b0c8e0'; ctx.font = 'italic 400 28px "EB Garamond", serif'; ctx.textAlign = 'center';
-      ctx.fillText('There are books that comfort you.', 512, 140); ctx.fillText('This is not one of them.', 512, 178);
-      ctx.fillStyle = 'rgba(200,215,235,0.75)'; ctx.font = '400 23px "EB Garamond", serif';
-      ['','The Unyielding March is a raw, unflinching','collection of eleven verses that stare directly','into the face of despair and refuse to blink.','Written across the darkest seasons of','Praveen Kumar\'s life, these pages do not offer','easy answers or tidy redemptions.','They offer something rarer: the truth.','','This is a book for anyone who has ever felt','the dead weight of depression pressing down','before their eyes opened. For anyone who has','plastered on a smile while something inside','them bled. For anyone who has waited,','exhausted and hopeless, for a collapse','that never came.','','These verses do not preach resilience.','They do not promise light at the end.','They simply stand beside you in the dark','and say: I know this place.','I have been here too.','','Brutal. Honest. Necessary.'].forEach((l,i) => { if(l) ctx.fillText(l, 512, 258 + i*30); });
-      ctx.fillStyle = '#b0c8e0'; ctx.font = 'italic 400 26px "EB Garamond", serif';
-      ctx.fillText('The Unyielding March is not a book', 512, 1020); ctx.fillText('you read to feel better.', 512, 1054);
-      ctx.fillText('It is a book you read to feel understood.', 512, 1088);
-      ctx.strokeStyle = 'rgba(140,160,210,0.4)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(300, 1140); ctx.lineTo(724, 1140); ctx.stroke();
-      ctx.fillStyle = '#b0c8e0'; ctx.font = '400 26px "Cinzel", serif'; ctx.fillText('PRAVEEN KUMAR', 512, 1210);
-      ctx.font = '700 22px "Cinzel Decorative", serif'; ctx.fillText('THE UNYIELDING MARCH', 512, 1260);
-      ctx.fillStyle = 'rgba(200,215,235,0.5)'; ctx.font = 'italic 400 18px "EB Garamond", serif'; ctx.fillText('A Collection of Verses', 512, 1295);
-      ctx.fillStyle = 'rgba(200,215,235,0.2)'; ctx.fillRect(362, 1330, 300, 50);
-      ctx.fillStyle = 'rgba(200,215,235,0.3)'; ctx.font = '400 14px "EB Garamond", serif'; ctx.fillText('Poetry · First Edition', 512, 1360);
-    }, false);
-
-    // Coming Soon tag
-    const tagGroup = new THREE.Group(); tagGroup.position.set(0, -bH/2-0.85, bD/2+0.35); book2.add(tagGroup);
-    const tagCv = document.createElement('canvas'); tagCv.width = 512; tagCv.height = 128;
-    const tCtx = tagCv.getContext('2d');
-    tCtx.fillStyle = '#0a0a1e'; tCtx.beginPath(); tCtx.moveTo(40, 8); tCtx.lineTo(472, 8); tCtx.quadraticCurveTo(492, 8, 492, 28); tCtx.lineTo(492, 100); tCtx.quadraticCurveTo(492, 120, 472, 120); tCtx.lineTo(40, 120); tCtx.quadraticCurveTo(20, 120, 20, 100); tCtx.lineTo(20, 28); tCtx.quadraticCurveTo(20, 8, 40, 8); tCtx.closePath(); tCtx.fill();
-    tCtx.strokeStyle = '#8090c0'; tCtx.lineWidth = 4; tCtx.beginPath(); tCtx.moveTo(40, 8); tCtx.lineTo(472, 8); tCtx.quadraticCurveTo(492, 8, 492, 28); tCtx.lineTo(492, 100); tCtx.quadraticCurveTo(492, 120, 472, 120); tCtx.lineTo(40, 120); tCtx.quadraticCurveTo(20, 120, 20, 100); tCtx.lineTo(20, 28); tCtx.quadraticCurveTo(20, 8, 40, 8); tCtx.closePath(); tCtx.stroke();
-    tCtx.fillStyle = '#b0c8e0'; tCtx.font = '700 44px "Cinzel Decorative", serif'; tCtx.textAlign = 'center'; tCtx.fillText('COMING SOON', 256, 80);
-    const tagTex = new THREE.CanvasTexture(tagCv); tagTex.colorSpace = THREE.SRGBColorSpace;
-    tagGroup.add(new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.38), new THREE.MeshStandardMaterial({ map: tagTex, roughness: 0.5, metalness: 0.1, transparent: true, side: THREE.DoubleSide })));
+    
+    animate();
 
     function resize() {
       const rect = section.getBoundingClientRect();
@@ -549,36 +654,31 @@
       camera.aspect = rect.width / Math.max(rect.height, 1);
       camera.updateProjectionMatrix();
     }
-    window.addEventListener('resize', resize); resize();
-
-    let isDragging = false, prev = { x:0, y:0 }, rv = { x:0, y:0 };
-    let tRX = 0.25, tRY = 4.7, cRX = 0.25, cRY = 4.7;
-    canvas.addEventListener('pointerdown', (e) => { isDragging = true; canvas.classList.add('dragging'); prev.x = e.clientX; prev.y = e.clientY; });
-    window.addEventListener('pointermove', (e) => { if (!isDragging) return; rv.y = (e.clientX - prev.x) * 0.006; rv.x = (e.clientY - prev.y) * 0.004; tRY += rv.y; tRX += rv.x; tRX = Math.max(-1.0, Math.min(1.5, tRX)); prev.x = e.clientX; prev.y = e.clientY; });
-    window.addEventListener('pointerup', () => { isDragging = false; canvas.classList.remove('dragging'); });
-
-    const clock = new THREE.Clock();
-    function animate() {
-      requestAnimationFrame(animate);
-      const dt = Math.min(clock.getDelta(), 0.1); const time = performance.now() * 0.001;
-      if (!isDragging) { tRY += 0.05 * dt; rv.x *= 0.94; rv.y *= 0.94; tRX += rv.x*dt; tRY += rv.y*dt; tRX = Math.max(-1.0, Math.min(1.5, tRX)); }
-      cRX += (tRX - cRX) * 4 * dt; cRY += (tRY - cRY) * 4 * dt;
-      book1.rotation.x = cRX; book1.rotation.y = cRY; book2.rotation.x = cRX; book2.rotation.y = cRY;
-      tagGroup.position.y = -bH/2-0.85 + Math.sin(time*2.5)*0.08;
-      tagGroup.rotation.z = Math.sin(time*1.8)*0.04;
-      moonGlow.material.uniforms.uTime.value = time;
-      birdData.forEach(b => { b.mesh.position.x = b.bx + Math.sin(time*b.speed+b.off)*5; b.mesh.position.y = b.by + Math.cos(time*b.speed*0.6+b.off)*2.5; b.mesh.position.z = b.bz + Math.cos(time*b.speed*0.4+b.off)*2; });
-      bookLight.intensity = 50 + Math.sin(time*0.5)*4;
-      renderer.render(scene, camera);
-    }
-    animate();
-
+    window.addEventListener('resize', resize);
+    resize();
+    
+    // DOM interactions
     document.getElementById('currentYear').textContent = new Date().getFullYear();
     document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    const cc = document.getElementById('cookieConsent');
-    if (cc && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cc.classList.add('show');
-    document.getElementById('acceptCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cc.classList.remove('show'); });
-    document.getElementById('declineCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cc.classList.remove('show'); });
+    document.getElementById('comingSoonBtn')?.addEventListener('click', () => {
+      alert('📖 The Horseman\'s Journal is coming soon.\n\nSign up for the newsletter to be notified when the book launches!');
+    });
+    document.getElementById('previewBookBtn')?.addEventListener('click', () => {
+      window.open('sample.pdf', '_blank');
+    });
+    
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
+      cookieConsent.classList.add('show');
+    }
+    document.getElementById('acceptCookies')?.addEventListener('click', () => {
+      localStorage.setItem('cookiesAccepted', 'true');
+      cookieConsent.classList.remove('show');
+    });
+    document.getElementById('declineCookies')?.addEventListener('click', () => {
+      localStorage.setItem('cookiesDeclined', 'true');
+      cookieConsent.classList.remove('show');
+    });
   </script>
 </body>
 </html>
