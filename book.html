@@ -24,9 +24,9 @@
   
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0a0508; color: #f0ede0; font-family: 'EB Garamond', serif; overflow-x: hidden; padding-top: 0; }
+    body { background: #0a0508; color: #f0ede0; font-family: 'EB Garamond', serif; overflow-x: hidden; }
     
-    /* ===== NAVBAR (fixed but book canvas starts below it) ===== */
+    /* ===== NAVBAR ===== */
     .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 1rem 1rem 0; pointer-events: none; }
     .navbar-wrapper * { pointer-events: auto; }
     .scene { perspective: 700px; perspective-origin: 50% 60%; width: 100%; max-width: 1020px; }
@@ -52,16 +52,16 @@
     .portal-wall { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4)); border-radius: 100px; transform: translateZ(-14px); z-index: 2; border: 1px solid rgba(120,70,0,0.5); }
     .portal-glow { position: absolute; inset: -4px; border-radius: 100px; background: transparent; box-shadow: 0 0 20px rgba(212,175,55,0.4),0 0 60px rgba(212,175,55,0.15); transform: translateZ(-7px); z-index: 1; }
 
-    /* ===== BOOK HERO SECTION - WITH TOP PADDING TO AVOID NAVBAR ===== */
-    .book-hero { position: relative; width: 100%; height: 100vh; overflow: hidden; background: #0a0508; margin-top: 0; padding-top: 80px; }
-    #bookCanvas { position: absolute; top: 80px; left: 0; width: 100%; height: calc(100% - 80px); z-index: 0; display: block; cursor: grab; }
+    /* ===== BOOK HERO SECTION ===== */
+    .book-hero { position: relative; width: 100%; height: 90vh; min-height: 600px; overflow: hidden; background: #0a0508; margin-top: 0; }
+    #bookCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; display: block; cursor: grab; }
     #bookCanvas:active { cursor: grabbing; }
-    .book-hero-overlay { position: absolute; top: 80px; left: 0; width: 100%; height: calc(100% - 80px); background: radial-gradient(ellipse at 50% 50%, transparent 35%, rgba(0,0,0,0.4) 100%); z-index: 1; pointer-events: none; }
-    .book-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10; font-family: 'Cinzel',serif; font-size: 0.7rem; letter-spacing: 6px; color: rgba(212,175,55,0.7); text-align: center; pointer-events: none; animation: hintPulse 3s ease-in-out infinite; background: rgba(0,0,0,0.5); padding: 8px 20px; border-radius: 40px; backdrop-filter: blur(4px); white-space: nowrap; }
+    .book-hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.3) 100%); z-index: 1; pointer-events: none; }
+    .book-hint { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; font-family: 'Cinzel',serif; font-size: 0.65rem; letter-spacing: 5px; color: rgba(212,175,55,0.7); text-align: center; pointer-events: none; animation: hintPulse 3s ease-in-out infinite; background: rgba(0,0,0,0.5); padding: 6px 16px; border-radius: 40px; backdrop-filter: blur(4px); white-space: nowrap; }
     @keyframes hintPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
 
-    /* ===== OPENING POEM SECTION ===== */
-    .opening-section { background: linear-gradient(180deg, #0a0508, #0d060a 50%, #0a0508); padding: 5rem 2rem; border-top: 1px solid rgba(212,175,55,0.08); border-bottom: 1px solid rgba(212,175,55,0.08); }
+    /* ===== OPENING POEM SECTION - MOVED SLIGHTLY DOWN ===== */
+    .opening-section { background: linear-gradient(180deg, #0a0508, #0d060a 50%, #0a0508); padding: 6rem 2rem 5rem; border-top: 1px solid rgba(212,175,55,0.08); border-bottom: 1px solid rgba(212,175,55,0.08); margin-top: 0; }
     .opening-inner { max-width: 700px; margin: 0 auto; text-align: center; }
     .opening-label { font-family: 'Cinzel',serif; font-size: 0.6rem; letter-spacing: 5px; color: rgba(212,175,55,0.5); text-transform: uppercase; margin-bottom: 2rem; }
     .opening-poem { font-family: 'EB Garamond',serif; font-size: 1.1rem; line-height: 2; color: rgba(240,230,200,0.7); font-style: italic; }
@@ -125,14 +125,13 @@
     .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
 
     @media (max-width: 860px) {
-      .book-hero { padding-top: 100px; }
-      #bookCanvas { top: 100px; height: calc(100% - 100px); }
-      .book-hero-overlay { top: 100px; height: calc(100% - 100px); }
-      .book-hint { font-size: 0.5rem; letter-spacing: 3px; padding: 5px 12px; white-space: nowrap; bottom: 15px; }
+      .book-hero { height: 70vh; min-height: 500px; }
+      .book-hint { font-size: 0.5rem; letter-spacing: 3px; padding: 4px 10px; white-space: nowrap; bottom: 15px; }
+      .opening-section { padding: 4rem 1.5rem; }
       .specs-grid { grid-template-columns: repeat(3,1fr); gap: 0.6rem; padding: 1rem; }
       .spec-value { font-size: 1rem; } .spec-label { font-size: 0.5rem; }
       .topics-list { columns: 1; }
-      .opening-section { padding: 3rem 1.5rem; } .opening-poem { font-size: 0.95rem; }
+      .opening-poem { font-size: 0.95rem; }
       .reviews-full-grid { grid-template-columns: repeat(2,1fr); }
       .navbar-wrapper { padding: 0.5rem; overflow-x: visible; }
       .scene { perspective: none; width: 100%; }
@@ -170,7 +169,7 @@
   <section class="book-hero">
     <canvas id="bookCanvas"></canvas>
     <div class="book-hero-overlay"></div>
-    <div class="book-hint">✧ DRAG TO ROTATE 360° — SEE FRONT & BACK COVERS ✧</div>
+    <div class="book-hint">✧ DRAG TO ROTATE — SEE FRONT & BACK COVERS ✧</div>
   </section>
 
   <section class="opening-section">
@@ -264,19 +263,19 @@
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color('#0a0508');
-    scene.fog = new THREE.FogExp2('#0a0508', 0.008);
+    scene.fog = new THREE.FogExp2('#0a0508', 0.01);
 
-    // Camera positioned to see the full book clearly
-    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 20);
-    camera.position.set(0, 0.2, 2.5);
+    // Camera - positioned to see the book clearly
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 20);
+    camera.position.set(0, 0.15, 2.4);
     camera.lookAt(0, 0, 0);
 
     // Lighting
-    const ambient = new THREE.AmbientLight('#2a2030', 0.8);
+    const ambient = new THREE.AmbientLight('#2a2030', 0.75);
     scene.add(ambient);
     
-    const mainLight = new THREE.DirectionalLight('#D4AF37', 2.5);
-    mainLight.position.set(2, 2, 2.5);
+    const mainLight = new THREE.DirectionalLight('#D4AF37', 2.8);
+    mainLight.position.set(2, 2.5, 2.2);
     mainLight.castShadow = true;
     scene.add(mainLight);
     
@@ -285,16 +284,16 @@
     scene.add(fillLight);
     
     const backLight = new THREE.PointLight('#D4AF37', 1.5);
-    backLight.position.set(0, 0.2, -2);
+    backLight.position.set(0, 0.15, -2);
     scene.add(backLight);
     
-    const bottomLight = new THREE.PointLight('#806040', 0.6);
-    bottomLight.position.set(0, -0.8, 0);
+    const bottomLight = new THREE.PointLight('#806040', 0.7);
+    bottomLight.position.set(0, -0.7, 0);
     scene.add(bottomLight);
 
-    // Stars
+    // Stars background
     const starGeometry = new THREE.BufferGeometry();
-    const starCount = 1500;
+    const starCount = 1200;
     const starPositions = new Float32Array(starCount * 3);
     for (let i = 0; i < starCount; i++) {
       starPositions[i*3] = (Math.random() - 0.5) * 200;
@@ -302,68 +301,68 @@
       starPositions[i*3+2] = (Math.random() - 0.5) * 100 - 50;
     }
     starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    const stars = new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: '#ffffff', size: 0.08, transparent: true, opacity: 0.5 }));
+    const stars = new THREE.Points(starGeometry, new THREE.PointsMaterial({ color: '#ffffff', size: 0.07, transparent: true, opacity: 0.5 }));
     scene.add(stars);
     
-    // Colored stars
-    const colorStarGeo = new THREE.BufferGeometry();
-    const colorStarCount = 500;
-    const colorStarPositions = new Float32Array(colorStarCount * 3);
-    for (let i = 0; i < colorStarCount; i++) {
-      colorStarPositions[i*3] = (Math.random() - 0.5) * 180;
-      colorStarPositions[i*3+1] = (Math.random() - 0.5) * 60 + 4;
-      colorStarPositions[i*3+2] = (Math.random() - 0.5) * 80 - 40;
+    // Golden stars
+    const goldStarGeo = new THREE.BufferGeometry();
+    const goldStarCount = 400;
+    const goldStarPositions = new Float32Array(goldStarCount * 3);
+    for (let i = 0; i < goldStarCount; i++) {
+      goldStarPositions[i*3] = (Math.random() - 0.5) * 180;
+      goldStarPositions[i*3+1] = (Math.random() - 0.5) * 60 + 4;
+      goldStarPositions[i*3+2] = (Math.random() - 0.5) * 80 - 40;
     }
-    colorStarGeo.setAttribute('position', new THREE.BufferAttribute(colorStarPositions, 3));
-    const colorStars = new THREE.Points(colorStarGeo, new THREE.PointsMaterial({ color: '#D4AF37', size: 0.1, transparent: true, opacity: 0.6 }));
-    scene.add(colorStars);
+    goldStarGeo.setAttribute('position', new THREE.BufferAttribute(goldStarPositions, 3));
+    const goldStars = new THREE.Points(goldStarGeo, new THREE.PointsMaterial({ color: '#D4AF37', size: 0.09, transparent: true, opacity: 0.6 }));
+    scene.add(goldStars);
 
-    // Simple pedestal
+    // Pedestal
     const pedestal = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.4, 1.8, 0.15, 24),
+      new THREE.CylinderGeometry(1.3, 1.6, 0.12, 24),
       new THREE.MeshStandardMaterial({ color: '#1a1218', roughness: 0.4, metalness: 0.1 })
     );
-    pedestal.position.set(0, -1.0, 0);
+    pedestal.position.set(0, -0.85, 0);
     pedestal.castShadow = true;
     scene.add(pedestal);
     
     const pedestalTop = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.6, 1.4, 0.1, 24),
+      new THREE.CylinderGeometry(1.45, 1.3, 0.08, 24),
       new THREE.MeshStandardMaterial({ color: '#2a1a20', roughness: 0.35, metalness: 0.15 })
     );
-    pedestalTop.position.set(0, -0.85, 0);
+    pedestalTop.position.set(0, -0.73, 0);
     pedestalTop.castShadow = true;
     scene.add(pedestalTop);
 
-    // Dust particles
+    // Floating dust
     const dustGeo = new THREE.BufferGeometry();
-    const dustCount = 800;
+    const dustCount = 600;
     const dustPositions = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount; i++) {
-      dustPositions[i*3] = (Math.random() - 0.5) * 15;
-      dustPositions[i*3+1] = Math.random() * 3;
-      dustPositions[i*3+2] = (Math.random() - 0.5) * 12 - 2;
+      dustPositions[i*3] = (Math.random() - 0.5) * 14;
+      dustPositions[i*3+1] = Math.random() * 2.5;
+      dustPositions[i*3+2] = (Math.random() - 0.5) * 10 - 1.5;
     }
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
-    const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: '#D4AF37', size: 0.012, transparent: true, opacity: 0.25 }));
+    const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: '#D4AF37', size: 0.01, transparent: true, opacity: 0.2 }));
     scene.add(dust);
 
-    // ===== SINGLE BOOK - USING YOUR IMAGES ONLY =====
-    const bW = 2.4, bH = 3.2, bD = 0.4, sW = 0.22;
+    // ===== SINGLE BOOK - SMALLER SIZE =====
+    const bW = 2.0, bH = 2.7, bD = 0.35, sW = 0.18;
     
     const bookGroup = new THREE.Group();
-    bookGroup.position.set(0, -0.25, 0);
+    bookGroup.position.set(0, -0.2, 0);
     scene.add(bookGroup);
     
     // Book structure
     const coverMat = new THREE.MeshStandardMaterial({ color: '#0a0a0a', roughness: 0.45 });
-    const frontCoverMesh = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.06), coverMat);
-    frontCoverMesh.position.set(sW/2 + 0.04, 0, bD/2);
+    const frontCoverMesh = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.05), coverMat);
+    frontCoverMesh.position.set(sW/2 + 0.03, 0, bD/2);
     frontCoverMesh.castShadow = true;
     bookGroup.add(frontCoverMesh);
     
-    const backCoverMesh = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.06), coverMat);
-    backCoverMesh.position.set(sW/2 + 0.04, 0, -bD/2);
+    const backCoverMesh = new THREE.Mesh(new THREE.BoxGeometry(bW, bH, 0.05), coverMat);
+    backCoverMesh.position.set(sW/2 + 0.03, 0, -bD/2);
     backCoverMesh.castShadow = true;
     bookGroup.add(backCoverMesh);
     
@@ -372,35 +371,35 @@
     spine.castShadow = true;
     bookGroup.add(spine);
     
-    const pages = new THREE.Mesh(new THREE.BoxGeometry(bW - sW - 0.14, bH - 0.16, bD - 0.1), new THREE.MeshStandardMaterial({ color: '#f5f0e0', roughness: 0.7 }));
-    pages.position.set(sW/2 + 0.1, 0, 0);
+    const pages = new THREE.Mesh(new THREE.BoxGeometry(bW - sW - 0.12, bH - 0.14, bD - 0.08), new THREE.MeshStandardMaterial({ color: '#f5f0e0', roughness: 0.7 }));
+    pages.position.set(sW/2 + 0.08, 0, 0);
     pages.castShadow = true;
     bookGroup.add(pages);
     
-    // YOUR FRONT COVER IMAGE
+    // YOUR FRONT COVER IMAGE (with title and logo)
     const textureLoader = new THREE.TextureLoader();
     const frontTexture = textureLoader.load('cover-front-bg.jpg');
     frontTexture.colorSpace = THREE.SRGBColorSpace;
     const frontPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(bW - sW - 0.16, bH - 0.18),
+      new THREE.PlaneGeometry(bW - sW - 0.14, bH - 0.16),
       new THREE.MeshStandardMaterial({ map: frontTexture, roughness: 0.4, metalness: 0.05 })
     );
-    frontPlane.position.set(sW/2 + 0.06, 0, bD/2 + 0.035);
+    frontPlane.position.set(sW/2 + 0.05, 0, bD/2 + 0.03);
     frontPlane.castShadow = true;
     bookGroup.add(frontPlane);
     
-    // YOUR BACK COVER IMAGE
+    // YOUR BACK COVER IMAGE (with all the original text)
     const backTexture = textureLoader.load('cover-back-bg.jpg');
     backTexture.colorSpace = THREE.SRGBColorSpace;
     const backPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(bW - sW - 0.16, bH - 0.18),
+      new THREE.PlaneGeometry(bW - sW - 0.14, bH - 0.16),
       new THREE.MeshStandardMaterial({ map: backTexture, roughness: 0.4, metalness: 0.05 })
     );
-    backPlane.position.set(sW/2 + 0.06, 0, -bD/2 - 0.035);
+    backPlane.position.set(sW/2 + 0.05, 0, -bD/2 - 0.03);
     backPlane.castShadow = true;
     bookGroup.add(backPlane);
     
-    // Simple spine text
+    // Spine text
     const spineCanvas = document.createElement('canvas');
     spineCanvas.width = 256;
     spineCanvas.height = 1024;
@@ -411,22 +410,22 @@
     spineCtx.translate(128, 512);
     spineCtx.rotate(-Math.PI/2);
     spineCtx.fillStyle = '#D4AF37';
-    spineCtx.font = '500 36px "Cinzel", serif';
+    spineCtx.font = '500 32px "Cinzel", serif';
     spineCtx.textAlign = 'center';
     spineCtx.fillText("THE HORSEMAN'S JOURNAL", 0, 0);
     spineCtx.restore();
     const spineTexture = new THREE.CanvasTexture(spineCanvas);
     const spinePlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(bH - 0.2, sW - 0.04),
+      new THREE.PlaneGeometry(bH - 0.18, sW - 0.03),
       new THREE.MeshStandardMaterial({ map: spineTexture, roughness: 0.35, metalness: 0.1 })
     );
-    spinePlane.position.set(-bW/2 + sW/2, 0, 0.015);
+    spinePlane.position.set(-bW/2 + sW/2, 0, 0.012);
     spinePlane.rotation.y = Math.PI/2;
     bookGroup.add(spinePlane);
     
     // Coming Soon ribbon
     const ribbonGroup = new THREE.Group();
-    ribbonGroup.position.set(1.05, 1.35, 0.42);
+    ribbonGroup.position.set(0.88, 1.15, 0.37);
     bookGroup.add(ribbonGroup);
     
     const ribbonCanvas = document.createElement('canvas');
@@ -444,19 +443,19 @@
     ribbonCtx.closePath();
     ribbonCtx.fill();
     ribbonCtx.fillStyle = '#D4AF37';
-    ribbonCtx.font = '700 32px "Cinzel", serif';
+    ribbonCtx.font = '700 28px "Cinzel", serif';
     ribbonCtx.textAlign = 'center';
-    ribbonCtx.fillText('COMING SOON', 256, 74);
+    ribbonCtx.fillText('COMING SOON', 256, 72);
     const ribbonTextureImg = new THREE.CanvasTexture(ribbonCanvas);
-    const ribbon = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.3), new THREE.MeshStandardMaterial({ map: ribbonTextureImg, side: THREE.DoubleSide, transparent: true }));
-    ribbon.rotation.z = 0.15;
+    const ribbon = new THREE.Mesh(new THREE.PlaneGeometry(1.0, 0.26), new THREE.MeshStandardMaterial({ map: ribbonTextureImg, side: THREE.DoubleSide, transparent: true }));
+    ribbon.rotation.z = 0.12;
     ribbonGroup.add(ribbon);
     
     // Rotation controls
     let isDragging = false;
     let prevX = 0, prevY = 0;
-    let targetRotX = 0, targetRotY = 0.2;
-    let currentRotX = 0, currentRotY = 0.2;
+    let targetRotX = 0, targetRotY = 0.15;
+    let currentRotX = 0, currentRotY = 0.15;
     
     canvas.addEventListener('pointerdown', (e) => {
       isDragging = true;
@@ -467,8 +466,8 @@
     
     window.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
-      const deltaX = (e.clientX - prevX) * 0.015;
-      const deltaY = (e.clientY - prevY) * 0.012;
+      const deltaX = (e.clientX - prevX) * 0.014;
+      const deltaY = (e.clientY - prevY) * 0.01;
       targetRotY += deltaX;
       targetRotX += deltaY;
       prevX = e.clientX;
@@ -494,9 +493,9 @@
       
       const now = performance.now();
       if (now - lastMoveTime > 4000 && !isDragging) {
-        autoRotateAngle += 0.002;
-        targetRotY = 0.3 + Math.sin(autoRotateAngle * 0.3) * 0.3;
-        targetRotX = 0.05 + Math.cos(autoRotateAngle * 0.25) * 0.1;
+        autoRotateAngle += 0.0015;
+        targetRotY = 0.2 + Math.sin(autoRotateAngle * 0.3) * 0.25;
+        targetRotX = 0.05 + Math.cos(autoRotateAngle * 0.25) * 0.08;
       }
       
       currentRotX += (targetRotX - currentRotX) * 0.12;
@@ -505,14 +504,14 @@
       bookGroup.rotation.x = currentRotX;
       bookGroup.rotation.y = currentRotY;
       
-      dust.rotation.y += 0.002;
+      dust.rotation.y += 0.0015;
       stars.rotation.y += 0.0003;
-      colorStars.rotation.x = Math.sin(time * 0.08) * 0.02;
+      goldStars.rotation.x = Math.sin(time * 0.08) * 0.02;
       
       // Handle canvas resize
       const rect = canvas.parentElement.getBoundingClientRect();
       const width = rect.width;
-      const height = rect.height - 80;
+      const height = rect.height;
       if (renderer.domElement.width !== width || renderer.domElement.height !== height) {
         renderer.setSize(width, height, false);
         camera.aspect = width / height;
@@ -524,14 +523,14 @@
     
     // Initial resize
     const rect = canvas.parentElement.getBoundingClientRect();
-    renderer.setSize(rect.width, rect.height - 80, false);
-    camera.aspect = rect.width / (rect.height - 80);
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
     
     window.addEventListener('resize', () => {
       const r = canvas.parentElement.getBoundingClientRect();
-      renderer.setSize(r.width, r.height - 80, false);
-      camera.aspect = r.width / (r.height - 80);
+      renderer.setSize(r.width, r.height, false);
+      camera.aspect = r.width / r.height;
       camera.updateProjectionMatrix();
     });
     
