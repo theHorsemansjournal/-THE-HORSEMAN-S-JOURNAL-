@@ -8,51 +8,56 @@
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/about.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/awakening.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/chronicles.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/companions.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/essays.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- essays.html (Verses) removed as requested -->
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/questions.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/gathering.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/book.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/privacy.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/terms.html</loc>
+    <lastmod>2026-05-30</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
