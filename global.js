@@ -430,17 +430,16 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
         ];
         
-        // LANTERNS - FIXED POSITIONING ON SCREEN (no scrolling)
+        // LANTERNS - FIXED POSITIONING ON SCREEN (Verses removed)
         const sections = [
             { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
             { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
             { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
             { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
-            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45, screenX: 76, screenY: 28, depth: 0.55 },
             { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
         ];
         
-        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
+        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
         
         // Create lanterns with FIXED positioning
         const lanternsDiv = document.getElementById('lanterns');
@@ -682,17 +681,31 @@
         if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         const scrollHint = document.getElementById('scrollHint');
         if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
-        const previewBtn = document.getElementById('previewBookBtn');
-        if (previewBtn) previewBtn.addEventListener('click', () => window.open('sample.pdf', '_blank'));
-        const whatsappLink = document.getElementById('whatsappLink');
-        if (whatsappLink) whatsappLink.addEventListener('click', (e) => { e.preventDefault(); alert('WhatsApp: [ADD YOUR NUMBER]'); });
         
+        // ===== UNIFIED COOKIE CONSENT (matches HTML fallback) =====
         const cookieConsent = document.getElementById('cookieConsent');
-        if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
         const acceptCookies = document.getElementById('acceptCookies');
-        if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
         const declineCookies = document.getElementById('declineCookies');
-        if (declineCookies) declineCookies.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
+        
+        function setCookieConsent(accepted) {
+            localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+            if (cookieConsent) cookieConsent.style.display = 'none';
+        }
+        
+        function showCookieConsent() {
+            if (!cookieConsent) return;
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                cookieConsent.style.display = 'flex';
+            } else {
+                cookieConsent.style.display = 'none';
+            }
+        }
+        
+        if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
+        if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
+        
+        showCookieConsent();
         
         function animate() {
             t++;
