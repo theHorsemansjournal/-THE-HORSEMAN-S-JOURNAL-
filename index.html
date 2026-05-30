@@ -11,7 +11,6 @@
   
   <meta property="og:title" content="The Horseman's Journal">
   <meta property="og:description" content="Eleven years of horsemanship. Trust, not force.">
-  <!-- Placeholder for og:image - Replace with your own 1200x630 image -->
   <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%231a140e'/%3E%3Ctext x='600' y='315' font-size='48' font-family='Georgia, serif' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3EThe Horseman's Journal%3C/text%3E%3C/svg%3E">
   <meta property="og:type" content="website">
   
@@ -32,7 +31,6 @@
   
   <link rel="stylesheet" href="global.css">
   <link rel="icon" type="image/png" href="favicon.png">
-  <!-- Placeholder for apple-touch-icon - Replace with your own 180x180 image -->
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%231a140e'/%3E%3Ctext x='90' y='90' font-size='90' font-family='Georgia, serif' fill='%23D4AF37' text-anchor='middle' dominant-baseline='middle'%3EH%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -55,7 +53,6 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
-            <!-- VERSES removed as requested -->
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
@@ -109,7 +106,6 @@
           <a href="awakening.html" class="hall-card"><span class="hall-card-num">II</span><div><h3 class="hall-card-name">Awakening</h3><p class="hall-card-desc">The moment of surrender that changed everything.</p></div><span class="hall-card-arrow">→</span></a>
           <a href="chronicles.html" class="hall-card"><span class="hall-card-num">III</span><div><h3 class="hall-card-name">Chronicles</h3><p class="hall-card-desc">Fifteen articles. Foundational, Practical, and the Unique Edge.</p></div><span class="hall-card-arrow">→</span></a>
           <a href="companions.html" class="hall-card"><span class="hall-card-num">IV</span><div><h3 class="hall-card-name">Companions</h3><p class="hall-card-desc">Eight horses. Eight stories written in dust and silence.</p></div><span class="hall-card-arrow">→</span></a>
-          <!-- Verses card removed -->
           <a href="questions.html" class="hall-card"><span class="hall-card-num">V</span><div><h3 class="hall-card-name">Questions</h3><p class="hall-card-desc">Twelve answers to the questions horsemen ask most.</p></div><span class="hall-card-arrow">→</span></a>
         </div>
       </div>
@@ -157,7 +153,6 @@
             <h2 class="book-showcase-title">The Horseman's Journal</h2>
             <p class="book-showcase-subtitle">A Conversation in Silence</p>
             <p class="book-description">Eleven years with horses. Fifteen truths written in dust, silence, and breath. This is not a training manual. It is an invitation — into trust, into stillness, into the invisible bond between horse and human.</p>
-            <!-- Price and note removed as requested -->
             <div class="book-actions">
               <span class="btn-coming-soon">📖 COMING SOON</span>
               <a href="book.html" class="btn-read-more">📖 READ MORE →</a>
@@ -172,18 +167,20 @@
         <div class="newsletter-box">
           <h3>✦ The Herd's Letter ✦</h3>
           <p style="margin-bottom:1rem; font-size:0.8rem;">Weekly wisdom from the arena. No spam, only silence.</p>
-          <form class="newsletter-form" action="https://formspree.io/f/xjgzzdlp" method="POST">
+          <form id="newsletterForm" class="newsletter-form">
             <input type="email" name="email" placeholder="Your email address" required>
             <button type="submit">Subscribe →</button>
+            <div id="newsletterStatus" class="form-status"></div>
           </form>
         </div>
         <div class="contact-form-box">
           <h3>✧ Send a Message ✧</h3>
-          <form class="contact-form" action="https://formspree.io/f/xjgzzdlp" method="POST">
+          <form id="contactForm" class="contact-form">
             <input type="text" name="name" placeholder="Your name">
             <input type="email" name="email" placeholder="Your email">
-            <textarea rows="3" placeholder="Your message..."></textarea>
+            <textarea rows="3" name="message" placeholder="Your message..."></textarea>
             <button type="submit">Send →</button>
+            <div id="contactStatus" class="form-status"></div>
           </form>
         </div>
       </div>
@@ -214,7 +211,6 @@
     <button id="declineCookies" type="button" style="background:transparent; border:1px solid #D4AF37; color:#D4AF37;">Decline</button>
   </div>
 
-  <!-- Required containers for JavaScript -->
   <div id="lanterns"></div>
   <div id="hallParticles"></div>
 
