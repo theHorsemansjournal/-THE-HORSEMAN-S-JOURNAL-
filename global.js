@@ -2,6 +2,7 @@
 // Canvas animation, lantern navigation, interactive elements, AJAX forms, favicon particles, AND 3D BOOK
 
 (function() {
+    // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -9,240 +10,23 @@
     }
 
     function init() {
-        // ========== 3D BOOK SHOWCASE (NEW - Interactive Three.js Book) ==========
-        function init3DBook() {
-            const container = document.querySelector('.book-hardcover-container');
-            if (!container) return;
-            
-            // Check if Three.js is loaded, if not load it
-            if (typeof THREE === 'undefined') {
-                const script = document.createElement('script');
-                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-                script.onload = () => init3DBook();
-                document.head.appendChild(script);
-                return;
-            }
-            
-            // Hide the static book cover
-            const staticBook = container.querySelector('.book-hardcover');
-            if (staticBook) {
-                staticBook.style.opacity = '0';
-                staticBook.style.pointerEvents = 'none';
-                staticBook.style.position = 'absolute';
-            }
-            
-            // Setup Three.js scene
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setClearColor(0x000000, 0);
-            renderer.shadowMap.enabled = true;
-            container.appendChild(renderer.domElement);
-            renderer.domElement.style.position = 'relative';
-            renderer.domElement.style.zIndex = '10';
-            
-            // Lighting
-            const ambientLight = new THREE.AmbientLight(0x2a2218, 0.55);
-            scene.add(ambientLight);
-            
-            const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
-            mainLight.position.set(3, 4, 2.5);
-            mainLight.castShadow = true;
-            scene.add(mainLight);
-            
-            const fillLight = new THREE.PointLight(0xb87c4f, 0.45);
-            fillLight.position.set(0, -1, 1);
-            scene.add(fillLight);
-            
-            const rimLight = new THREE.PointLight(0xffb56a, 0.55);
-            rimLight.position.set(-1.5, 1.2, -2);
-            scene.add(rimLight);
-            
-            const backLight = new THREE.PointLight(0x4a6a8a, 0.3);
-            backLight.position.set(0, 0.5, -2);
-            scene.add(backLight);
-            
-            // Create book group
-            const bookGroup = new THREE.Group();
-            
-            // Book dimensions
-            const coverW = 1.55;
-            const coverH = 2.15;
-            const coverD = 0.3;
-            
-            // Main cover (leather texture look)
-            const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12, emissive: 0x2a1508, emissiveIntensity: 0.05 });
-            const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
-            cover.castShadow = true;
-            bookGroup.add(cover);
-            
-            // Spine detail
-            const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38, metalness: 0.18 });
-            const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
-            spine.position.set(coverW/2 + 0.04, 0, 0);
-            bookGroup.add(spine);
-            
-            // Pages (cream-colored)
-            const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68, emissive: 0xccaa88, emissiveIntensity: 0.02 });
-            const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
-            pages.position.set(0, 0, coverD/2 + 0.065);
-            pages.castShadow = true;
-            bookGroup.add(pages);
-            
-            // Gold foil material
-            const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85, roughness: 0.25 });
-            
-            // Top border
-            const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-            topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
-            bookGroup.add(topBorder);
-            
-            // Bottom border
-            const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-            bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
-            bookGroup.add(bottomBorder);
-            
-            // Left border
-            const leftBorder = new THREE.Mesh(new THREE.BoxGeometry(0.045, coverH - 0.28, 0.05), goldMat);
-            leftBorder.position.set(-coverW/2 + 0.11, 0, coverD/2 + 0.025);
-            bookGroup.add(leftBorder);
-            
-            // Right border
-            const rightBorder = new THREE.Mesh(new THREE.BoxGeometry(0.045, coverH - 0.28, 0.05), goldMat);
-            rightBorder.position.set(coverW/2 - 0.11, 0, coverD/2 + 0.025);
-            bookGroup.add(rightBorder);
-            
-            // Center medallion/emblem
-            const emblemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.045, 32);
-            const emblemMat = new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.72, roughness: 0.3 });
-            const emblem = new THREE.Mesh(emblemGeo, emblemMat);
-            emblem.rotation.x = Math.PI / 2;
-            emblem.position.set(0, 0.1, coverD/2 + 0.045);
-            bookGroup.add(emblem);
-            
-            // Decorative ring around emblem
-            const ringGeo = new THREE.TorusGeometry(0.24, 0.018, 32, 64);
-            const ring = new THREE.Mesh(ringGeo, goldMat);
-            ring.rotation.x = Math.PI / 2;
-            ring.position.set(0, 0.1, coverD/2 + 0.048);
-            bookGroup.add(ring);
-            
-            // Bookmark ribbon
-            const ribbonMat = new THREE.MeshStandardMaterial({ color: 0x9e4a2a });
-            const ribbon = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.55, 0.016), ribbonMat);
-            ribbon.position.set(0.48, -0.68, coverD/2 + 0.105);
-            bookGroup.add(ribbon);
-            
-            // Page edge lines (simulating individual pages)
-            for (let i = -0.72; i <= 0.72; i += 0.24) {
-                const lineGeo = new THREE.BoxGeometry(1.34, 0.007, 0.007);
-                const lineMat = new THREE.MeshStandardMaterial({ color: 0xc9b28b });
-                const line = new THREE.Mesh(lineGeo, lineMat);
-                line.position.set(0, i, coverD/2 + 0.12);
-                bookGroup.add(line);
-            }
-            
-            scene.add(bookGroup);
-            
-            // Floating magical particles around the book
-            const particleCount = 200;
-            const particleGeo = new THREE.BufferGeometry();
-            const positions = new Float32Array(particleCount * 3);
-            for (let i = 0; i < particleCount; i++) {
-                positions[i*3] = (Math.random() - 0.5) * 2.8;
-                positions[i*3+1] = (Math.random() - 0.5) * 2.6;
-                positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
-            }
-            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.6 });
-            const particles = new THREE.Points(particleGeo, particleMat);
-            scene.add(particles);
-            
-            // Add a second particle system (blueish magical dust)
-            const particleGeo2 = new THREE.BufferGeometry();
-            const positions2 = new Float32Array(120 * 3);
-            for (let i = 0; i < 120; i++) {
-                positions2[i*3] = (Math.random() - 0.5) * 3.2;
-                positions2[i*3+1] = (Math.random() - 0.5) * 2.8;
-                positions2[i*3+2] = (Math.random() - 0.5) * 2.6 + 0.1;
-            }
-            particleGeo2.setAttribute('position', new THREE.BufferAttribute(positions2, 3));
-            const particleMat2 = new THREE.PointsMaterial({ color: 0x88aaff, size: 0.014, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.4 });
-            const particles2 = new THREE.Points(particleGeo2, particleMat2);
-            scene.add(particles2);
-            
-            // Position camera
-            camera.position.set(0, 0.2, 2.8);
-            camera.lookAt(0, 0.1, 0);
-            
-            // Mouse interaction for reactive rotation
-            let mouseX = 0;
-            let mouseY = 0;
-            let targetRotY = 0;
-            let targetRotX = 0;
-            let currentRotY = 0;
-            let currentRotX = 0;
-            
-            container.addEventListener('mousemove', (e) => {
-                const rect = container.getBoundingClientRect();
-                mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-                mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-                targetRotY = mouseX * 0.5;
-                targetRotX = mouseY * 0.25;
-            });
-            
-            container.addEventListener('mouseleave', () => {
-                targetRotY = 0;
-                targetRotX = 0;
-            });
-            
-            // Animation variables
-            let time = 0;
-            
-            function animate3D() {
-                requestAnimationFrame(animate3D);
-                time += 0.012;
-                
-                // Smooth rotation interpolation
-                currentRotY += (targetRotY - currentRotY) * 0.08;
-                currentRotX += (targetRotX - currentRotX) * 0.08;
-                bookGroup.rotation.y = currentRotY;
-                bookGroup.rotation.x = currentRotX;
-                bookGroup.rotation.z = currentRotX * 0.12;
-                
-                // Animate particles
-                particles.rotation.y += 0.008;
-                particles.rotation.x = Math.sin(time * 0.5) * 0.1;
-                particles2.rotation.y -= 0.005;
-                particles2.rotation.z = Math.sin(time * 0.4) * 0.08;
-                
-                // Pulsing lights for magical effect
-                rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
-                fillLight.intensity = 0.45 + Math.sin(time * 1.5) * 0.08;
-                backLight.intensity = 0.3 + Math.sin(time * 1.2) * 0.07;
-                
-                renderer.render(scene, camera);
-            }
-            
-            animate3D();
-            
-            // Handle container resize
-            const resizeObserver = new ResizeObserver(() => {
-                const w = container.clientWidth;
-                const h = container.clientHeight;
-                renderer.setSize(w, h);
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-            });
-            resizeObserver.observe(container);
-        }
+        // ========== FIRST: Initialize Hero Canvas Animation ==========
+        initHeroCanvas();
         
-        // Call the 3D book initialization
-        init3DBook();
+        // ========== SECOND: Initialize 3D Book (after a short delay to ensure DOM is ready) ==========
+        setTimeout(() => {
+            init3DBook();
+        }, 100);
         
-        // ========== ORIGINAL CANVAS AND ANIMATION CODE ==========
+        // ========== THIRD: Initialize all other features ==========
+        initLanternsAndParticles();
+        initFormsAndCookie();
+        initFaviconParticles();
+        initScrollAndNav();
+    }
+
+    // ========== HERO CANVAS ANIMATION (Original working code) ==========
+    function initHeroCanvas() {
         const canvas = document.getElementById('heroCanvas');
         if (!canvas) {
             console.error('heroCanvas not found!');
@@ -612,56 +396,6 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
         ];
         
-        const sections = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
-        ];
-        
-        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
-        
-        const lanternsDiv = document.getElementById('lanterns');
-        const lanternEls = [];
-        
-        if (lanternsDiv) {
-            sections.forEach((s, i) => {
-                const el = document.createElement('div');
-                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(160,140,110,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(160,140,110,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
-                const glowEl = el.querySelector('.lantern-glow');
-                const labelEl = el.querySelector('.lantern-label');
-                el.addEventListener('mouseenter', () => {
-                    if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 25px hsla(${s.baseHue}, 45%, 40%, 0.6),0 0 45px hsla(${s.baseHue}, 40%, 35%, 0.4)`;
-                        glowEl.style.filter = 'brightness(1.2)';
-                    }
-                    if (labelEl) labelEl.style.opacity = '1';
-                });
-                el.addEventListener('mouseleave', () => {
-                    if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3)`;
-                        glowEl.style.filter = 'brightness(1)';
-                    }
-                    if (labelEl) labelEl.style.opacity = '0';
-                });
-                el.addEventListener('click', () => { location.href = pageMap[i]; });
-                lanternsDiv.appendChild(el);
-                lanternEls.push({ el, glowEl, s });
-            });
-        }
-        
-        function updateLanternColors() {
-            lanternEls.forEach(({ glowEl, s }) => {
-                if (glowEl) {
-                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${currentHue}, 42%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
-                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 40%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
-                }
-            });
-        }
-        
         function render() {
             ctx.clearRect(0, 0, W, H);
             const sg = ctx.createLinearGradient(0, 0, 0, H);
@@ -672,6 +406,7 @@
             sg.addColorStop(1, '#4a352a');
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
+            
             const auroraY = H * 0.15;
             for (let b = 0; b < 6; b++) {
                 const bandY = auroraY + b * 38;
@@ -695,14 +430,17 @@
                 ctx.closePath();
                 ctx.fill();
             }
+            
             const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
             horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
             horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
             horizonGrad.addColorStop(1, 'rgba(160,80,40,0.25)');
             ctx.fillStyle = horizonGrad;
             ctx.fillRect(0, H * 0.55, W, H * 0.25);
+            
             drawRealisticMoon(W * 0.78, H * 0.16, 42);
             ctx.shadowBlur = 0;
+            
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
@@ -711,6 +449,7 @@
                 ctx.arc(s.x * W, s.y * H, s.r * tw * 0.6, 0, Math.PI * 2);
                 ctx.fill();
             });
+            
             ctx.globalAlpha = 1;
             ctx.fillStyle = 'rgba(10,8,20,0.75)';
             ctx.beginPath();
@@ -722,6 +461,7 @@
             ctx.lineTo(W, H * 0.66);
             ctx.closePath();
             ctx.fill();
+            
             const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
             groundColors.forEach((col, i) => {
                 ctx.fillStyle = col;
@@ -736,12 +476,14 @@
                 ctx.closePath();
                 ctx.fill();
             });
+            
             const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
             mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
             mistGrad.addColorStop(0.7, 'rgba(30,25,45,0.2)');
             mistGrad.addColorStop(1, 'rgba(20,15,35,0.35)');
             ctx.fillStyle = mistGrad;
             ctx.fillRect(0, H * 0.75, W, H * 0.25);
+            
             grass.forEach(g => {
                 const sw = Math.sin(t * g.sp + g.off) * 9;
                 ctx.strokeStyle = g.color;
@@ -751,9 +493,11 @@
                 ctx.quadraticCurveTo(g.x * W + sw * 0.45, g.by * H - g.h * 0.5, g.x * W + sw, g.by * H - g.h);
                 ctx.stroke();
             });
+            
             herd.forEach(h => {
                 horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
             });
+            
             flies.forEach(f => {
                 f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
                 f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
@@ -767,27 +511,225 @@
                 ctx.arc(f.x * W, f.y * H, f.r, 0, Math.PI * 2);
                 ctx.fill();
             });
+            
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
-            sections.forEach((s) => {
-                const lx = s.screenX / 100 * W + (mx - 0.5) * 20 * s.depth;
-                const ly = s.screenY / 100 * H + (my - 0.5) * 10 * s.depth;
-                const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
-                poolGrad.addColorStop(0, `hsla(${currentHue}, 40%, 35%, 0.08)`);
-                poolGrad.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = poolGrad;
-                ctx.beginPath();
-                ctx.arc(lx, ly + 35, 95, 0, Math.PI * 2);
-                ctx.fill();
-            });
+            
             const idle = t - lastMove > 200;
             logoOpacity = idle ? 0.95 : 0.15;
             drawLogo(W * 0.5, H * 0.35, 1.2, logoOpacity);
-            updateLanternColors();
         }
         
-        // Book particles (for static book showcase)
+        function animate() {
+            t++;
+            render();
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+        window.addEventListener('resize', () => { resize(); });
+    }
+    
+    // ========== 3D BOOK SHOWCASE (Interactive) ==========
+    function init3DBook() {
+        const container = document.querySelector('.book-hardcover-container');
+        if (!container) return;
+        
+        // Check if Three.js is loaded, if not load it
+        if (typeof THREE === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            script.onload = () => init3DBook();
+            document.head.appendChild(script);
+            return;
+        }
+        
+        // Hide the static book cover but keep container
+        const staticBook = container.querySelector('.book-hardcover');
+        if (staticBook) {
+            staticBook.style.opacity = '0';
+            staticBook.style.pointerEvents = 'none';
+            staticBook.style.position = 'absolute';
+        }
+        
+        // Setup Three.js scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setClearColor(0x000000, 0);
+        renderer.shadowMap.enabled = true;
+        container.appendChild(renderer.domElement);
+        renderer.domElement.style.position = 'relative';
+        renderer.domElement.style.zIndex = '10';
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.55);
+        scene.add(ambientLight);
+        
+        const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
+        mainLight.position.set(3, 4, 2.5);
+        mainLight.castShadow = true;
+        scene.add(mainLight);
+        
+        const fillLight = new THREE.PointLight(0xb87c4f, 0.45);
+        fillLight.position.set(0, -1, 1);
+        scene.add(fillLight);
+        
+        const rimLight = new THREE.PointLight(0xffb56a, 0.55);
+        rimLight.position.set(-1.5, 1.2, -2);
+        scene.add(rimLight);
+        
+        // Create book group
+        const bookGroup = new THREE.Group();
+        
+        const coverW = 1.55;
+        const coverH = 2.15;
+        const coverD = 0.3;
+        
+        const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
+        const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
+        cover.castShadow = true;
+        bookGroup.add(cover);
+        
+        const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
+        const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
+        spine.position.set(coverW/2 + 0.04, 0, 0);
+        bookGroup.add(spine);
+        
+        const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
+        const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
+        pages.position.set(0, 0, coverD/2 + 0.065);
+        pages.castShadow = true;
+        bookGroup.add(pages);
+        
+        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85, roughness: 0.25 });
+        
+        const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
+        topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
+        bookGroup.add(topBorder);
+        
+        const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
+        bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
+        bookGroup.add(bottomBorder);
+        
+        const emblemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.045, 32);
+        const emblemMat = new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.72 });
+        const emblem = new THREE.Mesh(emblemGeo, emblemMat);
+        emblem.rotation.x = Math.PI / 2;
+        emblem.position.set(0, 0.1, coverD/2 + 0.045);
+        bookGroup.add(emblem);
+        
+        scene.add(bookGroup);
+        
+        // Floating particles
+        const particleCount = 150;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i*3] = (Math.random() - 0.5) * 2.8;
+            positions[i*3+1] = (Math.random() - 0.5) * 2.6;
+            positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.5 });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+        
+        camera.position.set(0, 0.2, 2.8);
+        camera.lookAt(0, 0.1, 0);
+        
+        let mouseX = 0, mouseY = 0;
+        let targetRotY = 0, targetRotX = 0;
+        let currentRotY = 0, currentRotX = 0;
+        
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+            targetRotY = mouseX * 0.4;
+            targetRotX = mouseY * 0.2;
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            targetRotY = 0;
+            targetRotX = 0;
+        });
+        
+        let time = 0;
+        
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            time += 0.012;
+            
+            currentRotY += (targetRotY - currentRotY) * 0.08;
+            currentRotX += (targetRotX - currentRotX) * 0.08;
+            bookGroup.rotation.y = currentRotY;
+            bookGroup.rotation.x = currentRotX;
+            
+            particles.rotation.y += 0.008;
+            particles.rotation.x = Math.sin(time * 0.5) * 0.1;
+            
+            rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
+            
+            renderer.render(scene, camera);
+        }
+        
+        animate3D();
+        
+        const resizeObserver = new ResizeObserver(() => {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            renderer.setSize(w, h);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        });
+        resizeObserver.observe(container);
+    }
+    
+    // ========== LANTERNS AND PARTICLES ==========
+    function initLanternsAndParticles() {
+        const sections = [
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
+        ];
+        
+        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
+        const lanternsDiv = document.getElementById('lanterns');
+        
+        if (lanternsDiv) {
+            sections.forEach((s, i) => {
+                const el = document.createElement('div');
+                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
+                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;">${s.name}</span></div>`;
+                const glowEl = el.querySelector('.lantern-glow');
+                const labelEl = el.querySelector('.lantern-label');
+                el.addEventListener('mouseenter', () => { if (labelEl) labelEl.style.opacity = '1'; });
+                el.addEventListener('mouseleave', () => { if (labelEl) labelEl.style.opacity = '0'; });
+                el.addEventListener('click', () => { location.href = pageMap[i]; });
+                lanternsDiv.appendChild(el);
+            });
+        }
+        
+        // Hall particles
+        const hallParticles = document.getElementById('hallParticles');
+        if (hallParticles) {
+            for (let i = 0; i < 35; i++) {
+                const p = document.createElement('div');
+                p.className = 'hall-bg-particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.top = Math.random() * 100 + '%';
+                p.style.animationDuration = (Math.random() * 12 + 8) + 's';
+                p.style.animationDelay = Math.random() * 12 + 's';
+                hallParticles.appendChild(p);
+            }
+        }
+        
+        // Book particles
         const bookParticlesContainer = document.getElementById('bookParticles');
         if (bookParticlesContainer) {
             for (let i = 0; i < 25; i++) {
@@ -802,29 +744,23 @@
                 bookParticlesContainer.appendChild(particle);
             }
         }
-        
-        const hallParticles = document.getElementById('hallParticles');
-        if (hallParticles) {
-            for (let i = 0; i < 35; i++) {
-                const p = document.createElement('div');
-                p.className = 'hall-bg-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.top = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 12 + 8) + 's';
-                p.style.animationDelay = Math.random() * 12 + 's';
-                hallParticles.appendChild(p);
-            }
-        }
-        
-        // Year, scroll, portal
+    }
+    
+    // ========== FORMS AND COOKIE CONSENT ==========
+    function initFormsAndCookie() {
+        // Current year
         const yearSpan = document.getElementById('currentYear');
         if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        
+        // Portal button
         const portalBtn = document.getElementById('portalBtn');
         if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
+        // Scroll hint
         const scrollHint = document.getElementById('scrollHint');
         if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
         
-        // ========== COOKIE CONSENT ==========
+        // Cookie consent
         const cookieConsent = document.getElementById('cookieConsent');
         const acceptCookies = document.getElementById('acceptCookies');
         const declineCookies = document.getElementById('declineCookies');
@@ -834,21 +770,14 @@
             if (cookieConsent) cookieConsent.style.display = 'none';
         }
         
-        function showCookieConsent() {
-            if (!cookieConsent) return;
-            const consent = localStorage.getItem('cookieConsent');
-            if (!consent) {
-                cookieConsent.style.display = 'flex';
-            } else {
-                cookieConsent.style.display = 'none';
-            }
+        if (cookieConsent && !localStorage.getItem('cookieConsent')) {
+            cookieConsent.style.display = 'flex';
         }
         
         if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
         if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
-        showCookieConsent();
         
-        // ========== FORMS AJAX SUBMISSION (Formspree) ==========
+        // Forms
         const newsletterForm = document.getElementById('newsletterForm');
         const contactForm = document.getElementById('contactForm');
         const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
@@ -871,12 +800,7 @@
                     form.reset();
                     setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
                 } else {
-                    const data = await response.json();
-                    if (data.errors) {
-                        statusDiv.innerHTML = '❌ Error: ' + data.errors.map(e => e.message).join(', ');
-                    } else {
-                        statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
-                    }
+                    statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
                     statusDiv.classList.add('error');
                 }
             } catch (error) {
@@ -897,8 +821,10 @@
                 await submitForm(contactForm, 'contactStatus');
             });
         }
-        
-        // ========== FAVICON PARTICLE ANIMATION ==========
+    }
+    
+    // ========== FAVICON PARTICLES ==========
+    function initFaviconParticles() {
         const faviconCanvas = document.createElement('canvas');
         faviconCanvas.id = 'faviconCanvas';
         faviconCanvas.style.position = 'fixed';
@@ -986,14 +912,21 @@
             resizeFavCanvas();
             initFavParticles();
         });
-        
-        // ========== MAIN ANIMATION LOOP ==========
-        function animate() {
-            t++;
-            render();
-            requestAnimationFrame(animate);
-        }
-        animate();
-        window.addEventListener('resize', () => { resize(); });
+    }
+    
+    // ========== SCROLL AND NAVIGATION ==========
+    function initScrollAndNav() {
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     }
 })();
