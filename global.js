@@ -1,5 +1,5 @@
 // The Horseman's Journal - Global JavaScript
-// Canvas animation, lantern navigation, interactive elements, and AJAX forms
+// Canvas animation, lantern navigation, interactive elements, AJAX forms, and favicon particles
 
 (function() {
     if (document.readyState === 'loading') {
@@ -9,7 +9,7 @@
     }
 
     function init() {
-        // ========== CANVAS AND ANIMATION (unchanged, your original code) ==========
+        // ========== CANVAS AND ANIMATION (original code) ==========
         const canvas = document.getElementById('heroCanvas');
         if (!canvas) {
             console.error('heroCanvas not found!');
@@ -590,7 +590,7 @@
         const scrollHint = document.getElementById('scrollHint');
         if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
         
-        // ========== COOKIE CONSENT (unified) ==========
+        // ========== COOKIE CONSENT ==========
         const cookieConsent = document.getElementById('cookieConsent');
         const acceptCookies = document.getElementById('acceptCookies');
         const declineCookies = document.getElementById('declineCookies');
@@ -622,19 +622,16 @@
         async function submitForm(form, statusDivId) {
             const statusDiv = document.getElementById(statusDivId);
             if (!statusDiv) return;
-            
             const formData = new FormData(form);
             statusDiv.innerHTML = 'Sending...';
             statusDiv.style.color = '#D4AF37';
             statusDiv.classList.remove('error');
-            
             try {
                 const response = await fetch(formspreeEndpoint, {
                     method: 'POST',
                     body: formData,
                     headers: { 'Accept': 'application/json' }
                 });
-                
                 if (response.ok) {
                     statusDiv.innerHTML = '✓ Thank you! Your message has been sent.';
                     form.reset();
@@ -660,7 +657,6 @@
                 await submitForm(newsletterForm, 'newsletterStatus');
             });
         }
-        
         if (contactForm) {
             contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -668,7 +664,96 @@
             });
         }
         
-        // ========== ANIMATION LOOP ==========
+        // ========== FAVICON PARTICLE ANIMATION (NEW) ==========
+        const faviconCanvas = document.createElement('canvas');
+        faviconCanvas.id = 'faviconCanvas';
+        faviconCanvas.style.position = 'fixed';
+        faviconCanvas.style.top = '0';
+        faviconCanvas.style.left = '0';
+        faviconCanvas.style.width = '100%';
+        faviconCanvas.style.height = '100%';
+        faviconCanvas.style.pointerEvents = 'none';
+        faviconCanvas.style.zIndex = '0';
+        faviconCanvas.style.opacity = '0.2';
+        document.body.appendChild(faviconCanvas);
+        
+        const favCtx = faviconCanvas.getContext('2d');
+        let favW, favH;
+        let favParticles = [];
+        const faviconImg = new Image();
+        faviconImg.src = 'favicon.png';
+        
+        function resizeFavCanvas() {
+            favW = faviconCanvas.width = window.innerWidth;
+            favH = faviconCanvas.height = window.innerHeight;
+        }
+        
+        class FavParticle {
+            constructor() {
+                this.x = Math.random() * favW;
+                this.y = Math.random() * favH;
+                this.size = Math.random() * 20 + 10;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
+                this.alpha = Math.random() * 0.4 + 0.1;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.01;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.rotation += this.rotSpeed;
+                if (this.x < -50) this.x = favW + 50;
+                if (this.x > favW + 50) this.x = -50;
+                if (this.y < -50) this.y = favH + 50;
+                if (this.y > favH + 50) this.y = -50;
+            }
+            draw() {
+                if (!faviconImg.complete) return;
+                favCtx.save();
+                favCtx.translate(this.x, this.y);
+                favCtx.rotate(this.rotation);
+                favCtx.globalAlpha = this.alpha;
+                favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
+                favCtx.restore();
+            }
+        }
+        
+        function initFavParticles() {
+            favParticles = [];
+            for (let i = 0; i < 40; i++) {
+                favParticles.push(new FavParticle());
+            }
+        }
+        
+        function animateFav() {
+            if (!favCtx) return;
+            favCtx.clearRect(0, 0, favW, favH);
+            favParticles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateFav);
+        }
+        
+        if (faviconImg.complete) {
+            resizeFavCanvas();
+            initFavParticles();
+            animateFav();
+        } else {
+            faviconImg.onload = () => {
+                resizeFavCanvas();
+                initFavParticles();
+                animateFav();
+            };
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeFavCanvas();
+            initFavParticles();
+        });
+        
+        // ========== MAIN ANIMATION LOOP ==========
         function animate() {
             t++;
             render();
