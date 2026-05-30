@@ -26,7 +26,7 @@
       line-height: 1.6;
     }
 
-    /* ===== LOGO WATERMARK - NOW VISIBLE ===== */
+    /* ===== LOGO WATERMARK - USING LOGO.JPG ===== */
     .logo-watermark {
       position: fixed;
       top: 50%;
@@ -186,10 +186,39 @@
     .footer-links a { color: #D4A040; text-decoration: none; margin: 0 0.5rem; }
     .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(180,200,160,0.15); background: #030804; }
 
-    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
-    .cookie-consent.show { transform: translateY(0); }
-    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
-    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
+    /* ===== COOKIE CONSENT (Unified with global style) ===== */
+    .cookie-consent {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #0a0718e6;
+      backdrop-filter: blur(12px);
+      padding: 0.8rem;
+      text-align: center;
+      z-index: 1000;
+      font-size: 0.75rem;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+      border-top: 1px solid rgba(212,175,55,0.2);
+    }
+    .cookie-consent.show {
+      transform: translateY(0);
+    }
+    .cookie-consent button {
+      background: #D4AF37;
+      border: none;
+      padding: 0.2rem 1rem;
+      margin-left: 0.5rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+    }
+    .cookie-consent .decline-btn {
+      background: transparent;
+      border: 1px solid rgba(212,175,55,0.5);
+      color: #D4AF37;
+    }
 
     @media (max-width: 860px) {
       .about-content { padding: 60px 1rem 80px; }
@@ -203,9 +232,9 @@
 </head>
 <body>
 
-  <!-- ===== VISIBLE LOGO WATERMARK ===== -->
+  <!-- ===== VISIBLE LOGO WATERMARK (logo.jpg) ===== -->
   <div class="logo-watermark">
-    <img src="logo.png" alt="The Horseman's Journal Logo">
+    <img src="logo.jpg" alt="The Horseman's Journal Logo">
   </div>
 
   <div class="navbar-wrapper">
@@ -224,13 +253,13 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
+            <!-- VERSES REMOVED -->
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
-            <button class="portal-btn" id="portalBtn">
+            <button class="portal-btn" id="portalBtn" type="button">
               <span class="portal-glow"></span>
               <span class="portal-wall"></span>
               <span class="portal-top">PORTAL ✦</span>
@@ -346,8 +375,8 @@
   <section class="contact-section">
     <h3 class="contact-heading">Connect</h3>
     <div class="contact-links">
-      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
-      <a href="https://wa.me/919811618824" class="contact-link" target="_blank">💬 WhatsApp</a>
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+      <a href="https://wa.me/919811618824" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">💬 WhatsApp</a>
       <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
     </div>
   </section>
@@ -363,12 +392,12 @@
 
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
-    <button id="acceptCookies">Accept</button>
-    <button id="declineCookies" class="decline-btn">Decline</button>
+    <button id="acceptCookies" type="button">Accept</button>
+    <button id="declineCookies" type="button" class="decline-btn">Decline</button>
   </div>
 
   <script>
-    // ===== CANVAS - DEEP FOREST WITH VISIBLE GROUND =====
+    // ===== CANVAS - DEEP FOREST WITH VISIBLE GROUND (original, unchanged) =====
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -626,10 +655,119 @@
     document.getElementById('scrollHint')?.addEventListener('click', () => document.querySelector('.about-content')?.scrollIntoView({ behavior: 'smooth' }));
     document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // ===== UNIFIED COOKIE CONSENT (matches index.html) =====
     const cookieConsent = document.getElementById('cookieConsent');
-    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
-    document.getElementById('acceptCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
-    document.getElementById('declineCookies')?.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
+    const acceptCookies = document.getElementById('acceptCookies');
+    const declineCookies = document.getElementById('declineCookies');
+    
+    function setCookieConsent(accepted) {
+      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+      if (cookieConsent) cookieConsent.style.display = 'none';
+    }
+    
+    function showCookieConsent() {
+      if (!cookieConsent) return;
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        cookieConsent.style.display = 'flex';
+      } else {
+        cookieConsent.style.display = 'none';
+      }
+    }
+    
+    if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
+    if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
+    showCookieConsent();
+
+    // ===== FAVICON PARTICLE ANIMATION (floating favicon.png in background) =====
+    const faviconCanvas = document.createElement('canvas');
+    faviconCanvas.id = 'faviconCanvas';
+    faviconCanvas.style.position = 'fixed';
+    faviconCanvas.style.top = '0';
+    faviconCanvas.style.left = '0';
+    faviconCanvas.style.width = '100%';
+    faviconCanvas.style.height = '100%';
+    faviconCanvas.style.pointerEvents = 'none';
+    faviconCanvas.style.zIndex = '0';
+    faviconCanvas.style.opacity = '0.2';
+    document.body.appendChild(faviconCanvas);
+    
+    const favCtx = faviconCanvas.getContext('2d');
+    let favW, favH;
+    let favParticles = [];
+    const faviconImg = new Image();
+    faviconImg.src = 'favicon.png';
+    
+    function resizeFavCanvas() {
+      favW = faviconCanvas.width = window.innerWidth;
+      favH = faviconCanvas.height = window.innerHeight;
+    }
+    
+    class FavParticle {
+      constructor() {
+        this.x = Math.random() * favW;
+        this.y = Math.random() * favH;
+        this.size = Math.random() * 20 + 10;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
+        this.alpha = Math.random() * 0.4 + 0.1;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.01;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotSpeed;
+        if (this.x < -50) this.x = favW + 50;
+        if (this.x > favW + 50) this.x = -50;
+        if (this.y < -50) this.y = favH + 50;
+        if (this.y > favH + 50) this.y = -50;
+      }
+      draw() {
+        if (!faviconImg.complete) return;
+        favCtx.save();
+        favCtx.translate(this.x, this.y);
+        favCtx.rotate(this.rotation);
+        favCtx.globalAlpha = this.alpha;
+        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
+        favCtx.restore();
+      }
+    }
+    
+    function initFavParticles() {
+      favParticles = [];
+      for (let i = 0; i < 40; i++) {
+        favParticles.push(new FavParticle());
+      }
+    }
+    
+    function animateFav() {
+      if (!favCtx) return;
+      favCtx.clearRect(0, 0, favW, favH);
+      favParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateFav);
+    }
+    
+    if (faviconImg.complete) {
+      resizeFavCanvas();
+      initFavParticles();
+      animateFav();
+    } else {
+      faviconImg.onload = () => {
+        resizeFavCanvas();
+        initFavParticles();
+        animateFav();
+      };
+    }
+    
+    window.addEventListener('resize', () => {
+      resizeFavCanvas();
+      initFavParticles();
+    });
   </script>
 </body>
 </html>
