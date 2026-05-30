@@ -10,11 +10,29 @@ body {
     color: #f0ede0;
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
+    position: relative;
 }
 
-@media (max-width: 860px) {
-    body {
-    }
+/* ===== WATERMARK (logo.jpg) ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('logo.jpg');
+    background-repeat: repeat;
+    background-size: 180px;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure all content sits above watermark */
+.hero, .great-hall, .testimonials, .book-showcase, .extra-sections, .contact, .footer-links, .copyright, .navbar-wrapper {
+    position: relative;
+    z-index: 1;
 }
 
 /* ===== SKIP LINK (Accessibility) ===== */
@@ -35,7 +53,7 @@ body {
     top: 10px;
 }
 
-/* ===== COMING SOON BUTTON (replaces buy now) ===== */
+/* ===== COMING SOON BUTTON ===== */
 .btn-coming-soon {
     display: inline-block;
     padding: 12px 28px;
@@ -57,7 +75,7 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background: #0a0508; /* fallback if canvas fails */
+    background: #0a0508;
 }
 
 #heroCanvas {
@@ -648,7 +666,7 @@ body {
     color: rgba(240,230,200,0.3);
 }
 
-/* ===== NEW BOOK SHOWCASE ===== */
+/* ===== BOOK SHOWCASE ===== */
 .book-showcase {
     background: linear-gradient(180deg, #0d060a 0%, #0a0508 100%);
     padding: 5rem 2rem;
@@ -668,7 +686,6 @@ body {
     align-items: center;
 }
 
-/* Hardcover Book Container */
 .book-hardcover-container {
     position: relative;
     display: flex;
@@ -677,7 +694,6 @@ body {
     min-height: 380px;
 }
 
-/* Pulsing Glow Behind Book */
 .book-glow {
     position: absolute;
     width: 200px;
@@ -693,17 +709,10 @@ body {
 }
 
 @keyframes bookGlowPulse {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.6;
-    }
-    50% { 
-        transform: translate(-50%, -50%) scale(1.3);
-        opacity: 1;
-    }
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
 }
 
-/* The Book - Flat Hardcover Look */
 .book-hardcover {
     position: relative;
     width: 180px;
@@ -717,24 +726,18 @@ body {
     transform: translateY(-8px);
 }
 
-/* Spine */
 .book-spine {
     position: absolute;
     top: 0;
     left: 0;
     width: 18px;
     height: 100%;
-    background: linear-gradient(90deg, 
-        #080808 0%, 
-        #151515 40%, 
-        #0a0a0a 60%, 
-        #111111 100%);
+    background: linear-gradient(90deg, #080808 0%, #151515 40%, #0a0a0a 60%, #111111 100%);
     border-radius: 3px 0 0 3px;
     z-index: 3;
     box-shadow: inset -1px 0 2px rgba(0,0,0,0.6);
 }
 
-/* Gold accent lines on spine */
 .book-spine::before {
     content: '';
     position: absolute;
@@ -756,7 +759,6 @@ body {
     background: rgba(212,175,55,0.4);
 }
 
-/* Front Cover */
 .book-cover-front {
     position: absolute;
     top: 0;
@@ -765,10 +767,7 @@ body {
     bottom: 0;
     background: linear-gradient(160deg, #1a1a1a 0%, #0c0c0c 30%, #050505 60%, #111111 100%);
     border-radius: 0 5px 5px 0;
-    box-shadow: 
-        6px 8px 24px rgba(0,0,0,0.6),
-        inset 0 1px 0 rgba(255,255,255,0.02),
-        inset 0 0 0 1px rgba(212,175,55,0.06);
+    box-shadow: 6px 8px 24px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02), inset 0 0 0 1px rgba(212,175,55,0.06);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -776,32 +775,16 @@ body {
     z-index: 4;
 }
 
-/* Leather texture on cover */
 .book-cover-front::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: 
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 3px,
-            rgba(255,255,255,0.006) 3px,
-            rgba(255,255,255,0.006) 4px
-        ),
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 4px,
-            rgba(255,255,255,0.004) 4px,
-            rgba(255,255,255,0.004) 5px
-        );
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.006) 3px, rgba(255,255,255,0.006) 4px), repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.004) 4px, rgba(255,255,255,0.004) 5px);
     border-radius: inherit;
     pointer-events: none;
     z-index: 5;
 }
 
-/* Gold border frame on cover */
 .book-cover-front::after {
     content: '';
     position: absolute;
@@ -812,7 +795,6 @@ body {
     z-index: 6;
 }
 
-/* Logo on Cover */
 .book-cover-logo {
     position: relative;
     z-index: 7;
@@ -829,26 +811,18 @@ body {
     opacity: 1;
 }
 
-/* Page Edge (visible on the right side) */
 .book-pages {
     position: absolute;
     top: 3px;
     right: -8px;
     width: 12px;
     bottom: 3px;
-    background: linear-gradient(90deg,
-        #f2edd8 0%,
-        #e5dfc5 20%,
-        #f0ebd5 40%,
-        #dbd3b4 60%,
-        #f0ebd5 80%,
-        #e5dfc5 100%);
+    background: linear-gradient(90deg, #f2edd8 0%, #e5dfc5 20%, #f0ebd5 40%, #dbd3b4 60%, #f0ebd5 80%, #e5dfc5 100%);
     border-radius: 0 4px 4px 0;
     z-index: 1;
     box-shadow: -1px 0 1px rgba(0,0,0,0.3);
 }
 
-/* Page line details */
 .book-pages::after {
     content: '';
     position: absolute;
@@ -856,33 +830,22 @@ body {
     left: 2px;
     right: 2px;
     bottom: 2px;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(170,160,130,0.12) 2px,
-        rgba(170,160,130,0.12) 3px
-    );
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(170,160,130,0.12) 2px, rgba(170,160,130,0.12) 3px);
     border-radius: 0 3px 3px 0;
 }
 
-/* Bottom page stack */
 .book-pages-bottom {
     position: absolute;
     bottom: -5px;
     left: 18px;
     right: -8px;
     height: 8px;
-    background: linear-gradient(180deg,
-        #e5dfc5 0%,
-        #d5cba8 50%,
-        #e8e0c8 100%);
+    background: linear-gradient(180deg, #e5dfc5 0%, #d5cba8 50%, #e8e0c8 100%);
     border-radius: 0 0 3px 3px;
     z-index: 1;
     box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 }
 
-/* Book Particles */
 .book-particles-container {
     position: absolute;
     top: 0;
@@ -905,23 +868,12 @@ body {
 }
 
 @keyframes bookParticleRise {
-    0% { 
-        transform: translateY(0) translateX(0) scale(1); 
-        opacity: 0; 
-    }
-    8% { 
-        opacity: 0.9; 
-    }
-    50% { 
-        opacity: 0.6; 
-    }
-    100% { 
-        transform: translateY(-180px) translateX(25px) scale(0.2); 
-        opacity: 0; 
-    }
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+    8% { opacity: 0.9; }
+    50% { opacity: 0.6; }
+    100% { transform: translateY(-180px) translateX(25px) scale(0.2); opacity: 0; }
 }
 
-/* Book Details */
 .book-details {
     text-align: left;
 }
@@ -951,58 +903,12 @@ body {
     max-width: 480px;
 }
 
-.book-price {
-    margin-bottom: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.price-amount {
-    font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    color: #D4AF37;
-}
-
-.price-note {
-    font-size: 0.65rem;
-    color: rgba(240,230,200,0.45);
-    font-family: 'EB Garamond', serif;
-}
-
 .book-actions {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
 }
 
-/* Buy Now Button */
-.btn-buy {
-    display: inline-block;
-    padding: 12px 28px;
-    background: linear-gradient(135deg, #D4AF37, #b8942e);
-    color: #0a0500 !important;
-    font-family: 'Cinzel', serif;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-decoration: none;
-    border-radius: 40px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(212,175,55,0.3);
-    border: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.btn-buy:hover {
-    background: linear-gradient(135deg, #e6c34c, #D4AF37);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(212,175,55,0.45);
-    color: #0a0500 !important;
-}
-
-/* Read More Button */
 .btn-read-more {
     display: inline-block;
     padding: 12px 28px;
@@ -1179,7 +1085,7 @@ body {
     font-family: 'Cinzel', serif;
 }
 
-/* ===== LANTERNS CONTAINER - FIXED ON SCREEN ===== */
+/* ===== LANTERNS CONTAINER ===== */
 #lanterns {
     position: fixed;
     top: 0;
@@ -1227,6 +1133,31 @@ body {
     10% { opacity: 1; }
     90% { opacity: 0.5; }
     100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+}
+
+/* ===== FORM STATUS MESSAGES ===== */
+.form-status {
+    margin-top: 0.8rem;
+    font-size: 0.7rem;
+    font-family: 'EB Garamond', serif;
+    color: #D4AF37;
+    text-align: center;
+    transition: all 0.2s;
+}
+.form-status.error {
+    color: #cd7f32;
+}
+
+/* ===== FAVICON ANIMATION CANVAS ===== */
+#faviconCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.2;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -1318,8 +1249,6 @@ body {
     .testimonials-grid {
         gap: 1rem;
     }
-    
-    /* Book showcase responsive */
     .book-showcase-grid {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1346,11 +1275,9 @@ body {
     .book-cover-logo {
         width: 120px;
     }
-    
     .extra-grid {
         flex-direction: column;
     }
-    
     #lanterns .lantern-glow {
         width: 18px !important;
         height: 24px !important;
@@ -1359,17 +1286,4 @@ body {
         font-size: 0.45rem !important;
         letter-spacing: 1px !important;
     }
-}
-
-/* ===== FORM STATUS MESSAGES ===== */
-.form-status {
-    margin-top: 0.8rem;
-    font-size: 0.7rem;
-    font-family: 'EB Garamond', serif;
-    color: #D4AF37;
-    text-align: center;
-    transition: all 0.2s;
-}
-.form-status.error {
-    color: #cd7f32;
 }
