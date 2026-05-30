@@ -335,13 +335,13 @@
 
   <script>
     // ============================================
-    // AUTHENTICATION CHECK (redirects to admin.html)
+    // AUTHENTICATION CHECK (redirects to admin-login.html)
     // ============================================
     const authExpiry = localStorage.getItem('adminExpires');
     if (localStorage.getItem('adminAuth') !== 'true' || (authExpiry && Date.now() > parseInt(authExpiry))) {
       localStorage.removeItem('adminAuth');
       localStorage.removeItem('adminExpires');
-      window.location.href = 'admin.html';
+      window.location.href = 'admin-login.html';
     }
 
     let currentSection = 'book';
@@ -517,7 +517,7 @@
       localStorage.removeItem('adminAuth');
       localStorage.removeItem('adminExpires');
       localStorage.removeItem('journalContent');
-      window.location.href = 'admin.html';
+      window.location.href = 'admin-login.html';
     }
 
     // Navigation
