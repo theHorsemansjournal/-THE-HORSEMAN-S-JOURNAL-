@@ -35,6 +35,34 @@
       line-height: 1.6;
     }
 
+    /* ===== WATERMARK (logo.jpg) ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('logo.jpg');
+      background-repeat: repeat;
+      background-size: 180px;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== FAVICON ANIMATION CANVAS ===== */
+    #faviconCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+    }
+
     .orb {
       position: fixed;
       border-radius: 50%;
@@ -73,13 +101,13 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: 1;
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse at 50% 65%, transparent 25%, rgba(8,4,2,0.75) 85%);
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
     }
     .hero-content {
@@ -237,6 +265,31 @@
       box-shadow: inset 0 2px 0 rgba(255,255,255,0.05), 0 8px 30px rgba(0,0,0,0.5);
       z-index: 5;
       pointer-events: none;
+    }
+
+    /* Logo emblem on each stall card (top-right corner) */
+    .stall-logo-emblem {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 36px;
+      height: 36px;
+      background: rgba(10,7,4,0.65);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(212,175,55,0.5);
+      backdrop-filter: blur(3px);
+      z-index: 12;
+      box-shadow: 0 0 6px rgba(212,175,55,0.3);
+      pointer-events: none;
+    }
+    .stall-logo-emblem img {
+      width: 28px;
+      height: auto;
+      border-radius: 50%;
+      opacity: 0.85;
     }
 
     .stall-photo-wrap {
@@ -845,6 +898,8 @@
     }
     @media (max-width: 520px) {
       .hero-title { font-size: 1.8rem; }
+      .stall-logo-emblem { width: 28px; height: 28px; top: 4px; right: 4px; }
+      .stall-logo-emblem img { width: 22px; }
     }
   </style>
 </head>
@@ -870,13 +925,13 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html" class="active">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
+            <!-- VERSES REMOVED -->
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
-            <button class="portal-btn" id="portalBtn">
+            <button class="portal-btn" id="portalBtn" type="button">
               <span class="portal-glow"></span>
               <span class="portal-wall"></span>
               <span class="portal-top">PORTAL ✦</span>
@@ -911,6 +966,7 @@
   <section class="stalls-section">
     <div class="stalls-grid" id="stallsGrid">
 
+      <!-- T-Rex (Hanoverian Stallion) -->
       <div class="stall-wrap" data-index="0">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -926,6 +982,10 @@
               </div>
             </div>
           </div>
+          <!-- Logo emblem on card -->
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">T-Rex</div>
             <div class="stall-info-breed">Hanoverian · Stallion · Age 8</div>
@@ -934,6 +994,7 @@
         </div>
       </div>
 
+      <!-- Gladiator (Warmblood, In Memoriam) -->
       <div class="stall-wrap" data-index="1">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -949,6 +1010,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info">
             <div class="stall-info-name">Gladiator</div>
@@ -958,6 +1022,7 @@
         </div>
       </div>
 
+      <!-- Xanthos (Warmblood) -->
       <div class="stall-wrap" data-index="2">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -973,6 +1038,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">Xanthos</div>
             <div class="stall-info-breed">Warmblood · Gelding · Age 15</div>
@@ -981,6 +1049,7 @@
         </div>
       </div>
 
+      <!-- Rubin (Warmblood) -->
       <div class="stall-wrap" data-index="3">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -996,6 +1065,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">Rubin</div>
             <div class="stall-info-breed">Warmblood · Stallion · Age 10</div>
@@ -1004,6 +1076,7 @@
         </div>
       </div>
 
+      <!-- Highsocity (Warmblood, In Memoriam) -->
       <div class="stall-wrap" data-index="4">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -1019,6 +1092,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info">
             <div class="stall-info-name">Highsocity</div>
@@ -1028,6 +1104,7 @@
         </div>
       </div>
 
+      <!-- Yuvraj (Indian Breed) -->
       <div class="stall-wrap" data-index="5">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -1043,6 +1120,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">Yuvraj</div>
             <div class="stall-info-breed">Indian Breed · Stallion · Age 20</div>
@@ -1051,6 +1131,7 @@
         </div>
       </div>
 
+      <!-- Arjun (Warmblood) -->
       <div class="stall-wrap" data-index="6">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -1066,6 +1147,9 @@
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">Arjun</div>
             <div class="stall-info-breed">Warmblood · Gelding · Age 12</div>
@@ -1074,6 +1158,7 @@
         </div>
       </div>
 
+      <!-- Storm (Warmblood - user said all except Yuvraj are warmbloods, so changing Storm to Warmblood) -->
       <div class="stall-wrap" data-index="7">
         <div class="stall-3d">
           <div class="stall-frame"></div>
@@ -1085,13 +1170,16 @@
             <div class="stall-nameplate">
               <div class="nameplate-brass">
                 <div class="nameplate-name">Storm</div>
-                <div class="nameplate-sub">Thoroughbred</div>
+                <div class="nameplate-sub">Warmblood</div>
               </div>
             </div>
           </div>
+          <div class="stall-logo-emblem">
+            <img src="logo.jpg" alt="Journal Logo">
+          </div>
           <div class="stall-info">
             <div class="stall-info-name">Storm</div>
-            <div class="stall-info-breed">Thoroughbred · Mare · Age 9</div>
+            <div class="stall-info-breed">Warmblood · Mare · Age 9</div>
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -1150,8 +1238,8 @@
   <section class="contact-section">
     <h3 class="contact-heading">Connect</h3>
     <div class="contact-links">
-      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
-      <a href="https://wa.me/919811618824" class="contact-link" target="_blank">💬 WhatsApp</a>
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+      <a href="https://wa.me/919811618824" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">💬 WhatsApp</a>
       <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
     </div>
   </section>
@@ -1167,11 +1255,12 @@
 
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
-    <button id="acceptCookies">Accept</button>
-    <button id="declineCookies" class="decline-btn">Decline</button>
+    <button id="acceptCookies" type="button">Accept</button>
+    <button id="declineCookies" type="button" class="decline-btn">Decline</button>
   </div>
 
   <script>
+    // ===== CANVAS ANIMATION (original, with z-index fix) =====
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -1367,6 +1456,7 @@
       animate();
     }
 
+    // ===== HORSE DATA (with updated breeds) =====
     const horses = [
       {
         issue: 'Companion No. 01',
@@ -1441,12 +1531,12 @@
       {
         issue: 'Companion No. 08',
         name: 'Storm',
-        breed: 'Thoroughbred',
+        breed: 'Warmblood',
         age: '9',
         gender: 'Mare',
         photo: 'horse8.jpg',
         memorial: false,
-        story: `<p>She arrived wild. A Thoroughbred mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined, though I suspect it was she who refined me and not the other way around.</div><p>Working with Storm was working with weather. You did not control it. You learned to move inside it with respect.</p>`
+        story: `<p>She arrived wild. A warmblood mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined, though I suspect it was she who refined me and not the other way around.</div><p>Working with Storm was working with weather. You did not control it. You learned to move inside it with respect.</p>`
       }
     ];
 
@@ -1529,17 +1619,118 @@
     });
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // ===== UNIFIED COOKIE CONSENT (same as index.html) =====
     const cookieConsent = document.getElementById('cookieConsent');
-    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
-      cookieConsent.classList.add('show');
+    const acceptCookies = document.getElementById('acceptCookies');
+    const declineCookies = document.getElementById('declineCookies');
+    
+    function setCookieConsent(accepted) {
+      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+      if (cookieConsent) cookieConsent.classList.remove('show');
     }
-    document.getElementById('acceptCookies')?.addEventListener('click', () => { 
-      localStorage.setItem('cookiesAccepted', 'true'); 
-      cookieConsent.classList.remove('show'); 
-    });
-    document.getElementById('declineCookies')?.addEventListener('click', () => { 
-      localStorage.setItem('cookiesDeclined', 'true'); 
-      cookieConsent.classList.remove('show'); 
+    
+    function showCookieConsent() {
+      if (!cookieConsent) return;
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        cookieConsent.classList.add('show');
+      } else {
+        cookieConsent.classList.remove('show');
+      }
+    }
+    
+    if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
+    if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
+    showCookieConsent();
+
+    // ===== FAVICON PARTICLE ANIMATION =====
+    const faviconCanvas = document.createElement('canvas');
+    faviconCanvas.id = 'faviconCanvas';
+    faviconCanvas.style.position = 'fixed';
+    faviconCanvas.style.top = '0';
+    faviconCanvas.style.left = '0';
+    faviconCanvas.style.width = '100%';
+    faviconCanvas.style.height = '100%';
+    faviconCanvas.style.pointerEvents = 'none';
+    faviconCanvas.style.zIndex = '0';
+    faviconCanvas.style.opacity = '0.2';
+    document.body.appendChild(faviconCanvas);
+    
+    const favCtx = faviconCanvas.getContext('2d');
+    let favW, favH;
+    let favParticles = [];
+    const faviconImg = new Image();
+    faviconImg.src = 'favicon.png';
+    
+    function resizeFavCanvas() {
+      favW = faviconCanvas.width = window.innerWidth;
+      favH = faviconCanvas.height = window.innerHeight;
+    }
+    
+    class FavParticle {
+      constructor() {
+        this.x = Math.random() * favW;
+        this.y = Math.random() * favH;
+        this.size = Math.random() * 20 + 10;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
+        this.alpha = Math.random() * 0.4 + 0.1;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.01;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotSpeed;
+        if (this.x < -50) this.x = favW + 50;
+        if (this.x > favW + 50) this.x = -50;
+        if (this.y < -50) this.y = favH + 50;
+        if (this.y > favH + 50) this.y = -50;
+      }
+      draw() {
+        if (!faviconImg.complete) return;
+        favCtx.save();
+        favCtx.translate(this.x, this.y);
+        favCtx.rotate(this.rotation);
+        favCtx.globalAlpha = this.alpha;
+        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
+        favCtx.restore();
+      }
+    }
+    
+    function initFavParticles() {
+      favParticles = [];
+      for (let i = 0; i < 40; i++) {
+        favParticles.push(new FavParticle());
+      }
+    }
+    
+    function animateFav() {
+      if (!favCtx) return;
+      favCtx.clearRect(0, 0, favW, favH);
+      favParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateFav);
+    }
+    
+    if (faviconImg.complete) {
+      resizeFavCanvas();
+      initFavParticles();
+      animateFav();
+    } else {
+      faviconImg.onload = () => {
+        resizeFavCanvas();
+        initFavParticles();
+        animateFav();
+      };
+    }
+    
+    window.addEventListener('resize', () => {
+      resizeFavCanvas();
+      initFavParticles();
     });
   </script>
 
