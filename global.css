@@ -1360,3 +1360,16 @@ body {
         letter-spacing: 1px !important;
     }
 }
+
+/* ===== FORM STATUS MESSAGES ===== */
+.form-status {
+    margin-top: 0.8rem;
+    font-size: 0.7rem;
+    font-family: 'EB Garamond', serif;
+    color: #D4AF37;
+    text-align: center;
+    transition: all 0.2s;
+}
+.form-status.error {
+    color: #cd7f32;
+}
