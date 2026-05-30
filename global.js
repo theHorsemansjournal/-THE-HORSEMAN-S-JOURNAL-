@@ -1,8 +1,7 @@
 // The Horseman's Journal - Global JavaScript
-// Canvas animation, lantern navigation, interactive elements, AJAX forms, favicon particles, AND 3D BOOK
+// Canvas animation, lantern navigation, and interactive elements
 
 (function() {
-    // Wait for DOM to be fully loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
@@ -10,23 +9,6 @@
     }
 
     function init() {
-        // ========== FIRST: Initialize Hero Canvas Animation ==========
-        initHeroCanvas();
-        
-        // ========== SECOND: Initialize 3D Book (after a short delay to ensure DOM is ready) ==========
-        setTimeout(() => {
-            init3DBook();
-        }, 100);
-        
-        // ========== THIRD: Initialize all other features ==========
-        initLanternsAndParticles();
-        initFormsAndCookie();
-        initFaviconParticles();
-        initScrollAndNav();
-    }
-
-    // ========== HERO CANVAS ANIMATION (Original working code) ==========
-    function initHeroCanvas() {
         const canvas = document.getElementById('heroCanvas');
         if (!canvas) {
             console.error('heroCanvas not found!');
@@ -50,29 +32,41 @@
             lastMove = t;
         });
         
+        // ===== LOGO DRAWING FUNCTION - Horse and Rider Silhouette =====
         function drawLogo(x, y, size, opacity) {
             ctx.save();
             ctx.translate(x, y);
             ctx.scale(size, size);
             ctx.globalAlpha = opacity;
+            
             ctx.fillStyle = '#D4AF37';
             ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
             ctx.shadowBlur = 15;
+            
+            // Horse body
             ctx.beginPath();
             ctx.ellipse(0, 0, 28, 14, 0, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Neck
             ctx.beginPath();
             ctx.moveTo(18, -6);
             ctx.quadraticCurveTo(28, -28, 24, -42);
             ctx.quadraticCurveTo(16, -28, 8, -8);
             ctx.closePath();
             ctx.fill();
+            
+            // Head
             ctx.beginPath();
             ctx.ellipse(26, -46, 10, 7, -0.1, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Muzzle
             ctx.beginPath();
             ctx.ellipse(32, -44, 6, 5, 0, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Ears
             ctx.beginPath();
             ctx.moveTo(22, -54);
             ctx.lineTo(19, -64);
@@ -83,13 +77,19 @@
             ctx.lineTo(30, -64);
             ctx.lineTo(26, -54);
             ctx.fill();
+            
+            // Rider
             ctx.fillStyle = '#B8860B';
             ctx.beginPath();
             ctx.ellipse(12, -28, 6, 10, -0.2, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Rider head
             ctx.beginPath();
             ctx.arc(10, -42, 5, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Hat
             ctx.fillStyle = '#8B6914';
             ctx.beginPath();
             ctx.ellipse(10, -47, 8, 3, 0, 0, Math.PI * 2);
@@ -97,6 +97,8 @@
             ctx.beginPath();
             ctx.ellipse(10, -45, 5, 4, 0, 0, Math.PI * 2);
             ctx.fill();
+            
+            // Arm
             ctx.fillStyle = '#B8860B';
             ctx.beginPath();
             ctx.moveTo(16, -32);
@@ -104,6 +106,8 @@
             ctx.lineTo(24, -35);
             ctx.closePath();
             ctx.fill();
+            
+            // Legs
             ctx.beginPath();
             ctx.moveTo(10, -22);
             ctx.lineTo(14, -12);
@@ -116,25 +120,35 @@
             ctx.lineTo(-2, -12);
             ctx.closePath();
             ctx.fill();
+            
+            // Horse legs
             ctx.fillStyle = '#D4AF37';
             ctx.fillRect(16, 8, 5, 18);
             ctx.fillRect(24, 6, 5, 18);
             ctx.fillRect(-18, 6, 5, 18);
             ctx.fillRect(-26, 8, 5, 18);
+            
+            // Hooves
             ctx.fillStyle = '#8B6914';
             ctx.fillRect(16, 24, 5, 4);
             ctx.fillRect(24, 22, 5, 4);
             ctx.fillRect(-18, 22, 5, 4);
             ctx.fillRect(-26, 24, 5, 4);
+            
+            // Tail
             ctx.fillStyle = '#B8860B';
             ctx.beginPath();
             ctx.moveTo(-30, -4);
             ctx.quadraticCurveTo(-42, 0, -38, 16);
             ctx.quadraticCurveTo(-34, 8, -28, 2);
             ctx.fill();
+            
+            // Mane
             for (let i = 0; i < 6; i++) {
                 ctx.fillRect(14 + i * 2, -18 - i * 2, 3, 6);
             }
+            
+            // Reins
             ctx.beginPath();
             ctx.moveTo(28, -40);
             ctx.lineTo(22, -36);
@@ -142,6 +156,8 @@
             ctx.strokeStyle = '#8B6914';
             ctx.lineWidth = 1.2;
             ctx.stroke();
+            
+            // Sparkle effects
             ctx.shadowBlur = 8;
             for (let i = 0; i < 8; i++) {
                 const angle = (t * 0.02 + i * Math.PI / 4) % (Math.PI * 2);
@@ -153,11 +169,13 @@
                 ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
                 ctx.fill();
             }
+            
             ctx.shadowBlur = 0;
             ctx.globalAlpha = 1;
             ctx.restore();
         }
         
+        // Stars
         const stars = Array.from({length: 400}, () => ({
             x: Math.random(), y: Math.random() * 0.55,
             r: Math.random() * 2 + 0.3,
@@ -167,6 +185,7 @@
             color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 50}%, ${Math.random() * 40 + 60}%)`
         }));
         
+        // Grass
         const grass = Array.from({length: 700}, () => ({
             x: Math.random(), by: 0.68 + Math.random() * 0.32,
             h: Math.random() * 45 + 15,
@@ -175,6 +194,7 @@
             color: Math.random() > 0.7 ? '#4a3a2a' : '#2a3a1a'
         }));
         
+        // Fireflies
         const flies = Array.from({length: 60}, () => ({
             x: Math.random(), y: 0.68 + Math.random() * 0.28,
             r: Math.random() * 2 + 0.5,
@@ -185,8 +205,10 @@
             color: `hsl(${Math.random() * 40 + 40}, 80%, ${Math.random() * 30 + 50}%)`
         }));
         
+        // Moon
         function drawRealisticMoon(x, y, radius) {
             const pulse = Math.sin(t * 0.02) * 0.1 + 0.9;
+            
             const glowGrad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, radius * 2.2);
             glowGrad.addColorStop(0, `rgba(255,220,120,${0.25 * pulse})`);
             glowGrad.addColorStop(0.4, `rgba(255,180,80,${0.12 * pulse})`);
@@ -196,6 +218,7 @@
             ctx.beginPath();
             ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
             ctx.fill();
+            
             const moonGrad = ctx.createRadialGradient(x - radius * 0.25, y - radius * 0.25, radius * 0.2, x, y, radius);
             moonGrad.addColorStop(0, `rgba(255,235,180,0.98)`);
             moonGrad.addColorStop(0.4, `rgba(245,210,140,0.9)`);
@@ -205,6 +228,7 @@
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
+            
             ctx.shadowBlur = 0;
             const craters = [
                 { cx: -radius * 0.38, cy: -radius * 0.28, r: radius * 0.13, highlight: true },
@@ -216,20 +240,24 @@
                 { cx: -radius * 0.12, cy: -radius * 0.48, r: radius * 0.06, highlight: true },
                 { cx: radius * 0.52, cy: -radius * 0.42, r: radius * 0.05, highlight: false },
             ];
+            
             craters.forEach(crater => {
                 const craterX = x + crater.cx;
                 const craterY = y + crater.cy;
                 const craterR = crater.r;
+                
                 ctx.fillStyle = 'rgba(140,90,40,0.45)';
                 ctx.beginPath();
                 ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
                 ctx.fill();
+                
                 if (crater.highlight) {
                     ctx.fillStyle = 'rgba(255,235,180,0.3)';
                     ctx.beginPath();
                     ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.35, craterR * 0.22, 0, 0, Math.PI * 2);
                     ctx.fill();
                 }
+                
                 ctx.fillStyle = 'rgba(80,50,20,0.25)';
                 ctx.beginPath();
                 ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.28, craterR * 0.18, 0, 0, Math.PI * 2);
@@ -237,18 +265,22 @@
             });
         }
         
+        // Horse drawing function
         function horse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false) {
             ctx.save();
             ctx.translate(hx, hy);
             const actualScale = isGuardian ? sc * 2.2 : sc;
             if (flip) ctx.scale(-actualScale, actualScale);
             else ctx.scale(actualScale, actualScale);
+            
             const useMovement = !isGuardian;
             const br = useMovement ? Math.sin(t * 0.018 + hx * 0.01) * 1.5 : 0;
+            
             if (isGuardian) {
                 ctx.shadowColor = 'rgba(212,175,55,0.2)';
                 ctx.shadowBlur = 10;
             }
+            
             if (pose === 'guardian') {
                 ctx.fillStyle = coat;
                 [-18, -4, 8, 22].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 28));
@@ -378,10 +410,12 @@
                 ctx.quadraticCurveTo(24, 6, 28, 18);
                 ctx.stroke();
             }
+            
             ctx.shadowBlur = 0;
             ctx.restore();
         }
         
+        // THE HERD
         const herd = [
             { x: 0.07, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
             { x: 0.93, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: true, isGuardian: true },
@@ -396,8 +430,71 @@
             { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
         ];
         
+        // LANTERNS - FIXED POSITIONING ON SCREEN (no scrolling)
+        const sections = [
+            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
+            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
+            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
+            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
+            { name: 'Verses', baseHue: 280, shiftSpeed: 0.45, screenX: 76, screenY: 28, depth: 0.55 },
+            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
+        ];
+        
+        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'essays.html', 'questions.html'];
+        
+        // Create lanterns with FIXED positioning
+        const lanternsDiv = document.getElementById('lanterns');
+        const lanternEls = [];
+        
+        if (lanternsDiv) {
+            sections.forEach((s, i) => {
+                const el = document.createElement('div');
+                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
+                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(160,140,110,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(160,140,110,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
+                
+                const glowEl = el.querySelector('.lantern-glow');
+                const labelEl = el.querySelector('.lantern-label');
+                
+                el.addEventListener('mouseenter', () => {
+                    if (glowEl) {
+                        glowEl.style.boxShadow = `0 0 25px hsla(${s.baseHue}, 45%, 40%, 0.6),0 0 45px hsla(${s.baseHue}, 40%, 35%, 0.4)`;
+                        glowEl.style.filter = 'brightness(1.2)';
+                    }
+                    if (labelEl) labelEl.style.opacity = '1';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    if (glowEl) {
+                        glowEl.style.boxShadow = `0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3)`;
+                        glowEl.style.filter = 'brightness(1)';
+                    }
+                    if (labelEl) labelEl.style.opacity = '0';
+                });
+                
+                el.addEventListener('click', () => {
+                    location.href = pageMap[i];
+                });
+                
+                lanternsDiv.appendChild(el);
+                lanternEls.push({ el, glowEl, s });
+            });
+        }
+        
+        // Update lantern colors only (positions are fixed)
+        function updateLanternColors() {
+            lanternEls.forEach(({ glowEl, s }) => {
+                if (glowEl) {
+                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
+                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${currentHue}, 42%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
+                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 40%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
+                }
+            });
+        }
+        
         function render() {
             ctx.clearRect(0, 0, W, H);
+            
+            // Sky
             const sg = ctx.createLinearGradient(0, 0, 0, H);
             sg.addColorStop(0, '#0a0a2a');
             sg.addColorStop(0.25, '#151540');
@@ -407,6 +504,7 @@
             ctx.fillStyle = sg;
             ctx.fillRect(0, 0, W, H);
             
+            // Aurora
             const auroraY = H * 0.15;
             for (let b = 0; b < 6; b++) {
                 const bandY = auroraY + b * 38;
@@ -431,6 +529,7 @@
                 ctx.fill();
             }
             
+            // Horizon glow
             const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
             horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
             horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
@@ -438,9 +537,11 @@
             ctx.fillStyle = horizonGrad;
             ctx.fillRect(0, H * 0.55, W, H * 0.25);
             
+            // Moon
             drawRealisticMoon(W * 0.78, H * 0.16, 42);
             ctx.shadowBlur = 0;
             
+            // Stars
             stars.forEach(s => {
                 const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
                 ctx.fillStyle = s.color;
@@ -449,8 +550,9 @@
                 ctx.arc(s.x * W, s.y * H, s.r * tw * 0.6, 0, Math.PI * 2);
                 ctx.fill();
             });
-            
             ctx.globalAlpha = 1;
+            
+            // Distant ground
             ctx.fillStyle = 'rgba(10,8,20,0.75)';
             ctx.beginPath();
             ctx.moveTo(0, H * 0.66);
@@ -462,6 +564,7 @@
             ctx.closePath();
             ctx.fill();
             
+            // Ground layers
             const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
             groundColors.forEach((col, i) => {
                 ctx.fillStyle = col;
@@ -477,6 +580,7 @@
                 ctx.fill();
             });
             
+            // Mist
             const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
             mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
             mistGrad.addColorStop(0.7, 'rgba(30,25,45,0.2)');
@@ -484,6 +588,7 @@
             ctx.fillStyle = mistGrad;
             ctx.fillRect(0, H * 0.75, W, H * 0.25);
             
+            // Grass
             grass.forEach(g => {
                 const sw = Math.sin(t * g.sp + g.off) * 9;
                 ctx.strokeStyle = g.color;
@@ -494,10 +599,14 @@
                 ctx.stroke();
             });
             
+            // Horses
             herd.forEach(h => {
-                horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
+                horse(h.x * W + (mx - 0.5) * 35 * h.s, 
+                      h.y * H + (my - 0.5) * 12 * h.s, 
+                      h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
             });
             
+            // Fireflies
             flies.forEach(f => {
                 f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
                 f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
@@ -511,208 +620,46 @@
                 ctx.arc(f.x * W, f.y * H, f.r, 0, Math.PI * 2);
                 ctx.fill();
             });
-            
             ctx.globalAlpha = 1;
             ctx.shadowBlur = 0;
             
+            // Light pools (these move with mouse but lanterns are fixed)
+            sections.forEach((s) => {
+                const lx = s.screenX / 100 * W + (mx - 0.5) * 20 * s.depth;
+                const ly = s.screenY / 100 * H + (my - 0.5) * 10 * s.depth;
+                const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
+                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
+                poolGrad.addColorStop(0, `hsla(${currentHue}, 40%, 35%, 0.08)`);
+                poolGrad.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = poolGrad;
+                ctx.beginPath();
+                ctx.arc(lx, ly + 35, 95, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Draw the logo
             const idle = t - lastMove > 200;
             logoOpacity = idle ? 0.95 : 0.15;
             drawLogo(W * 0.5, H * 0.35, 1.2, logoOpacity);
-        }
-        
-        function animate() {
-            t++;
-            render();
-            requestAnimationFrame(animate);
-        }
-        
-        animate();
-        window.addEventListener('resize', () => { resize(); });
-    }
-    
-    // ========== 3D BOOK SHOWCASE (Interactive) ==========
-    function init3DBook() {
-        const container = document.querySelector('.book-hardcover-container');
-        if (!container) return;
-        
-        // Check if Three.js is loaded, if not load it
-        if (typeof THREE === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-            script.onload = () => init3DBook();
-            document.head.appendChild(script);
-            return;
-        }
-        
-        // Hide the static book cover but keep container
-        const staticBook = container.querySelector('.book-hardcover');
-        if (staticBook) {
-            staticBook.style.opacity = '0';
-            staticBook.style.pointerEvents = 'none';
-            staticBook.style.position = 'absolute';
-        }
-        
-        // Setup Three.js scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setClearColor(0x000000, 0);
-        renderer.shadowMap.enabled = true;
-        container.appendChild(renderer.domElement);
-        renderer.domElement.style.position = 'relative';
-        renderer.domElement.style.zIndex = '10';
-        
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.55);
-        scene.add(ambientLight);
-        
-        const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
-        mainLight.position.set(3, 4, 2.5);
-        mainLight.castShadow = true;
-        scene.add(mainLight);
-        
-        const fillLight = new THREE.PointLight(0xb87c4f, 0.45);
-        fillLight.position.set(0, -1, 1);
-        scene.add(fillLight);
-        
-        const rimLight = new THREE.PointLight(0xffb56a, 0.55);
-        rimLight.position.set(-1.5, 1.2, -2);
-        scene.add(rimLight);
-        
-        // Create book group
-        const bookGroup = new THREE.Group();
-        
-        const coverW = 1.55;
-        const coverH = 2.15;
-        const coverD = 0.3;
-        
-        const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
-        const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
-        cover.castShadow = true;
-        bookGroup.add(cover);
-        
-        const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
-        const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
-        spine.position.set(coverW/2 + 0.04, 0, 0);
-        bookGroup.add(spine);
-        
-        const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
-        const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
-        pages.position.set(0, 0, coverD/2 + 0.065);
-        pages.castShadow = true;
-        bookGroup.add(pages);
-        
-        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85, roughness: 0.25 });
-        
-        const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-        topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
-        bookGroup.add(topBorder);
-        
-        const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-        bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
-        bookGroup.add(bottomBorder);
-        
-        const emblemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.045, 32);
-        const emblemMat = new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.72 });
-        const emblem = new THREE.Mesh(emblemGeo, emblemMat);
-        emblem.rotation.x = Math.PI / 2;
-        emblem.position.set(0, 0.1, coverD/2 + 0.045);
-        bookGroup.add(emblem);
-        
-        scene.add(bookGroup);
-        
-        // Floating particles
-        const particleCount = 150;
-        const particleGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount; i++) {
-            positions[i*3] = (Math.random() - 0.5) * 2.8;
-            positions[i*3+1] = (Math.random() - 0.5) * 2.6;
-            positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
-        }
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.5 });
-        const particles = new THREE.Points(particleGeo, particleMat);
-        scene.add(particles);
-        
-        camera.position.set(0, 0.2, 2.8);
-        camera.lookAt(0, 0.1, 0);
-        
-        let mouseX = 0, mouseY = 0;
-        let targetRotY = 0, targetRotX = 0;
-        let currentRotY = 0, currentRotX = 0;
-        
-        container.addEventListener('mousemove', (e) => {
-            const rect = container.getBoundingClientRect();
-            mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-            mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-            targetRotY = mouseX * 0.4;
-            targetRotX = mouseY * 0.2;
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            targetRotY = 0;
-            targetRotX = 0;
-        });
-        
-        let time = 0;
-        
-        function animate3D() {
-            requestAnimationFrame(animate3D);
-            time += 0.012;
             
-            currentRotY += (targetRotY - currentRotY) * 0.08;
-            currentRotX += (targetRotX - currentRotX) * 0.08;
-            bookGroup.rotation.y = currentRotY;
-            bookGroup.rotation.x = currentRotX;
-            
-            particles.rotation.y += 0.008;
-            particles.rotation.x = Math.sin(time * 0.5) * 0.1;
-            
-            rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
-            
-            renderer.render(scene, camera);
+            // Update lantern colors
+            updateLanternColors();
         }
         
-        animate3D();
-        
-        const resizeObserver = new ResizeObserver(() => {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
-            renderer.setSize(w, h);
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-        });
-        resizeObserver.observe(container);
-    }
-    
-    // ========== LANTERNS AND PARTICLES ==========
-    function initLanternsAndParticles() {
-        const sections = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
-        ];
-        
-        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
-        const lanternsDiv = document.getElementById('lanterns');
-        
-        if (lanternsDiv) {
-            sections.forEach((s, i) => {
-                const el = document.createElement('div');
-                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;">${s.name}</span></div>`;
-                const glowEl = el.querySelector('.lantern-glow');
-                const labelEl = el.querySelector('.lantern-label');
-                el.addEventListener('mouseenter', () => { if (labelEl) labelEl.style.opacity = '1'; });
-                el.addEventListener('mouseleave', () => { if (labelEl) labelEl.style.opacity = '0'; });
-                el.addEventListener('click', () => { location.href = pageMap[i]; });
-                lanternsDiv.appendChild(el);
-            });
+        // ===== BOOK PARTICLES =====
+        const bookParticlesContainer = document.getElementById('bookParticles');
+        if (bookParticlesContainer) {
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'book-particle';
+                particle.style.left = (Math.random() * 80 + 10) + '%';
+                particle.style.bottom = (Math.random() * 40 + 10) + '%';
+                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.width = (Math.random() * 3 + 1.5) + 'px';
+                particle.style.height = particle.style.width;
+                bookParticlesContainer.appendChild(particle);
+            }
         }
         
         // Hall particles
@@ -729,204 +676,31 @@
             }
         }
         
-        // Book particles
-        const bookParticlesContainer = document.getElementById('bookParticles');
-        if (bookParticlesContainer) {
-            for (let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'book-particle';
-                particle.style.left = (Math.random() * 80 + 10) + '%';
-                particle.style.bottom = (Math.random() * 40 + 10) + '%';
-                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particle.style.width = (Math.random() * 3 + 1.5) + 'px';
-                particle.style.height = particle.style.width;
-                bookParticlesContainer.appendChild(particle);
-            }
-        }
-    }
-    
-    // ========== FORMS AND COOKIE CONSENT ==========
-    function initFormsAndCookie() {
-        // Current year
-        const yearSpan = document.getElementById('currentYear');
-        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-        
-        // Portal button
+        // Additional functionality
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
         const portalBtn = document.getElementById('portalBtn');
         if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        
-        // Scroll hint
         const scrollHint = document.getElementById('scrollHint');
         if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
+        const previewBtn = document.getElementById('previewBookBtn');
+        if (previewBtn) previewBtn.addEventListener('click', () => window.open('sample.pdf', '_blank'));
+        const whatsappLink = document.getElementById('whatsappLink');
+        if (whatsappLink) whatsappLink.addEventListener('click', (e) => { e.preventDefault(); alert('WhatsApp: [ADD YOUR NUMBER]'); });
         
-        // Cookie consent
         const cookieConsent = document.getElementById('cookieConsent');
+        if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) cookieConsent.classList.add('show');
         const acceptCookies = document.getElementById('acceptCookies');
+        if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('cookiesAccepted', 'true'); cookieConsent.classList.remove('show'); });
         const declineCookies = document.getElementById('declineCookies');
+        if (declineCookies) declineCookies.addEventListener('click', () => { localStorage.setItem('cookiesDeclined', 'true'); cookieConsent.classList.remove('show'); });
         
-        function setCookieConsent(accepted) {
-            localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-            if (cookieConsent) cookieConsent.style.display = 'none';
+        function animate() {
+            t++;
+            render();
+            requestAnimationFrame(animate);
         }
         
-        if (cookieConsent && !localStorage.getItem('cookieConsent')) {
-            cookieConsent.style.display = 'flex';
-        }
-        
-        if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
-        if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
-        
-        // Forms
-        const newsletterForm = document.getElementById('newsletterForm');
-        const contactForm = document.getElementById('contactForm');
-        const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
-        
-        async function submitForm(form, statusDivId) {
-            const statusDiv = document.getElementById(statusDivId);
-            if (!statusDiv) return;
-            const formData = new FormData(form);
-            statusDiv.innerHTML = 'Sending...';
-            statusDiv.style.color = '#D4AF37';
-            statusDiv.classList.remove('error');
-            try {
-                const response = await fetch(formspreeEndpoint, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    statusDiv.innerHTML = '✓ Thank you! Your message has been sent.';
-                    form.reset();
-                    setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
-                } else {
-                    statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
-                    statusDiv.classList.add('error');
-                }
-            } catch (error) {
-                statusDiv.innerHTML = '❌ Network error. Please check your connection.';
-                statusDiv.classList.add('error');
-            }
-        }
-        
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(newsletterForm, 'newsletterStatus');
-            });
-        }
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(contactForm, 'contactStatus');
-            });
-        }
-    }
-    
-    // ========== FAVICON PARTICLES ==========
-    function initFaviconParticles() {
-        const faviconCanvas = document.createElement('canvas');
-        faviconCanvas.id = 'faviconCanvas';
-        faviconCanvas.style.position = 'fixed';
-        faviconCanvas.style.top = '0';
-        faviconCanvas.style.left = '0';
-        faviconCanvas.style.width = '100%';
-        faviconCanvas.style.height = '100%';
-        faviconCanvas.style.pointerEvents = 'none';
-        faviconCanvas.style.zIndex = '0';
-        faviconCanvas.style.opacity = '0.2';
-        document.body.appendChild(faviconCanvas);
-        
-        const favCtx = faviconCanvas.getContext('2d');
-        let favW, favH;
-        let favParticles = [];
-        const faviconImg = new Image();
-        faviconImg.src = 'favicon.png';
-        
-        function resizeFavCanvas() {
-            favW = faviconCanvas.width = window.innerWidth;
-            favH = faviconCanvas.height = window.innerHeight;
-        }
-        
-        class FavParticle {
-            constructor() {
-                this.x = Math.random() * favW;
-                this.y = Math.random() * favH;
-                this.size = Math.random() * 20 + 10;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
-                this.alpha = Math.random() * 0.4 + 0.1;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.01;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.rotation += this.rotSpeed;
-                if (this.x < -50) this.x = favW + 50;
-                if (this.x > favW + 50) this.x = -50;
-                if (this.y < -50) this.y = favH + 50;
-                if (this.y > favH + 50) this.y = -50;
-            }
-            draw() {
-                if (!faviconImg.complete) return;
-                favCtx.save();
-                favCtx.translate(this.x, this.y);
-                favCtx.rotate(this.rotation);
-                favCtx.globalAlpha = this.alpha;
-                favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
-                favCtx.restore();
-            }
-        }
-        
-        function initFavParticles() {
-            favParticles = [];
-            for (let i = 0; i < 40; i++) {
-                favParticles.push(new FavParticle());
-            }
-        }
-        
-        function animateFav() {
-            if (!favCtx) return;
-            favCtx.clearRect(0, 0, favW, favH);
-            favParticles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateFav);
-        }
-        
-        if (faviconImg.complete) {
-            resizeFavCanvas();
-            initFavParticles();
-            animateFav();
-        } else {
-            faviconImg.onload = () => {
-                resizeFavCanvas();
-                initFavParticles();
-                animateFav();
-            };
-        }
-        
-        window.addEventListener('resize', () => {
-            resizeFavCanvas();
-            initFavParticles();
-        });
-    }
-    
-    // ========== SCROLL AND NAVIGATION ==========
-    function initScrollAndNav() {
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+        animate();
+        window.addEventListener('resize', () => { resize(); });
     }
 })();
