@@ -127,6 +127,95 @@
       font-size: 0.55rem;
       color: rgba(240,230,200,0.15);
     }
+    .forgot-link {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      color: rgba(232,200,74,0.5);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      cursor: pointer;
+    }
+    .forgot-link:hover {
+      color: #E8C84A;
+      text-decoration: underline;
+    }
+
+    /* Modal for Forgot Password */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    .modal-overlay.open {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-content {
+      background: linear-gradient(145deg, #1a1528, #0f0c1a);
+      border: 1px solid rgba(232,200,74,0.3);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    .modal-content h3 {
+      font-family: 'Cinzel Decorative', serif;
+      color: #E8C84A;
+      margin-bottom: 1rem;
+    }
+    .modal-content p {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.85rem;
+      color: rgba(240,230,200,0.6);
+      margin-bottom: 1rem;
+    }
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: rgba(20,15,35,0.8);
+      border: 1px solid rgba(232,200,74,0.2);
+      border-radius: 8px;
+      color: #fff;
+    }
+    .modal-content button {
+      background: #E8C84A;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Cinzel', serif;
+      margin-top: 0.5rem;
+    }
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: rgba(232,200,74,0.5);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .reset-status {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: #E8C84A;
+    }
 
     /* ===== COOKIE CONSENT (unified) ===== */
     .cookie-consent {
@@ -176,7 +265,20 @@
     <input type="password" id="adminPassword" placeholder="Enter Admin Password" autocomplete="off">
     <button onclick="login()" type="button">ACCESS PORTAL ✦</button>
     <div class="error" id="errorMsg">Incorrect password. Please try again.</div>
+    <a class="forgot-link" id="forgotLink">🔐 Forgot Password?</a>
     <p class="security-note">⚠️ Secure area. Authorized access only.</p>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="resetModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+      <h3>Reset Password</h3>
+      <p>Enter your email address. A reset link will be sent to you with instructions.</p>
+      <input type="email" id="resetEmail" placeholder="Your email address" autocomplete="off">
+      <button id="sendResetBtn" type="button">Send Reset Instructions</button>
+      <div id="resetStatus" class="reset-status"></div>
+    </div>
   </div>
 
   <div id="cookieConsent" class="cookie-consent">
@@ -207,6 +309,87 @@
     // Press Enter key to login
     document.getElementById('adminPassword').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') login();
+    });
+
+    // ============================================
+    // FORGOT PASSWORD MODAL + EMAIL (via Formspree)
+    // ============================================
+    const modal = document.getElementById('resetModal');
+    const forgotLink = document.getElementById('forgotLink');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const sendBtn = document.getElementById('sendResetBtn');
+    const resetStatus = document.getElementById('resetStatus');
+
+    forgotLink.addEventListener('click', () => {
+      modal.classList.add('open');
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      resetStatus.innerHTML = '';
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    sendBtn.addEventListener('click', async () => {
+      const email = document.getElementById('resetEmail').value.trim();
+      if (!email) {
+        resetStatus.innerHTML = '❌ Please enter your email address.';
+        resetStatus.style.color = '#ff8888';
+        return;
+      }
+
+      resetStatus.innerHTML = '⏳ Sending reset instructions...';
+      resetStatus.style.color = '#E8C84A';
+
+      // Instructions to reset password on GitHub
+      const resetInstructions = `
+Password Reset Request for The Horseman's Journal
+
+You requested to reset your admin password.
+
+To reset your password:
+1. Go to your GitHub repository: https://github.com/thehorsemansjournal/-THE-HORSEMAN-S-JOURNAL-
+2. Open the file "admin-login.html" (or "admin.html" if you use that name).
+3. Find the line: const CORRECT_PASSWORD = "..."
+4. Change the password to a new secure one.
+5. Save and commit the file.
+6. Return to the admin login page and use your new password.
+
+If you did not request this, ignore this email.
+
+-- The Horseman's Journal
+      `;
+
+      // Use Formspree to send email (POST to your endpoint)
+      const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('message', resetInstructions);
+      formData.append('_subject', 'Admin Password Reset Request - The Horseman\'s Journal');
+
+      try {
+        const response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          resetStatus.innerHTML = '✅ Reset instructions sent! Check your email.';
+          resetStatus.style.color = '#a5d6a5';
+          document.getElementById('resetEmail').value = '';
+          setTimeout(closeModal, 3000);
+        } else {
+          resetStatus.innerHTML = '❌ Failed to send. Please try again later.';
+          resetStatus.style.color = '#ff8888';
+        }
+      } catch (err) {
+        resetStatus.innerHTML = '❌ Network error. Please try again.';
+        resetStatus.style.color = '#ff8888';
+      }
     });
 
     // ============================================
