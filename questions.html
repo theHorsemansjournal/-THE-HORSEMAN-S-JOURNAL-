@@ -36,14 +36,42 @@
       line-height: 1.6;
     }
 
+    /* ===== WATERMARK (logo.jpg) ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('logo.jpg');
+      background-repeat: repeat;
+      background-size: 180px;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== FAVICON ANIMATION CANVAS ===== */
+    #faviconCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+    }
+
     .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; }
     .orb1 { width: 55vw; height: 55vw; top: -12vh; right: -12vw; background: radial-gradient(circle, rgba(200, 150, 60, 0.09), transparent); }
     .orb2 { width: 45vw; height: 45vw; bottom: -8vh; left: -18vw; background: radial-gradient(circle, rgba(180, 120, 40, 0.05), transparent); }
     .orb3 { width: 35vw; height: 35vw; top: 45vh; left: 32vw; background: radial-gradient(circle, rgba(160, 100, 30, 0.035), transparent); }
 
     .questions-hero { position: relative; width: 100%; height: 100vh; min-height: 650px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(8,4,2,0.75) 90%); z-index: 1; pointer-events: none; }
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+    .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(8,4,2,0.75) 90%); z-index: 2; pointer-events: none; }
     .hero-content { position: relative; z-index: 10; text-align: center; max-width: 900px; padding: 0 2rem; animation: heroFloat 6s ease-in-out infinite; }
     @keyframes heroFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
     .hero-eyebrow { font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 8px; color: rgba(200,150,60,0.5); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
@@ -250,13 +278,13 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
-            <li><a href="essays.html">VERSES</a></li>
+            <!-- VERSES REMOVED -->
             <li><a href="questions.html" class="active">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
           </ul>
           <div class="portal-scene">
-            <button class="portal-btn" id="portalBtn">
+            <button class="portal-btn" id="portalBtn" type="button">
               <span class="portal-glow"></span>
               <span class="portal-wall"></span>
               <span class="portal-top">PORTAL ✦</span>
@@ -285,12 +313,12 @@
       <input type="text" id="faqSearch" placeholder="Search questions..." class="search-input">
     </div>
     <div class="filter-buttons">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="Fear & Anxiety">Fear & Anxiety</button>
-      <button class="filter-btn" data-filter="Behavior">Behavior</button>
-      <button class="filter-btn" data-filter="Training">Training</button>
-      <button class="filter-btn" data-filter="Safety & Handling">Safety</button>
-      <button class="filter-btn" data-filter="Trust & Relationship">Trust</button>
+      <button class="filter-btn active" data-filter="all" type="button">All</button>
+      <button class="filter-btn" data-filter="Fear & Anxiety" type="button">Fear & Anxiety</button>
+      <button class="filter-btn" data-filter="Behavior" type="button">Behavior</button>
+      <button class="filter-btn" data-filter="Training" type="button">Training</button>
+      <button class="filter-btn" data-filter="Safety & Handling" type="button">Safety</button>
+      <button class="filter-btn" data-filter="Trust & Relationship" type="button">Trust</button>
     </div>
   </section>
 
@@ -314,8 +342,8 @@
   <section class="contact-section">
     <h3 class="contact-heading">Connect</h3>
     <div class="contact-links">
-      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
-      <a href="https://wa.me/919811618824" class="contact-link" target="_blank">💬 WhatsApp</a>
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener noreferrer">📸 Instagram</a>
+      <a href="https://wa.me/919811618824" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Contact via WhatsApp">💬 WhatsApp</a>
       <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
     </div>
   </section>
@@ -331,19 +359,20 @@
 
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
-    <button id="acceptCookies">Accept</button>
-    <button id="declineCookies" class="decline-btn">Decline</button>
+    <button id="acceptCookies" type="button">Accept</button>
+    <button id="declineCookies" type="button" class="decline-btn">Decline</button>
   </div>
 
   <div class="answer-panel" id="answerPanel">
     <div class="answer-backdrop" id="answerBackdrop"></div>
     <div class="answer-viewer" id="answerViewer">
-      <button class="answer-close" id="answerClose"></button>
+      <button class="answer-close" id="answerClose" type="button"></button>
       <div class="answer-content" id="answerContent"></div>
     </div>
   </div>
 
   <script>
+    // ===== CANVAS ANIMATION (z-index fixed: watermark behind canvas) =====
     const canvas=document.getElementById('heroCanvas'),ctx=canvas.getContext('2d');
     let W,H,mx=.5,my=.5,time=0,activeScene=-1,sceneTransition=0;
     function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight}
@@ -364,6 +393,7 @@
     function anim(){time++;const t=activeScene>=0?1:0;sceneTransition+=(t-sceneTransition)*.05;particles.forEach(p=>{p.y-=p.speed*.06;p.x+=Math.sin(time*.015+p.phase)*p.drift*.02;if(p.y<-.1){p.y=1.05+Math.random()*.15;p.x=Math.random()*1.3-.15}});render();requestAnimationFrame(anim)}
     anim();
 
+    // ===== QUESTIONS DATA (unchanged) =====
     const questions=[
       {num:'01',category:'Fear & Anxiety',title:'Why does my horse spook at nothing?',excerpt:'Your horse is not being stupid. It is reading a world you cannot fully perceive.',scene:1,answer:`<p>The first thing to understand is that your horse is not spooking at nothing. It is spooking at something you did not detect. Horses possess sensory abilities far beyond ours. Their eyes are set on the sides of their head, giving them nearly 350 degrees of vision. Their ears rotate independently to track sounds from different directions simultaneously. Their nose can detect scents at concentrations we cannot register. When a horse spooks, it has detected something — a sound, a smell, a movement in the peripheral vision — that its sixty-million-year-old survival system has flagged as potentially dangerous.</p><p>This is not a flaw. It is the design working perfectly. The amygdala fires before the thinking brain has time to process. In twelve milliseconds, adrenaline floods the system. The body is already moving before the conscious mind catches up. You cannot reason with this response because reason arrives too late.</p><div class="answer-key">Fear in a horse is not a character flaw. It is sixty million years of perfect engineering. Your job is not to eliminate it. Your job is to become the thing the horse trusts more than it fears the unknown.</div><p>What you can do: First, stop punishing the spook. Punishment adds a second layer of threat. The horse now fears the original stimulus and the human beside it. Instead, become a source of calm. Breathe out. Soften your body. Let your stillness communicate that the environment is safe. Over time, the horse will begin to use your nervous system as a reference point. This is called co-regulation, and it is the foundation of genuine trust.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: The Flight Response →</a>`},
       {num:'02',category:'Behavior',title:'Why does my horse not listen to me?',excerpt:'A horse that seems to ignore you is not being stubborn. It is communicating.',scene:2,answer:`<p>When a horse does not respond, the natural human reaction is to ask louder. More leg. More rein. More pressure. This is almost always the wrong response. A horse that is not listening is not defying you. It is telling you something. Your job is to figure out what.</p><p>There are three real reasons horses stop responding. The first is clarity. The horse does not understand what you are asking. You may think the signal is clear, but horses learn through the release of pressure, not the application of it. If the release is not timed precisely, the horse never learns what made the pressure stop.</p><p>The second reason is pain. Horses are stoic prey animals that hide discomfort. By the time a horse displays resistance, it may have been in pain for weeks or months. Check the back, the hocks, the teeth, the feet, the saddle fit. A horse that refuses to go forward or accept contact is often a horse in physical distress.</p><div class="answer-key">The third reason is trust. A horse that has learned that mistakes bring punishment will stop trying. It is not stubborn. It is being careful with the only body it has.</div><p>Before you escalate, ask: Is the ask clear? Is the horse in pain? Is there enough trust for the horse to try something uncertain? Answer those honestly, and the listening almost always returns.</p><a href="chronicles.html" class="answer-link">Read more in Chronicles: Why Your Horse Does Not Listen →</a>`},
@@ -389,7 +419,7 @@
     document.querySelectorAll('.filter-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');af=b.getAttribute('data-filter');filterQ()})});
 
     const ap=document.getElementById('answerPanel'),ac=document.getElementById('answerContent'),av=document.getElementById('answerViewer');let cq=-1;
-    function openAnswer(i){cq=i;const q=questions[i];activeScene=q.scene;document.getElementById('heroTitle').innerHTML=q.title.split('?')[0]+'<span class="gold">?</span>';document.getElementById('heroTagline').textContent=q.excerpt;ac.innerHTML=`<span class="answer-num">Question ${q.num} · ${q.category}</span><h2 class="answer-title">${q.title}</h2><div class="answer-body">${q.answer}</div><div class="answer-nav"><button class="answer-nav-btn" id="answerPrev">← Previous</button><span class="answer-nav-count">${q.num} / 12</span><button class="answer-nav-btn" id="answerNext">Next →</button></div>`;const prevBtn=document.getElementById('answerPrev');const nextBtn=document.getElementById('answerNext');if(prevBtn)prevBtn.addEventListener('click',()=>{openAnswer((cq-1+questions.length)%questions.length)});if(nextBtn)nextBtn.addEventListener('click',()=>{openAnswer((cq+1)%questions.length)});ap.classList.add('open');av.scrollTop=0;document.body.style.overflow='hidden'}
+    function openAnswer(i){cq=i;const q=questions[i];activeScene=q.scene;document.getElementById('heroTitle').innerHTML=q.title.split('?')[0]+'<span class="gold">?</span>';document.getElementById('heroTagline').textContent=q.excerpt;ac.innerHTML=`<span class="answer-num">Question ${q.num} · ${q.category}</span><h2 class="answer-title">${q.title}</h2><div class="answer-body">${q.answer}</div><div class="answer-nav"><button class="answer-nav-btn" id="answerPrev" type="button">← Previous</button><span class="answer-nav-count">${q.num} / 12</span><button class="answer-nav-btn" id="answerNext" type="button">Next →</button></div>`;const prevBtn=document.getElementById('answerPrev');const nextBtn=document.getElementById('answerNext');if(prevBtn)prevBtn.addEventListener('click',()=>{openAnswer((cq-1+questions.length)%questions.length)});if(nextBtn)nextBtn.addEventListener('click',()=>{openAnswer((cq+1)%questions.length)});ap.classList.add('open');av.scrollTop=0;document.body.style.overflow='hidden'}
     function closeAnswer(){ap.classList.remove('open');document.body.style.overflow='';activeScene=-1;document.getElementById('heroTitle').innerHTML='Quest<span class="gold">ions</span>';document.getElementById('heroTagline').textContent='Straight from the arena. No theories. Only what works.'}
     document.getElementById('answerClose')?.addEventListener('click',closeAnswer);
     document.getElementById('answerBackdrop')?.addEventListener('click',closeAnswer);
@@ -398,19 +428,118 @@
     document.getElementById('scrollHint')?.addEventListener('click',()=>{document.querySelector('.faq-controls')?.scrollIntoView({behavior:'smooth'})});
     document.getElementById('portalBtn')?.addEventListener('click',()=>{window.scrollTo({top:0,behavior:'smooth'})});
 
-    // Cookie consent
+    // ===== UNIFIED COOKIE CONSENT (same key as index.html) =====
     document.getElementById('currentYear').textContent = new Date().getFullYear();
     const cookieConsent = document.getElementById('cookieConsent');
-    if (cookieConsent && !localStorage.getItem('cookiesAccepted') && !localStorage.getItem('cookiesDeclined')) {
-      cookieConsent.classList.add('show');
+    const acceptCookies = document.getElementById('acceptCookies');
+    const declineCookies = document.getElementById('declineCookies');
+    
+    function setCookieConsent(accepted) {
+      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+      if (cookieConsent) cookieConsent.classList.remove('show');
     }
-    document.getElementById('acceptCookies')?.addEventListener('click', () => { 
-      localStorage.setItem('cookiesAccepted', 'true'); 
-      cookieConsent.classList.remove('show'); 
-    });
-    document.getElementById('declineCookies')?.addEventListener('click', () => { 
-      localStorage.setItem('cookiesDeclined', 'true'); 
-      cookieConsent.classList.remove('show'); 
+    
+    function showCookieConsent() {
+      if (!cookieConsent) return;
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        cookieConsent.classList.add('show');
+      } else {
+        cookieConsent.classList.remove('show');
+      }
+    }
+    
+    if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
+    if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
+    showCookieConsent();
+
+    // ===== FAVICON PARTICLE ANIMATION =====
+    const faviconCanvas = document.createElement('canvas');
+    faviconCanvas.id = 'faviconCanvas';
+    faviconCanvas.style.position = 'fixed';
+    faviconCanvas.style.top = '0';
+    faviconCanvas.style.left = '0';
+    faviconCanvas.style.width = '100%';
+    faviconCanvas.style.height = '100%';
+    faviconCanvas.style.pointerEvents = 'none';
+    faviconCanvas.style.zIndex = '0';
+    faviconCanvas.style.opacity = '0.2';
+    document.body.appendChild(faviconCanvas);
+    
+    const favCtx = faviconCanvas.getContext('2d');
+    let favW, favH;
+    let favParticles = [];
+    const faviconImg = new Image();
+    faviconImg.src = 'favicon.png';
+    
+    function resizeFavCanvas() {
+      favW = faviconCanvas.width = window.innerWidth;
+      favH = faviconCanvas.height = window.innerHeight;
+    }
+    
+    class FavParticle {
+      constructor() {
+        this.x = Math.random() * favW;
+        this.y = Math.random() * favH;
+        this.size = Math.random() * 20 + 10;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
+        this.alpha = Math.random() * 0.4 + 0.1;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.01;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotSpeed;
+        if (this.x < -50) this.x = favW + 50;
+        if (this.x > favW + 50) this.x = -50;
+        if (this.y < -50) this.y = favH + 50;
+        if (this.y > favH + 50) this.y = -50;
+      }
+      draw() {
+        if (!faviconImg.complete) return;
+        favCtx.save();
+        favCtx.translate(this.x, this.y);
+        favCtx.rotate(this.rotation);
+        favCtx.globalAlpha = this.alpha;
+        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
+        favCtx.restore();
+      }
+    }
+    
+    function initFavParticles() {
+      favParticles = [];
+      for (let i = 0; i < 40; i++) {
+        favParticles.push(new FavParticle());
+      }
+    }
+    
+    function animateFav() {
+      if (!favCtx) return;
+      favCtx.clearRect(0, 0, favW, favH);
+      favParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateFav);
+    }
+    
+    if (faviconImg.complete) {
+      resizeFavCanvas();
+      initFavParticles();
+      animateFav();
+    } else {
+      faviconImg.onload = () => {
+        resizeFavCanvas();
+        initFavParticles();
+        animateFav();
+      };
+    }
+    
+    window.addEventListener('resize', () => {
+      resizeFavCanvas();
+      initFavParticles();
     });
   </script>
 </body>
