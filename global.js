@@ -1,765 +1,1327 @@
-// The Horseman's Journal - Global JavaScript
-// Canvas animation, lantern navigation, interactive elements, AJAX forms, and favicon particles
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-(function() {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
+body {
+    background: #020108;
+    color: #f0ede0;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+}
 
-    function init() {
-        // ========== CANVAS AND ANIMATION (original code) ==========
-        const canvas = document.getElementById('heroCanvas');
-        if (!canvas) {
-            console.error('heroCanvas not found!');
-            return;
-        }
-        
-        const ctx = canvas.getContext('2d');
-        let W, H, mx = 0.5, my = 0.5, t = 0;
-        let logoOpacity = 0.95;
-        let lastMove = 0;
-        
-        function resize() {
-            W = canvas.width = canvas.offsetWidth;
-            H = canvas.height = canvas.offsetHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => {
-            mx = e.clientX / W;
-            my = e.clientY / H;
-            lastMove = t;
-        });
-        
-        function drawLogo(x, y, size, opacity) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.scale(size, size);
-            ctx.globalAlpha = opacity;
-            ctx.fillStyle = '#D4AF37';
-            ctx.shadowColor = 'rgba(212, 175, 55, 0.5)';
-            ctx.shadowBlur = 15;
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 28, 14, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(18, -6);
-            ctx.quadraticCurveTo(28, -28, 24, -42);
-            ctx.quadraticCurveTo(16, -28, 8, -8);
-            ctx.closePath();
-            ctx.fill();
-            ctx.beginPath();
-            ctx.ellipse(26, -46, 10, 7, -0.1, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.ellipse(32, -44, 6, 5, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(22, -54);
-            ctx.lineTo(19, -64);
-            ctx.lineTo(16, -54);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(28, -54);
-            ctx.lineTo(30, -64);
-            ctx.lineTo(26, -54);
-            ctx.fill();
-            ctx.fillStyle = '#B8860B';
-            ctx.beginPath();
-            ctx.ellipse(12, -28, 6, 10, -0.2, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(10, -42, 5, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#8B6914';
-            ctx.beginPath();
-            ctx.ellipse(10, -47, 8, 3, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.ellipse(10, -45, 5, 4, 0, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.fillStyle = '#B8860B';
-            ctx.beginPath();
-            ctx.moveTo(16, -32);
-            ctx.lineTo(28, -38);
-            ctx.lineTo(24, -35);
-            ctx.closePath();
-            ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(10, -22);
-            ctx.lineTo(14, -12);
-            ctx.lineTo(8, -10);
-            ctx.closePath();
-            ctx.fill();
-            ctx.beginPath();
-            ctx.moveTo(6, -24);
-            ctx.lineTo(2, -14);
-            ctx.lineTo(-2, -12);
-            ctx.closePath();
-            ctx.fill();
-            ctx.fillStyle = '#D4AF37';
-            ctx.fillRect(16, 8, 5, 18);
-            ctx.fillRect(24, 6, 5, 18);
-            ctx.fillRect(-18, 6, 5, 18);
-            ctx.fillRect(-26, 8, 5, 18);
-            ctx.fillStyle = '#8B6914';
-            ctx.fillRect(16, 24, 5, 4);
-            ctx.fillRect(24, 22, 5, 4);
-            ctx.fillRect(-18, 22, 5, 4);
-            ctx.fillRect(-26, 24, 5, 4);
-            ctx.fillStyle = '#B8860B';
-            ctx.beginPath();
-            ctx.moveTo(-30, -4);
-            ctx.quadraticCurveTo(-42, 0, -38, 16);
-            ctx.quadraticCurveTo(-34, 8, -28, 2);
-            ctx.fill();
-            for (let i = 0; i < 6; i++) {
-                ctx.fillRect(14 + i * 2, -18 - i * 2, 3, 6);
-            }
-            ctx.beginPath();
-            ctx.moveTo(28, -40);
-            ctx.lineTo(22, -36);
-            ctx.lineTo(18, -32);
-            ctx.strokeStyle = '#8B6914';
-            ctx.lineWidth = 1.2;
-            ctx.stroke();
-            ctx.shadowBlur = 8;
-            for (let i = 0; i < 8; i++) {
-                const angle = (t * 0.02 + i * Math.PI / 4) % (Math.PI * 2);
-                const rad = 45;
-                const sx = Math.cos(angle) * rad;
-                const sy = Math.sin(angle) * rad;
-                ctx.fillStyle = `rgba(212, 175, 55, ${0.3 + Math.sin(t * 0.05 + i) * 0.15})`;
-                ctx.beginPath();
-                ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            ctx.shadowBlur = 0;
-            ctx.globalAlpha = 1;
-            ctx.restore();
-        }
-        
-        const stars = Array.from({length: 400}, () => ({
-            x: Math.random(), y: Math.random() * 0.55,
-            r: Math.random() * 2 + 0.3,
-            sp: Math.random() * 0.015 + 0.003,
-            off: Math.random() * Math.PI * 2,
-            ba: Math.random() * 0.7 + 0.2,
-            color: `hsl(${Math.random() * 60 + 20}, ${Math.random() * 50 + 50}%, ${Math.random() * 40 + 60}%)`
-        }));
-        
-        const grass = Array.from({length: 700}, () => ({
-            x: Math.random(), by: 0.68 + Math.random() * 0.32,
-            h: Math.random() * 45 + 15,
-            sp: Math.random() * 0.02 + 0.005,
-            off: Math.random() * Math.PI * 2,
-            color: Math.random() > 0.7 ? '#4a3a2a' : '#2a3a1a'
-        }));
-        
-        const flies = Array.from({length: 60}, () => ({
-            x: Math.random(), y: 0.68 + Math.random() * 0.28,
-            r: Math.random() * 2 + 0.5,
-            sp: Math.random() * 0.3 + 0.1,
-            ph: Math.random() * Math.PI * 2,
-            dx: (Math.random() - 0.5) * 0.35,
-            dy: (Math.random() - 0.5) * 0.2,
-            color: `hsl(${Math.random() * 40 + 40}, 80%, ${Math.random() * 30 + 50}%)`
-        }));
-        
-        function drawRealisticMoon(x, y, radius) {
-            const pulse = Math.sin(t * 0.02) * 0.1 + 0.9;
-            const glowGrad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, radius * 2.2);
-            glowGrad.addColorStop(0, `rgba(255,220,120,${0.25 * pulse})`);
-            glowGrad.addColorStop(0.4, `rgba(255,180,80,${0.12 * pulse})`);
-            glowGrad.addColorStop(0.7, `rgba(200,120,40,0.05)`);
-            glowGrad.addColorStop(1, 'rgba(100,50,20,0)');
-            ctx.fillStyle = glowGrad;
-            ctx.beginPath();
-            ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
-            ctx.fill();
-            const moonGrad = ctx.createRadialGradient(x - radius * 0.25, y - radius * 0.25, radius * 0.2, x, y, radius);
-            moonGrad.addColorStop(0, `rgba(255,235,180,0.98)`);
-            moonGrad.addColorStop(0.4, `rgba(245,210,140,0.9)`);
-            moonGrad.addColorStop(0.7, `rgba(220,170,100,0.85)`);
-            moonGrad.addColorStop(1, `rgba(180,130,70,0.8)`);
-            ctx.fillStyle = moonGrad;
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            const craters = [
-                { cx: -radius * 0.38, cy: -radius * 0.28, r: radius * 0.13, highlight: true },
-                { cx: radius * 0.42, cy: -radius * 0.18, r: radius * 0.11, highlight: false },
-                { cx: radius * 0.18, cy: radius * 0.32, r: radius * 0.09, highlight: true },
-                { cx: -radius * 0.22, cy: radius * 0.38, r: radius * 0.07, highlight: false },
-                { cx: -radius * 0.52, cy: radius * 0.12, r: radius * 0.08, highlight: true },
-                { cx: radius * 0.32, cy: radius * 0.12, r: radius * 0.06, highlight: false },
-                { cx: -radius * 0.12, cy: -radius * 0.48, r: radius * 0.06, highlight: true },
-                { cx: radius * 0.52, cy: -radius * 0.42, r: radius * 0.05, highlight: false },
-            ];
-            craters.forEach(crater => {
-                const craterX = x + crater.cx;
-                const craterY = y + crater.cy;
-                const craterR = crater.r;
-                ctx.fillStyle = 'rgba(140,90,40,0.45)';
-                ctx.beginPath();
-                ctx.ellipse(craterX, craterY, craterR, craterR * 0.85, 0, 0, Math.PI * 2);
-                ctx.fill();
-                if (crater.highlight) {
-                    ctx.fillStyle = 'rgba(255,235,180,0.3)';
-                    ctx.beginPath();
-                    ctx.ellipse(craterX - craterR * 0.2, craterY - craterR * 0.15, craterR * 0.35, craterR * 0.22, 0, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.fillStyle = 'rgba(80,50,20,0.25)';
-                ctx.beginPath();
-                ctx.ellipse(craterX + craterR * 0.15, craterY + craterR * 0.1, craterR * 0.28, craterR * 0.18, 0, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-        
-        function horse(hx, hy, sc, coat, mane, pose, flip, isGuardian = false) {
-            ctx.save();
-            ctx.translate(hx, hy);
-            const actualScale = isGuardian ? sc * 2.2 : sc;
-            if (flip) ctx.scale(-actualScale, actualScale);
-            else ctx.scale(actualScale, actualScale);
-            const useMovement = !isGuardian;
-            const br = useMovement ? Math.sin(t * 0.018 + hx * 0.01) * 1.5 : 0;
-            if (isGuardian) {
-                ctx.shadowColor = 'rgba(212,175,55,0.2)';
-                ctx.shadowBlur = 10;
-            }
-            if (pose === 'guardian') {
-                ctx.fillStyle = coat;
-                [-18, -4, 8, 22].forEach((lx, i) => ctx.fillRect(lx, 12, 5, 28));
-                ctx.beginPath();
-                ctx.ellipse(0, 3, 34, 16, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(22, -1);
-                ctx.quadraticCurveTo(34, -32, 28, -46);
-                ctx.quadraticCurveTo(20, -32, 10, -4);
-                ctx.closePath();
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(28, -48, 10, 6, -0.1, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(28, -53);
-                ctx.lineTo(25, -62);
-                ctx.lineTo(22, -53);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(30, -53);
-                ctx.lineTo(33, -62);
-                ctx.lineTo(30, -53);
-                ctx.fill();
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 3.2;
-                ctx.beginPath();
-                ctx.moveTo(22, -5);
-                ctx.quadraticCurveTo(28, -22, 32, -38);
-                ctx.stroke();
-            } else if (pose === 'foreground') {
-                ctx.fillStyle = coat;
-                [-18, -4, 8, 20].forEach((lx, i) => {
-                    const offset = useMovement ? (i % 2 ? br : -br) : 0;
-                    ctx.fillRect(lx, 12 + offset, 5, 28);
-                });
-                ctx.beginPath();
-                ctx.ellipse(0, 3, 34, 16, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(22, -1);
-                ctx.quadraticCurveTo(34, -32, 28, -46);
-                ctx.quadraticCurveTo(20, -32, 10, -4);
-                ctx.closePath();
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(28, -48, 10, 6, -0.1, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(28, -53);
-                ctx.lineTo(25, -62);
-                ctx.lineTo(22, -53);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(30, -53);
-                ctx.lineTo(33, -62);
-                ctx.lineTo(30, -53);
-                ctx.fill();
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(22, -5);
-                ctx.quadraticCurveTo(28, -22, 32, -38);
-                ctx.stroke();
-            } else if (pose === 'nuzzle') {
-                ctx.fillStyle = coat;
-                [-14, -2, 8, 18].forEach((lx, i) => {
-                    const offset = useMovement ? (i % 2 ? br : -br) : 0;
-                    ctx.fillRect(lx, 16 + offset, 4, 20);
-                });
-                ctx.beginPath();
-                ctx.ellipse(0, 5, 26, 12, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(16, 1);
-                ctx.quadraticCurveTo(28, -14, 26, -24);
-                ctx.quadraticCurveTo(18, -18, 6, 3);
-                ctx.closePath();
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(26, -26, 7, 5, -0.15, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(26, -30);
-                ctx.lineTo(25, -37);
-                ctx.lineTo(23, -30);
-                ctx.fill();
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(16, -2);
-                ctx.quadraticCurveTo(20, -10, 24, -20);
-                ctx.stroke();
-            } else {
-                ctx.fillStyle = coat;
-                [-14, -2, 8, 18].forEach((lx, i) => {
-                    const offset = useMovement ? (i % 2 ? br : -br) : 0;
-                    ctx.fillRect(lx, 16 + offset, 4, 20);
-                });
-                ctx.beginPath();
-                ctx.ellipse(0, 5, 28, 13, 0, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(18, 1);
-                ctx.quadraticCurveTo(32, 12, 26, 26);
-                ctx.quadraticCurveTo(18, 20, 7, 3);
-                ctx.closePath();
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(28, 30, 8, 5, 0.25, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(30, 25);
-                ctx.lineTo(32, 19);
-                ctx.lineTo(27, 24);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(27, 26);
-                ctx.lineTo(25, 20);
-                ctx.lineTo(24, 26);
-                ctx.fill();
-                ctx.strokeStyle = mane;
-                ctx.lineWidth = 2.2;
-                ctx.beginPath();
-                ctx.moveTo(18, -3);
-                ctx.quadraticCurveTo(24, 6, 28, 18);
-                ctx.stroke();
-            }
-            ctx.shadowBlur = 0;
-            ctx.restore();
-        }
-        
-        const herd = [
-            { x: 0.07, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: false, isGuardian: true },
-            { x: 0.93, y: 0.76, s: 0.95, coat: '#0d0a0e', mane: '#1a1418', pose: 'guardian', flip: true, isGuardian: true },
-            { x: 0.18, y: 0.85, s: 0.70, coat: '#2a1a12', mane: '#3a2818', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.30, y: 0.82, s: 0.78, coat: '#1a1618', mane: '#2a2428', pose: 'graze', flip: true, isGuardian: false },
-            { x: 0.42, y: 0.84, s: 0.55, coat: '#3a2818', mane: '#4a3020', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.50, y: 0.83, s: 0.72, coat: '#4a3222', mane: '#5a3e2a', pose: 'nuzzle', flip: false, isGuardian: false },
-            { x: 0.56, y: 0.84, s: 0.68, coat: '#3a3035', mane: '#4a4045', pose: 'nuzzle', flip: true, isGuardian: false },
-            { x: 0.68, y: 0.83, s: 0.85, coat: '#5a4828', mane: '#6a5530', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.82, y: 0.85, s: 0.75, coat: '#141018', mane: '#221e26', pose: 'graze', flip: false, isGuardian: false },
-            { x: 0.90, y: 0.78, s: 1.50, coat: '#080608', mane: '#141018', pose: 'foreground', flip: true, isGuardian: false },
-            { x: 0.10, y: 0.79, s: 1.40, coat: '#1a0e08', mane: '#2a1a10', pose: 'foreground', flip: false, isGuardian: false },
-        ];
-        
-        const sections = [
-            { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28, depth: 0.6 },
-            { name: 'Awakening', baseHue: 350, shiftSpeed: 0.4, screenX: 28, screenY: 24, depth: 0.7 },
-            { name: 'Chronicles', baseHue: 30, shiftSpeed: 0.35, screenX: 44, screenY: 22, depth: 0.8 },
-            { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24, depth: 0.65 },
-            { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32, depth: 0.5 }
-        ];
-        
-        const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
-        
-        const lanternsDiv = document.getElementById('lanterns');
-        const lanternEls = [];
-        
-        if (lanternsDiv) {
-            sections.forEach((s, i) => {
-                const el = document.createElement('div');
-                el.style.cssText = `position:fixed;z-index:15;pointer-events:auto;cursor:pointer;width:50px;height:70px;transform:translate(-50%,-50%);left:${s.screenX}%;top:${s.screenY}%;`;
-                el.innerHTML = `<div class="lantern-glow" style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:22px;height:30px;border-radius:12px 12px 8px 8px;background:radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${s.baseHue}, 42%, 38%, 0.75) 60%, rgba(0,0,0,0.6) 100%);box-shadow:0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3);animation:lanternBob ${3 + i * 0.4}s ease-in-out infinite;transition:box-shadow .4s,filter .4s,background .2s;"></div><div style="position:absolute;top:28px;left:50%;transform:translateX(-50%);width:2px;height:12px;background:rgba(160,140,110,0.4);"></div><div style="position:absolute;top:36px;left:50%;transform:translateX(-50%);width:1px;height:18px;background:rgba(160,140,110,0.2);"></div><div class="lantern-label" style="position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .35s;white-space:nowrap;"><span style="font-family:'Cinzel',serif;font-size:.6rem;font-weight:600;letter-spacing:2px;color:#D4AF37;display:block;text-shadow:0 0 5px rgba(0,0,0,0.5);">${s.name}</span></div>`;
-                const glowEl = el.querySelector('.lantern-glow');
-                const labelEl = el.querySelector('.lantern-label');
-                el.addEventListener('mouseenter', () => {
-                    if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 25px hsla(${s.baseHue}, 45%, 40%, 0.6),0 0 45px hsla(${s.baseHue}, 40%, 35%, 0.4)`;
-                        glowEl.style.filter = 'brightness(1.2)';
-                    }
-                    if (labelEl) labelEl.style.opacity = '1';
-                });
-                el.addEventListener('mouseleave', () => {
-                    if (glowEl) {
-                        glowEl.style.boxShadow = `0 0 15px hsla(${s.baseHue}, 40%, 30%, 0.5),0 0 30px hsla(${s.baseHue}, 35%, 25%, 0.3)`;
-                        glowEl.style.filter = 'brightness(1)';
-                    }
-                    if (labelEl) labelEl.style.opacity = '0';
-                });
-                el.addEventListener('click', () => { location.href = pageMap[i]; });
-                lanternsDiv.appendChild(el);
-                lanternEls.push({ el, glowEl, s });
-            });
-        }
-        
-        function updateLanternColors() {
-            lanternEls.forEach(({ glowEl, s }) => {
-                if (glowEl) {
-                    const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                    glowEl.style.background = `radial-gradient(circle at 50% 30%, rgba(200,180,150,0.55), hsla(${currentHue}, 42%, 35%, 0.75) 60%, rgba(0,0,0,0.65) 100%)`;
-                    glowEl.style.boxShadow = `0 0 15px hsla(${currentHue}, 40%, 28%, 0.5), 0 0 30px hsla(${currentHue}, 35%, 22%, 0.35)`;
-                }
-            });
-        }
-        
-        function render() {
-            ctx.clearRect(0, 0, W, H);
-            const sg = ctx.createLinearGradient(0, 0, 0, H);
-            sg.addColorStop(0, '#0a0a2a');
-            sg.addColorStop(0.25, '#151540');
-            sg.addColorStop(0.5, '#2a1a3a');
-            sg.addColorStop(0.75, '#3a2a3a');
-            sg.addColorStop(1, '#4a352a');
-            ctx.fillStyle = sg;
-            ctx.fillRect(0, 0, W, H);
-            const auroraY = H * 0.15;
-            for (let b = 0; b < 6; b++) {
-                const bandY = auroraY + b * 38;
-                const bandAlpha = 0.06 - b * 0.008;
-                const bandGrad = ctx.createLinearGradient(0, bandY, 0, bandY + 70);
-                bandGrad.addColorStop(0, `rgba(80,140,120,${bandAlpha * 0.5})`);
-                bandGrad.addColorStop(0.3, `rgba(${b % 2 === 0 ? '140,100,180' : '100,140,180'},${bandAlpha})`);
-                bandGrad.addColorStop(0.6, `rgba(180,120,160,${bandAlpha * 0.7})`);
-                bandGrad.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = bandGrad;
-                ctx.beginPath();
-                ctx.moveTo(0, bandY - 15);
-                for (let i = 0; i <= 100; i++) {
-                    const nx = i / 100;
-                    const wave1 = Math.sin(nx * 3.5 + t * 0.008 + b * 1.2) * 28;
-                    const wave2 = Math.sin(nx * 8 + t * 0.012 + b * 2) * 15;
-                    ctx.lineTo(nx * W, bandY + wave1 + wave2);
-                }
-                ctx.lineTo(W, bandY + 70);
-                ctx.lineTo(0, bandY + 70);
-                ctx.closePath();
-                ctx.fill();
-            }
-            const horizonGrad = ctx.createLinearGradient(0, H * 0.55, 0, H * 0.75);
-            horizonGrad.addColorStop(0, 'rgba(180,100,60,0)');
-            horizonGrad.addColorStop(0.5, 'rgba(200,120,70,0.12)');
-            horizonGrad.addColorStop(1, 'rgba(160,80,40,0.25)');
-            ctx.fillStyle = horizonGrad;
-            ctx.fillRect(0, H * 0.55, W, H * 0.25);
-            drawRealisticMoon(W * 0.78, H * 0.16, 42);
-            ctx.shadowBlur = 0;
-            stars.forEach(s => {
-                const tw = Math.sin(t * s.sp + s.off) * 0.4 + 0.6;
-                ctx.fillStyle = s.color;
-                ctx.globalAlpha = s.ba * tw * 0.8;
-                ctx.beginPath();
-                ctx.arc(s.x * W, s.y * H, s.r * tw * 0.6, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            ctx.globalAlpha = 1;
-            ctx.fillStyle = 'rgba(10,8,20,0.75)';
-            ctx.beginPath();
-            ctx.moveTo(0, H * 0.66);
-            for (let i = 0; i <= 70; i++) {
-                const nx = i / 70;
-                ctx.lineTo(nx * W, H * 0.62 - Math.sin(nx * 3.8) * H * 0.022);
-            }
-            ctx.lineTo(W, H * 0.66);
-            ctx.closePath();
-            ctx.fill();
-            const groundColors = ['#0c0a1c', '#12102a', '#1a1535', '#221d3a'];
-            groundColors.forEach((col, i) => {
-                ctx.fillStyle = col;
-                ctx.beginPath();
-                ctx.moveTo(0, H);
-                for (let j = 0; j <= 90; j++) {
-                    const nx = j / 90;
-                    const h = H * (0.72 + i * 0.055 - Math.sin(nx * (2.5 + i * 1.3) + i) * 0.045);
-                    ctx.lineTo(nx * W, h);
-                }
-                ctx.lineTo(W, H);
-                ctx.closePath();
-                ctx.fill();
-            });
-            const mistGrad = ctx.createLinearGradient(0, H * 0.75, 0, H);
-            mistGrad.addColorStop(0, 'rgba(20,18,35,0)');
-            mistGrad.addColorStop(0.7, 'rgba(30,25,45,0.2)');
-            mistGrad.addColorStop(1, 'rgba(20,15,35,0.35)');
-            ctx.fillStyle = mistGrad;
-            ctx.fillRect(0, H * 0.75, W, H * 0.25);
-            grass.forEach(g => {
-                const sw = Math.sin(t * g.sp + g.off) * 9;
-                ctx.strokeStyle = g.color;
-                ctx.lineWidth = 0.6;
-                ctx.beginPath();
-                ctx.moveTo(g.x * W, g.by * H);
-                ctx.quadraticCurveTo(g.x * W + sw * 0.45, g.by * H - g.h * 0.5, g.x * W + sw, g.by * H - g.h);
-                ctx.stroke();
-            });
-            herd.forEach(h => {
-                horse(h.x * W + (mx - 0.5) * 35 * h.s, h.y * H + (my - 0.5) * 12 * h.s, h.s, h.coat, h.mane, h.pose, h.flip, h.isGuardian);
-            });
-            flies.forEach(f => {
-                f.x += Math.sin(t * 0.02 + f.ph) * f.dx;
-                f.y += Math.cos(t * 0.022 + f.ph) * f.dy;
-                f.x = ((f.x % 1) + 1) % 1;
-                f.y = Math.max(0.66, Math.min(0.96, f.y));
-                const a = Math.abs(Math.sin(t * f.sp + f.ph)) * 0.6;
-                ctx.fillStyle = f.color;
-                ctx.globalAlpha = a;
-                ctx.shadowBlur = 8;
-                ctx.beginPath();
-                ctx.arc(f.x * W, f.y * H, f.r, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            ctx.globalAlpha = 1;
-            ctx.shadowBlur = 0;
-            sections.forEach((s) => {
-                const lx = s.screenX / 100 * W + (mx - 0.5) * 20 * s.depth;
-                const ly = s.screenY / 100 * H + (my - 0.5) * 10 * s.depth;
-                const currentHue = (s.baseHue + t * 0.5 * s.shiftSpeed) % 360;
-                const poolGrad = ctx.createRadialGradient(lx, ly + 35, 5, lx, ly + 35, 95);
-                poolGrad.addColorStop(0, `hsla(${currentHue}, 40%, 35%, 0.08)`);
-                poolGrad.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = poolGrad;
-                ctx.beginPath();
-                ctx.arc(lx, ly + 35, 95, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            const idle = t - lastMove > 200;
-            logoOpacity = idle ? 0.95 : 0.15;
-            drawLogo(W * 0.5, H * 0.35, 1.2, logoOpacity);
-            updateLanternColors();
-        }
-        
-        // Book particles
-        const bookParticlesContainer = document.getElementById('bookParticles');
-        if (bookParticlesContainer) {
-            for (let i = 0; i < 25; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'book-particle';
-                particle.style.left = (Math.random() * 80 + 10) + '%';
-                particle.style.bottom = (Math.random() * 40 + 10) + '%';
-                particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
-                particle.style.animationDelay = Math.random() * 5 + 's';
-                particle.style.width = (Math.random() * 3 + 1.5) + 'px';
-                particle.style.height = particle.style.width;
-                bookParticlesContainer.appendChild(particle);
-            }
-        }
-        
-        const hallParticles = document.getElementById('hallParticles');
-        if (hallParticles) {
-            for (let i = 0; i < 35; i++) {
-                const p = document.createElement('div');
-                p.className = 'hall-bg-particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.top = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 12 + 8) + 's';
-                p.style.animationDelay = Math.random() * 12 + 's';
-                hallParticles.appendChild(p);
-            }
-        }
-        
-        // Year, scroll, portal
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        const portalBtn = document.getElementById('portalBtn');
-        if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        const scrollHint = document.getElementById('scrollHint');
-        if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
-        
-        // ========== COOKIE CONSENT ==========
-        const cookieConsent = document.getElementById('cookieConsent');
-        const acceptCookies = document.getElementById('acceptCookies');
-        const declineCookies = document.getElementById('declineCookies');
-        
-        function setCookieConsent(accepted) {
-            localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-            if (cookieConsent) cookieConsent.style.display = 'none';
-        }
-        
-        function showCookieConsent() {
-            if (!cookieConsent) return;
-            const consent = localStorage.getItem('cookieConsent');
-            if (!consent) {
-                cookieConsent.style.display = 'flex';
-            } else {
-                cookieConsent.style.display = 'none';
-            }
-        }
-        
-        if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
-        if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
-        showCookieConsent();
-        
-        // ========== FORMS AJAX SUBMISSION (Formspree) ==========
-        const newsletterForm = document.getElementById('newsletterForm');
-        const contactForm = document.getElementById('contactForm');
-        const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
-        
-        async function submitForm(form, statusDivId) {
-            const statusDiv = document.getElementById(statusDivId);
-            if (!statusDiv) return;
-            const formData = new FormData(form);
-            statusDiv.innerHTML = 'Sending...';
-            statusDiv.style.color = '#D4AF37';
-            statusDiv.classList.remove('error');
-            try {
-                const response = await fetch(formspreeEndpoint, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    statusDiv.innerHTML = '✓ Thank you! Your message has been sent.';
-                    form.reset();
-                    setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
-                } else {
-                    const data = await response.json();
-                    if (data.errors) {
-                        statusDiv.innerHTML = '❌ Error: ' + data.errors.map(e => e.message).join(', ');
-                    } else {
-                        statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
-                    }
-                    statusDiv.classList.add('error');
-                }
-            } catch (error) {
-                statusDiv.innerHTML = '❌ Network error. Please check your connection.';
-                statusDiv.classList.add('error');
-            }
-        }
-        
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(newsletterForm, 'newsletterStatus');
-            });
-        }
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(contactForm, 'contactStatus');
-            });
-        }
-        
-        // ========== FAVICON PARTICLE ANIMATION (NEW) ==========
-        const faviconCanvas = document.createElement('canvas');
-        faviconCanvas.id = 'faviconCanvas';
-        faviconCanvas.style.position = 'fixed';
-        faviconCanvas.style.top = '0';
-        faviconCanvas.style.left = '0';
-        faviconCanvas.style.width = '100%';
-        faviconCanvas.style.height = '100%';
-        faviconCanvas.style.pointerEvents = 'none';
-        faviconCanvas.style.zIndex = '0';
-        faviconCanvas.style.opacity = '0.2';
-        document.body.appendChild(faviconCanvas);
-        
-        const favCtx = faviconCanvas.getContext('2d');
-        let favW, favH;
-        let favParticles = [];
-        const faviconImg = new Image();
-        faviconImg.src = 'favicon.png';
-        
-        function resizeFavCanvas() {
-            favW = faviconCanvas.width = window.innerWidth;
-            favH = faviconCanvas.height = window.innerHeight;
-        }
-        
-        class FavParticle {
-            constructor() {
-                this.x = Math.random() * favW;
-                this.y = Math.random() * favH;
-                this.size = Math.random() * 20 + 10;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
-                this.alpha = Math.random() * 0.4 + 0.1;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotSpeed = (Math.random() - 0.5) * 0.01;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.rotation += this.rotSpeed;
-                if (this.x < -50) this.x = favW + 50;
-                if (this.x > favW + 50) this.x = -50;
-                if (this.y < -50) this.y = favH + 50;
-                if (this.y > favH + 50) this.y = -50;
-            }
-            draw() {
-                if (!faviconImg.complete) return;
-                favCtx.save();
-                favCtx.translate(this.x, this.y);
-                favCtx.rotate(this.rotation);
-                favCtx.globalAlpha = this.alpha;
-                favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
-                favCtx.restore();
-            }
-        }
-        
-        function initFavParticles() {
-            favParticles = [];
-            for (let i = 0; i < 40; i++) {
-                favParticles.push(new FavParticle());
-            }
-        }
-        
-        function animateFav() {
-            if (!favCtx) return;
-            favCtx.clearRect(0, 0, favW, favH);
-            favParticles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateFav);
-        }
-        
-        if (faviconImg.complete) {
-            resizeFavCanvas();
-            initFavParticles();
-            animateFav();
-        } else {
-            faviconImg.onload = () => {
-                resizeFavCanvas();
-                initFavParticles();
-                animateFav();
-            };
-        }
-        
-        window.addEventListener('resize', () => {
-            resizeFavCanvas();
-            initFavParticles();
-        });
-        
-        // ========== MAIN ANIMATION LOOP ==========
-        function animate() {
-            t++;
-            render();
-            requestAnimationFrame(animate);
-        }
-        animate();
-        window.addEventListener('resize', () => { resize(); });
+@media (max-width: 860px) {
+    body {
     }
-})();
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#heroCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    pointer-events: none;
+}
+
+.hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 14px;
+    background: linear-gradient(135deg, #D4AF37, #CD7F32);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 25%, #8B6914 50%, #D4AF37 75%, #B8860B 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 5px;
+    margin-bottom: 0.8rem;
+    animation: titleShine 5s ease-in-out infinite;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+@keyframes titleShine {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)); background-position: 0% 50%; }
+    50% { filter: drop-shadow(0 0 40px rgba(212,175,55,0.4)); background-position: 100% 50%; }
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin: 1.2rem 0;
+}
+
+.hero-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37, #CD7F32, transparent);
+}
+
+.hero-gem {
+    width: 10px;
+    height: 10px;
+    background: #D4AF37;
+    transform: rotate(45deg);
+    box-shadow: 0 0 15px #D4AF37;
+    animation: gemPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes gemPulse {
+    0%, 100% { box-shadow: 0 0 8px #D4AF37; transform: rotate(45deg) scale(1); }
+    50% { box-shadow: 0 0 30px #FFD700; transform: rotate(45deg) scale(1.2); }
+}
+
+.hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    color: rgba(240,230,200,0.85);
+    max-width: 550px;
+    margin: 0 auto;
+    line-height: 1.6;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-stat {
+    text-align: center;
+    border-right: 1px solid rgba(212,175,55,0.3);
+    padding-right: 2.5rem;
+}
+
+.hero-stat:last-child { border-right: none; padding-right: 0; }
+
+.hero-stat-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.3rem;
+    color: #D4AF37;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(212,175,55,0.3);
+}
+
+.hero-stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 4px;
+    color: rgba(240,230,200,0.7);
+    text-transform: uppercase;
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+    cursor: pointer;
+    animation: scrollFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes scrollFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+    50% { transform: translateX(-50%) translateY(10px); opacity: 1; }
+}
+
+.hero-scroll span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 8px;
+    color: #D4AF37;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.hero-scroll svg { width: 20px; stroke: #D4AF37; }
+
+/* ===== NAVBAR 3D STYLES ===== */
+.navbar-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem 0;
+    pointer-events: none;
+}
+
+.navbar-wrapper * {
+    pointer-events: auto;
+}
+
+.scene {
+    perspective: 700px;
+    perspective-origin: 50% 60%;
+    width: 100%;
+    max-width: 1020px;
+}
+
+.nav3d {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(28deg) rotateY(0deg);
+    transition: transform .5s cubic-bezier(.23, 1, .32, 1);
+    height: 64px;
+}
+
+.nav3d:hover {
+    transform: rotateX(8deg) rotateY(2deg);
+}
+
+.face {
+    position: absolute;
+    border-radius: 18px;
+}
+
+.face-top {
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(212, 175, 55, 0.06) 40%, rgba(255, 255, 255, 0.04) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    border-bottom-color: rgba(212, 175, 55, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 60px rgba(212, 175, 55, 0.06);
+    z-index: 4;
+}
+
+.face-back {
+    inset: 0;
+    background: rgba(212, 175, 55, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: translateZ(-36px);
+    z-index: 1;
+}
+
+.face-bottom-wall {
+    left: 18px;
+    right: 18px;
+    bottom: -36px;
+    height: 36px;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.18) 0%, rgba(100, 60, 0, 0.08) 60%, rgba(0, 0, 0, 0.02) 100%);
+    border-left: 1px solid rgba(212, 175, 55, 0.15);
+    border-right: 1px solid rgba(212, 175, 55, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 0 0 12px 12px;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+    z-index: 2;
+}
+
+.face-top-wall {
+    left: 18px;
+    right: 18px;
+    top: -5px;
+    height: 5px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(212, 175, 55, 0.2));
+    border-radius: 18px 18px 0 0;
+    transform-origin: bottom center;
+    transform: rotateX(90deg);
+    z-index: 3;
+}
+
+.face-left-wall {
+    top: 4px;
+    bottom: 4px;
+    left: -36px;
+    width: 36px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 12px 0 0 12px;
+    transform-origin: right center;
+    transform: rotateY(-90deg);
+    z-index: 2;
+}
+
+.face-right-wall {
+    top: 4px;
+    bottom: 4px;
+    right: -36px;
+    width: 36px;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 0 12px 12px 0;
+    transform-origin: left center;
+    transform: rotateY(90deg);
+    z-index: 2;
+}
+
+.nav-content {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.2rem;
+    transform: translateZ(1px);
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.brand {
+    font-family: 'Cinzel', serif;
+    font-size: .75rem;
+    font-weight: 700;
+    color: #D4AF37;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 0 24px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.3);
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.brand small {
+    display: inline-block;
+    font-size: .45rem;
+    letter-spacing: 3px;
+    color: rgba(212, 175, 55, 0.4);
+    font-weight: 400;
+    margin-left: 0.3rem;
+}
+
+.links {
+    display: flex;
+    gap: 0.1rem;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.links li a {
+    display: block;
+    font-size: .55rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: rgba(255, 240, 180, 0.5);
+    text-decoration: none;
+    padding: 4px 6px;
+    border-radius: 8px;
+    transition: all .25s;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    position: relative;
+    white-space: nowrap;
+}
+
+.links li a:hover,
+.links li a.active {
+    color: #FFF8DC;
+    background: rgba(255, 255, 255, 0.07);
+    text-shadow: 0 0 16px rgba(212, 175, 55, 0.9);
+}
+
+.portal-scene {
+    perspective: 300px;
+    flex-shrink: 0;
+}
+
+.portal-btn {
+    position: relative;
+    transform-style: preserve-3d;
+    transform: rotateX(22deg);
+    transition: transform .25s;
+    display: inline-block;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.portal-btn:hover {
+    transform: rotateX(5deg) translateY(-2px);
+}
+
+.portal-btn:active {
+    transform: rotateX(30deg) translateY(2px);
+}
+
+.portal-top {
+    display: block;
+    padding: 5px 12px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(212, 175, 55, 0.35) 50%, rgba(180, 120, 0, 0.25) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.7);
+    border-bottom-color: rgba(212, 175, 55, 0.2);
+    border-radius: 100px;
+    font-family: 'Raleway', sans-serif;
+    font-size: .55rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #FFF8DC;
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.9);
+    position: relative;
+    z-index: 3;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.portal-wall {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(140, 90, 0, 0.6), rgba(60, 30, 0, 0.4));
+    border-radius: 100px;
+    transform: translateZ(-14px);
+    z-index: 2;
+    border: 1px solid rgba(120, 70, 0, 0.5);
+}
+
+.portal-glow {
+    position: absolute;
+    inset: -4px;
+    border-radius: 100px;
+    background: transparent;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), 0 0 60px rgba(212, 175, 55, 0.15);
+    transform: translateZ(-7px);
+    z-index: 1;
+}
+
+/* ===== GREAT HALL SECTION ===== */
+.great-hall {
+    position: relative;
+    background: linear-gradient(180deg, #0a0508 0%, #120a10 20%, #0a0508 100%);
+    padding: 5rem 2rem 4rem;
+    z-index: 10;
+}
+
+.hall-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.hall-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hall-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.hall-heading {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: #D4AF37;
+    letter-spacing: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.hall-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: rgba(240,230,200,0.35);
+}
+
+.hall-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.hall-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.8rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid rgba(212,175,55,0.06);
+    transition: all 0.4s ease;
+}
+
+.hall-card:hover {
+    background: linear-gradient(90deg, rgba(212,175,55,0.08), transparent);
+    padding-left: 2.8rem;
+}
+
+.hall-card-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2rem;
+    color: rgba(212,175,55,0.15);
+    min-width: 65px;
+    font-weight: 400;
+}
+
+.hall-card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #e8dfc7;
+    letter-spacing: 2px;
+    margin-bottom: 0.2rem;
+}
+
+.hall-card:hover .hall-card-name {
+    color: #D4AF37;
+}
+
+.hall-card-desc {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: rgba(240,230,200,0.4);
+    line-height: 1.4;
+}
+
+.hall-card-arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: all 0.3s;
+    color: #D4AF37;
+}
+
+.hall-card:hover .hall-card-arrow {
+    opacity: 0.6;
+    transform: translateX(5px);
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+    background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%);
+    padding: 5rem 2rem;
+    border-top: 1px solid rgba(212,175,55,0.08);
+    border-bottom: 1px solid rgba(212,175,55,0.08);
+}
+
+.testimonials-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonials-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    color: #D4AF37;
+    letter-spacing: 3px;
+}
+
+.testimonials-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: rgba(240,230,200,0.4);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: rgba(20,12,18,0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(212,175,55,0.12);
+    border-radius: 24px;
+    padding: 1.8rem;
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212,175,55,0.3);
+    background: rgba(20,12,18,0.8);
+}
+
+.testimonial-stars {
+    color: #D4AF37;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(240,230,200,0.85);
+}
+
+.testimonial-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: #D4AF37;
+    margin-top: 1rem;
+}
+
+.testimonial-role {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.6rem;
+    color: rgba(240,230,200,0.3);
+}
+
+/* ===== NEW BOOK SHOWCASE ===== */
+.book-showcase {
+    background: linear-gradient(180deg, #0d060a 0%, #0a0508 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.book-showcase-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.book-showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Hardcover Book Container */
+.book-hardcover-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 380px;
+}
+
+/* Pulsing Glow Behind Book */
+.book-glow {
+    position: absolute;
+    width: 200px;
+    height: 260px;
+    background: radial-gradient(ellipse, rgba(212,175,55,0.22) 0%, rgba(212,175,55,0.06) 40%, transparent 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: bookGlowPulse 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes bookGlowPulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* The Book - Flat Hardcover Look */
+.book-hardcover {
+    position: relative;
+    width: 180px;
+    height: 240px;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
+
+.book-hardcover:hover {
+    transform: translateY(-8px);
+}
+
+/* Spine */
+.book-spine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        #080808 0%, 
+        #151515 40%, 
+        #0a0a0a 60%, 
+        #111111 100%);
+    border-radius: 3px 0 0 3px;
+    z-index: 3;
+    box-shadow: inset -1px 0 2px rgba(0,0,0,0.6);
+}
+
+/* Gold accent lines on spine */
+.book-spine::before {
+    content: '';
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 30%;
+    background: rgba(212,175,55,0.4);
+}
+.book-spine::after {
+    content: '';
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 30%;
+    background: rgba(212,175,55,0.4);
+}
+
+/* Front Cover */
+.book-cover-front {
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(160deg, #1a1a1a 0%, #0c0c0c 30%, #050505 60%, #111111 100%);
+    border-radius: 0 5px 5px 0;
+    box-shadow: 
+        6px 8px 24px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.02),
+        inset 0 0 0 1px rgba(212,175,55,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 4;
+}
+
+/* Leather texture on cover */
+.book-cover-front::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(255,255,255,0.006) 3px,
+            rgba(255,255,255,0.006) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 4px,
+            rgba(255,255,255,0.004) 4px,
+            rgba(255,255,255,0.004) 5px
+        );
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Gold border frame on cover */
+.book-cover-front::after {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(212,175,55,0.18);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 6;
+}
+
+/* Logo on Cover */
+.book-cover-logo {
+    position: relative;
+    z-index: 7;
+    width: 150px;
+    height: auto;
+    max-width: 90%;
+    filter: drop-shadow(0 0 12px rgba(212,175,55,0.4));
+    opacity: 0.92;
+    transition: all 0.4s ease;
+}
+
+.book-hardcover:hover .book-cover-logo {
+    filter: drop-shadow(0 0 14px rgba(212,175,55,0.5));
+    opacity: 1;
+}
+
+/* Page Edge (visible on the right side) */
+.book-pages {
+    position: absolute;
+    top: 3px;
+    right: -8px;
+    width: 12px;
+    bottom: 3px;
+    background: linear-gradient(90deg,
+        #f2edd8 0%,
+        #e5dfc5 20%,
+        #f0ebd5 40%,
+        #dbd3b4 60%,
+        #f0ebd5 80%,
+        #e5dfc5 100%);
+    border-radius: 0 4px 4px 0;
+    z-index: 1;
+    box-shadow: -1px 0 1px rgba(0,0,0,0.3);
+}
+
+/* Page line details */
+.book-pages::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(170,160,130,0.12) 2px,
+        rgba(170,160,130,0.12) 3px
+    );
+    border-radius: 0 3px 3px 0;
+}
+
+/* Bottom page stack */
+.book-pages-bottom {
+    position: absolute;
+    bottom: -5px;
+    left: 18px;
+    right: -8px;
+    height: 8px;
+    background: linear-gradient(180deg,
+        #e5dfc5 0%,
+        #d5cba8 50%,
+        #e8e0c8 100%);
+    border-radius: 0 0 3px 3px;
+    z-index: 1;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+}
+
+/* Book Particles */
+.book-particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: visible;
+}
+
+.book-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(212, 175, 55, 0.8);
+    border-radius: 50%;
+    animation: bookParticleRise 4.5s linear infinite;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
+@keyframes bookParticleRise {
+    0% { 
+        transform: translateY(0) translateX(0) scale(1); 
+        opacity: 0; 
+    }
+    8% { 
+        opacity: 0.9; 
+    }
+    50% { 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: translateY(-180px) translateX(25px) scale(0.2); 
+        opacity: 0; 
+    }
+}
+
+/* Book Details */
+.book-details {
+    text-align: left;
+}
+
+.book-showcase-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: #D4AF37;
+    letter-spacing: 4px;
+    margin-bottom: 0.4rem;
+}
+
+.book-showcase-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: rgba(240,230,200,0.45);
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.book-description {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(240,230,200,0.75);
+    margin-bottom: 1.5rem;
+    max-width: 480px;
+}
+
+.book-price {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.price-amount {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #D4AF37;
+}
+
+.price-note {
+    font-size: 0.65rem;
+    color: rgba(240,230,200,0.45);
+    font-family: 'EB Garamond', serif;
+}
+
+.book-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Buy Now Button */
+.btn-buy {
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #D4AF37, #b8942e);
+    color: #0a0500 !important;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-buy:hover {
+    background: linear-gradient(135deg, #e6c34c, #D4AF37);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212,175,55,0.45);
+    color: #0a0500 !important;
+}
+
+/* Read More Button */
+.btn-read-more {
+    display: inline-block;
+    padding: 12px 28px;
+    background: transparent;
+    color: #D4AF37 !important;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 40px;
+    border: 1px solid rgba(212,175,55,0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-read-more:hover {
+    background: rgba(212,175,55,0.1);
+    border-color: rgba(212,175,55,0.7);
+    transform: translateY(-2px);
+    color: #D4AF37 !important;
+}
+
+/* ===== EXTRA SECTIONS ===== */
+.extra-sections {
+    padding: 3rem 2rem;
+    background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%);
+    border-top: 1px solid rgba(212,175,55,0.06);
+    border-bottom: 1px solid rgba(212,175,55,0.06);
+}
+
+.extra-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.newsletter-box, .contact-form-box {
+    flex: 1;
+    background: rgba(20,12,18,0.5);
+    backdrop-filter: blur(8px);
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(212,175,55,0.1);
+}
+
+.newsletter-box h3, .contact-form-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #D4AF37;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+}
+
+.newsletter-form input, .contact-form input, .contact-form textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(212,175,55,0.2);
+    padding: 0.7rem;
+    margin-bottom: 0.8rem;
+    color: #f0ede0;
+    border-radius: 12px;
+    font-family: 'EB Garamond', serif;
+}
+
+.newsletter-form button, .contact-form button {
+    background: #D4AF37;
+    color: #0a0500;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    border-radius: 40px;
+    font-family: 'Cinzel', serif;
+    transition: 0.3s;
+}
+
+.newsletter-form button:hover, .contact-form button:hover {
+    transform: translateY(-2px);
+    background: #e6c34c;
+}
+
+/* ===== CONTACT SECTION ===== */
+.contact {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: #0a0508;
+}
+
+.contact-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+    color: #D4AF37;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.contact-link {
+    text-decoration: none;
+    color: rgba(240,230,200,0.5);
+    transition: 0.3s;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-link:hover {
+    color: #D4AF37;
+    transform: translateY(-3px);
+}
+
+/* ===== FOOTER ===== */
+.footer-links {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.7rem;
+    color: rgba(240,230,200,0.25);
+    border-top: 1px solid rgba(212,175,55,0.06);
+}
+
+.footer-links a {
+    color: #D4AF37;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.copyright {
+    text-align: center;
+    padding: 1rem 2rem 2rem;
+    font-size: 0.65rem;
+    color: rgba(240,230,200,0.15);
+}
+
+/* ===== COOKIE CONSENT ===== */
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0a0718e6;
+    backdrop-filter: blur(12px);
+    padding: 0.8rem;
+    text-align: center;
+    z-index: 1000;
+    font-size: 0.75rem;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+    border-top: 1px solid rgba(212,175,55,0.2);
+}
+
+.cookie-consent.show {
+    transform: translateY(0);
+}
+
+.cookie-consent button {
+    background: #D4AF37;
+    border: none;
+    padding: 0.2rem 1rem;
+    margin-left: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+}
+
+/* ===== LANTERNS CONTAINER - FIXED ON SCREEN ===== */
+#lanterns {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+    overflow: visible;
+}
+
+@keyframes lanternBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.lantern-glow {
+    transition: box-shadow 0.4s, filter 0.4s, background 0.2s;
+}
+
+.lantern-label {
+    transition: opacity 0.35s;
+}
+
+/* ===== HALL PARTICLES ===== */
+#hallParticles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.hall-bg-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 50%;
+    animation: hallParticleRise 12s linear infinite;
+}
+
+@keyframes hallParticleRise {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-100vh) translateX(30px); opacity: 0; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 860px) {
+    .navbar-wrapper {
+        padding: 0.5rem;
+        overflow-x: visible;
+    }
+    .scene {
+        perspective: none;
+        width: 100%;
+    }
+    .nav3d {
+        height: auto;
+        transform: rotateX(0deg) !important;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+    }
+    .nav3d:hover {
+        transform: rotateX(0deg) !important;
+    }
+    .face-top {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .face-bottom-wall,
+    .face-top-wall,
+    .face-left-wall,
+    .face-right-wall,
+    .face-back {
+        display: none;
+    }
+    .nav-content {
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0.6rem;
+        justify-content: center;
+    }
+    .brand {
+        font-size: 0.55rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+    .brand small {
+        font-size: 0.35rem;
+        display: inline-block;
+    }
+    .links {
+        gap: 0.2rem;
+        justify-content: center;
+        width: 100%;
+    }
+    .links li a {
+        font-size: 0.45rem;
+        padding: 3px 5px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    .portal-scene {
+        position: static;
+        margin-top: 0.2rem;
+    }
+    .portal-top {
+        font-size: 0.45rem;
+        padding: 3px 8px;
+    }
+    .great-hall {
+        padding: 2rem 1rem 3rem;
+    }
+    .hall-card {
+        padding: 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .hall-card-num {
+        font-size: 1.2rem;
+        min-width: 35px;
+    }
+    .hall-card-name {
+        font-size: 0.85rem;
+    }
+    .hall-card-arrow {
+        display: none;
+    }
+    .testimonials-grid {
+        gap: 1rem;
+    }
+    
+    /* Book showcase responsive */
+    .book-showcase-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+    .book-hardcover-container {
+        min-height: 340px;
+        order: -1;
+    }
+    .book-hardcover {
+        width: 160px;
+        height: 216px;
+        transform: rotateY(-8deg) rotateX(4deg);
+    }
+    .book-details {
+        text-align: center;
+    }
+    .book-description {
+        max-width: 100%;
+    }
+    .book-actions {
+        justify-content: center;
+    }
+    .book-cover-logo {
+        width: 120px;
+    }
+    
+    .extra-grid {
+        flex-direction: column;
+    }
+    
+    #lanterns .lantern-glow {
+        width: 18px !important;
+        height: 24px !important;
+    }
+    #lanterns .lantern-label span {
+        font-size: 0.45rem !important;
+        letter-spacing: 1px !important;
+    }
+}
