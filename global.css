@@ -11,6 +11,7 @@ body {
     font-family: 'Cormorant Garamond', serif;
     overflow-x: hidden;
     position: relative;
+    max-width: 100%;
 }
 
 /* ===== WATERMARK (logo.jpg) ===== */
@@ -1231,37 +1232,36 @@ body::before {
     .great-hall {
         padding: 2rem 1rem 3rem;
     }
+    /* FIX: Better alignment for hall cards on mobile */
     .hall-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
         padding: 1rem;
-        gap: 1rem;
-        flex-wrap: wrap;
+        text-align: left;
     }
     .hall-card-num {
         font-size: 1.2rem;
-        min-width: 35px;
+        min-width: auto;
     }
     .hall-card-name {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
+    }
+    .hall-card-desc {
+        font-size: 0.8rem;
     }
     .hall-card-arrow {
         display: none;
     }
+    /* FIX: Testimonials grid on very narrow screens */
     .testimonials-grid {
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
     .book-showcase-grid {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 2.5rem;
-    }
-    .book-hardcover-container {
-        min-height: 340px;
-        order: -1;
-    }
-    .book-hardcover {
-        width: 160px;
-        height: 216px;
-        transform: rotateY(-8deg) rotateX(4deg);
     }
     .book-details {
         text-align: center;
@@ -1271,9 +1271,6 @@ body::before {
     }
     .book-actions {
         justify-content: center;
-    }
-    .book-cover-logo {
-        width: 120px;
     }
     .extra-grid {
         flex-direction: column;
@@ -1285,5 +1282,9 @@ body::before {
     #lanterns .lantern-label span {
         font-size: 0.45rem !important;
         letter-spacing: 1px !important;
+    }
+    /* Additional safety for all sections */
+    .great-hall, .testimonials, .book-showcase, .extra-sections, .contact {
+        overflow-x: hidden;
     }
 }
