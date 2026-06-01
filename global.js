@@ -553,10 +553,13 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK SHOWCASE (FULLY FIXED: canvas fills container, proper fallback, responsive) ==========
+    // ========== 3D BOOK SHOWCASE (FIXED: uses logo.jpg, robust canvas sizing, retry on zero dimensions) ==========
     function init3DBook() {
         const container = document.querySelector('.book-hardcover-container');
-        if (!container) return;
+        if (!container) {
+            console.warn('Book container not found');
+            return;
+        }
         
         // Remove static CSS book completely
         const staticBook = container.querySelector('.book-hardcover');
@@ -578,12 +581,23 @@
         // Make container relative for absolute canvas positioning
         container.style.position = 'relative';
         
+        // Get container dimensions; if zero, retry after a short delay
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        if (width === 0 || height === 0) {
+            console.warn('Book container has zero size, retrying in 200ms');
+            setTimeout(() => init3DBook(), 200);
+            return;
+        }
+        
+        console.log('Initializing 3D book, container size:', width, height);
+        
         // Setup scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
         renderer.domElement.style.position = 'absolute';
@@ -632,16 +646,16 @@
         pages.position.set(0, 0, coverD/2 + 0.065);
         bookGroup.add(pages);
         
-        // Front cover with texture (favicon.png) – fallback to dark brown if missing
+        // Front cover with texture (logo.jpg)
         const textureLoader = new THREE.TextureLoader();
-        const logoTexture = textureLoader.load('favicon.png', 
-            () => {}, // success
+        const coverTexture = textureLoader.load('logo.jpg', 
+            () => { console.log('Logo texture loaded successfully'); },
             undefined,
-            (err) => { console.warn('favicon.png not found, using solid color'); }
+            (err) => { console.warn('Could not load logo.jpg, using solid color', err); }
         );
         const frontCoverMat = new THREE.MeshStandardMaterial({ 
-            map: logoTexture, 
-            color: 0x5c3a1e,  // fallback color matches cover
+            map: coverTexture, 
+            color: 0x5c3a1e,
             metalness: 0.3, 
             roughness: 0.4 
         });
@@ -649,7 +663,7 @@
         frontCover.position.set(0, 0, coverD/2 + 0.03);
         bookGroup.add(frontCover);
         
-        // Decorative gold emblem (always visible, adds elegance)
+        // Decorative gold emblem
         const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
         emblemCircle.rotation.x = Math.PI / 2;
         emblemCircle.position.set(0, 0, coverD/2 + 0.08);
@@ -684,21 +698,20 @@
         
         // Responsive scaling and camera distance
         function updateBookSize() {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            const aspect = width / height;
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            if (w === 0 || h === 0) return;
+            const aspect = w / h;
             
-            // Scale based on container width – book fits nicely
-            let scale = Math.min(1.2, Math.max(0.6, width / 450));
+            let scale = Math.min(1.2, Math.max(0.6, w / 450));
             bookGroup.scale.set(scale, scale, scale);
             
-            // Adjust camera distance so book is fully visible
             const baseDistance = 2.2;
             const adjustedDistance = baseDistance / scale;
             camera.position.set(0, 0.1, adjustedDistance);
             camera.aspect = aspect;
             camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
+            renderer.setSize(w, h);
         }
         
         updateBookSize();
