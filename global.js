@@ -1,4 +1,4 @@
-// The Horseman's Journal - Global JavaScript (Final: 3D book works on Mac + iPhone)
+// The Horseman's Journal - Global JavaScript (Static Book – Works on All Devices)
 
 (function() {
     if (document.readyState === 'loading') {
@@ -9,7 +9,8 @@
 
     function init() {
         initHeroCanvas();
-        setTimeout(() => { init3DBook(); }, 500);
+        // No 3D book – show static book instead
+        showStaticBook();
         initLanternsAndParticles();
         initFormsAndFeatures();
         initFaviconParticles();
@@ -528,200 +529,25 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK (Works on Mac + iPhone, with fallback to static book) ==========
-    function init3DBook() {
+    // ========== SHOW STATIC BOOK (No Three.js – works everywhere) ==========
+    function showStaticBook() {
         const container = document.querySelector('.book-hardcover-container');
         if (!container) return;
-        
+        // Ensure static book is visible
         const staticBook = container.querySelector('.book-hardcover');
-        let threeActive = false;
-        
-        // Remove any previous canvas
-        const oldCanvas = container.querySelector('canvas');
-        if (oldCanvas) oldCanvas.remove();
-        
-        // Ensure Three.js is loaded
-        if (typeof THREE === 'undefined') {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-            script.onload = () => init3DBook();
-            document.head.appendChild(script);
-            return;
+        if (staticBook) {
+            staticBook.style.display = 'block';
+            staticBook.style.opacity = '1';
+            staticBook.style.visibility = 'visible';
         }
-        
-        // Mobile detection
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        
-        container.style.position = 'relative';
-        container.style.minHeight = '340px'; // ensure height
-        
-        // Scene setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
-        
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 2));
-        renderer.setClearColor(0x000000, 0);
-        renderer.domElement.style.position = 'absolute';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.width = '100%';
-        renderer.domElement.style.height = '100%';
-        renderer.domElement.style.pointerEvents = 'none';
-        renderer.domElement.style.zIndex = '2';
-        container.appendChild(renderer.domElement);
-        
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.6);
-        scene.add(ambientLight);
-        const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
-        mainLight.position.set(3, 4, 2.5);
-        scene.add(mainLight);
-        const fillLight = new THREE.PointLight(0xb87c4f, 0.5);
-        fillLight.position.set(0, -1, 1);
-        scene.add(fillLight);
-        const rimLight = new THREE.PointLight(0xffb56a, 0.6);
-        rimLight.position.set(-1.5, 1.2, -2);
-        scene.add(rimLight);
-        
-        // Book group
-        const bookGroup = new THREE.Group();
-        const coverW = 1.55, coverH = 2.15, coverD = 0.3;
-        
-        const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
-        const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
-        bookGroup.add(cover);
-        
-        const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
-        const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
-        spine.position.set(coverW/2 + 0.04, 0, 0);
-        bookGroup.add(spine);
-        
-        const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
-        const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
-        pages.position.set(0, 0, coverD/2 + 0.065);
-        bookGroup.add(pages);
-        
-        // Front cover texture
-        const textureLoader = new THREE.TextureLoader();
-        const frontCoverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, metalness: 0.3, roughness: 0.4 });
-        const frontCover = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.12, coverH - 0.12, 0.05), frontCoverMat);
-        frontCover.position.set(0, 0, coverD/2 + 0.03);
-        bookGroup.add(frontCover);
-        
-        textureLoader.load('favicon.png', (tex) => {
-            frontCoverMat.map = tex; frontCoverMat.needsUpdate = true;
-        }, undefined, () => {
-            textureLoader.load('logo.jpg', (tex) => {
-                frontCoverMat.map = tex; frontCoverMat.needsUpdate = true;
-            });
-        });
-        
-        // Emblem
-        const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
-        emblemCircle.rotation.x = Math.PI / 2;
-        emblemCircle.position.set(0, 0, coverD/2 + 0.08);
-        bookGroup.add(emblemCircle);
-        
-        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
-        const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-        topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
-        bookGroup.add(topBorder);
-        const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-        bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
-        bookGroup.add(bottomBorder);
-        
-        scene.add(bookGroup);
-        
-        // Particles (fewer on mobile)
-        const particleCount = isMobile ? 20 : 120;
-        const particleGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount; i++) {
-            positions[i*3] = (Math.random() - 0.5) * 2.8;
-            positions[i*3+1] = (Math.random() - 0.5) * 2.6;
-            positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
-        }
-        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.4 });
-        const particles = new THREE.Points(particleGeo, particleMat);
-        scene.add(particles);
-        
-        // Responsive scaling
-        function updateBookSize() {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-            if (width === 0 || height === 0) return;
-            const aspect = width / height;
-            let scale = Math.min(1.1, Math.max(0.55, width / 480));
-            bookGroup.scale.set(scale, scale, scale);
-            const baseDistance = 2.2;
-            const adjustedDistance = baseDistance / scale;
-            camera.position.set(0, 0.1, adjustedDistance);
-            camera.aspect = aspect;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        }
-        
-        updateBookSize();
-        
-        // Mouse tilt (disabled on mobile)
-        let targetRotY = 0, targetRotX = 0;
-        let currentRotY = 0, currentRotX = 0;
-        if (!isMobile) {
-            container.addEventListener('mousemove', (e) => {
-                const rect = container.getBoundingClientRect();
-                const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-                const mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-                targetRotY = mouseX * 0.3;
-                targetRotX = mouseY * 0.15;
-            });
-            container.addEventListener('mouseleave', () => { targetRotY = 0; targetRotX = 0; });
-        }
-        
-        let time = 0;
-        let fallbackTimer = null;
-        
-        function animate3D() {
-            requestAnimationFrame(animate3D);
-            if (!threeActive) return;
-            time += 0.012;
-            if (!isMobile) {
-                currentRotY += (targetRotY - currentRotY) * 0.08;
-                currentRotX += (targetRotX - currentRotX) * 0.08;
-                bookGroup.rotation.y = currentRotY;
-                bookGroup.rotation.x = currentRotX;
-            }
-            particles.rotation.y += 0.008;
-            particles.rotation.x = Math.sin(time * 0.5) * 0.1;
-            rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
-            renderer.render(scene, camera);
-        }
-        
-        // Start 3D and hide static book
-        threeActive = true;
-        if (staticBook) staticBook.style.display = 'none';
-        animate3D();
-        
-        // Fallback: if after 1.5 seconds the canvas has zero size or WebGL fails, show static book
-        fallbackTimer = setTimeout(() => {
-            const canvas = renderer.domElement;
-            if (!canvas || canvas.width === 0 || canvas.height === 0) {
-                console.warn('3D book failed to render, showing static book');
-                threeActive = false;
-                if (staticBook) staticBook.style.display = 'block';
-                if (renderer.domElement) renderer.domElement.style.display = 'none';
-            }
-        }, 1500);
-        
-        // Resize observer
-        const resizeObserver = new ResizeObserver(() => updateBookSize());
-        resizeObserver.observe(container);
-        window.addEventListener('resize', () => updateBookSize());
-        
-        // Extra resize after a moment for mobile
-        setTimeout(() => updateBookSize(), 200);
+        // Remove any Three.js canvas if present
+        const canvas = container.querySelector('canvas');
+        if (canvas) canvas.remove();
+        // Also ensure the glow and particles container don't interfere
+        const glow = container.querySelector('.book-glow');
+        if (glow) glow.style.zIndex = '1';
+        const particlesContainer = document.getElementById('bookParticles');
+        if (particlesContainer) particlesContainer.style.zIndex = '3';
     }
     
     // ========== LANTERNS AND PARTICLES (unchanged) ==========
