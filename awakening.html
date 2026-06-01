@@ -227,24 +227,88 @@
       transform: rotateX(5deg) rotateY(-3deg);
       transition: transform .5s cubic-bezier(.23,1,.32,1);
     }
+    
+    /* MOBILE OPTIMIZATIONS */
     @media (max-width: 860px) {
-      .manuscript-inner { transform: none; padding: 2rem 1.5rem; }
-      .chapter-container { flex-direction: column; }
-      .chapter-sidebar { flex-direction: row; padding-top: 0; flex: 0 0 auto; }
-      .chapter-vline { width: 40px; height: 1px; }
-      .chapter-side-text { writing-mode: horizontal-tb; transform: none; }
-      .hero-title { font-size: 2rem; }
+      .manuscript-inner { 
+        transform: none !important; 
+        padding: 2rem 1.5rem; 
+      }
+      .chapter-container { 
+        flex-direction: column; 
+      }
+      .chapter-sidebar { 
+        flex-direction: row; 
+        padding-top: 0; 
+        flex: 0 0 auto; 
+      }
+      .chapter-vline { 
+        width: 40px; 
+        height: 1px; 
+      }
+      .chapter-side-text { 
+        writing-mode: horizontal-tb; 
+        transform: none; 
+      }
+      .hero-title { 
+        font-size: 2rem; 
+      }
+      .manuscript:hover .manuscript-inner { 
+        transform: none !important; 
+      }
+      
+      /* Reduce orbs blur on mobile */
+      .orb {
+        filter: blur(60px) !important;
+        opacity: 0.5 !important;
+      }
+      
+      /* Disable hover effects on mobile */
+      .hero-cta:hover {
+        transform: none;
+      }
+      
+      /* Optimize animations */
+      .hero-content {
+        animation: none !important;
+      }
+      
+      .closing-star {
+        animation: none !important;
+      }
+      
+      .closing-symbols span {
+        animation: none !important;
+      }
+      
+      .hero-overlay {
+        background: radial-gradient(ellipse at 50% 45%, transparent 20%, rgba(10,8,20,0.85) 90%) !important;
+      }
     }
+    
     @media (max-width: 520px) {
-      .hero-title { font-size: 1.6rem; }
+      .hero-title { 
+        font-size: 1.6rem; 
+      }
+      .chapter { 
+        padding: 3rem 1rem; 
+      }
     }
-    .manuscript:hover .manuscript-inner {
-      transform: rotateX(2deg) rotateY(-1deg) translateY(-4px);
-      box-shadow: 0 35px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(180,150,200,0.18);
+    
+    /* Disable hover effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+      .manuscript-inner {
+        transform: none !important;
+      }
+      .hero-cta:hover {
+        transform: none;
+        background: transparent;
+      }
+      .nav-arrow:hover {
+        transform: none;
+      }
     }
-    @media (max-width: 860px) {
-      .manuscript:hover .manuscript-inner { transform: none; }
-    }
+    
     .manuscript-ruled {
       position: absolute; inset: 0; pointer-events: none;
       background: repeating-linear-gradient(180deg, transparent, transparent 29px, rgba(200,170,150,0.035) 29px, rgba(200,170,150,0.035) 30px);
@@ -287,11 +351,26 @@
     }
     .page-body p { margin-bottom: 1.2em; text-indent: 2em; }
     .page-body p:first-child { text-indent: 0; }
+    
+    /* Optimized dropcap for mobile */
     .dropcap::first-letter {
-      font-family: 'Cinzel Decorative', serif; font-size: 3.6em; font-weight: 700;
-      color: #E8C84A; float: left; line-height: .75;
-      margin: .08em .1em 0 0; text-shadow: 0 0 20px rgba(200,160,130,0.4);
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.6em;
+      font-weight: 700;
+      color: #E8C84A;
+      float: left;
+      line-height: .75;
+      margin: .08em .1em 0 0;
+      text-shadow: 0 0 20px rgba(200,160,130,0.4);
     }
+    
+    @media (max-width: 860px) {
+      .dropcap::first-letter {
+        font-size: 2.8em !important;
+        text-shadow: 0 0 10px rgba(200,160,130,0.3) !important;
+      }
+    }
+    
     .blockquote {
       border-left: 3px solid rgba(200,170,150,0.35);
       padding: .85rem 1.1rem; margin: 1.4rem 0;
@@ -483,11 +562,6 @@
       background: transparent;
       border: 1px solid rgba(212,175,55,0.5);
       color: #D4AF37;
-    }
-
-    /* Hide second canvas on mobile for performance */
-    @media (max-width: 860px) {
-      .hero-canvas { opacity: 0.6; }
     }
   </style>
 </head>
@@ -846,7 +920,7 @@
 
   <script>
     // ============================================
-    // OPTIMIZED CANVAS ANIMATION FOR MOBILE
+    // OPTIMIZED CANVAS ANIMATION WITH BEAUTIFUL MOUNTAINS
     // ============================================
     (function() {
       const canvas = document.getElementById('heroCanvas');
@@ -861,14 +935,13 @@
       // Detect mobile for performance tuning
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 860;
       
-      // Reduce particles on mobile (15 instead of 100)
+      // Reduce particles on mobile (15 instead of 60)
       const PARTICLE_COUNT = isMobile ? 15 : 60;
       let stardust = [];
       
       function resize() {
         W = canvas.width = canvas.offsetWidth;
         H = canvas.height = canvas.offsetHeight;
-        // Reinitialize particles on resize
         initParticles();
       }
       
@@ -887,9 +960,7 @@
         }
       }
       
-      window.addEventListener('resize', () => {
-        resize();
-      });
+      window.addEventListener('resize', () => { resize(); });
       
       const heroSection = document.getElementById('awakeningHero');
       if (heroSection && !isMobile) {
@@ -913,55 +984,52 @@
       }
       
       function drawStars() {
-        const starCount = isMobile ? 25 : 50;
+        const starCount = isMobile ? 30 : 60;
         for (let i = 0; i < starCount; i++) {
           const sx = (Math.sin(i * 127.1 + 311.7) * 0.5 + 0.5) * W;
           const sy = (Math.cos(i * 269.5 + 183.3) * 0.5 + 0.5) * H * 0.55;
           const twinkle = 0.3 + 0.7 * Math.abs(Math.sin(time * 0.012 + i * 2.7));
           ctx.fillStyle = `rgba(255,248,232,${twinkle * 0.25})`;
           ctx.beginPath();
-          ctx.arc(sx, sy, (isMobile ? 0.4 : 0.5) + twinkle * (isMobile ? 0.3 : 0.5), 0, Math.PI * 2);
+          ctx.arc(sx, sy, (isMobile ? 0.5 : 0.8) + twinkle * (isMobile ? 0.3 : 0.6), 0, Math.PI * 2);
           ctx.fill();
         }
       }
       
+      // BEAUTIFUL LAYERED MOUNTAINS - RESTORED!
       function drawMountains() {
-        // Simplified mountains on mobile for performance
-        if (isMobile) {
-          ctx.fillStyle = '#1a1530';
-          ctx.fillRect(0, H * 0.7, W, H * 0.3);
-          ctx.fillStyle = '#141028';
-          ctx.fillRect(0, H * 0.75, W, H * 0.25);
-          ctx.fillStyle = '#0d0a1c';
-          ctx.fillRect(0, H * 0.8, W, H * 0.2);
-        } else {
-          ctx.fillStyle = '#1a1530';
-          ctx.beginPath();
-          ctx.moveTo(0, H * 0.75);
-          for (let i = 0; i <= 80; i++) {
-            const nx = i / 80;
-            ctx.lineTo(nx * W, H * 0.5 + Math.sin(nx * 2.3) * H * 0.15 + Math.sin(nx * 5.1) * H * 0.06);
-          }
-          ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-          
-          ctx.fillStyle = '#141028';
-          ctx.beginPath();
-          ctx.moveTo(0, H * 0.78);
-          for (let i = 0; i <= 80; i++) {
-            const nx = i / 80;
-            ctx.lineTo(nx * W, H * 0.58 + Math.sin(nx * 1.8 + 1.5) * H * 0.12 + Math.sin(nx * 4.2) * H * 0.05);
-          }
-          ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-          
-          ctx.fillStyle = '#0d0a1c';
-          ctx.beginPath();
-          ctx.moveTo(0, H * 0.8);
-          for (let i = 0; i <= 80; i++) {
-            const nx = i / 80;
-            ctx.lineTo(nx * W, H * 0.65 + Math.sin(nx * 1.4 + 0.8) * H * 0.08);
-          }
-          ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        // Layer 1 - Distant mountains (lightest)
+        ctx.fillStyle = '#1a1535';
+        ctx.beginPath();
+        ctx.moveTo(0, H * 0.72);
+        for (let i = 0; i <= 60; i++) {
+          const nx = i / 60;
+          ctx.lineTo(nx * W, H * 0.52 + Math.sin(nx * 2.8) * H * 0.12 + Math.sin(nx * 5.5) * H * 0.05);
         }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+        ctx.fill();
+        
+        // Layer 2 - Mid mountains
+        ctx.fillStyle = '#141028';
+        ctx.beginPath();
+        ctx.moveTo(0, H * 0.75);
+        for (let i = 0; i <= 60; i++) {
+          const nx = i / 60;
+          ctx.lineTo(nx * W, H * 0.58 + Math.sin(nx * 2.2 + 1.2) * H * 0.11 + Math.sin(nx * 4.8) * H * 0.04);
+        }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+        ctx.fill();
+        
+        // Layer 3 - Foreground mountains (darkest)
+        ctx.fillStyle = '#0d0a1c';
+        ctx.beginPath();
+        ctx.moveTo(0, H * 0.78);
+        for (let i = 0; i <= 60; i++) {
+          const nx = i / 60;
+          ctx.lineTo(nx * W, H * 0.64 + Math.sin(nx * 1.8 + 0.6) * H * 0.09 + Math.sin(nx * 3.5) * H * 0.03);
+        }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+        ctx.fill();
       }
       
       function drawStallion(x, y, scale) {
@@ -1088,29 +1156,27 @@
       }
       
       function render() {
-        // Skip rendering if canvas is not visible (performance boost)
         if (!canvas.offsetParent) return;
         
         ctx.clearRect(0, 0, W, H);
         drawSky();
         drawStars();
-        drawMountains();
+        drawMountains(); // Beautiful layered mountains restored!
         drawCosmicLight();
         
-        const stallionX = W * 0.48 + (mouseX - 0.5) * (isMobile ? 10 : 25);
-        const stallionY = H * 0.58 + (mouseY - 0.5) * (isMobile ? 6 : 15);
-        drawStallion(stallionX, stallionY, isMobile ? 0.8 : 1.2);
+        const stallionX = W * 0.48 + (mouseX - 0.5) * (isMobile ? 8 : 25);
+        const stallionY = H * 0.58 + (mouseY - 0.5) * (isMobile ? 5 : 15);
+        drawStallion(stallionX, stallionY, isMobile ? 0.75 : 1.2);
         
-        const manX = stallionX - (isMobile ? 35 : 50);
-        const manY = stallionY + (isMobile ? 10 : 20);
-        drawYoungMan(manX, manY, isMobile ? 0.7 : 1.1);
+        const manX = stallionX - (isMobile ? 32 : 50);
+        const manY = stallionY + (isMobile ? 9 : 20);
+        drawYoungMan(manX, manY, isMobile ? 0.65 : 1.1);
         
         drawStardust();
       }
       
       function animate() {
         time++;
-        // Update particles
         stardust.forEach(p => {
           p.y -= p.speed * 0.05;
           p.x += Math.sin(time * 0.015 + p.phase) * p.drift * 0.02;
@@ -1123,18 +1189,15 @@
         animationId = requestAnimationFrame(animate);
       }
       
-      // Start everything
       resize();
       initParticles();
       
-      // Use requestIdleCallback to start animation when browser is ready
       if (window.requestIdleCallback) {
         window.requestIdleCallback(() => animate(), { timeout: 1000 });
       } else {
         setTimeout(animate, 100);
       }
       
-      // Clean up on page unload
       window.addEventListener('beforeunload', () => {
         if (animationId) cancelAnimationFrame(animationId);
       });
@@ -1170,7 +1233,7 @@
       portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // ===== COOKIE CONSENT =====
+    // Cookie consent
     const cookieConsent = document.getElementById('cookieConsent');
     const acceptCookies = document.getElementById('acceptCookies');
     const declineCookies = document.getElementById('declineCookies');
