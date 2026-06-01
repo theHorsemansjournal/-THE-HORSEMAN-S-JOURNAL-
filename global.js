@@ -553,16 +553,18 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK SHOWCASE (RESPONSIVE + LOGO) ==========
+    // ========== 3D BOOK SHOWCASE (FULLY FIXED: canvas fills container, proper fallback, responsive) ==========
     function init3DBook() {
         const container = document.querySelector('.book-hardcover-container');
         if (!container) return;
         
         // Remove static CSS book completely
         const staticBook = container.querySelector('.book-hardcover');
-        if (staticBook) {
-            staticBook.remove();
-        }
+        if (staticBook) staticBook.remove();
+        
+        // Remove any existing Three.js canvas from this container to avoid duplicates
+        const oldCanvas = container.querySelector('canvas');
+        if (oldCanvas) oldCanvas.remove();
         
         // Ensure Three.js is loaded
         if (typeof THREE === 'undefined') {
@@ -573,29 +575,38 @@
             return;
         }
         
+        // Make container relative for absolute canvas positioning
+        container.style.position = 'relative';
+        
         // Setup scene
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         
         renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // limit for mobile performance
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.pointerEvents = 'none';
         container.appendChild(renderer.domElement);
         
         // Lighting
-        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.55);
+        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.6);
         scene.add(ambientLight);
         
         const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
         mainLight.position.set(3, 4, 2.5);
         scene.add(mainLight);
         
-        const fillLight = new THREE.PointLight(0xb87c4f, 0.45);
+        const fillLight = new THREE.PointLight(0xb87c4f, 0.5);
         fillLight.position.set(0, -1, 1);
         scene.add(fillLight);
         
-        const rimLight = new THREE.PointLight(0xffb56a, 0.55);
+        const rimLight = new THREE.PointLight(0xffb56a, 0.6);
         rimLight.position.set(-1.5, 1.2, -2);
         scene.add(rimLight);
         
@@ -604,29 +615,47 @@
         
         const coverW = 1.55, coverH = 2.15, coverD = 0.3;
         
+        // Main cover (dark brown)
         const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
         const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
         bookGroup.add(cover);
         
+        // Spine
         const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
         const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
         spine.position.set(coverW/2 + 0.04, 0, 0);
         bookGroup.add(spine);
         
+        // Pages
         const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
         const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
         pages.position.set(0, 0, coverD/2 + 0.065);
         bookGroup.add(pages);
         
-        // Front cover with texture (favicon.png)
+        // Front cover with texture (favicon.png) – fallback to dark brown if missing
         const textureLoader = new THREE.TextureLoader();
-        const logoTexture = textureLoader.load('favicon.png');
-        const frontCoverMat = new THREE.MeshStandardMaterial({ map: logoTexture, color: 0xffffff, metalness: 0.3, roughness: 0.4 });
+        const logoTexture = textureLoader.load('favicon.png', 
+            () => {}, // success
+            undefined,
+            (err) => { console.warn('favicon.png not found, using solid color'); }
+        );
+        const frontCoverMat = new THREE.MeshStandardMaterial({ 
+            map: logoTexture, 
+            color: 0x5c3a1e,  // fallback color matches cover
+            metalness: 0.3, 
+            roughness: 0.4 
+        });
         const frontCover = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.12, coverH - 0.12, 0.05), frontCoverMat);
         frontCover.position.set(0, 0, coverD/2 + 0.03);
         bookGroup.add(frontCover);
         
-        // Optional gold borders to match design
+        // Decorative gold emblem (always visible, adds elegance)
+        const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
+        emblemCircle.rotation.x = Math.PI / 2;
+        emblemCircle.position.set(0, 0, coverD/2 + 0.08);
+        bookGroup.add(emblemCircle);
+        
+        // Gold borders
         const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
         const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
         topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
@@ -638,7 +667,7 @@
         
         scene.add(bookGroup);
         
-        // Particles - reduce count on mobile for performance
+        // Particles (fewer on mobile)
         const isMobile = window.innerWidth < 860;
         const particleCount = isMobile ? 60 : 150;
         const particleGeo = new THREE.BufferGeometry();
@@ -659,21 +688,19 @@
             const height = container.clientHeight;
             const aspect = width / height;
             
-            // Base scale: book should be about 30-40% of container width
-            let scale = width / 500;
-            scale = Math.min(1.4, Math.max(0.7, scale));
+            // Scale based on container width – book fits nicely
+            let scale = Math.min(1.2, Math.max(0.6, width / 450));
             bookGroup.scale.set(scale, scale, scale);
             
-            // Adjust camera distance so book fills nicely
-            const baseDistance = 2.5;
+            // Adjust camera distance so book is fully visible
+            const baseDistance = 2.2;
             const adjustedDistance = baseDistance / scale;
-            camera.position.set(0, 0.2, adjustedDistance);
+            camera.position.set(0, 0.1, adjustedDistance);
             camera.aspect = aspect;
             camera.updateProjectionMatrix();
             renderer.setSize(width, height);
         }
         
-        // Initial call
         updateBookSize();
         
         // Mouse tilt effect
@@ -684,8 +711,8 @@
             const rect = container.getBoundingClientRect();
             const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
             const mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-            targetRotY = mouseX * 0.4;
-            targetRotX = mouseY * 0.2;
+            targetRotY = mouseX * 0.3;
+            targetRotX = mouseY * 0.15;
         });
         
         container.addEventListener('mouseleave', () => {
@@ -714,16 +741,10 @@
         
         animate3D();
         
-        // Resize observer for responsive behavior
-        const resizeObserver = new ResizeObserver(() => {
-            updateBookSize();
-        });
+        // Resize observer
+        const resizeObserver = new ResizeObserver(() => updateBookSize());
         resizeObserver.observe(container);
-        
-        // Also handle window resize (backup)
-        window.addEventListener('resize', () => {
-            updateBookSize();
-        });
+        window.addEventListener('resize', () => updateBookSize());
     }
     
     // ========== LANTERNS AND PARTICLES ==========
