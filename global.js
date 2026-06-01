@@ -553,17 +553,13 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK SHOWCASE (FIXED: uses logo.jpg, robust canvas sizing, retry on zero dimensions) ==========
+    // ========== 3D BOOK SHOWCASE (FULLY FIXED: tries favicon.png then logo.jpg, canvas fills container, fallback to CSS) ==========
     function init3DBook() {
         const container = document.querySelector('.book-hardcover-container');
-        if (!container) {
-            console.warn('Book container not found');
-            return;
-        }
+        if (!container) return;
         
-        // Remove static CSS book completely
+        // Keep a reference to the static book (fallback)
         const staticBook = container.querySelector('.book-hardcover');
-        if (staticBook) staticBook.remove();
         
         // Remove any existing Three.js canvas from this container to avoid duplicates
         const oldCanvas = container.querySelector('canvas');
@@ -571,6 +567,7 @@
         
         // Ensure Three.js is loaded
         if (typeof THREE === 'undefined') {
+            console.warn('Three.js not loaded, loading now...');
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
             script.onload = () => init3DBook();
@@ -581,23 +578,12 @@
         // Make container relative for absolute canvas positioning
         container.style.position = 'relative';
         
-        // Get container dimensions; if zero, retry after a short delay
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-        if (width === 0 || height === 0) {
-            console.warn('Book container has zero size, retrying in 200ms');
-            setTimeout(() => init3DBook(), 200);
-            return;
-        }
-        
-        console.log('Initializing 3D book, container size:', width, height);
-        
         // Setup scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         
-        renderer.setSize(width, height);
+        renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setClearColor(0x000000, 0);
         renderer.domElement.style.position = 'absolute';
@@ -646,16 +632,37 @@
         pages.position.set(0, 0, coverD/2 + 0.065);
         bookGroup.add(pages);
         
-        // Front cover with texture (logo.jpg)
+        // Front cover with texture – try favicon.png, fallback to logo.jpg, then solid color
         const textureLoader = new THREE.TextureLoader();
-        const coverTexture = textureLoader.load('logo.jpg', 
-            () => { console.log('Logo texture loaded successfully'); },
+        let coverTexture = null;
+        let textureLoaded = false;
+        
+        // Try to load favicon.png
+        const faviconTexture = textureLoader.load('favicon.png', 
+            () => { 
+                console.log('favicon.png loaded successfully');
+                textureLoaded = true;
+                if (coverTexture) coverTexture.material.map = faviconTexture;
+            },
             undefined,
-            (err) => { console.warn('Could not load logo.jpg, using solid color', err); }
+            (err) => { console.warn('favicon.png not found, trying logo.jpg'); }
         );
+        
+        // Fallback to logo.jpg after a short delay if favicon fails
+        setTimeout(() => {
+            if (!textureLoaded) {
+                const logoTexture = textureLoader.load('logo.jpg', 
+                    () => { console.log('logo.jpg loaded as fallback'); },
+                    undefined,
+                    (err) => { console.warn('logo.jpg also not found, using solid color'); }
+                );
+                if (frontCoverMat) frontCoverMat.map = logoTexture;
+            }
+        }, 500);
+        
         const frontCoverMat = new THREE.MeshStandardMaterial({ 
-            map: coverTexture, 
-            color: 0x5c3a1e,
+            map: faviconTexture,
+            color: 0x5c3a1e,  // fallback color matches cover
             metalness: 0.3, 
             roughness: 0.4 
         });
@@ -663,7 +670,7 @@
         frontCover.position.set(0, 0, coverD/2 + 0.03);
         bookGroup.add(frontCover);
         
-        // Decorative gold emblem
+        // Decorative gold emblem (always visible)
         const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
         emblemCircle.rotation.x = Math.PI / 2;
         emblemCircle.position.set(0, 0, coverD/2 + 0.08);
@@ -698,20 +705,21 @@
         
         // Responsive scaling and camera distance
         function updateBookSize() {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
-            if (w === 0 || h === 0) return;
-            const aspect = w / h;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const aspect = width / height;
             
-            let scale = Math.min(1.2, Math.max(0.6, w / 450));
+            // Scale based on container width – book fits nicely
+            let scale = Math.min(1.2, Math.max(0.6, width / 450));
             bookGroup.scale.set(scale, scale, scale);
             
+            // Adjust camera distance so book is fully visible
             const baseDistance = 2.2;
             const adjustedDistance = baseDistance / scale;
             camera.position.set(0, 0.1, adjustedDistance);
             camera.aspect = aspect;
             camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
+            renderer.setSize(width, height);
         }
         
         updateBookSize();
@@ -752,7 +760,21 @@
             renderer.render(scene, camera);
         }
         
+        // Hide static book and start 3D rendering
+        if (staticBook) staticBook.style.display = 'none';
         animate3D();
+        
+        // If something goes wrong and canvas is not visible after 2 seconds, show static book as fallback
+        setTimeout(() => {
+            const canvas = container.querySelector('canvas');
+            if (canvas && canvas.width > 0 && canvas.height > 0) {
+                console.log('3D book rendering active');
+            } else {
+                console.warn('3D book failed, showing static fallback');
+                if (staticBook) staticBook.style.display = 'block';
+                if (renderer.domElement) renderer.domElement.style.display = 'none';
+            }
+        }, 2000);
         
         // Resize observer
         const resizeObserver = new ResizeObserver(() => updateBookSize());
@@ -800,7 +822,7 @@
             }
         }
         
-        // Book particles
+        // Book particles (these are CSS particles, not Three.js – keep them)
         const bookParticlesContainer = document.getElementById('bookParticles');
         if (bookParticlesContainer) {
             for (let i = 0; i < 25; i++) {
