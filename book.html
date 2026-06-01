@@ -215,8 +215,7 @@
   <!-- HERO SECTION with 3D canvas -->
   <section class="book-hero">
     <div class="hero-content">
-      <!-- 🔥 FIXED: added width and height attributes -->
-      <canvas id="bookCanvas" width="400" height="500"></canvas>
+      <canvas id="bookCanvas"></canvas>
       <div class="hero-text">
         <div class="hero-label">✦ HANDCRAFTED VOLUME ✦</div>
         <div class="hero-title">The Horseman's<br>Journal</div>
@@ -236,7 +235,7 @@
     </div>
   </section>
 
-  <!-- ===== REMAINING SECTIONS (unchanged) ===== -->
+  <!-- ===== REMAINING SECTIONS (exactly as your original) ===== -->
   <section class="opening-section">
     <div class="opening-inner">
       <div class="opening-label">✦ From the Beginning ✦</div>
@@ -328,68 +327,37 @@
     <button id="declineCookies" type="button" class="decline-btn">Decline</button>
   </div>
 
-  <!-- 🔥 FIXED: updated Three.js script with laptop reliability & fallback -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-    // ========== RELIABLE THREE.JS 3D BOOK (with laptop fix) ==========
+    // ========== RELIABLE THREE.JS 3D BOOK ==========
     (function() {
       const canvas = document.getElementById('bookCanvas');
       if (!canvas) return;
-
-      // Create fallback message (hidden by default)
-      const fallbackDiv = document.createElement('div');
-      fallbackDiv.id = 'bookFallback';
-      fallbackDiv.style.cssText = `
-        display:none; width:100%; height:100%; position:absolute; top:0; left:0;
-        background:rgba(10,5,8,0.9); color:#D4AF37; display:flex; align-items:center;
-        justify-content:center; flex-direction:column; font-family:'Cinzel',serif;
-        border-radius:8px; z-index:5; text-align:center; padding:1rem;
-      `;
-      fallbackDiv.innerHTML = `
-        <div style="font-size:1.5rem; margin-bottom:0.5rem;">📖</div>
-        <div style="font-size:0.8rem;">3D book requires WebGL</div>
-        <div style="font-size:0.55rem; color:rgba(212,175,55,0.6);">Please enable WebGL or update your browser</div>
-      `;
-      canvas.parentNode.insertBefore(fallbackDiv, canvas);
-
-      function showFallback() {
-        canvas.style.display = 'none';
-        fallbackDiv.style.display = 'flex';
-      }
-
-      // Book dimensions
-      const w = 2.2, h = 3.1, d = 0.6;
-
-      let scene, camera, renderer, bookGroup, particles, rimLight;
-      let isDragging = false, lastX = 0, rotY = -0.4, rotX = 0.1;
-
-      function setupScene() {
-        scene = new THREE.Scene();
-
-        // Camera
-        const aspect = canvas.clientWidth / canvas.clientHeight || 1.2;
-        camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
-        camera.position.set(0, 0.3, 4.5);
+      
+      // Wait for container to have size
+      function init() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        if (width === 0 || height === 0) {
+          setTimeout(init, 100);
+          return;
+        }
+        
+        // Book dimensions
+        const w = 2.2;
+        const h = 3.1;
+        const d = 0.6;
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+        camera.position.set(0, 0.2, 4.5);
         camera.lookAt(0, 0, 0);
-
-        // Renderer
-        try {
-          renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-          renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-          renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-          renderer.setClearColor(0x000000, 0);
-        } catch (e) {
-          showFallback();
-          return false;
-        }
-
-        // Check if WebGL context is actually available
-        const gl = renderer.getContext();
-        if (!gl) {
-          showFallback();
-          return false;
-        }
-
+        
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setClearColor(0x000000, 0);
+        
         // Lighting
         const ambient = new THREE.AmbientLight(0x404060, 0.6);
         scene.add(ambient);
@@ -399,46 +367,52 @@
         const fillLight = new THREE.PointLight(0xaa8866, 0.5);
         fillLight.position.set(-1, 1, 1.5);
         scene.add(fillLight);
-        rimLight = new THREE.PointLight(0xffaa66, 0.6);
+        const rimLight = new THREE.PointLight(0xffaa66, 0.6);
         rimLight.position.set(-1, 1.5, -2);
         scene.add(rimLight);
-
-        // Book group
-        bookGroup = new THREE.Group();
+        
+        const bookGroup = new THREE.Group();
+        
+        // Materials
         const brownMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.4, metalness: 0.1 });
         const pageMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.7, metalness: 0.02 });
         const spineMat = new THREE.MeshStandardMaterial({ color: 0xcd9a4b, metalness: 0.3, roughness: 0.5 });
-
+        
+        // Back cover
         const back = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.05), brownMat);
         back.position.set(0, 0, -d/2);
         bookGroup.add(back);
-
+        
+        // Front cover base
         const frontBase = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.05), brownMat);
         frontBase.position.set(0, 0, d/2);
         bookGroup.add(frontBase);
-
+        
+        // Spine
         const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, h, d), spineMat);
         spine.position.set(-w/2 - 0.02, 0, 0);
         bookGroup.add(spine);
-
+        
+        // Pages
         const pages = new THREE.Mesh(new THREE.BoxGeometry(w - 0.2, h - 0.2, d - 0.1), pageMat);
         pages.position.set(0, 0, 0);
         bookGroup.add(pages);
-
-        // Front cover image (with fallback color)
+        
+        // Front cover image (try to load, fallback to brown)
         const loader = new THREE.TextureLoader();
         const frontTexture = loader.load('cover-front-bg.jpg', undefined, undefined, () => console.log('Front cover image missing, using solid color'));
         const frontMat = new THREE.MeshStandardMaterial({ map: frontTexture, color: 0x8b5a2b, roughness: 0.3, metalness: 0.05 });
         const frontImage = new THREE.Mesh(new THREE.BoxGeometry(w - 0.1, h - 0.1, 0.04), frontMat);
         frontImage.position.set(0, 0, d/2 + 0.03);
         bookGroup.add(frontImage);
-
+        
+        // Back cover image
         const backTexture = loader.load('cover-back-bg.jpg', undefined, undefined, () => console.log('Back cover image missing, using solid color'));
         const backMat = new THREE.MeshStandardMaterial({ map: backTexture, color: 0x8b5a2b, roughness: 0.3, metalness: 0.05 });
         const backImage = new THREE.Mesh(new THREE.BoxGeometry(w - 0.1, h - 0.1, 0.04), backMat);
         backImage.position.set(0, 0, -d/2 - 0.03);
         bookGroup.add(backImage);
-
+        
         // Gold borders
         const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.8 });
         const topBorder = new THREE.Mesh(new THREE.BoxGeometry(w - 0.2, 0.05, 0.03), goldMat);
@@ -447,10 +421,10 @@
         const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(w - 0.2, 0.05, 0.03), goldMat);
         bottomBorder.position.set(0, -h/2 + 0.15, d/2 + 0.05);
         bookGroup.add(bottomBorder);
-
+        
         scene.add(bookGroup);
-
-        // Particles
+        
+        // Simple particles
         const particleCount = 80;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
@@ -461,109 +435,80 @@
         }
         particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
         const particleMatPoints = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.03, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.3 });
-        particles = new THREE.Points(particleGeo, particleMatPoints);
+        const particles = new THREE.Points(particleGeo, particleMatPoints);
         scene.add(particles);
-
-        return true;
-      }
-
-      function onStart(e) {
-        isDragging = true;
-        const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
-        lastX = clientX;
-        canvas.style.cursor = 'grabbing';
-        e.preventDefault();
-      }
-
-      function onMove(e) {
-        if (!isDragging || !bookGroup) return;
-        const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
-        const delta = clientX - lastX;
-        rotY += delta * 0.008;
-        lastX = clientX;
-        bookGroup.rotation.y = rotY;
-        bookGroup.rotation.x = rotX;
-      }
-
-      function onEnd() {
-        isDragging = false;
-        canvas.style.cursor = 'grab';
-      }
-
-      function resizeCanvas() {
-        if (!renderer) return;
-        const w = canvas.clientWidth;
-        const h = canvas.clientHeight;
-        if (w === 0 || h === 0) return;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-
-      function animate() {
-        requestAnimationFrame(animate);
-        if (!renderer || !scene || !camera) return;
-        particles.rotation.y += 0.005;
-        particles.rotation.x += 0.003;
-        rimLight.intensity = 0.6 + Math.sin(performance.now() * 0.002) * 0.1;
-        renderer.render(scene, camera);
-      }
-
-      // ----- Main initialisation (after full page load) -----
-      window.addEventListener('load', () => {
-        // Ensure canvas has size
-        if (canvas.clientWidth === 0 || canvas.clientHeight === 0) {
-          // Wait for layout
-          setTimeout(() => {
-            if (canvas.clientWidth === 0) {
-              showFallback();
-              return;
-            }
-            start3D();
-          }, 200);
-        } else {
-          start3D();
+        
+        // Rotation controls
+        let isDragging = false;
+        let lastX = 0;
+        let rotY = -0.4;
+        let rotX = 0.1;
+        
+        function onStart(e) {
+          isDragging = true;
+          const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
+          lastX = clientX;
+          canvas.style.cursor = 'grabbing';
+          e.preventDefault();
         }
-      });
-
-      function start3D() {
-        if (!setupScene()) return; // WebGL failed -> fallback already shown
-
-        // Interaction
+        
+        function onMove(e) {
+          if (!isDragging) return;
+          const clientX = e.clientX !== undefined ? e.clientX : e.touches[0].clientX;
+          const delta = clientX - lastX;
+          rotY += delta * 0.008;
+          lastX = clientX;
+          bookGroup.rotation.y = rotY;
+          bookGroup.rotation.x = rotX;
+        }
+        
+        function onEnd() {
+          isDragging = false;
+          canvas.style.cursor = 'grab';
+        }
+        
         canvas.addEventListener('mousedown', onStart);
         window.addEventListener('mousemove', onMove);
         window.addEventListener('mouseup', onEnd);
         canvas.addEventListener('touchstart', onStart, { passive: false });
         window.addEventListener('touchmove', onMove, { passive: false });
         window.addEventListener('touchend', onEnd);
-
-        // Auto-resize with ResizeObserver
-        if (window.ResizeObserver) {
-          const ro = new ResizeObserver(() => resizeCanvas());
-          ro.observe(canvas);
-        } else {
-          window.addEventListener('resize', resizeCanvas);
-          resizeCanvas(); // initial
+        
+        // Responsive
+        function resizeCanvas() {
+          const w = canvas.clientWidth;
+          const h = canvas.clientHeight;
+          renderer.setSize(w, h);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
         }
-
-        // Start animation
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // Animation
+        let time = 0;
+        function animate() {
+          requestAnimationFrame(animate);
+          time += 0.01;
+          particles.rotation.y += 0.005;
+          particles.rotation.x += 0.003;
+          rimLight.intensity = 0.6 + Math.sin(time * 2) * 0.1;
+          renderer.render(scene, camera);
+        }
+        animate();
+        
         bookGroup.rotation.y = rotY;
         bookGroup.rotation.x = rotX;
         canvas.style.cursor = 'grab';
-        animate();
       }
-
-      // Handle WebGL context loss
-      canvas.addEventListener('webglcontextlost', (e) => {
-        e.preventDefault();
-        showFallback();
-      });
+      
+      init();
     })();
-
-    // ===== MISC (unchanged) =====
+    
+    // ===== MISC =====
     document.getElementById('currentYear').textContent = new Date().getFullYear();
     document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
+    
     const cookieConsent = document.getElementById('cookieConsent');
     const accept = document.getElementById('acceptCookies');
     const decline = document.getElementById('declineCookies');
@@ -574,8 +519,8 @@
     if (cookieConsent && !localStorage.getItem('cookieConsent')) setTimeout(() => cookieConsent.classList.add('show'), 1500);
     accept?.addEventListener('click', () => setCookie(true));
     decline?.addEventListener('click', () => setCookie(false));
-
-    document.getElementById('buyNowBtn')?.addEventListener('click', (e) => { e.preventDefault(); window.location.hash = '#purchase'; });
+    
+    document.getElementById('buyNowBtn')?.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '#purchase'; });
   </script>
 </body>
 </html>
