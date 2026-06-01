@@ -553,12 +553,18 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK SHOWCASE ==========
+    // ========== 3D BOOK SHOWCASE (RESPONSIVE + LOGO) ==========
     function init3DBook() {
         const container = document.querySelector('.book-hardcover-container');
         if (!container) return;
         
-        // Check if Three.js is loaded
+        // Remove static CSS book completely
+        const staticBook = container.querySelector('.book-hardcover');
+        if (staticBook) {
+            staticBook.remove();
+        }
+        
+        // Ensure Three.js is loaded
         if (typeof THREE === 'undefined') {
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
@@ -567,20 +573,13 @@
             return;
         }
         
-        // Hide static book
-        const staticBook = container.querySelector('.book-hardcover');
-        if (staticBook) {
-            staticBook.style.opacity = '0';
-            staticBook.style.pointerEvents = 'none';
-            staticBook.style.position = 'absolute';
-        }
-        
         // Setup scene
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         
         renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // limit for mobile performance
         renderer.setClearColor(0x000000, 0);
         container.appendChild(renderer.domElement);
         
@@ -619,8 +618,16 @@
         pages.position.set(0, 0, coverD/2 + 0.065);
         bookGroup.add(pages);
         
-        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
+        // Front cover with texture (favicon.png)
+        const textureLoader = new THREE.TextureLoader();
+        const logoTexture = textureLoader.load('favicon.png');
+        const frontCoverMat = new THREE.MeshStandardMaterial({ map: logoTexture, color: 0xffffff, metalness: 0.3, roughness: 0.4 });
+        const frontCover = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.12, coverH - 0.12, 0.05), frontCoverMat);
+        frontCover.position.set(0, 0, coverD/2 + 0.03);
+        bookGroup.add(frontCover);
         
+        // Optional gold borders to match design
+        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
         const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
         topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
         bookGroup.add(topBorder);
@@ -629,17 +636,11 @@
         bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
         bookGroup.add(bottomBorder);
         
-        const emblemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.045, 32);
-        const emblemMat = new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.72 });
-        const emblem = new THREE.Mesh(emblemGeo, emblemMat);
-        emblem.rotation.x = Math.PI / 2;
-        emblem.position.set(0, 0.1, coverD/2 + 0.045);
-        bookGroup.add(emblem);
-        
         scene.add(bookGroup);
         
-        // Particles
-        const particleCount = 150;
+        // Particles - reduce count on mobile for performance
+        const isMobile = window.innerWidth < 860;
+        const particleCount = isMobile ? 60 : 150;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
         for (let i = 0; i < particleCount; i++) {
@@ -652,9 +653,30 @@
         const particles = new THREE.Points(particleGeo, particleMat);
         scene.add(particles);
         
-        camera.position.set(0, 0.2, 2.8);
-        camera.lookAt(0, 0.1, 0);
+        // Responsive scaling and camera distance
+        function updateBookSize() {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const aspect = width / height;
+            
+            // Base scale: book should be about 30-40% of container width
+            let scale = width / 500;
+            scale = Math.min(1.4, Math.max(0.7, scale));
+            bookGroup.scale.set(scale, scale, scale);
+            
+            // Adjust camera distance so book fills nicely
+            const baseDistance = 2.5;
+            const adjustedDistance = baseDistance / scale;
+            camera.position.set(0, 0.2, adjustedDistance);
+            camera.aspect = aspect;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
         
+        // Initial call
+        updateBookSize();
+        
+        // Mouse tilt effect
         let targetRotY = 0, targetRotX = 0;
         let currentRotY = 0, currentRotX = 0;
         
@@ -692,14 +714,16 @@
         
         animate3D();
         
+        // Resize observer for responsive behavior
         const resizeObserver = new ResizeObserver(() => {
-            const w = container.clientWidth;
-            const h = container.clientHeight;
-            renderer.setSize(w, h);
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
+            updateBookSize();
         });
         resizeObserver.observe(container);
+        
+        // Also handle window resize (backup)
+        window.addEventListener('resize', () => {
+            updateBookSize();
+        });
     }
     
     // ========== LANTERNS AND PARTICLES ==========
