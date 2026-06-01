@@ -1,5 +1,4 @@
-// The Horseman's Journal - Global JavaScript
-// Canvas animation, lantern navigation, interactive elements, AJAX forms, favicon particles, AND 3D BOOK
+// The Horseman's Journal - Global JavaScript (Final: 3D book works on Mac + iPhone)
 
 (function() {
     if (document.readyState === 'loading') {
@@ -9,48 +8,25 @@
     }
 
     function init() {
-        // ========== FIRST: Initialize Hero Canvas Animation ==========
         initHeroCanvas();
-        
-        // ========== SECOND: Initialize 3D Book after a delay (ensures DOM ready) ==========
-        setTimeout(() => {
-            init3DBook();
-        }, 500);
-        
-        // ========== THIRD: Initialize Lanterns and Particles ==========
+        setTimeout(() => { init3DBook(); }, 500);
         initLanternsAndParticles();
-        
-        // ========== FOURTH: Forms, Cookie, and Other Features ==========
         initFormsAndFeatures();
-        
-        // ========== FIFTH: Favicon Particles ==========
         initFaviconParticles();
     }
     
-    // ========== HERO CANVAS ANIMATION (Fully working original code) ==========
+    // ========== HERO CANVAS (your original, unchanged) ==========
     function initHeroCanvas() {
         const canvas = document.getElementById('heroCanvas');
-        if (!canvas) {
-            console.error('heroCanvas not found!');
-            return;
-        }
-        
+        if (!canvas) { console.error('heroCanvas not found'); return; }
         const ctx = canvas.getContext('2d');
         let W, H, mx = 0.5, my = 0.5, t = 0;
         let logoOpacity = 0.95;
         let lastMove = 0;
-        
-        function resize() {
-            W = canvas.width = canvas.offsetWidth;
-            H = canvas.height = canvas.offsetHeight;
-        }
+        function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
         resize();
         window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => {
-            mx = e.clientX / W;
-            my = e.clientY / H;
-            lastMove = t;
-        });
+        window.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; lastMove = t; });
         
         function drawLogo(x, y, size, opacity) {
             ctx.save();
@@ -548,198 +524,207 @@
             render();
             requestAnimationFrame(animate);
         }
-        
         animate();
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== 3D BOOK SHOWCASE (FIXED FOR MOBILE SAFARI) ==========
-function init3DBook() {
-    const container = document.querySelector('.book-hardcover-container');
-    if (!container) return;
-    
-    // Remove static CSS book
-    const staticBook = container.querySelector('.book-hardcover');
-    if (staticBook) staticBook.style.display = 'none'; // keep hidden, no fallback
-    
-    // Remove any previous Three.js canvas
-    const oldCanvas = container.querySelector('canvas');
-    if (oldCanvas) oldCanvas.remove();
-    
-    // Check WebGL support
-    if (typeof THREE === 'undefined') {
-        console.warn('Three.js not loaded, loading...');
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-        script.onload = () => init3DBook();
-        document.head.appendChild(script);
-        return;
-    }
-    
-    // Mobile detection for performance
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) console.log('Mobile device detected, reducing quality');
-    
-    container.style.position = 'relative';
-    
-    // Scene setup
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
-    
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
-    renderer.setClearColor(0x000000, 0);
-    renderer.domElement.style.position = 'absolute';
-    renderer.domElement.style.top = '0';
-    renderer.domElement.style.left = '0';
-    renderer.domElement.style.width = '100%';
-    renderer.domElement.style.height = '100%';
-    renderer.domElement.style.pointerEvents = 'none';
-    renderer.domElement.style.zIndex = '2';
-    container.appendChild(renderer.domElement);
-    
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x2a2218, 0.6);
-    scene.add(ambientLight);
-    const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
-    mainLight.position.set(3, 4, 2.5);
-    scene.add(mainLight);
-    const fillLight = new THREE.PointLight(0xb87c4f, 0.5);
-    fillLight.position.set(0, -1, 1);
-    scene.add(fillLight);
-    const rimLight = new THREE.PointLight(0xffb56a, 0.6);
-    rimLight.position.set(-1.5, 1.2, -2);
-    scene.add(rimLight);
-    
-    // Book group
-    const bookGroup = new THREE.Group();
-    const coverW = 1.55, coverH = 2.15, coverD = 0.3;
-    
-    const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
-    const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
-    bookGroup.add(cover);
-    
-    const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
-    const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
-    spine.position.set(coverW/2 + 0.04, 0, 0);
-    bookGroup.add(spine);
-    
-    const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
-    const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
-    pages.position.set(0, 0, coverD/2 + 0.065);
-    bookGroup.add(pages);
-    
-    // Front cover texture (favicon.png, fallback to logo.jpg, then solid)
-    const textureLoader = new THREE.TextureLoader();
-    let usedTexture = null;
-    const frontCoverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, metalness: 0.3, roughness: 0.4 });
-    const frontCover = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.12, coverH - 0.12, 0.05), frontCoverMat);
-    frontCover.position.set(0, 0, coverD/2 + 0.03);
-    bookGroup.add(frontCover);
-    
-    // Try to load favicon.png
-    textureLoader.load('favicon.png', (tex) => {
-        frontCoverMat.map = tex;
-        frontCoverMat.needsUpdate = true;
-        console.log('Book texture: favicon.png loaded');
-    }, undefined, () => {
-        textureLoader.load('logo.jpg', (tex) => {
-            frontCoverMat.map = tex;
-            frontCoverMat.needsUpdate = true;
-            console.log('Book texture: logo.jpg loaded as fallback');
-        });
-    });
-    
-    // Gold emblem
-    const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
-    emblemCircle.rotation.x = Math.PI / 2;
-    emblemCircle.position.set(0, 0, coverD/2 + 0.08);
-    bookGroup.add(emblemCircle);
-    
-    const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
-    const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-    topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
-    bookGroup.add(topBorder);
-    const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
-    bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
-    bookGroup.add(bottomBorder);
-    
-    scene.add(bookGroup);
-    
-    // Particles (much fewer on mobile)
-    const particleCount = isMobile ? 30 : 150;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-        positions[i*3] = (Math.random() - 0.5) * 2.8;
-        positions[i*3+1] = (Math.random() - 0.5) * 2.6;
-        positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.5 });
-    const particles = new THREE.Points(particleGeo, particleMat);
-    scene.add(particles);
-    
-    // Responsive scaling
-    function updateBookSize() {
-        const width = container.clientWidth;
-        const height = container.clientHeight;
-        if (width === 0 || height === 0) return;
-        const aspect = width / height;
-        let scale = Math.min(1.2, Math.max(0.6, width / 450));
-        bookGroup.scale.set(scale, scale, scale);
-        const baseDistance = 2.2;
-        const adjustedDistance = baseDistance / scale;
-        camera.position.set(0, 0.1, adjustedDistance);
-        camera.aspect = aspect;
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-    }
-    
-    updateBookSize();
-    
-    // Mouse/tilt effect (disabled on mobile to avoid jitter)
-    let targetRotY = 0, targetRotX = 0;
-    let currentRotY = 0, currentRotX = 0;
-    if (!isMobile) {
-        container.addEventListener('mousemove', (e) => {
-            const rect = container.getBoundingClientRect();
-            const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-            const mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-            targetRotY = mouseX * 0.3;
-            targetRotX = mouseY * 0.15;
-        });
-        container.addEventListener('mouseleave', () => { targetRotY = 0; targetRotX = 0; });
-    }
-    
-    let time = 0;
-    function animate3D() {
-        requestAnimationFrame(animate3D);
-        time += 0.012;
-        if (!isMobile) {
-            currentRotY += (targetRotY - currentRotY) * 0.08;
-            currentRotX += (targetRotX - currentRotX) * 0.08;
-            bookGroup.rotation.y = currentRotY;
-            bookGroup.rotation.x = currentRotX;
+    // ========== 3D BOOK (Works on Mac + iPhone, with fallback to static book) ==========
+    function init3DBook() {
+        const container = document.querySelector('.book-hardcover-container');
+        if (!container) return;
+        
+        const staticBook = container.querySelector('.book-hardcover');
+        let threeActive = false;
+        
+        // Remove any previous canvas
+        const oldCanvas = container.querySelector('canvas');
+        if (oldCanvas) oldCanvas.remove();
+        
+        // Ensure Three.js is loaded
+        if (typeof THREE === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            script.onload = () => init3DBook();
+            document.head.appendChild(script);
+            return;
         }
-        particles.rotation.y += 0.008;
-        particles.rotation.x = Math.sin(time * 0.5) * 0.1;
-        rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
-        renderer.render(scene, camera);
+        
+        // Mobile detection
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        
+        container.style.position = 'relative';
+        container.style.minHeight = '340px'; // ensure height
+        
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: !isMobile });
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 2));
+        renderer.setClearColor(0x000000, 0);
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = '0';
+        renderer.domElement.style.left = '0';
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.pointerEvents = 'none';
+        renderer.domElement.style.zIndex = '2';
+        container.appendChild(renderer.domElement);
+        
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x2a2218, 0.6);
+        scene.add(ambientLight);
+        const mainLight = new THREE.DirectionalLight(0xebc48e, 1.0);
+        mainLight.position.set(3, 4, 2.5);
+        scene.add(mainLight);
+        const fillLight = new THREE.PointLight(0xb87c4f, 0.5);
+        fillLight.position.set(0, -1, 1);
+        scene.add(fillLight);
+        const rimLight = new THREE.PointLight(0xffb56a, 0.6);
+        rimLight.position.set(-1.5, 1.2, -2);
+        scene.add(rimLight);
+        
+        // Book group
+        const bookGroup = new THREE.Group();
+        const coverW = 1.55, coverH = 2.15, coverD = 0.3;
+        
+        const coverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, roughness: 0.42, metalness: 0.12 });
+        const cover = new THREE.Mesh(new THREE.BoxGeometry(coverW, coverH, coverD), coverMat);
+        bookGroup.add(cover);
+        
+        const spineMat = new THREE.MeshStandardMaterial({ color: 0x4a2c12, roughness: 0.38 });
+        const spine = new THREE.Mesh(new THREE.BoxGeometry(0.12, coverH - 0.1, coverD + 0.02), spineMat);
+        spine.position.set(coverW/2 + 0.04, 0, 0);
+        bookGroup.add(spine);
+        
+        const pagesMat = new THREE.MeshStandardMaterial({ color: 0xf2e6d2, roughness: 0.68 });
+        const pages = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.16, coverH - 0.22, 0.13), pagesMat);
+        pages.position.set(0, 0, coverD/2 + 0.065);
+        bookGroup.add(pages);
+        
+        // Front cover texture
+        const textureLoader = new THREE.TextureLoader();
+        const frontCoverMat = new THREE.MeshStandardMaterial({ color: 0x5c3a1e, metalness: 0.3, roughness: 0.4 });
+        const frontCover = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.12, coverH - 0.12, 0.05), frontCoverMat);
+        frontCover.position.set(0, 0, coverD/2 + 0.03);
+        bookGroup.add(frontCover);
+        
+        textureLoader.load('favicon.png', (tex) => {
+            frontCoverMat.map = tex; frontCoverMat.needsUpdate = true;
+        }, undefined, () => {
+            textureLoader.load('logo.jpg', (tex) => {
+                frontCoverMat.map = tex; frontCoverMat.needsUpdate = true;
+            });
+        });
+        
+        // Emblem
+        const emblemCircle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32), new THREE.MeshStandardMaterial({ color: 0xdd9f68, metalness: 0.8 }));
+        emblemCircle.rotation.x = Math.PI / 2;
+        emblemCircle.position.set(0, 0, coverD/2 + 0.08);
+        bookGroup.add(emblemCircle);
+        
+        const goldMat = new THREE.MeshStandardMaterial({ color: 0xefb87e, metalness: 0.85 });
+        const topBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
+        topBorder.position.set(0, coverH/2 - 0.13, coverD/2 + 0.025);
+        bookGroup.add(topBorder);
+        const bottomBorder = new THREE.Mesh(new THREE.BoxGeometry(coverW - 0.24, 0.045, 0.05), goldMat);
+        bottomBorder.position.set(0, -coverH/2 + 0.13, coverD/2 + 0.025);
+        bookGroup.add(bottomBorder);
+        
+        scene.add(bookGroup);
+        
+        // Particles (fewer on mobile)
+        const particleCount = isMobile ? 20 : 120;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            positions[i*3] = (Math.random() - 0.5) * 2.8;
+            positions[i*3+1] = (Math.random() - 0.5) * 2.6;
+            positions[i*3+2] = (Math.random() - 0.5) * 2.4 + 0.2;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({ color: 0xd4af37, size: 0.018, transparent: true, blending: THREE.AdditiveBlending, opacity: 0.4 });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+        
+        // Responsive scaling
+        function updateBookSize() {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            if (width === 0 || height === 0) return;
+            const aspect = width / height;
+            let scale = Math.min(1.1, Math.max(0.55, width / 480));
+            bookGroup.scale.set(scale, scale, scale);
+            const baseDistance = 2.2;
+            const adjustedDistance = baseDistance / scale;
+            camera.position.set(0, 0.1, adjustedDistance);
+            camera.aspect = aspect;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+        
+        updateBookSize();
+        
+        // Mouse tilt (disabled on mobile)
+        let targetRotY = 0, targetRotX = 0;
+        let currentRotY = 0, currentRotX = 0;
+        if (!isMobile) {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                const mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+                targetRotY = mouseX * 0.3;
+                targetRotX = mouseY * 0.15;
+            });
+            container.addEventListener('mouseleave', () => { targetRotY = 0; targetRotX = 0; });
+        }
+        
+        let time = 0;
+        let fallbackTimer = null;
+        
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            if (!threeActive) return;
+            time += 0.012;
+            if (!isMobile) {
+                currentRotY += (targetRotY - currentRotY) * 0.08;
+                currentRotX += (targetRotX - currentRotX) * 0.08;
+                bookGroup.rotation.y = currentRotY;
+                bookGroup.rotation.x = currentRotX;
+            }
+            particles.rotation.y += 0.008;
+            particles.rotation.x = Math.sin(time * 0.5) * 0.1;
+            rimLight.intensity = 0.55 + Math.sin(time * 2) * 0.1;
+            renderer.render(scene, camera);
+        }
+        
+        // Start 3D and hide static book
+        threeActive = true;
+        if (staticBook) staticBook.style.display = 'none';
+        animate3D();
+        
+        // Fallback: if after 1.5 seconds the canvas has zero size or WebGL fails, show static book
+        fallbackTimer = setTimeout(() => {
+            const canvas = renderer.domElement;
+            if (!canvas || canvas.width === 0 || canvas.height === 0) {
+                console.warn('3D book failed to render, showing static book');
+                threeActive = false;
+                if (staticBook) staticBook.style.display = 'block';
+                if (renderer.domElement) renderer.domElement.style.display = 'none';
+            }
+        }, 1500);
+        
+        // Resize observer
+        const resizeObserver = new ResizeObserver(() => updateBookSize());
+        resizeObserver.observe(container);
+        window.addEventListener('resize', () => updateBookSize());
+        
+        // Extra resize after a moment for mobile
+        setTimeout(() => updateBookSize(), 200);
     }
-    animate3D();
     
-    // Resize observer
-    const resizeObserver = new ResizeObserver(() => updateBookSize());
-    resizeObserver.observe(container);
-    window.addEventListener('resize', () => updateBookSize());
-    
-    // Force a re-update after a short delay for mobile
-    setTimeout(() => updateBookSize(), 200);
-}
-    
-    // ========== LANTERNS AND PARTICLES ==========
+    // ========== LANTERNS AND PARTICLES (unchanged) ==========
     function initLanternsAndParticles() {
         const sections = [
             { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28 },
@@ -748,10 +733,8 @@ function init3DBook() {
             { name: 'Companions', baseHue: 200, shiftSpeed: 0.25, screenX: 60, screenY: 24 },
             { name: 'Questions', baseHue: 15, shiftSpeed: 0.3, screenX: 88, screenY: 32 }
         ];
-        
         const pageMap = ['about.html', 'awakening.html', 'chronicles.html', 'companions.html', 'questions.html'];
         const lanternsDiv = document.getElementById('lanterns');
-        
         if (lanternsDiv) {
             sections.forEach((s, i) => {
                 const el = document.createElement('div');
@@ -764,8 +747,6 @@ function init3DBook() {
                 lanternsDiv.appendChild(el);
             });
         }
-        
-        // Hall particles
         const hallParticles = document.getElementById('hallParticles');
         if (hallParticles) {
             for (let i = 0; i < 35; i++) {
@@ -778,8 +759,6 @@ function init3DBook() {
                 hallParticles.appendChild(p);
             }
         }
-        
-        // Book particles (these are CSS particles, not Three.js – keep them)
         const bookParticlesContainer = document.getElementById('bookParticles');
         if (bookParticlesContainer) {
             for (let i = 0; i < 25; i++) {
@@ -796,42 +775,27 @@ function init3DBook() {
         }
     }
     
-    // ========== FORMS AND FEATURES ==========
+    // ========== FORMS AND FEATURES (unchanged) ==========
     function initFormsAndFeatures() {
-        // Current year
         const yearSpan = document.getElementById('currentYear');
         if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-        
-        // Portal button
         const portalBtn = document.getElementById('portalBtn');
         if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        
-        // Scroll hint
         const scrollHint = document.getElementById('scrollHint');
         if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
-        
-        // Cookie consent
         const cookieConsent = document.getElementById('cookieConsent');
         const acceptCookies = document.getElementById('acceptCookies');
         const declineCookies = document.getElementById('declineCookies');
-        
         function setCookieConsent(accepted) {
             localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
             if (cookieConsent) cookieConsent.style.display = 'none';
         }
-        
-        if (cookieConsent && !localStorage.getItem('cookieConsent')) {
-            cookieConsent.style.display = 'flex';
-        }
-        
+        if (cookieConsent && !localStorage.getItem('cookieConsent')) cookieConsent.style.display = 'flex';
         if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
         if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
-        
-        // Forms
         const newsletterForm = document.getElementById('newsletterForm');
         const contactForm = document.getElementById('contactForm');
         const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
-        
         async function submitForm(form, statusDivId) {
             const statusDiv = document.getElementById(statusDivId);
             if (!statusDiv) return;
@@ -858,22 +822,11 @@ function init3DBook() {
                 statusDiv.classList.add('error');
             }
         }
-        
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(newsletterForm, 'newsletterStatus');
-            });
-        }
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await submitForm(contactForm, 'contactStatus');
-            });
-        }
+        if (newsletterForm) newsletterForm.addEventListener('submit', async (e) => { e.preventDefault(); await submitForm(newsletterForm, 'newsletterStatus'); });
+        if (contactForm) contactForm.addEventListener('submit', async (e) => { e.preventDefault(); await submitForm(contactForm, 'contactStatus'); });
     }
     
-    // ========== FAVICON PARTICLES ==========
+    // ========== FAVICON PARTICLES (unchanged) ==========
     function initFaviconParticles() {
         const faviconCanvas = document.createElement('canvas');
         faviconCanvas.id = 'faviconCanvas';
@@ -886,18 +839,12 @@ function init3DBook() {
         faviconCanvas.style.zIndex = '0';
         faviconCanvas.style.opacity = '0.2';
         document.body.appendChild(faviconCanvas);
-        
         const favCtx = faviconCanvas.getContext('2d');
         let favW, favH;
         let favParticles = [];
         const faviconImg = new Image();
         faviconImg.src = 'favicon.png';
-        
-        function resizeFavCanvas() {
-            favW = faviconCanvas.width = window.innerWidth;
-            favH = faviconCanvas.height = window.innerHeight;
-        }
-        
+        function resizeFavCanvas() { favW = faviconCanvas.width = window.innerWidth; favH = faviconCanvas.height = window.innerHeight; }
         class FavParticle {
             constructor() {
                 this.x = Math.random() * favW;
@@ -928,39 +875,10 @@ function init3DBook() {
                 favCtx.restore();
             }
         }
-        
-        function initFavParticles() {
-            favParticles = [];
-            for (let i = 0; i < 40; i++) {
-                favParticles.push(new FavParticle());
-            }
-        }
-        
-        function animateFav() {
-            if (!favCtx) return;
-            favCtx.clearRect(0, 0, favW, favH);
-            favParticles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateFav);
-        }
-        
-        if (faviconImg.complete) {
-            resizeFavCanvas();
-            initFavParticles();
-            animateFav();
-        } else {
-            faviconImg.onload = () => {
-                resizeFavCanvas();
-                initFavParticles();
-                animateFav();
-            };
-        }
-        
-        window.addEventListener('resize', () => {
-            resizeFavCanvas();
-            initFavParticles();
-        });
+        function initFavParticles() { favParticles = []; for (let i = 0; i < 40; i++) favParticles.push(new FavParticle()); }
+        function animateFav() { if (!favCtx) return; favCtx.clearRect(0, 0, favW, favH); favParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateFav); }
+        if (faviconImg.complete) { resizeFavCanvas(); initFavParticles(); animateFav(); } 
+        else { faviconImg.onload = () => { resizeFavCanvas(); initFavParticles(); animateFav(); }; }
+        window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
     }
 })();
