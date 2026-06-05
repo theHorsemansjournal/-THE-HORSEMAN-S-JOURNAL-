@@ -1,63 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- MAIN PAGES -->
   <url>
     <loc>https://thehorsemansjournal.com/</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/about.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/awakening.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/chronicles.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/companions.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/questions.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/gathering.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/book.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/privacy.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/terms.html</loc>
-    <lastmod>2026-05-30</lastmod>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- 15 CHRONICLE ARTICLES -->
+  <url><loc>https://thehorsemansjournal.com/chronicle-1.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-2.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-3.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-4.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-5.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-6.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-7.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-8.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-9.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-10.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-11.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-12.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-13.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-14.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://thehorsemansjournal.com/chronicle-15.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
