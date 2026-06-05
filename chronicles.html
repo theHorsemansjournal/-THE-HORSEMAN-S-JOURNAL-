@@ -4,730 +4,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Chronicles - The Horseman's Journal | 15 Articles on Horsemanship</title>
-  
   <meta name="description" content="Fifteen in-depth articles on horse psychology, trust, training, and the invisible bond between horse and human. Foundational, Practical, and Unique Edge paths.">
   <meta name="keywords" content="horse articles, horsemanship, horse psychology, horse training, trust with horses, natural horsemanship, equestrian, horse bond">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
-  
   <meta property="og:title" content="Chronicles - The Horseman's Journal">
   <meta property="og:description" content="Fifteen articles on horsemanship, trust, and the bond between horse and human.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Horseman's Journal">
-  
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Chronicles - The Horseman's Journal">
   <meta name="twitter:description" content="Fifteen articles on horsemanship, trust, and the bond between horse and human.">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="global.css">
-  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #1a0f0a;
-      color: #f0e6d6;
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    /* ===== WATERMARK (logo.jpg) ===== */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('logo.jpg');
-      background-repeat: repeat;
-      background-size: 180px;
-      opacity: 0.035;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ===== FAVICON ANIMATION CANVAS ===== */
-    #faviconCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.2;
-    }
-
-    .custom-cursor {
-      position: fixed;
-      width: 24px;
-      height: 24px;
-      border: 2px solid #D4A55A;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
-      backdrop-filter: blur(2px);
-    }
-    .custom-cursor.hover {
-      width: 48px;
-      height: 48px;
-      background: rgba(212, 165, 90, 0.1);
-      border-color: #D4A55A;
-    }
-
-    .chronicles-hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 650px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      display: block;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 55%, transparent 20%, rgba(26,15,10,0.7) 90%);
-      z-index: 2;
-      pointer-events: none;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      animation: fadeUp 1.2s ease;
-    }
+    body { background: #1a0f0a; color: #f0e6d6; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.6; }
+    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logo.jpg'); background-repeat: repeat; background-size: 180px; opacity: 0.035; pointer-events: none; z-index: 0; }
+    #faviconCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.2; }
+    .custom-cursor { position: fixed; width: 24px; height: 24px; border: 2px solid #D4A55A; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s; backdrop-filter: blur(2px); }
+    .custom-cursor.hover { width: 48px; height: 48px; background: rgba(212, 165, 90, 0.1); border-color: #D4A55A; }
+    .chronicles-hero { position: relative; width: 100%; height: 100vh; min-height: 650px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; display: block; }
+    .hero-overlay { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, transparent 20%, rgba(26,15,10,0.7) 90%); z-index: 2; pointer-events: none; }
+    .hero-content { position: relative; z-index: 10; text-align: center; animation: fadeUp 1.2s ease; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    .chr-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 10px;
-      color: rgba(212, 165, 90, 0.8);
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    .chr-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.6rem, 6.5vw, 5rem);
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 8px;
-      text-shadow: 0 0 80px rgba(212, 165, 90, 0.3);
-    }
+    .chr-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 10px; color: rgba(212, 165, 90, 0.8); margin-bottom: 1.5rem; text-transform: uppercase; }
+    .chr-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(2.6rem, 6.5vw, 5rem); font-weight: 700; color: #fff; letter-spacing: 8px; text-shadow: 0 0 80px rgba(212, 165, 90, 0.3); }
     .chr-title .gold { color: #D4A55A; text-shadow: 0 0 60px rgba(212, 165, 90, 0.6); }
-    .chr-div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      margin: 1.5rem 0;
-    }
+    .chr-div { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin: 1.5rem 0; }
     .chr-dline { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 165, 90, 0.6), transparent); }
     .chr-dgem { width: 8px; height: 8px; background: #D4A55A; transform: rotate(45deg); box-shadow: 0 0 18px rgba(212, 165, 90, 0.8); }
-    .chr-tagline {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: rgba(240, 230, 210, 0.7);
-      max-width: 550px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    .horse-intro {
-      position: relative;
-      background: linear-gradient(145deg, #2a1a10, #1a0f0a);
-      margin: 2rem 2rem 4rem 2rem;
-      border-radius: 32px;
-      padding: 5rem 2rem;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
-      border: 1px solid rgba(212, 165, 90, 0.2);
-    }
+    .chr-tagline { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: rgba(240, 230, 210, 0.7); max-width: 550px; margin: 0 auto; line-height: 1.8; }
+    .horse-intro { position: relative; background: linear-gradient(145deg, #2a1a10, #1a0f0a); margin: 2rem 2rem 4rem 2rem; border-radius: 32px; padding: 5rem 2rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border: 1px solid rgba(212, 165, 90, 0.2); }
     .intro-inner { max-width: 860px; margin: 0 auto; text-align: center; }
-    .intro-badge {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 6px;
-      color: rgba(212, 165, 90, 0.8);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      display: inline-block;
-      background: rgba(212, 165, 90, 0.1);
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-    }
-    .intro-headline {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      color: #D4A55A;
-      letter-spacing: 2px;
-      line-height: 1.2;
-      margin-bottom: 2rem;
-    }
-    .intro-body {
-      font-family: 'EB Garamond', serif;
-      font-size: 1.1rem;
-      line-height: 1.9;
-      color: rgba(240, 230, 210, 0.85);
-    }
+    .intro-badge { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 6px; color: rgba(212, 165, 90, 0.8); text-transform: uppercase; margin-bottom: 2rem; display: inline-block; background: rgba(212, 165, 90, 0.1); padding: 0.3rem 1rem; border-radius: 40px; }
+    .intro-headline { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #D4A55A; letter-spacing: 2px; line-height: 1.2; margin-bottom: 2rem; }
+    .intro-body { font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.9; color: rgba(240, 230, 210, 0.85); }
     .intro-body p { margin-bottom: 1.5rem; }
-    .intro-body p:first-child::first-letter {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.5em;
-      font-weight: 700;
-      color: #D4A55A;
-      float: left;
-      line-height: 0.75;
-      margin: 0.1em 0.15em 0 0;
-      text-shadow: 0 0 25px rgba(212, 165, 90, 0.5);
-    }
-    .intro-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2.5rem;
-    }
+    .intro-body p:first-child::first-letter { font-family: 'Cinzel Decorative', serif; font-size: 3.5em; font-weight: 700; color: #D4A55A; float: left; line-height: 0.75; margin: 0.1em 0.15em 0 0; text-shadow: 0 0 25px rgba(212, 165, 90, 0.5); }
+    .intro-ornament { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.5rem; }
     .iorn-line { width: 120px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212, 165, 90, 0.4), transparent); }
-    .iorn-text {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 5px;
-      color: rgba(212, 165, 90, 0.5);
-      text-transform: uppercase;
-    }
-
-    .chronicles-section {
-      position: relative;
-      background: #1a0f0a;
-      padding: 3rem 2rem 5rem;
-    }
+    .iorn-text { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 5px; color: rgba(212, 165, 90, 0.5); text-transform: uppercase; }
+    .chronicles-section { position: relative; background: #1a0f0a; padding: 3rem 2rem 5rem; }
     .chr-sec-header { text-align: center; margin-bottom: 3rem; }
-    .chr-sec-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 10px;
-      color: rgba(212, 165, 90, 0.6);
-      text-transform: uppercase;
-    }
-    .chr-sec-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 700;
-      color: #D4A55A;
-      letter-spacing: 4px;
-      margin: 0.5rem 0;
-    }
-    .chr-sec-sub {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      color: rgba(240, 230, 210, 0.45);
-    }
-    .chr-filters {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-    .chr-filter-btn {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 3px;
-      color: rgba(212, 165, 90, 0.7);
-      text-transform: uppercase;
-      background: transparent;
-      border: 1px solid rgba(212, 165, 90, 0.3);
-      padding: 8px 20px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    .chr-filter-btn:hover {
-      color: rgba(212, 165, 90, 0.9);
-      border-color: rgba(212, 165, 90, 0.6);
-      background: rgba(212, 165, 90, 0.1);
-      transform: translateY(-2px);
-    }
-    .chr-filter-btn.active {
-      color: #1a0f0a;
-      background: #D4A55A;
-      border-color: #D4A55A;
-      box-shadow: 0 0 20px rgba(212, 165, 90, 0.3);
-    }
-
-    .books-grid {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      position: relative;
-      z-index: 20;
-    }
-
+    .chr-sec-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 10px; color: rgba(212, 165, 90, 0.6); text-transform: uppercase; }
+    .chr-sec-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 700; color: #D4A55A; letter-spacing: 4px; margin: 0.5rem 0; }
+    .chr-sec-sub { font-family: 'EB Garamond', serif; font-style: italic; color: rgba(240, 230, 210, 0.45); }
+    .chr-filters { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .chr-filter-btn { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 3px; color: rgba(212, 165, 90, 0.7); text-transform: uppercase; background: transparent; border: 1px solid rgba(212, 165, 90, 0.3); padding: 8px 20px; cursor: pointer; transition: all 0.3s; }
+    .chr-filter-btn:hover { color: rgba(212, 165, 90, 0.9); border-color: rgba(212, 165, 90, 0.6); background: rgba(212, 165, 90, 0.1); transform: translateY(-2px); }
+    .chr-filter-btn.active { color: #1a0f0a; background: #D4A55A; border-color: #D4A55A; box-shadow: 0 0 20px rgba(212, 165, 90, 0.3); }
+    .books-grid { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; z-index: 20; }
     @media (max-width: 1000px) { .books-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 680px) { .books-grid { grid-template-columns: 1fr; } }
-
-    .book-card {
-      background: linear-gradient(145deg, #2a1a10, #1a0f0a);
-      border: 1px solid rgba(212, 165, 90, 0.3);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s;
-      position: relative;
-      z-index: 25;
-      display: block;
-    }
-    .book-card.locked {
-      opacity: 0.5;
-      filter: blur(2px);
-      pointer-events: none;
-    }
-    .book-card.locked::after {
-      content: '🔒';
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.5rem;
-      z-index: 10;
-      filter: blur(0);
-      color: #D4A55A;
-    }
-    .book-card.hidden { display: none; }
-    .book-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      border-color: rgba(212, 165, 90, 0.6);
-    }
-
-    .book-cover {
-      background: linear-gradient(135deg, #3a2518, #2a1a0a);
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-      min-height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .book-card { background: linear-gradient(145deg, #2a1a10, #1a0f0a); border: 1px solid rgba(212, 165, 90, 0.3); border-radius: 12px; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s; position: relative; z-index: 25; display: block; text-decoration: none; }
+    .book-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); border-color: rgba(212, 165, 90, 0.6); }
+    .book-cover { background: linear-gradient(135deg, #3a2518, #2a1a0a); padding: 2rem; text-align: center; position: relative; min-height: 220px; display: flex; align-items: center; justify-content: center; }
     .book-icon { font-size: 5rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); transition: transform 0.3s ease; }
     .book-card:hover .book-icon { transform: scale(1.1); }
-    .book-category-badge {
-      position: absolute;
-      top: 12px;
-      left: 0;
-      background: #c8922a;
-      padding: 0.3rem 1rem;
-      font-size: 0.55rem;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 2px;
-      color: #1a0f0a;
-      font-weight: bold;
-      clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-    }
+    .book-category-badge { position: absolute; top: 12px; left: 0; background: #c8922a; padding: 0.3rem 1rem; font-size: 0.55rem; font-family: 'Cinzel', serif; letter-spacing: 2px; color: #1a0f0a; font-weight: bold; clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%); }
     .book-card[data-category="practical"] .book-category-badge { background: #d4854a; }
     .book-card[data-category="edge"] .book-category-badge { background: #b890c0; }
-    .book-number {
-      position: absolute;
-      bottom: 8px;
-      right: 12px;
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.08);
-    }
-
-    .book-info {
-      padding: 1.5rem;
-      background: linear-gradient(160deg, #f5efd4, #ede0b8);
-      color: #3a2200;
-    }
-    .book-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      line-height: 1.4;
-    }
-    .book-excerpt {
-      font-family: 'EB Garamond', serif;
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: rgba(50, 30, 5, 0.8);
-      margin: 0.75rem 0;
-    }
-    .book-read {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      color: #b87a1a;
-      text-transform: uppercase;
-      display: inline-block;
-      margin-top: 0.75rem;
-      font-weight: 600;
-    }
+    .book-number { position: absolute; bottom: 8px; right: 12px; font-family: 'Cinzel Decorative', serif; font-size: 2.2rem; font-weight: 700; color: rgba(255, 255, 255, 0.08); }
+    .book-info { padding: 1.5rem; background: linear-gradient(160deg, #f5efd4, #ede0b8); color: #3a2200; }
+    .book-title { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; line-height: 1.4; }
+    .book-excerpt { font-family: 'EB Garamond', serif; font-size: 0.8rem; line-height: 1.6; color: rgba(50, 30, 5, 0.8); margin: 0.75rem 0; }
+    .book-read { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; color: #b87a1a; text-transform: uppercase; display: inline-block; margin-top: 0.75rem; font-weight: 600; }
     .book-read::after { content: ' →'; transition: transform 0.2s; }
     .book-card:hover .book-read::after { transform: translateX(4px); }
-
-    .article-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(26, 15, 10, 0.98);
-      backdrop-filter: blur(20px);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-    .article-modal.open { visibility: visible; opacity: 1; }
-    .modal-container {
-      width: 90%;
-      max-width: 900px;
-      max-height: 85vh;
-      background: linear-gradient(145deg, #2a1a10, #1a0f0a);
-      border: 1px solid rgba(212, 165, 90, 0.4);
-      border-radius: 16px;
-      overflow-y: auto;
-      position: relative;
-      transform: scale(0.95);
-      transition: transform 0.3s ease;
-    }
-    .article-modal.open .modal-container { transform: scale(1); }
-    .modal-container::-webkit-scrollbar { width: 4px; }
-    .modal-container::-webkit-scrollbar-track { background: #2a1a10; }
-    .modal-container::-webkit-scrollbar-thumb { background: #D4A55A; border-radius: 4px; }
-    .modal-close {
-      position: sticky;
-      top: 1rem;
-      right: 1rem;
-      float: right;
-      background: rgba(212, 165, 90, 0.1);
-      border: 1px solid rgba(212, 165, 90, 0.3);
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      font-size: 1.2rem;
-      color: #D4A55A;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      margin: 1rem 1rem 0 0;
-      transition: all 0.3s;
-    }
-    .modal-close:hover { background: rgba(212, 165, 90, 0.2); transform: scale(1.1); }
-    .modal-body {
-      clear: both;
-      padding: 0 2rem 2rem 2rem;
-      font-family: 'EB Garamond', serif;
-      color: rgba(240, 230, 210, 0.9);
-      line-height: 1.9;
-    }
-    .modal-label {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 5px;
-      color: rgba(212, 165, 90, 0.7);
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .modal-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #D4A55A;
-      margin-bottom: 0.5rem;
-    }
-    .modal-tagline {
-      font-style: italic;
-      color: rgba(212, 165, 90, 0.6);
-      margin-bottom: 1rem;
-    }
-    .modal-keywords { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0 1.5rem; }
-    .modal-keyword {
-      font-family: 'Cinzel', serif;
-      font-size: 0.55rem;
-      letter-spacing: 1px;
-      color: rgba(212, 165, 90, 0.8);
-      border: 1px solid rgba(212, 165, 90, 0.3);
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-    }
-    .modal-body .dropcap {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.5em;
-      font-weight: 700;
-      color: #D4A55A;
-      float: left;
-      line-height: 0.75;
-      margin: 0.1em 0.15em 0 0;
-    }
-    .modal-body .quote {
-      border-left: 3px solid #D4A55A;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      font-style: italic;
-      background: rgba(212, 165, 90, 0.05);
-      color: #e8d8a0;
-      border-radius: 0 8px 8px 0;
-    }
-    .modal-body .section-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #D4A55A;
-      margin: 2rem 0 0.5rem 0;
-    }
-    .modal-body .section-sub {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      color: rgba(212, 165, 90, 0.5);
-      margin-bottom: 1rem;
-    }
-    .modal-body p { margin-bottom: 1.2rem; text-indent: 1.8em; }
-    .modal-body p:first-of-type { text-indent: 0; }
-    .like-section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 2rem 0 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(212, 165, 90, 0.1);
-    }
-    .like-btn {
-      background: transparent;
-      border: 1px solid rgba(212, 165, 90, 0.3);
-      border-radius: 40px;
-      padding: 8px 20px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      color: #D4A55A;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .like-btn:hover { background: rgba(212, 165, 90, 0.1); transform: scale(1.05); }
-    .like-btn.liked { background: rgba(212, 165, 90, 0.2); border-color: #D4A55A; }
-    .like-count { font-size: 0.7rem; color: rgba(212, 165, 90, 0.7); }
-    .book-prompt {
-      text-align: center;
-      margin: 1rem 0;
-      padding: 1rem;
-      background: rgba(212, 165, 90, 0.05);
-      border-radius: 8px;
-    }
-    .book-prompt a {
-      color: #D4A55A;
-      text-decoration: none;
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-    }
-    .book-prompt a:hover { text-decoration: underline; }
-    .modal-footer {
-      text-align: center;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(212, 165, 90, 0.15);
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 3px;
-      color: rgba(212, 165, 90, 0.4);
-    }
-
-    .closing-section {
-      position: relative;
-      background: linear-gradient(180deg, #1a0f0a 0%, #2a1a10 100%);
-      padding: 5rem 2rem 4rem;
-      text-align: center;
-      border-top: 1px solid rgba(212, 165, 90, 0.1);
-    }
+    .closing-section { position: relative; background: linear-gradient(180deg, #1a0f0a 0%, #2a1a10 100%); padding: 5rem 2rem 4rem; text-align: center; border-top: 1px solid rgba(212, 165, 90, 0.1); }
     .closing-inner { max-width: 700px; margin: 0 auto; }
-    .closing-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin-bottom: 2rem;
-    }
-    .closing-oln {
-      flex: 1;
-      max-width: 100px;
-      height: .5px;
-      background: linear-gradient(90deg, transparent, rgba(212, 165, 90, 0.4));
-    }
+    .closing-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 2rem; }
+    .closing-oln { flex: 1; max-width: 100px; height: .5px; background: linear-gradient(90deg, transparent, rgba(212, 165, 90, 0.4)); }
     .closing-oln-r { background: linear-gradient(90deg, rgba(212, 165, 90, 0.4), transparent); }
-    .closing-gem {
-      width: 6px;
-      height: 6px;
-      background: #D4A55A;
-      transform: rotate(45deg);
-      box-shadow: 0 0 12px rgba(212, 165, 90, 0.6);
-    }
-    .closing-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.8rem;
-      color: #D4A55A;
-      letter-spacing: 4px;
-      margin-bottom: 1rem;
-    }
-    .closing-text {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: rgba(240, 230, 210, 0.6);
-      line-height: 1.9;
-      margin-bottom: 2rem;
-    }
-    .closing-quote {
-      font-family: 'Cinzel', serif;
-      font-size: 0.9rem;
-      letter-spacing: 4px;
-      color: rgba(212, 165, 90, 0.5);
-      margin-top: 2rem;
-    }
-
-    .admin-lock-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1001;
-      background: rgba(212, 165, 90, 0.15);
-      border: 1px solid rgba(212, 165, 90, 0.4);
-      color: #D4A55A;
-      padding: 6px 12px;
-      border-radius: 40px;
-      font-family: 'Cinzel', serif;
-      font-size: 0.55rem;
-      letter-spacing: 2px;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all 0.3s;
-    }
-    .admin-lock-btn:hover {
-      background: rgba(212, 165, 90, 0.3);
-      border-color: rgba(212, 165, 90, 0.7);
-    }
-
-    /* ===== CONTACT & FOOTER ===== */
-    .contact-section {
-      padding: 3rem 2rem;
-      text-align: center;
-      background: #140a06;
-      border-top: 1px solid rgba(212,165,90,0.12);
-    }
-    .contact-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 5px;
-      color: #D4AF37;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .contact-link {
-      text-decoration: none;
-      color: rgba(240,230,200,0.5);
-      transition: 0.3s;
-      font-family: 'EB Garamond', serif;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .closing-gem { width: 6px; height: 6px; background: #D4A55A; transform: rotate(45deg); box-shadow: 0 0 12px rgba(212, 165, 90, 0.6); }
+    .closing-title { font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: #D4A55A; letter-spacing: 4px; margin-bottom: 1rem; }
+    .closing-text { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(240, 230, 210, 0.6); line-height: 1.9; margin-bottom: 2rem; }
+    .closing-quote { font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; color: rgba(212, 165, 90, 0.5); margin-top: 2rem; }
+    .contact-section { padding: 3rem 2rem; text-align: center; background: #140a06; border-top: 1px solid rgba(212,165,90,0.12); }
+    .contact-heading { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond', serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
     .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
-    .footer-links {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.25);
-      border-top: 1px solid rgba(212,165,90,0.08);
-      background: #140a06;
-    }
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,165,90,0.08); background: #140a06; }
     .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
-    .copyright {
-      text-align: center;
-      padding: 1rem 2rem 2rem;
-      font-size: 0.65rem;
-      color: rgba(240,230,200,0.15);
-      background: #140a06;
-    }
-
-    /* ===== COOKIE CONSENT ===== */
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #0a0718e6;
-      backdrop-filter: blur(12px);
-      padding: 0.8rem;
-      text-align: center;
-      z-index: 1000;
-      font-size: 0.75rem;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-      border-top: 1px solid rgba(212,175,55,0.2);
-    }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); background: #140a06; }
+    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
     .cookie-consent.show { transform: translateY(0); }
-    .cookie-consent button {
-      background: #D4AF37;
-      border: none;
-      padding: 0.2rem 1rem;
-      margin-left: 0.5rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .cookie-consent .decline-btn {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.5);
-      color: #D4AF37;
-    }
-
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
+    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
     @media (max-width: 860px) {
       .horse-intro { margin: 1rem; padding: 3rem 1.5rem; }
       .books-grid { gap: 1rem; }
       .book-title { font-size: 0.85rem; }
       .book-excerpt { font-size: 0.7rem; }
-      .modal-body { padding: 0 1rem 1rem 1rem; }
-      .modal-title { font-size: 1.3rem; }
       .intro-headline { font-size: 1.3rem; }
       .intro-body { font-size: 0.95rem; }
       .chr-title { font-size: 1.8rem; letter-spacing: 4px; }
@@ -738,37 +111,17 @@
   </style>
 </head>
 <body>
-
   <div class="custom-cursor" id="customCursor"></div>
-
   <div class="navbar-wrapper">
     <div class="scene">
       <nav class="nav3d">
-        <div class="face face-back"></div>
-        <div class="face face-bottom-wall"></div>
-        <div class="face face-top-wall"></div>
-        <div class="face face-left-wall"></div>
-        <div class="face face-right-wall"></div>
-        <div class="face face-top"></div>
+        <div class="face face-back"></div><div class="face face-bottom-wall"></div><div class="face face-top-wall"></div><div class="face face-left-wall"></div><div class="face face-right-wall"></div><div class="face face-top"></div>
         <div class="nav-content">
           <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="awakening.html">AWAKENING</a></li>
-            <li><a href="chronicles.html" class="active">CHRONICLES</a></li>
-            <li><a href="companions.html">COMPANIONS</a></li>
-            <!-- VERSES REMOVED -->
-            <li><a href="questions.html">QUESTIONS</a></li>
-            <li><a href="gathering.html">GATHERING</a></li>
-            <li><a href="book.html">THE BOOK</a></li>
+            <li><a href="about.html">ABOUT</a></li><li><a href="awakening.html">AWAKENING</a></li><li><a href="chronicles.html" class="active">CHRONICLES</a></li><li><a href="companions.html">COMPANIONS</a></li><li><a href="questions.html">QUESTIONS</a></li><li><a href="gathering.html">GATHERING</a></li><li><a href="book.html">THE BOOK</a></li>
           </ul>
-          <div class="portal-scene">
-            <button class="portal-btn" id="portalBtn" type="button">
-              <span class="portal-glow"></span>
-              <span class="portal-wall"></span>
-              <span class="portal-top">PORTAL ✦</span>
-            </button>
-          </div>
+          <div class="portal-scene"><button class="portal-btn" id="portalBtn" type="button"><span class="portal-glow"></span><span class="portal-wall"></span><span class="portal-top">PORTAL ✦</span></button></div>
         </div>
       </nav>
     </div>
@@ -780,11 +133,7 @@
     <div class="hero-content">
       <div class="chr-eyebrow">THE HORSEMAN'S JOURNAL</div>
       <h1 class="chr-title">CHRON<span class="gold">ICLES</span></h1>
-      <div class="chr-div">
-        <div class="chr-dline"></div>
-        <div class="chr-dgem"></div>
-        <div class="chr-dline"></div>
-      </div>
+      <div class="chr-div"><div class="chr-dline"></div><div class="chr-dgem"></div><div class="chr-dline"></div></div>
       <div class="chr-tagline">Eleven years. Fifteen truths. Written in dust, silence, and the breath of horses.</div>
     </div>
   </section>
@@ -798,11 +147,7 @@
         <p>What you are about to read in these chronicles is not a training manual. It is not a collection of techniques or methods or step by step instructions. It is something older and quieter than that. An attempt to put into words what happens in the space between a human being and a horse when both of them, finally, stop pretending and begin to truly see each other.</p>
         <p>These articles were not written at a desk. They were written in arenas, on dusty ground, in the aftermath of falls and breakthroughs and long, hard silences. They were written by a man who has spent eleven years being taught by animals that cannot speak and learning that this is exactly why they are the best teachers in the world.</p>
       </div>
-      <div class="intro-ornament">
-        <div class="iorn-line"></div>
-        <div class="iorn-text">Fifteen Articles | Three Paths | One Truth</div>
-        <div class="iorn-line"></div>
-      </div>
+      <div class="intro-ornament"><div class="iorn-line"></div><div class="iorn-text">Fifteen Articles | Three Paths | One Truth</div><div class="iorn-line"></div></div>
     </div>
   </section>
 
@@ -810,26 +155,20 @@
     <div class="chr-sec-header">
       <div class="chr-sec-eyebrow">THE WRITTEN RECORD</div>
       <h2 class="chr-sec-title">THE ARTICLES</h2>
-      <div class="chr-sec-sub">Select a path. Open a book. Begin.</div>
+      <div class="chr-sec-sub">Select a path. Open an article. Begin.</div>
     </div>
-    
     <div class="chr-filters">
       <button class="chr-filter-btn active" data-filter="all" type="button">ALL ARTICLES</button>
       <button class="chr-filter-btn" data-filter="foundational" type="button">FOUNDATIONAL</button>
       <button class="chr-filter-btn" data-filter="practical" type="button">PRACTICAL</button>
       <button class="chr-filter-btn" data-filter="edge" type="button">YOUR UNIQUE EDGE</button>
     </div>
-
     <div class="books-grid" id="booksGrid"></div>
   </section>
 
   <section class="closing-section">
     <div class="closing-inner">
-      <div class="closing-ornament">
-        <div class="closing-oln"></div>
-        <div class="closing-gem"></div>
-        <div class="closing-oln closing-oln-r"></div>
-      </div>
+      <div class="closing-ornament"><div class="closing-oln"></div><div class="closing-gem"></div><div class="closing-oln closing-oln-r"></div></div>
       <h3 class="closing-title">The Journey Continues</h3>
       <p class="closing-text">These fifteen articles are a beginning, not an end. Each horse you meet will teach you something new. Each session in the arena will reveal something about yourself you had not seen before. The work never ends — and that is not a burden. It is a gift.</p>
       <p class="closing-text">✨ What you read here was lived first in dust, in silence, in the space between a breath and a heartbeat. May it serve you as it has served me.</p>
@@ -847,13 +186,9 @@
   </section>
 
   <div class="footer-links">
-    <a href="privacy.html">Privacy Policy</a> • 
-    <a href="sitemap.xml">Sitemap</a> • 
-    <a href="terms.html">Terms of Use</a>
+    <a href="privacy.html">Privacy Policy</a> • <a href="sitemap.xml">Sitemap</a> • <a href="terms.html">Terms of Use</a>
   </div>
-  <div class="copyright">
-    © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
-  </div>
+  <div class="copyright">© <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.</div>
 
   <div id="cookieConsent" class="cookie-consent">
     <span>🍪 This website uses cookies to improve your experience.</span>
@@ -861,607 +196,206 @@
     <button id="declineCookies" type="button" class="decline-btn">Decline</button>
   </div>
 
-  <div class="article-modal" id="articleModal">
-    <div class="modal-container">
-      <button class="modal-close" id="modalClose" type="button">✕</button>
-      <div class="modal-body" id="modalBody"></div>
-    </div>
-  </div>
-
-  <button class="admin-lock-btn" id="adminLockBtn" type="button">🔒 LOCK HALF (ADMIN)</button>
-
   <script>
+    // ============================================
+    // HERO CANVAS – complete, taken from your original
+    // (I've included a minimal version here; replace with your full canvas code if needed)
+    // ============================================
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W, H, mx = 0.5, my = 0.5, time = 0;
+      function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+      resize(); window.addEventListener('resize', resize);
+      const heroSection = document.getElementById('chroniclesHero');
+      if (heroSection) heroSection.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; });
+      const herd = [
+        { x: 0.05, y: 0.71, s: 0.6, coat: '#8B5E3C', mane: '#5C3A1E', phase: 0 }, { x: 0.14, y: 0.73, s: 0.65, coat: '#9B6E4A', mane: '#6C4828', phase: 1.2 },
+        { x: 0.23, y: 0.70, s: 0.55, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.5 }, { x: 0.32, y: 0.72, s: 0.68, coat: '#A87B54', mane: '#7C5434', phase: 0.8 },
+        { x: 0.42, y: 0.69, s: 0.58, coat: '#8B5E3C', mane: '#5C3A1E', phase: 3.1 }, { x: 0.52, y: 0.71, s: 0.62, coat: '#9B6E4A', mane: '#6C4828', phase: 1.8 },
+        { x: 0.61, y: 0.68, s: 0.54, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.2 }, { x: 0.71, y: 0.72, s: 0.66, coat: '#A87B54', mane: '#7C5434', phase: 0.5 },
+        { x: 0.80, y: 0.70, s: 0.59, coat: '#8B5E3C', mane: '#5C3A1E', phase: 3.5 }, { x: 0.88, y: 0.73, s: 0.63, coat: '#9B6E4A', mane: '#6C4828', phase: 1.0 },
+        { x: 0.95, y: 0.71, s: 0.57, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.8 }, { x: 0.42, y: 0.78, s: 0.7, coat: '#C4996B', mane: '#A87848', phase: 4.0 }
+      ];
+      function drawRealisticHorse(x, y, scale, coat, mane, phase) {
+        ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
+        const headBob = Math.sin(phase * 0.5 + time * 0.03) * 3;
+        const tailSway = Math.sin(phase * 0.6 + time * 0.04) * 4;
+        const earTwitch = Math.sin(time * 0.05 + phase) * 0.8;
+        const legShift = Math.sin(time * 0.02 + phase) * 1.5;
+        ctx.fillStyle = coat; ctx.beginPath(); ctx.ellipse(0, 0, 32, 17, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = `rgba(255,240,200,0.06)`; ctx.beginPath(); ctx.ellipse(-6, -4, 18, 9, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = coat; ctx.beginPath(); ctx.moveTo(19, -4); ctx.quadraticCurveTo(29, -26, 25 + headBob, -39); ctx.quadraticCurveTo(19, -28, 9, -6); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(26 + headBob, -41, 9.5, 6.5, -0.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = `rgba(80,50,30,0.7)`; ctx.beginPath(); ctx.ellipse(30 + headBob, -38, 4.5, 4, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#1a0e06'; ctx.beginPath(); ctx.arc(29 + headBob, -44, 1.6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#ffffcc'; ctx.beginPath(); ctx.arc(28.5 + headBob, -44.5, 0.6, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = coat; ctx.beginPath(); ctx.moveTo(21 + headBob + earTwitch * 0.5, -47); ctx.lineTo(18 + headBob + earTwitch, -56); ctx.lineTo(14 + headBob + earTwitch * 0.5, -47); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(26 + headBob - earTwitch * 0.3, -47); ctx.lineTo(30 + headBob - earTwitch, -56); ctx.lineTo(28 + headBob - earTwitch * 0.5, -46); ctx.fill();
+        ctx.fillStyle = coat; [-17, -5, 7, 19].forEach((lx, i) => { const shift = (i % 2 === 0) ? legShift * 0.5 : -legShift * 0.3; ctx.fillRect(lx, 10 + shift, 5.5, 27); });
+        ctx.fillStyle = '#0a0602'; [-17, -5, 7, 19].forEach(lx => ctx.fillRect(lx, 34, 5.5, 5));
+        ctx.fillStyle = mane; ctx.beginPath(); ctx.moveTo(-30, -2); ctx.quadraticCurveTo(-40 + tailSway, 5, -36 + tailSway, 18); ctx.lineTo(-30 + tailSway * 0.3, 9); ctx.fill();
+        ctx.fillStyle = mane; for (let i = 0; i < 7; i++) { const maneOffset = Math.sin(time * 0.05 + i) * 0.5; ctx.fillRect(17 + maneOffset, -13 - i * 2.5, 4.5, 5); }
+        ctx.restore();
+      }
+      function drawMountains() {
+        ctx.fillStyle = '#C4784A'; ctx.beginPath(); ctx.moveTo(0, H * 0.55);
+        for (let i = 0; i <= 80; i++) { const nx = i / 80; const x = nx * W; let y = H * 0.28 + Math.sin(nx * Math.PI * 1.5) * H * 0.12 + Math.sin(nx * Math.PI * 3) * H * 0.05; ctx.lineTo(x, y); }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#A0522D'; ctx.beginPath(); ctx.moveTo(0, H * 0.55);
+        for (let i = 0; i <= 80; i++) { const nx = i / 80; const x = nx * W; let y = H * 0.36 + Math.sin(nx * Math.PI * 1.8 + 1.2) * H * 0.1 + Math.sin(nx * Math.PI * 3.5) * H * 0.04; ctx.lineTo(x, y); }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = 'rgba(210,190,170,0.15)'; ctx.beginPath();
+        for (let i = 0; i <= 40; i++) { const nx = i / 40; const x = nx * W; let y = H * 0.33 + Math.sin(nx * Math.PI * 1.8 + 1.2) * H * 0.08; if (i === 0 || i === 40) ctx.moveTo(x, y - 5); else ctx.lineTo(x, y - 5); } ctx.fill();
+        ctx.fillStyle = '#6B3A2A'; ctx.beginPath(); ctx.moveTo(0, H * 0.55);
+        for (let i = 0; i <= 80; i++) { const nx = i / 80; const x = nx * W; let y = H * 0.46 + Math.sin(nx * Math.PI * 1.2 + 0.8) * H * 0.08 + Math.sin(nx * Math.PI * 2.8) * H * 0.03; ctx.lineTo(x, y); }
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+      }
+      function drawStables() {
+        const stableX = W * 0.10, stableY = H * 0.57;
+        ctx.fillStyle = '#8B5A3A'; ctx.fillRect(stableX, stableY, 85, 55);
+        ctx.fillStyle = '#6B3A2A'; for (let i = 0; i < 3; i++) ctx.fillRect(stableX + 12 + i * 28, stableY + 5, 22, 45);
+        ctx.fillStyle = '#A87B54'; ctx.beginPath(); ctx.moveTo(stableX - 8, stableY); ctx.lineTo(stableX + 93, stableY); ctx.lineTo(stableX + 42, stableY - 18); ctx.closePath(); ctx.fill();
+        const stableX2 = W * 0.70; ctx.fillStyle = '#8B5A3A'; ctx.fillRect(stableX2, stableY, 75, 55);
+        ctx.fillStyle = '#6B3A2A'; for (let i = 0; i < 2; i++) ctx.fillRect(stableX2 + 12 + i * 32, stableY + 5, 25, 45);
+        ctx.fillStyle = '#A87B54'; ctx.beginPath(); ctx.moveTo(stableX2 - 8, stableY); ctx.lineTo(stableX2 + 83, stableY); ctx.lineTo(stableX2 + 37, stableY - 18); ctx.closePath(); ctx.fill();
+      }
+      function drawGround() {
+        const grad = ctx.createLinearGradient(0, H * 0.6, 0, H);
+        grad.addColorStop(0, '#8B6B4A'); grad.addColorStop(0.4, '#6B4B3A'); grad.addColorStop(1, '#3B2B1A');
+        ctx.fillStyle = grad; ctx.fillRect(0, H * 0.6, W, H * 0.4);
+        ctx.strokeStyle = 'rgba(120,70,30,0.4)'; ctx.lineWidth = 2;
+        for (let i = 0; i < 15; i++) { const fenceX = W * 0.05 + i * W * 0.06; ctx.beginPath(); ctx.moveTo(fenceX, H * 0.61); ctx.lineTo(fenceX, H * 0.64); ctx.stroke(); }
+        ctx.beginPath(); ctx.moveTo(W * 0.05, H * 0.625); ctx.lineTo(W * 0.95, H * 0.625); ctx.stroke();
+      }
+      function drawSky() {
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.6);
+        skyGrad.addColorStop(0, '#2A1A1A'); skyGrad.addColorStop(0.3, '#4A3A2A'); skyGrad.addColorStop(0.6, '#6B5A4A'); skyGrad.addColorStop(0.8, '#8B7A6A'); skyGrad.addColorStop(1, '#A89A7A');
+        ctx.fillStyle = skyGrad; ctx.fillRect(0, 0, W, H * 0.6);
+        const sunX = W * 0.7 + Math.sin(time * 0.01) * 8, sunY = H * 0.2;
+        const sunGrad = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, W * 0.35);
+        sunGrad.addColorStop(0, 'rgba(232,200,100,0.12)'); sunGrad.addColorStop(0.5, 'rgba(200,160,80,0.06)'); sunGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = sunGrad; ctx.fillRect(0, 0, W, H);
+      }
+      let dustParticles = []; for (let i = 0; i < 100; i++) dustParticles.push({ x: Math.random() * W, y: Math.random() * H * 0.35 + H * 0.6, size: Math.random() * 2.5 + 0.5, speed: Math.random() * 0.4 + 0.08, opacity: Math.random() * 0.3 + 0.1 });
+      function drawDust() { dustParticles.forEach(p => { p.y -= p.speed * 0.04; if (p.y < H * 0.6) p.y = H * 0.95; ctx.fillStyle = `rgba(180,140,80,${p.opacity * 0.4})`; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); }); }
+      let birds = []; for (let i = 0; i < 15; i++) birds.push({ x: Math.random() * W, y: Math.random() * H * 0.3, size: Math.random() * 2.5 + 1, speed: Math.random() * 0.6 + 0.2 });
+      function drawBirds() { birds.forEach(b => { b.x -= b.speed; if (b.x < -30) b.x = W + 30; ctx.fillStyle = `rgba(100,80,60,0.35)`; ctx.beginPath(); ctx.moveTo(b.x, b.y); ctx.quadraticCurveTo(b.x + 6, b.y - 6, b.x + 12, b.y); ctx.quadraticCurveTo(b.x + 6, b.y + 6, b.x, b.y); ctx.fill(); }); }
+      function renderScene() { ctx.clearRect(0, 0, W, H); drawSky(); drawMountains(); drawStables(); drawGround(); herd.forEach(horse => { const offsetX = (mx - 0.5) * 18 * horse.s; const offsetY = (my - 0.5) * 10 * horse.s; drawRealisticHorse(horse.x * W + offsetX, horse.y * H + offsetY, horse.s, horse.coat, horse.mane, horse.phase); }); drawDust(); drawBirds(); }
+      function animate() { time++; renderScene(); requestAnimationFrame(animate); }
+      animate();
+    })();
+
+    // ============================================
+    // ARTICLES DATA & GRID (links to individual files)
+    // ============================================
+    const articles = [
+      { label: 'Foundational I', title: 'Understanding Horse Psychology', category: 'foundational', icon: '🐴', slug: 'chronicle-1', excerpt: 'Sixty million years of evolution. One question. Am I safe?' },
+      { label: 'Foundational II', title: 'The Flight Response', category: 'foundational', icon: '🐎', slug: 'chronicle-2', excerpt: 'Fear is not a character flaw. It is sixty million years of perfect engineering.' },
+      { label: 'Foundational III', title: 'Trust vs Control', category: 'foundational', icon: '📖', slug: 'chronicle-3', excerpt: 'Control gives you obedience. Trust gives you a horse that chooses you.' },
+      { label: 'Foundational IV', title: 'Reading Body Language', category: 'foundational', icon: '🔮', slug: 'chronicle-4', excerpt: 'Every flick of an ear is a sentence. Learn to read the language.' },
+      { label: 'Foundational V', title: 'Common Human Mistakes', category: 'foundational', icon: '✨', slug: 'chronicle-5', excerpt: 'Most horses do not have problems. Most horses have people.' },
+      { label: 'Practical VI', title: 'How to Build Trust', category: 'practical', icon: '🌟', slug: 'chronicle-6', excerpt: 'Trust is not a feeling. It is a thousand small promises kept.' },
+      { label: 'Practical VII', title: "Why Your Horse Doesn't Listen", category: 'practical', icon: '🍃', slug: 'chronicle-7', excerpt: 'A horse that will not listen is not defying you. It is talking to you.' },
+      { label: 'Practical VIII', title: 'Calming Anxious Horses', category: 'practical', icon: '🌙', slug: 'chronicle-8', excerpt: 'You cannot fight a nervous system. You can only offer it something steadier.' },
+      { label: 'Practical IX', title: 'First Time Handling', category: 'practical', icon: '⚡', slug: 'chronicle-9', excerpt: 'There is no second first meeting. What you bring to that moment, the horse will remember.' },
+      { label: 'Practical X', title: 'Signs of Trust', category: 'practical', icon: '💫', slug: 'chronicle-10', excerpt: 'Trust in a horse is not invisible. It is a behavior. And behavior can be read.' },
+      { label: 'Edge XI', title: 'What Horses Teach Us', category: 'edge', icon: '🕯️', slug: 'chronicle-11', excerpt: 'Spend enough time with horses and you will learn more about yourself than any mirror can show.' },
+      { label: 'Edge XII', title: 'Presence and Intention', category: 'edge', icon: '📜', slug: 'chronicle-12', excerpt: 'Horses live where most humans only visit — fully inside the present moment.' },
+      { label: 'Edge XIII', title: 'Horses React to Your Mind', category: 'edge', icon: '🏔️', slug: 'chronicle-13', excerpt: 'Before your hand moves, your mind has already moved. The horse felt it first.' },
+      { label: 'Edge XIV', title: 'Silence, Energy, Movement', category: 'edge', icon: '🌊', slug: 'chronicle-14', excerpt: 'There is a language older than words. Horses speak it fluently.' },
+      { label: 'Edge XV', title: 'The Philosophy', category: 'edge', icon: '🔥', slug: 'chronicle-15', excerpt: 'There are two ways to work with a horse. Only one of them is real.' }
+    ];
+
+    const icons = ['🐴', '🐎', '📖', '🔮', '✨', '🌟', '🍃', '🌙', '⚡', '💫', '🕯️', '📜', '🏔️', '🌊', '🔥'];
+    const booksGrid = document.getElementById('booksGrid');
+
+    function renderBooks(filter = 'all') {
+      booksGrid.innerHTML = '';
+      const filtered = filter === 'all' ? articles : articles.filter(a => a.category === filter);
+      filtered.forEach(article => {
+        const card = document.createElement('a');
+        card.href = article.slug + '.html';
+        card.className = 'book-card';
+        card.setAttribute('data-category', article.category);
+        const originalIndex = articles.findIndex(a => a.slug === article.slug);
+        const icon = icons[originalIndex % icons.length];
+        const number = String(originalIndex + 1).padStart(2, '0');
+        card.innerHTML = `
+          <div class="book-cover">
+            <div class="book-category-badge">${article.label}</div>
+            <div class="book-icon">${icon}</div>
+            <div class="book-number">${number}</div>
+          </div>
+          <div class="book-info">
+            <div class="book-title">${article.title}</div>
+            <div class="book-excerpt">${article.excerpt.substring(0, 100)}${article.excerpt.length > 100 ? '...' : ''}</div>
+            <div class="book-read">Read Article</div>
+          </div>
+        `;
+        booksGrid.appendChild(card);
+      });
+    }
+
+    renderBooks('all');
+
+    // Filter buttons
+    document.querySelectorAll('.chr-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('.chr-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderBooks(filter);
+      });
+    });
+
+    // Custom cursor (keep from original)
     const cursor = document.getElementById('customCursor');
     if (cursor) {
-      document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-      const hoverElements = document.querySelectorAll('.book-card, .chr-filter-btn, .portal-btn, .nav3d a, .admin-lock-btn, .modal-close, .like-btn');
+      document.addEventListener('mousemove', (e) => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+      const hoverElements = document.querySelectorAll('.book-card, .chr-filter-btn, .portal-btn, .nav3d a');
       hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
       });
     }
 
-    const heroCanvas = document.getElementById('heroCanvas');
-    if (heroCanvas) {
-      const ctx = heroCanvas.getContext('2d');
-      let W, H;
-      let mouseX = 0.5, mouseY = 0.5;
-      let time = 0;
-      
-      function resizeHero() {
-        W = heroCanvas.width = heroCanvas.offsetWidth;
-        H = heroCanvas.height = heroCanvas.offsetHeight;
-      }
-      resizeHero();
-      window.addEventListener('resize', resizeHero);
-      
-      const heroSection = document.getElementById('chroniclesHero');
-      if (heroSection) {
-        heroSection.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX / W;
-          mouseY = e.clientY / H;
-        });
-      }
-      
-      const herd = [
-        { x: 0.05, y: 0.71, s: 0.6, coat: '#8B5E3C', mane: '#5C3A1E', phase: 0 },
-        { x: 0.14, y: 0.73, s: 0.65, coat: '#9B6E4A', mane: '#6C4828', phase: 1.2 },
-        { x: 0.23, y: 0.70, s: 0.55, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.5 },
-        { x: 0.32, y: 0.72, s: 0.68, coat: '#A87B54', mane: '#7C5434', phase: 0.8 },
-        { x: 0.42, y: 0.69, s: 0.58, coat: '#8B5E3C', mane: '#5C3A1E', phase: 3.1 },
-        { x: 0.52, y: 0.71, s: 0.62, coat: '#9B6E4A', mane: '#6C4828', phase: 1.8 },
-        { x: 0.61, y: 0.68, s: 0.54, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.2 },
-        { x: 0.71, y: 0.72, s: 0.66, coat: '#A87B54', mane: '#7C5434', phase: 0.5 },
-        { x: 0.80, y: 0.70, s: 0.59, coat: '#8B5E3C', mane: '#5C3A1E', phase: 3.5 },
-        { x: 0.88, y: 0.73, s: 0.63, coat: '#9B6E4A', mane: '#6C4828', phase: 1.0 },
-        { x: 0.95, y: 0.71, s: 0.57, coat: '#7B4E2E', mane: '#4C2E18', phase: 2.8 },
-        { x: 0.42, y: 0.78, s: 0.7, coat: '#C4996B', mane: '#A87848', phase: 4.0 }
-      ];
-      
-      function drawRealisticHorse(x, y, scale, coat, mane, phase) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.scale(scale, scale);
-        
-        const headBob = Math.sin(phase * 0.5 + time * 0.03) * 3;
-        const tailSway = Math.sin(phase * 0.6 + time * 0.04) * 4;
-        const earTwitch = Math.sin(time * 0.05 + phase) * 0.8;
-        const legShift = Math.sin(time * 0.02 + phase) * 1.5;
-        
-        ctx.fillStyle = coat;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, 32, 17, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = `rgba(255,240,200,0.06)`;
-        ctx.beginPath();
-        ctx.ellipse(-6, -4, 18, 9, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = coat;
-        ctx.beginPath();
-        ctx.moveTo(19, -4);
-        ctx.quadraticCurveTo(29, -26, 25 + headBob, -39);
-        ctx.quadraticCurveTo(19, -28, 9, -6);
-        ctx.closePath();
-        ctx.fill();
-        ctx.beginPath();
-        ctx.ellipse(26 + headBob, -41, 9.5, 6.5, -0.2, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = `rgba(80,50,30,0.7)`;
-        ctx.beginPath();
-        ctx.ellipse(30 + headBob, -38, 4.5, 4, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#1a0e06';
-        ctx.beginPath();
-        ctx.arc(29 + headBob, -44, 1.6, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#ffffcc';
-        ctx.beginPath();
-        ctx.arc(28.5 + headBob, -44.5, 0.6, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = coat;
-        ctx.beginPath();
-        ctx.moveTo(21 + headBob + earTwitch * 0.5, -47);
-        ctx.lineTo(18 + headBob + earTwitch, -56);
-        ctx.lineTo(14 + headBob + earTwitch * 0.5, -47);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.moveTo(26 + headBob - earTwitch * 0.3, -47);
-        ctx.lineTo(30 + headBob - earTwitch, -56);
-        ctx.lineTo(28 + headBob - earTwitch * 0.5, -46);
-        ctx.fill();
-        ctx.fillStyle = coat;
-        [-17, -5, 7, 19].forEach((lx, i) => {
-          const shift = (i % 2 === 0) ? legShift * 0.5 : -legShift * 0.3;
-          ctx.fillRect(lx, 10 + shift, 5.5, 27);
-        });
-        ctx.fillStyle = '#0a0602';
-        [-17, -5, 7, 19].forEach(lx => { ctx.fillRect(lx, 34, 5.5, 5); });
-        ctx.fillStyle = mane;
-        ctx.beginPath();
-        ctx.moveTo(-30, -2);
-        ctx.quadraticCurveTo(-40 + tailSway, 5, -36 + tailSway, 18);
-        ctx.lineTo(-30 + tailSway * 0.3, 9);
-        ctx.fill();
-        ctx.fillStyle = mane;
-        for (let i = 0; i < 7; i++) {
-          const maneOffset = Math.sin(time * 0.05 + i) * 0.5;
-          ctx.fillRect(17 + maneOffset, -13 - i * 2.5, 4.5, 5);
-        }
-        ctx.restore();
-      }
-      
-      function drawMountains() {
-        ctx.fillStyle = '#C4784A';
-        ctx.beginPath();
-        ctx.moveTo(0, H * 0.55);
-        for (let i = 0; i <= 80; i++) {
-          const nx = i / 80;
-          const x = nx * W;
-          let y = H * 0.28 + Math.sin(nx * Math.PI * 1.5) * H * 0.12 + Math.sin(nx * Math.PI * 3) * H * 0.05;
-          ctx.lineTo(x, y);
-        }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = '#A0522D';
-        ctx.beginPath();
-        ctx.moveTo(0, H * 0.55);
-        for (let i = 0; i <= 80; i++) {
-          const nx = i / 80;
-          const x = nx * W;
-          let y = H * 0.36 + Math.sin(nx * Math.PI * 1.8 + 1.2) * H * 0.1 + Math.sin(nx * Math.PI * 3.5) * H * 0.04;
-          ctx.lineTo(x, y);
-        }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = 'rgba(210,190,170,0.15)';
-        ctx.beginPath();
-        for (let i = 0; i <= 40; i++) {
-          const nx = i / 40;
-          const x = nx * W;
-          let y = H * 0.33 + Math.sin(nx * Math.PI * 1.8 + 1.2) * H * 0.08;
-          if (i === 0 || i === 40) ctx.moveTo(x, y - 5);
-          else ctx.lineTo(x, y - 5);
-        }
-        ctx.fill();
-        ctx.fillStyle = '#6B3A2A';
-        ctx.beginPath();
-        ctx.moveTo(0, H * 0.55);
-        for (let i = 0; i <= 80; i++) {
-          const nx = i / 80;
-          const x = nx * W;
-          let y = H * 0.46 + Math.sin(nx * Math.PI * 1.2 + 0.8) * H * 0.08 + Math.sin(nx * Math.PI * 2.8) * H * 0.03;
-          ctx.lineTo(x, y);
-        }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
-        ctx.fill();
-      }
-      
-      function drawStables() {
-        const stableX = W * 0.10;
-        const stableY = H * 0.57;
-        ctx.fillStyle = '#8B5A3A';
-        ctx.fillRect(stableX, stableY, 85, 55);
-        ctx.fillStyle = '#6B3A2A';
-        for (let i = 0; i < 3; i++) { ctx.fillRect(stableX + 12 + i * 28, stableY + 5, 22, 45); }
-        ctx.fillStyle = '#A87B54';
-        ctx.beginPath();
-        ctx.moveTo(stableX - 8, stableY);
-        ctx.lineTo(stableX + 93, stableY);
-        ctx.lineTo(stableX + 42, stableY - 18);
-        ctx.closePath();
-        ctx.fill();
-        const stableX2 = W * 0.70;
-        ctx.fillStyle = '#8B5A3A';
-        ctx.fillRect(stableX2, stableY, 75, 55);
-        ctx.fillStyle = '#6B3A2A';
-        for (let i = 0; i < 2; i++) { ctx.fillRect(stableX2 + 12 + i * 32, stableY + 5, 25, 45); }
-        ctx.fillStyle = '#A87B54';
-        ctx.beginPath();
-        ctx.moveTo(stableX2 - 8, stableY);
-        ctx.lineTo(stableX2 + 83, stableY);
-        ctx.lineTo(stableX2 + 37, stableY - 18);
-        ctx.closePath();
-        ctx.fill();
-      }
-      
-      function drawGround() {
-        const grad = ctx.createLinearGradient(0, H * 0.6, 0, H);
-        grad.addColorStop(0, '#8B6B4A');
-        grad.addColorStop(0.4, '#6B4B3A');
-        grad.addColorStop(1, '#3B2B1A');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, H * 0.6, W, H * 0.4);
-        ctx.strokeStyle = 'rgba(120,70,30,0.4)';
-        ctx.lineWidth = 2;
-        for (let i = 0; i < 15; i++) {
-          const fenceX = W * 0.05 + i * W * 0.06;
-          ctx.beginPath();
-          ctx.moveTo(fenceX, H * 0.61);
-          ctx.lineTo(fenceX, H * 0.64);
-          ctx.stroke();
-        }
-        ctx.beginPath();
-        ctx.moveTo(W * 0.05, H * 0.625);
-        ctx.lineTo(W * 0.95, H * 0.625);
-        ctx.stroke();
-      }
-      
-      function drawSky() {
-        const skyGrad = ctx.createLinearGradient(0, 0, 0, H * 0.6);
-        skyGrad.addColorStop(0, '#2A1A1A');
-        skyGrad.addColorStop(0.3, '#4A3A2A');
-        skyGrad.addColorStop(0.6, '#6B5A4A');
-        skyGrad.addColorStop(0.8, '#8B7A6A');
-        skyGrad.addColorStop(1, '#A89A7A');
-        ctx.fillStyle = skyGrad;
-        ctx.fillRect(0, 0, W, H * 0.6);
-        const sunX = W * 0.7 + Math.sin(time * 0.01) * 8;
-        const sunY = H * 0.2;
-        const sunGrad = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, W * 0.35);
-        sunGrad.addColorStop(0, 'rgba(232,200,100,0.12)');
-        sunGrad.addColorStop(0.5, 'rgba(200,160,80,0.06)');
-        sunGrad.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = sunGrad;
-        ctx.fillRect(0, 0, W, H);
-      }
-      
-      let dustParticles = [];
-      for (let i = 0; i < 100; i++) {
-        dustParticles.push({ x: Math.random() * W, y: Math.random() * H * 0.35 + H * 0.6, size: Math.random() * 2.5 + 0.5, speed: Math.random() * 0.4 + 0.08, opacity: Math.random() * 0.3 + 0.1 });
-      }
-      function drawDust() {
-        dustParticles.forEach(p => {
-          p.y -= p.speed * 0.04;
-          if (p.y < H * 0.6) p.y = H * 0.95;
-          ctx.fillStyle = `rgba(180,140,80,${p.opacity * 0.4})`;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      }
-      
-      let birds = [];
-      for (let i = 0; i < 15; i++) {
-        birds.push({ x: Math.random() * W, y: Math.random() * H * 0.3, size: Math.random() * 2.5 + 1, speed: Math.random() * 0.6 + 0.2 });
-      }
-      function drawBirds() {
-        birds.forEach(b => {
-          b.x -= b.speed;
-          if (b.x < -30) b.x = W + 30;
-          ctx.fillStyle = `rgba(100,80,60,0.35)`;
-          ctx.beginPath();
-          ctx.moveTo(b.x, b.y);
-          ctx.quadraticCurveTo(b.x + 6, b.y - 6, b.x + 12, b.y);
-          ctx.quadraticCurveTo(b.x + 6, b.y + 6, b.x, b.y);
-          ctx.fill();
-        });
-      }
-      
-      function renderScene() {
-        ctx.clearRect(0, 0, W, H);
-        drawSky();
-        drawMountains();
-        drawStables();
-        drawGround();
-        herd.forEach(horse => {
-          const offsetX = (mouseX - 0.5) * 18 * horse.s;
-          const offsetY = (mouseY - 0.5) * 10 * horse.s;
-          drawRealisticHorse(horse.x * W + offsetX, horse.y * H + offsetY, horse.s, horse.coat, horse.mane, horse.phase);
-        });
-        drawDust();
-        drawBirds();
-      }
-      
-      function animate() { time++; renderScene(); requestAnimationFrame(animate); }
-      animate();
-    }
+    // Portal button
+    document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    const articles = [
-      { label: 'Foundational I', title: 'Understanding Horse Psychology', fullTitle: 'Understanding Horse Psychology: How Horses Think and Perceive Humans', tagline: 'Sixty million years of evolution. One question. Am I safe?', keywords: ['horse psychology', 'how horses think', 'equine mindset'], category: 'foundational', icon: '🐴', content: `<p><span class="dropcap">T</span>o feel what a horse feels is to first understand that you are noise. You arrive trailing the scent of purpose, your pockets full of plans, your mind full of what was and what will be. You walk with the heavy step of a predator, an animal that does not need to listen before it moves. To the horse, you are a storm on the horizon. They see the shape of you, but they feel the intention — the hurry, the jagged edges of a mind that never rests. And in your presence, they become what they have always been: a statue carved from a single question. Am I safe?</p><p>To connect with them is to decide to become silent. Not just in your voice, but in your soul. You must let your agenda fall to the dust like a heavy coat. You stand at the edge of their space and learn to simply be. You begin to breathe. Not the shallow, forgotten breaths of a busy life, but deep, slow tides of air that tell every listening cell in their body: you are not a threat. You are just a creature, breathing.</p><div class="quote">And that is when the world changes. You stop seeing with your eyes and start feeling with your skin. The wind on your cheek is the same wind in their mane. The earth under your feet is the same earth under theirs. You are no longer a man and a horse. You are two bodies in a field, sharing the same small slice of the world.</div><p>This is when the mirror appears. The horse begins to show you to yourself. If you carry tension — a tight jaw, a knot of worry in your gut — they will hold their own body tight, their head high, their muscles coiled. They will not come near the storm inside you. If you carry a grief you have refused to face, they will grow still and soft, their dark eye becoming a pool of sorrow that reflects your own. They absorb your truth and show it back without a word of judgment.</p><div class="section-heading">How Horses Think</div><div class="section-sub">They do not think in words. They think about the truth of this moment.</div><p>Horses do not think in sentences. They do not sort their experience into reasons or explanations. They think in pictures, in feelings, in what is happening right now. A horse scared once by a white plastic bag does not remember that plastic bags are scary. It remembers the exact feeling of that moment — the sudden movement, the crinkle of sound, the rush of fear, the need to run. When it sees another plastic bag, it does not think. It simply feels the same feeling, and the body moves.</p><div class="quote">You cannot teach a horse with words. You can only speak to it with what you are.</div><div class="section-heading">The Gift Horses Offer</div><div class="section-sub">Their complete, uncompromising honesty</div><p>Horses do not hold grudges. They do not replay past hurts. If you make a mistake, if you lose your temper, if you handle something badly — the horse will give you another chance. It will meet you fresh in the next moment, willing to try again, as long as you are willing to be honest.</p><p>The horse does not ask you to be perfect. It only asks you to be real. And in being real, you become, at last, someone worth trusting.</p>` },
-      { label: 'Foundational II', title: 'The Flight Response', fullTitle: 'The Flight Response: Why Horses Fear and How to Work With It', tagline: 'Fear is not a character flaw. It is sixty million years of perfect engineering.', keywords: ['flight response', 'why horses spook', 'fear and trust'], category: 'foundational', icon: '🐎', content: `<p><span class="dropcap">T</span>here is a sound that every horse alive knows before it is born. Not heard through the ears, but felt in the blood — a sound older than any language, older than the first human hand that ever reached toward a horse's neck. It is the sound of something moving in the grass when the grass should be still. It is the sound of threat. And the body of the horse — every muscle, every nerve, every breath — has been shaped by millions of years to answer that sound with one single, absolute response: run.</p><p>This is not a choice the horse makes. It is not a decision that passes through reason or reflection. By the time the thinking part of the brain has processed what the eyes have seen, the body is already moving. The legs are already carrying the horse away from what frightened it. This is not a flaw in the horse's design. This is the design working exactly as it was built to work.</p><div class="section-heading">The Brain That Runs Before It Thinks</div><div class="section-sub">The fear response fires in milliseconds. Reason arrives too late.</div><p>Deep inside the horse's brain, buried beneath layers of more recent evolution, sits a small almond-shaped structure called the amygdala. It is the oldest part of the emotional brain. It does not think. It does not weigh consequences. It does not consider whether the white plastic bag by the arena fence has ever hurt a horse before. It simply receives information from the senses and, in the span of twelve milliseconds, fires a signal that floods the entire body with adrenaline and cortisol.</p><div class="quote">The horse does not spook to frustrate you. It spooks because every ancestor that did not spook is no longer alive to have descendants.</div><div class="section-heading">Working With Fear, Not Against It</div><div class="section-sub">The horseman who fights the prey animal will fight forever. The one who works with it will find a partner.</div><p>Your job is not to convince the horse that its fear is wrong. Your job is to become so consistent, so calm, and so trustworthy that the horse's nervous system begins to use your energy as a reference point. A horse that trusts you does not stop being afraid. It simply decides that being near you is worth the risk. Honour that decision with everything you have.</p>` },
-      { label: 'Foundational III', title: 'Trust vs Control', fullTitle: 'Trust vs Control in Horse Training: What Actually Works', tagline: 'Control gives you obedience. Trust gives you a horse that chooses you.', keywords: ['trust vs control', 'natural horsemanship'], category: 'foundational', icon: '📖', content: `<p><span class="dropcap">T</span>here is a question every horseman must eventually answer — not with words, but with choices made in the arena every single day. Do you want to control your horse, or do you want to be trusted by it? These are not the same goal. They do not produce the same horse. And they do not ask the same things of you as a person.</p><p>Control gives you a horse that obeys when it cannot escape. Trust gives you a horse that chooses to be with you when all the exits are open. I have spent eleven years learning the difference. Only one of these is real horsemanship.</p><div class="quote">You can own a horse without it ever belonging to you. The difference is trust. And trust cannot be taken. It can only be given.</div><div class="section-heading">What Trust Actually Requires</div><div class="section-sub">Trust is not something you perform. It is something you become.</div><p>Trust is not earned in a single dramatic moment. It is built in the accumulation of ten thousand small moments — every time you do not punish what you did not explain, every time you notice the horse's discomfort and adjust before it becomes fear.</p><div class="quote">The horse does not ask for perfection. It asks for honesty. And honesty, sustained long enough, becomes the most powerful training tool that exists.</div><div class="section-heading">The Partnership That Changes Everything</div><p>The day the horse chooses you over the open field — that is the day you stop being a trainer. That is the day you become a horseman.</p>` },
-      { label: 'Foundational IV', title: 'Reading Body Language', fullTitle: 'How to Read a Horse\'s Body Language', tagline: 'Every flick of an ear is a sentence. Learn to read the language.', keywords: ['body language', 'horse signals', 'communication'], category: 'foundational', icon: '🔮', content: `<p><span class="dropcap">H</span>orses speak in the language of the body — constantly, precisely, and honestly. They cannot say one thing while meaning another. Every ear position, every shift of muscle, every flick of the tail is a sentence. Learning to read it is the single most important skill a horseman can develop.</p><div class="section-heading">The Ears</div><p>Ears forward means the horse is interested. Both ears locked forward onto a single point means the horse has found something that concerns it — this precedes a spook. Do not push forward. Give the horse a moment to process.</p><p>Ears pinned flat back is the signal that requires the most respect. Pinned ears say: I am at the end of my tolerance. This is a warning.</p><div class="quote">When both ears lock forward, the horse is doing the most important job it has: deciding whether the world is safe.</div><div class="section-heading">The Eyes and Body</div><p>The soft eye is what you are looking for. Rounded, full, with relaxed muscles around it. A soft eye means a horse that is calm, present, and not in survival mode. A low head means a calm, relaxed horse. The horse has been telling you the same thing for the last ten minutes. The only question is whether you have been listening.</p>` },
-      { label: 'Foundational V', title: 'Common Human Mistakes', fullTitle: 'Common Human Mistakes with Horses', tagline: 'Most horses do not have problems. Most horses have people.', keywords: ['mistakes', 'why horses misbehave'], category: 'foundational', icon: '✨', content: `<p><span class="dropcap">M</span>ost horses do not have problems. Most horses have people — people with tension they are not aware of, with plans the horse can feel but not understand.</p><div class="section-heading">Arriving Without Arriving</div><p>The most common mistake is walking into the arena still living somewhere else. They arrive with their body but not with themselves. The horse feels the absence immediately.</p><div class="quote">You cannot bring the noise of your day into the arena and then wonder why the horse is unsettled. The horse is reading you. Read yourself first.</div><div class="section-heading">Escalating Into the Problem</div><p>When the horse says no, the answer is rarely to ask louder. Most often, the answer is to ask smaller. Reward the try before it is perfect. That is the only formula that works.</p>` },
-      { label: 'Practical VI', title: 'How to Build Trust', fullTitle: 'How to Build Trust with a Horse (Step by Step)', tagline: 'Trust is not a feeling. It is a thousand small promises kept.', keywords: ['build trust', 'bonding'], category: 'practical', icon: '🌟', content: `<p><span class="dropcap">T</span>rust between a human and a horse is not a feeling. It is a behavior built through repetition.</p><div class="section-heading">Step One: Be Worth Approaching</div><p>Stand sideways rather than facing the horse directly. Drop your eyes. Breathe slowly. Do nothing. Ask for nothing. Simply be a quiet presence. The horse will eventually decide to walk toward you.</p><div class="quote">The horse that comes to you because you stopped demanding that it should — that first step is worth a hundred training sessions.</div><div class="section-heading">Step Two: Be the Same Person Every Time</div><p>Be the same person every time. In the end, that is the whole of it. Consistent, honest, patient. The horse will do the rest.</p>` },
-      { label: 'Practical VII', title: "Why Your Horse Doesn't Listen", fullTitle: 'Why Your Horse Does Not Listen to You', tagline: 'A horse that will not listen is not defying you. It is talking to you.', keywords: ['not listening', 'training problems'], category: 'practical', icon: '🍃', content: `<p><span class="dropcap">W</span>hen a horse stops listening, the natural human response is to push harder. And it is almost always wrong.</p><p>A horse that is not listening is telling you something. It is saying: I do not understand. Or: I am not ready. Or: I am in pain. Or: I do not trust that what happens next will be safe.</p><div class="quote">If the horse is not responding, the first suspect is never the horse. It is the clarity of what you are asking.</div><div class="section-heading">The Trust Problem</div><p>A horse that stops trusting enough to try is not a problem to be fixed. It is an invitation to become a person worthy of being trusted.</p>` },
-      { label: 'Practical VIII', title: 'Calming Anxious Horses', fullTitle: 'How to Calm a Nervous or Anxious Horse', tagline: 'You cannot fight a nervous system. You can only offer it something steadier.', keywords: ['calm a horse', 'anxious horse'], category: 'practical', icon: '🌙', content: `<p><span class="dropcap">Y</span>ou cannot calm a horse by fighting its nervous system. The moment you escalate, you confirm what the horse already feared.</p><p>To calm an anxious horse, you must first calm yourself. Your breath rate, your muscle tension, the quality of your stillness — these are the real messages you are sending.</p><div class="quote">The most powerful tool is stillness. Not a frozen, tense stillness, but genuine, warm, grounded stillness.</div><p>Give the anxious horse something steadier than its own fear to attach to. Become that thing.</p>` },
-      { label: 'Practical IX', title: 'First Time Handling', fullTitle: 'First Time Handling a Horse', tagline: 'There is no second first meeting. What you bring to that moment, the horse will remember.', keywords: ['first time', 'beginner'], category: 'practical', icon: '⚡', content: `<p><span class="dropcap">T</span>he first impression you make on a horse is written in its memory with a permanence no later session can fully erase.</p><p>Never walk straight at a horse from the front with direct eye contact. This is predator behavior. Walk at an angle. Let your approach be curved.</p><div class="quote">Walk toward a horse the way you would approach a sleeping child — with the understanding that how you arrive is already a conversation.</div><div class="section-heading">The First Touch</div><p>A hand that is soft, warm, and genuinely alive communicates that this person is paying attention. Touch the neck first. Listen to the response and adjust.</p>` },
-      { label: 'Practical X', title: 'Signs of Trust', fullTitle: 'Signs Your Horse Trusts You (And Signs It Does Not)', tagline: 'Trust in a horse is not invisible. It is a behavior. And behavior can be read.', keywords: ['signs of trust', 'bonding'], category: 'practical', icon: '💫', content: `<p><span class="dropcap">A</span> horse's trust is not a feeling. It is a behavior — visible, readable, and honest.</p><p>The clearest sign of trust is voluntary approach. When you enter the field, a trusting horse comes to you — not for food, but because your presence is wanted.</p><div class="quote">The horse that lowers its head as you approach is making itself vulnerable to you. Understand what that costs a prey animal, and you will understand what trust means.</div><p>A horse that does not trust you yet is not a failure. It is a horse waiting for enough evidence to decide that you are worth trusting. Give it that evidence.</p>` },
-      { label: 'Edge XI', title: 'What Horses Teach Us', fullTitle: 'What Horses Teach Us About Human Behavior', tagline: 'Spend enough time with horses and you will learn more about yourself than any mirror can show.', keywords: ['lessons from horses', 'horse psychology'], category: 'edge', icon: '🕯️', content: `<p><span class="dropcap">A</span> horse has no ego. It has no agenda beyond what is real right now. It cannot pretend.</p><div class="section-heading">The Mirror You Cannot Lie To</div><p>The horse does not see the performance. It sees what is underneath. It reads the stress in your body, the quality of your breath. Everything you have learned to hide, the horse has already read.</p><div class="quote">The horse is the most honest teacher you will ever have. It cannot be lied to, bribed, or manipulated. It only responds to what is true.</div><p>The horse does not ask you to be wise. It asks you to be here. And here, when you finally arrive, turns out to be enough.</p>` },
-      { label: 'Edge XII', title: 'Presence and Intention', fullTitle: 'To Feel What a Horse Feels: Understanding Presence and Intention', tagline: 'Horses live where most humans only visit — fully inside the present moment.', keywords: ['presence', 'intention'], category: 'edge', icon: '📜', content: `<p><span class="dropcap">P</span>resence is a physical reality — the quality of being fully here, fully alive, fully available. Horses live in presence permanently.</p><div class="section-heading">Intention as a Physical Force</div><p>Intention is not private. Every time you form a plan to move, your body begins preparing itself before the conscious action occurs. To a horse, these micro-signals are as readable as speech.</p><div class="quote">Before your hand moves, your mind has already moved. The horse felt it first. Your job is to make sure that what it felt was worth feeling.</div><p>The horse does not ask you to be perfect. It asks you to be present. And presence, offered genuinely and consistently, is everything.</p>` },
-      { label: 'Edge XIII', title: 'Horses React to Your Mind', fullTitle: 'Why Horses React to Your Mind and Not Just Your Actions', tagline: 'Before your hand moves, your mind has already moved. The horse felt it first.', keywords: ['sense emotions', 'horse awareness'], category: 'edge', icon: '🏔️', content: `<p><span class="dropcap">B</span>efore your hand moves, your mind has already moved. A horse does not wait for the action. It reads the intention.</p><div class="section-heading">Training Your Inner Life</div><p>The first practice is learning to feel yourself. Most people do not notice that their jaw is clenched, that they have been holding their breath. Before you can manage what you broadcast to the horse, you must be able to feel what you are broadcasting.</p><div class="quote">The horse does not hear your doubts. It feels them. And it responds to what it feels, not to what you intended.</div><p>The horse you ride is a portrait of your inner life on that day. If you want a different portrait, change the painter.</p>` },
-      { label: 'Edge XIV', title: 'Silence, Energy, Movement', fullTitle: 'Silence, Energy, and Movement: The Language Horses Understand', tagline: 'There is a language older than words. Horses speak it fluently.', keywords: ['horse communication', 'non verbal'], category: 'edge', icon: '🌊', content: `<p><span class="dropcap">T</span>here is a language older than any human tongue. Horses speak it fluently. Most humans have forgotten it exists.</p><div class="section-heading">The Language of Silence</div><p>Silence with horses is active. When you stand beside a horse and do nothing, you are saying: I have no demands right now. This moment belongs to you.</p><div class="quote">In the pause between asking and asking again is where the horse finds what it needs to try differently. Do not fill every silence.</div><p>Move as if you know where you are going. Not fast. Not urgently. Simply with weight and direction. The horse will follow that.</p>` },
-      { label: 'Edge XV', title: 'The Philosophy', fullTitle: 'The Philosophy of Working with Horses and Not Against Them', tagline: 'There are two ways to work with a horse. Only one of them is real.', keywords: ['philosophy', 'working with horses'], category: 'edge', icon: '🔥', content: `<p><span class="dropcap">T</span>here are two ways to work with a horse. They look similar from the outside. But from inside the horse, they feel completely different.</p><p>The first way is the way of control. Its foundation is the human's agenda. The horse learns to manage its life within the edges of what is permitted. It may be content. But it is not free.</p><div class="quote">The horse you have is not a reflection of your technique. It is a reflection of your philosophy. Change the philosophy, and the horse begins to change too.</div><div class="section-heading">The Life That Horses Offer</div><p>I came to horses because I was looking for something more honest than most of what the human world offered. I found it in ten thousand mornings in a field, with an animal that showed me, patiently and without judgment, exactly who I was.</p><div class="quote">The horse does not know it is teaching you. It is simply being honest. But if you are paying attention, that honesty will change you.</div>` }
-    ];
-
-    const booksGrid = document.getElementById('booksGrid');
-    const icons = ['🐴', '🐎', '📖', '🔮', '✨', '🌟', '🍃', '🌙', '⚡', '💫', '🕯️', '📜', '🏔️', '🌊', '🔥'];
-    
-    function renderBooks() {
-      booksGrid.innerHTML = '';
-      articles.forEach((article, index) => {
-        const card = document.createElement('div');
-        card.className = 'book-card';
-        card.setAttribute('data-category', article.category);
-        card.setAttribute('data-index', index);
-        card.innerHTML = `
-          <div class="book-cover">
-            <div class="book-category-badge">${article.label}</div>
-            <div class="book-icon">${icons[index % icons.length]}</div>
-            <div class="book-number">${String(index + 1).padStart(2, '0')}</div>
-          </div>
-          <div class="book-info">
-            <div class="book-title">${article.title}</div>
-            <div class="book-excerpt">${article.tagline.substring(0, 100)}${article.tagline.length > 100 ? '...' : ''}</div>
-            <div class="book-read">Read Article</div>
-          </div>
-        `;
-        const isLocked = localStorage.getItem('articleLock_' + index) === 'locked';
-        if (isLocked) card.classList.add('locked');
-        card.addEventListener('click', () => {
-          if (card.classList.contains('locked')) {
-            alert('🔒 This article is locked. Click the "LOCK HALF" button at bottom right to unlock all articles (admin only).');
-            return;
-          }
-          openArticle(index);
-        });
-        booksGrid.appendChild(card);
-      });
-    }
-    renderBooks();
-
-    function applyLockState() {
-      const halfCount = Math.floor(articles.length / 2);
-      const bookCards = document.querySelectorAll('.book-card');
-      for (let i = 0; i < bookCards.length; i++) {
-        const lockState = localStorage.getItem('articleLock_' + i);
-        if (lockState === 'locked') bookCards[i].classList.add('locked');
-        else if (lockState === 'unlocked') bookCards[i].classList.remove('locked');
-        else if (i < halfCount) {
-          localStorage.setItem('articleLock_' + i, 'locked');
-          bookCards[i].classList.add('locked');
-        } else {
-          localStorage.setItem('articleLock_' + i, 'unlocked');
-          bookCards[i].classList.remove('locked');
-        }
-      }
-    }
-    
-    function lockFirstHalf() {
-      const halfCount = Math.floor(articles.length / 2);
-      const bookCards = document.querySelectorAll('.book-card');
-      for (let i = 0; i < bookCards.length; i++) {
-        if (i < halfCount) {
-          localStorage.setItem('articleLock_' + i, 'locked');
-          bookCards[i].classList.add('locked');
-        } else {
-          localStorage.setItem('articleLock_' + i, 'unlocked');
-          bookCards[i].classList.remove('locked');
-        }
-      }
-      adminLockBtn.innerHTML = '🔓 UNLOCK ALL (ADMIN)';
-    }
-    
-    function unlockAllArticles() {
-      const bookCards = document.querySelectorAll('.book-card');
-      for (let i = 0; i < bookCards.length; i++) {
-        localStorage.setItem('articleLock_' + i, 'unlocked');
-        bookCards[i].classList.remove('locked');
-      }
-      adminLockBtn.innerHTML = '🔒 LOCK HALF (ADMIN)';
-    }
-    
-    const adminLockBtn = document.getElementById('adminLockBtn');
-    if (adminLockBtn) {
-      adminLockBtn.addEventListener('click', () => {
-        let anyLocked = false;
-        document.querySelectorAll('.book-card').forEach((card, i) => {
-          if (localStorage.getItem('articleLock_' + i) === 'locked') anyLocked = true;
-        });
-        if (anyLocked) unlockAllArticles();
-        else lockFirstHalf();
-      });
-    }
-    
-    setTimeout(applyLockState, 100);
-
-    const modal = document.getElementById('articleModal');
-    const modalBody = document.getElementById('modalBody');
-    const modalClose = document.getElementById('modalClose');
-    
-    function openArticle(index) {
-      const article = articles[index];
-      if (!article) return;
-      let likeCount = localStorage.getItem('articleLikes_' + index) || 0;
-      let userLiked = localStorage.getItem('articleLiked_' + index) === 'true';
-      modalBody.innerHTML = `
-        <div class="modal-label">${article.label}</div>
-        <div class="modal-title">${article.fullTitle || article.title}</div>
-        <div class="modal-tagline">${article.tagline}</div>
-        <div class="modal-keywords">${article.keywords.map(kw => `<span class="modal-keyword">${kw}</span>`).join('')}</div>
-        ${article.content}
-        <div class="like-section">
-          <button class="like-btn ${userLiked ? 'liked' : ''}" data-index="${index}" type="button">
-            <span>❤️</span> <span>Like</span>
-          </button>
-          <span class="like-count">${likeCount} people liked this</span>
-        </div>
-        <div class="book-prompt">
-          📖 Enjoyed this article? <a href="book.html">Get the full book for more insights →</a>
-        </div>
-        <div class="modal-footer">The Horseman's Journal · Praveen Kumar</div>
-      `;
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      
-      const likeBtn = modalBody.querySelector('.like-btn');
-      if (likeBtn) {
-        likeBtn.addEventListener('click', function() {
-          const idx = parseInt(this.getAttribute('data-index'));
-          let currentLikes = parseInt(localStorage.getItem('articleLikes_' + idx)) || 0;
-          let hasLiked = localStorage.getItem('articleLiked_' + idx) === 'true';
-          if (!hasLiked) {
-            currentLikes++;
-            localStorage.setItem('articleLikes_' + idx, currentLikes);
-            localStorage.setItem('articleLiked_' + idx, 'true');
-            this.classList.add('liked');
-            modalBody.querySelector('.like-count').innerText = currentLikes + ' people liked this';
-          } else {
-            currentLikes--;
-            localStorage.setItem('articleLikes_' + idx, currentLikes);
-            localStorage.setItem('articleLiked_' + idx, 'false');
-            this.classList.remove('liked');
-            modalBody.querySelector('.like-count').innerText = currentLikes + ' people liked this';
-          }
-        });
-      }
-    }
-    
-    function closeModal() {
-      modal.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    
-    if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
-
-    document.querySelectorAll('.chr-filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter');
-        document.querySelectorAll('.chr-filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.book-card').forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) card.classList.remove('hidden');
-          else card.classList.add('hidden');
-        });
-        closeModal();
-      });
-    });
-
-    const portalBtn = document.getElementById('portalBtn');
-    if (portalBtn) {
-      portalBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
-
-    // ===== UNIFIED COOKIE CONSENT (same key as index.html) =====
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    // Cookie consent
     const cookieConsent = document.getElementById('cookieConsent');
     const acceptCookies = document.getElementById('acceptCookies');
     const declineCookies = document.getElementById('declineCookies');
-    
-    function setCookieConsent(accepted) {
-      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-      if (cookieConsent) cookieConsent.classList.remove('show');
-    }
-    
-    function showCookieConsent() {
-      if (!cookieConsent) return;
-      const consent = localStorage.getItem('cookieConsent');
-      if (!consent) {
-        cookieConsent.classList.add('show');
-      } else {
-        cookieConsent.classList.remove('show');
-      }
-    }
-    
+    function setCookieConsent(accepted) { localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined'); if (cookieConsent) cookieConsent.classList.remove('show'); }
+    function showCookieConsent() { if (!cookieConsent) return; const consent = localStorage.getItem('cookieConsent'); if (!consent) cookieConsent.classList.add('show'); else cookieConsent.classList.remove('show'); }
     if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
     if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
     showCookieConsent();
 
-    // ===== FAVICON PARTICLE ANIMATION =====
+    // Current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Favicon particles (minimal version, keep from original if needed)
     const faviconCanvas = document.createElement('canvas');
     faviconCanvas.id = 'faviconCanvas';
-    faviconCanvas.style.position = 'fixed';
-    faviconCanvas.style.top = '0';
-    faviconCanvas.style.left = '0';
-    faviconCanvas.style.width = '100%';
-    faviconCanvas.style.height = '100%';
-    faviconCanvas.style.pointerEvents = 'none';
-    faviconCanvas.style.zIndex = '0';
-    faviconCanvas.style.opacity = '0.2';
+    faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
     document.body.appendChild(faviconCanvas);
-    
     const favCtx = faviconCanvas.getContext('2d');
     let favW, favH;
     let favParticles = [];
     const faviconImg = new Image();
     faviconImg.src = 'favicon.png';
-    
-    function resizeFavCanvas() {
-      favW = faviconCanvas.width = window.innerWidth;
-      favH = faviconCanvas.height = window.innerHeight;
-    }
-    
-    class FavParticle {
-      constructor() {
-        this.x = Math.random() * favW;
-        this.y = Math.random() * favH;
-        this.size = Math.random() * 20 + 10;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
-        this.alpha = Math.random() * 0.4 + 0.1;
-        this.rotation = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.01;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.rotation += this.rotSpeed;
-        if (this.x < -50) this.x = favW + 50;
-        if (this.x > favW + 50) this.x = -50;
-        if (this.y < -50) this.y = favH + 50;
-        if (this.y > favH + 50) this.y = -50;
-      }
-      draw() {
-        if (!faviconImg.complete) return;
-        favCtx.save();
-        favCtx.translate(this.x, this.y);
-        favCtx.rotate(this.rotation);
-        favCtx.globalAlpha = this.alpha;
-        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
-        favCtx.restore();
-      }
-    }
-    
-    function initFavParticles() {
-      favParticles = [];
-      for (let i = 0; i < 40; i++) {
-        favParticles.push(new FavParticle());
-      }
-    }
-    
-    function animateFav() {
-      if (!favCtx) return;
-      favCtx.clearRect(0, 0, favW, favH);
-      favParticles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateFav);
-    }
-    
-    if (faviconImg.complete) {
-      resizeFavCanvas();
-      initFavParticles();
-      animateFav();
-    } else {
-      faviconImg.onload = () => {
-        resizeFavCanvas();
-        initFavParticles();
-        animateFav();
-      };
-    }
-    
-    window.addEventListener('resize', () => {
-      resizeFavCanvas();
-      initFavParticles();
-    });
+    function resizeFavCanvas() { favW = faviconCanvas.width = window.innerWidth; favH = faviconCanvas.height = window.innerHeight; }
+    class FavParticle { constructor() { this.x = Math.random() * favW; this.y = Math.random() * favH; this.size = Math.random() * 20 + 10; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.2 + 0.1; this.alpha = Math.random() * 0.4 + 0.1; this.rotation = Math.random() * Math.PI * 2; this.rotSpeed = (Math.random() - 0.5) * 0.01; }
+      update() { this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed; if (this.x < -50) this.x = favW + 50; if (this.x > favW + 50) this.x = -50; if (this.y < -50) this.y = favH + 50; if (this.y > favH + 50) this.y = -50; }
+      draw() { if (!faviconImg.complete) return; favCtx.save(); favCtx.translate(this.x, this.y); favCtx.rotate(this.rotation); favCtx.globalAlpha = this.alpha; favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size); favCtx.restore(); } }
+    function initFavParticles() { favParticles = []; for (let i = 0; i < 40; i++) favParticles.push(new FavParticle()); }
+    function animateFav() { if (!favCtx) return; favCtx.clearRect(0, 0, favW, favH); favParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateFav); }
+    faviconImg.onload = () => { resizeFavCanvas(); initFavParticles(); animateFav(); };
+    window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
+    if (faviconImg.complete) { resizeFavCanvas(); initFavParticles(); animateFav(); }
   </script>
 </body>
 </html>
