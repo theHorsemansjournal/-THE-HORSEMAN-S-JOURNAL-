@@ -9,4 +9,4 @@ Disallow: /admin.html
 Disallow: /private/
 Disallow: /backup/
 
-Sitemap: https://thehorsemansjournal.github.io/-THE-HORSEMAN-S-JOURNAL-/sitemap.xml
+Sitemap: https://thehorsemansjournal.com/sitemap.xml
