@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Companions - The Horseman's Journal | The Horses Who Shaped Me</title>
-  <meta name="description" content="Meet the eight horses who shaped Praveen Kumar's journey. T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Arjun, and Storm. Each a teacher. Each a story.">
-  <meta name="keywords" content="companion horses, horse stories, T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Arjun, Storm, horsemanship journey">
+  <meta name="description" content="Meet the eight horses who shaped Praveen Kumar's journey. T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Maverick, and Storm. Each a teacher. Each a story.">
+  <meta name="keywords" content="companion horses, horse stories, T-Rex, Gladiator, Xanthos, Rubin, Highsocity, Yuvraj, Maverick, Storm, horsemanship journey">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
@@ -35,7 +35,6 @@
       line-height: 1.6;
     }
 
-    /* ===== WATERMARK (logo.jpg) ===== */
     body::before {
       content: '';
       position: fixed;
@@ -51,7 +50,6 @@
       z-index: 0;
     }
 
-    /* ===== FAVICON ANIMATION CANVAS ===== */
     #faviconCanvas {
       position: fixed;
       top: 0;
@@ -238,6 +236,8 @@
       opacity: 0;
       transform: translateY(30px);
       transition: opacity .7s ease, transform .7s ease;
+      text-decoration: none;
+      display: block;
     }
     .stall-wrap.visible {
       opacity: 1;
@@ -267,7 +267,6 @@
       pointer-events: none;
     }
 
-    /* Logo emblem on each stall card (top-right corner) */
     .stall-logo-emblem {
       position: absolute;
       top: 6px;
@@ -467,248 +466,6 @@
       opacity: 0;
     }
 
-    .story-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .5s ease;
-    }
-    .story-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .story-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(6, 3, 1, 0.94);
-      backdrop-filter: blur(10px);
-    }
-    .story-magazine {
-      position: relative;
-      z-index: 2;
-      width: 95%;
-      max-width: 1100px;
-      max-height: 90vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: #0e0803;
-      border: 1px solid rgba(200, 150, 40, 0.22);
-      border-radius: 4px;
-      overflow: hidden;
-      transform: scale(.93) translateY(20px);
-      transition: transform .5s cubic-bezier(.16, 1, .3, 1);
-      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
-    }
-    .story-overlay.open .story-magazine {
-      transform: scale(1) translateY(0);
-    }
-    .story-left {
-      position: relative;
-      min-height: 560px;
-      overflow: hidden;
-    }
-    .story-photo {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8rem;
-      overflow: hidden;
-    }
-    .story-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-    .story-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 50%, rgba(10, 5, 1, 0.8) 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, transparent 40%);
-      pointer-events: none;
-    }
-    .story-page-num {
-      position: absolute;
-      bottom: 20px;
-      left: 24px;
-      font-family: 'Cinzel', serif;
-      font-size: .55rem;
-      letter-spacing: 3px;
-      color: rgba(200, 150, 40, 0.35);
-      text-transform: uppercase;
-      z-index: 4;
-    }
-    .story-right {
-      padding: 3rem 2.5rem 0 3rem;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-height: 90vh;
-    }
-    .story-right::-webkit-scrollbar { width: 3px; }
-    .story-right::-webkit-scrollbar-thumb { background: rgba(200,150,40,0.2); border-radius: 2px; }
-    .story-issue {
-      font-family: 'Cinzel', serif;
-      font-size: .58rem;
-      letter-spacing: 4px;
-      color: rgba(200, 150, 40, 0.45);
-      text-transform: uppercase;
-      flex-shrink: 0;
-    }
-    .story-name {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700;
-      color: #E8C84A;
-      letter-spacing: 1px;
-      line-height: 1.1;
-      text-shadow: 0 0 30px rgba(200, 150, 40, 0.35);
-      flex-shrink: 0;
-    }
-    .story-memorial-tag {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: 3px;
-      color: rgba(255, 180, 160, 0.65);
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border: 1px solid rgba(255, 150, 120, 0.22);
-      border-radius: 2px;
-      background: rgba(255, 100, 80, 0.05);
-      display: inline-block;
-      width: fit-content;
-      flex-shrink: 0;
-    }
-    .story-divider {
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-      flex-shrink: 0;
-    }
-    .story-dline {
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(90deg, rgba(200, 150, 40, 0.35), transparent);
-    }
-    .story-dgem {
-      width: 4px; height: 4px;
-      background: #E8C84A;
-      transform: rotate(45deg);
-    }
-    .story-vitals {
-      display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
-      flex-shrink: 0;
-    }
-    .story-vital {
-      font-family: 'Cinzel', serif;
-      font-size: .55rem;
-      letter-spacing: 2px;
-      color: rgba(200, 150, 40, 0.7);
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border: 1px solid rgba(200, 150, 40, 0.2);
-      border-radius: 2px;
-      background: rgba(200, 150, 40, 0.05);
-    }
-    .story-text {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(.95rem, 1.4vw, 1.05rem);
-      line-height: 1.95;
-      color: rgba(240, 225, 195, 0.78);
-      flex-shrink: 0;
-    }
-    .story-text p { margin-bottom: 1.1rem; }
-    .story-text p:first-child::first-letter {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.2em;
-      font-weight: 700;
-      color: #E8C84A;
-      float: left;
-      line-height: .75;
-      margin: 0.1em 0.1em 0 0;
-      text-shadow: 0 0 20px rgba(200,150,40,0.5);
-    }
-    .story-quote {
-      border-left: 2px solid rgba(200, 150, 40, 0.4);
-      padding: .8rem 1.2rem;
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(.95rem, 1.4vw, 1.05rem);
-      color: rgba(212, 175, 100, 0.78);
-      line-height: 1.8;
-      background: rgba(200, 150, 40, 0.04);
-      border-radius: 0 3px 3px 0;
-      margin: .5rem 0;
-    }
-    .story-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      z-index: 10;
-      width: 36px; height: 36px;
-      border: 1px solid rgba(200, 150, 40, 0.3);
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.6);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .2s;
-    }
-    .story-close:hover {
-      border-color: rgba(200, 150, 40, 0.7);
-      background: rgba(200, 150, 40, 0.12);
-    }
-    .story-close::before, .story-close::after {
-      content: '';
-      position: absolute;
-      width: 14px; height: 1px;
-      background: rgba(200, 150, 40, 0.7);
-    }
-    .story-close::before { transform: rotate(45deg); }
-    .story-close::after { transform: rotate(-45deg); }
-    .story-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      border-top: 1px solid rgba(200, 150, 40, 0.12);
-      flex-shrink: 0;
-      position: sticky;
-      bottom: 0;
-      background: #0e0803;
-      z-index: 5;
-    }
-    .story-nav-btn {
-      font-family: 'Cinzel', serif;
-      font-size: .58rem;
-      letter-spacing: 2px;
-      color: rgba(200, 150, 40, 0.55);
-      text-transform: uppercase;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: color .2s;
-      padding: 4px 0;
-    }
-    .story-nav-btn:hover { color: #E8C84A; }
-    .story-nav-count {
-      font-family: 'Cinzel', serif;
-      font-size: .58rem;
-      letter-spacing: 2px;
-      color: rgba(200, 150, 40, 0.3);
-    }
-
     .companions-closing {
       position: relative;
       background: linear-gradient(180deg, #0d0804 0%, #1a1008 100%);
@@ -806,7 +563,6 @@
       50% { transform: translateY(-5px); }
     }
 
-    /* ===== CONTACT & FOOTER ===== */
     .contact-section {
       padding: 3rem 2rem;
       text-align: center;
@@ -855,7 +611,6 @@
       background: #0a0603;
     }
 
-    /* ===== COOKIE CONSENT ===== */
     .cookie-consent {
       position: fixed;
       bottom: 0;
@@ -890,11 +645,8 @@
     @media (max-width: 860px) {
       .stalls-grid { gap: 1rem; }
       .hero-title { font-size: 2rem; }
-      .story-magazine { grid-template-columns: 1fr; }
-      .story-left { display: none; }
       .closing-title { font-size: 1.4rem; }
       .closing-text { font-size: 0.95rem; }
-      .closing-quote p { font-size: 1rem; }
     }
     @media (max-width: 520px) {
       .hero-title { font-size: 1.8rem; }
@@ -925,7 +677,6 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html" class="active">COMPANIONS</a></li>
-            <!-- VERSES REMOVED -->
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
@@ -965,9 +716,8 @@
 
   <section class="stalls-section">
     <div class="stalls-grid" id="stallsGrid">
-
       <!-- T-Rex (Hanoverian Stallion) -->
-      <div class="stall-wrap" data-index="0">
+      <a href="companion-trex.html" class="stall-wrap" data-index="0">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -982,20 +732,19 @@
               </div>
             </div>
           </div>
-          <!-- Logo emblem on card -->
           <div class="stall-logo-emblem">
             <img src="logo.jpg" alt="Journal Logo">
           </div>
           <div class="stall-info">
             <div class="stall-info-name">T-Rex</div>
-            <div class="stall-info-breed">Hanoverian · Stallion · Age 8</div>
+            <div class="stall-info-breed">Hanoverian · Stallion · Age 7</div>
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
       <!-- Gladiator (Warmblood, In Memoriam) -->
-      <div class="stall-wrap" data-index="1">
+      <a href="companion-gladiator.html" class="stall-wrap" data-index="1">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -1016,14 +765,14 @@
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info">
             <div class="stall-info-name">Gladiator</div>
-            <div class="stall-info-breed">Warmblood · Age 20</div>
+            <div class="stall-info-breed">Warmblood · Stallion · Age 20</div>
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
       <!-- Xanthos (Warmblood) -->
-      <div class="stall-wrap" data-index="2">
+      <a href="companion-xanthos.html" class="stall-wrap" data-index="2">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -1047,10 +796,10 @@
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
       <!-- Rubin (Warmblood) -->
-      <div class="stall-wrap" data-index="3">
+      <a href="companion-rubin.html" class="stall-wrap" data-index="3">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -1074,10 +823,10 @@
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
       <!-- Highsocity (Warmblood, In Memoriam) -->
-      <div class="stall-wrap" data-index="4">
+      <a href="companion-highsocity.html" class="stall-wrap" data-index="4">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -1098,14 +847,14 @@
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info">
             <div class="stall-info-name">Highsocity</div>
-            <div class="stall-info-breed">Warmblood · Mare · Age 7</div>
+            <div class="stall-info-breed">Warmblood · Age 7</div>
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
       <!-- Yuvraj (Indian Breed) -->
-      <div class="stall-wrap" data-index="5">
+      <a href="companion-yuvraj.html" class="stall-wrap" data-index="5">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
@@ -1129,20 +878,20 @@
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
-      <!-- Arjun (Warmblood) -->
-      <div class="stall-wrap" data-index="6">
+      <!-- Maverick (Warmblood) - formerly Arjun -->
+      <a href="companion-maverick.html" class="stall-wrap" data-index="6">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
-            <img src="horse7.jpg" alt="Arjun" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <img src="maverick.jpg" alt="Maverick" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="stall-photo-placeholder" style="display:none;">🐴</div>
           </div>
           <div class="stall-door">
             <div class="stall-nameplate">
               <div class="nameplate-brass">
-                <div class="nameplate-name">Arjun</div>
+                <div class="nameplate-name">Maverick</div>
                 <div class="nameplate-sub">Warmblood</div>
               </div>
             </div>
@@ -1151,19 +900,19 @@
             <img src="logo.jpg" alt="Journal Logo">
           </div>
           <div class="stall-info">
-            <div class="stall-info-name">Arjun</div>
+            <div class="stall-info-name">Maverick</div>
             <div class="stall-info-breed">Warmblood · Gelding · Age 12</div>
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
+      </a>
 
-      <!-- Storm (Warmblood - user said all except Yuvraj are warmbloods, so changing Storm to Warmblood) -->
-      <div class="stall-wrap" data-index="7">
+      <!-- Storm (Warmblood Mare) -->
+      <a href="companion-storm.html" class="stall-wrap" data-index="7">
         <div class="stall-3d">
           <div class="stall-frame"></div>
           <div class="stall-photo-wrap">
-            <img src="horse8.jpg" alt="Storm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <img src="storm.jpg" alt="Storm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="stall-photo-placeholder" style="display:none;">🐎</div>
           </div>
           <div class="stall-door">
@@ -1183,34 +932,9 @@
           </div>
           <span class="stall-read">Open Stall</span>
         </div>
-      </div>
-
+      </a>
     </div>
   </section>
-
-  <div class="story-overlay" id="storyOverlay">
-    <div class="story-backdrop" id="storyBackdrop"></div>
-    <div class="story-magazine">
-      <div class="story-left">
-        <div class="story-photo" id="storyPhoto"></div>
-        <span class="story-page-num" id="storyPageNum"></span>
-      </div>
-      <div class="story-right">
-        <span class="story-issue" id="storyIssue"></span>
-        <div class="story-name" id="storyName"></div>
-        <div id="storyMemorialTag"></div>
-        <div class="story-divider"><div class="story-dline"></div><div class="story-dgem"></div></div>
-        <div class="story-vitals" id="storyVitals"></div>
-        <div class="story-text" id="storyText"></div>
-        <div class="story-nav">
-          <button class="story-nav-btn" id="prevBtn">← Previous</button>
-          <span class="story-nav-count" id="navCount">1 / 8</span>
-          <button class="story-nav-btn" id="nextBtn">Next →</button>
-        </div>
-      </div>
-      <button class="story-close" id="storyClose"></button>
-    </div>
-  </div>
 
   <section class="companions-closing">
     <div class="closing-inner">
@@ -1221,8 +945,8 @@
       </div>
       <div class="closing-star">🐴</div>
       <h3 class="closing-title">The Herd That Made Me</h3>
-      <p class="closing-text">Eight horses. Eight teachers. Each one arrived at exactly the moment I needed them — though I rarely understood it at the time. T-Rex taught me presence. Gladiator taught me that fire and softness can live in the same body. Xanthos taught me stillness. Rubin taught me patience. Highsocity taught me grace. Yuvraj taught me that wisdom deepens with age. Arjun taught me that the quiet ones carry the heaviest lessons. Storm taught me that wildness, respected, becomes trust.</p>
-      <p class="closing-text">I carry every one of them with me. Not as memories, but as living presences — voices I still hear in the arena when I am unsure, hands I still feel on my shoulder when I am tired, breath I still match when I need to slow down. They are not gone. They are here. In every horse I meet. In every lesson I write. In every moment I choose to stay when leaving would be easier.</p>
+      <p class="closing-text">Eight horses. Eight teachers. Each one arrived at exactly the moment I needed them. T-Rex taught me presence. Gladiator taught me that fire and softness can live in the same body. Xanthos taught me stillness. Rubin taught me patience. Highsocity taught me grace. Yuvraj taught me that wisdom deepens with age. Maverick taught me that the quiet ones carry the heaviest lessons. Storm taught me that wildness, respected, becomes trust.</p>
+      <p class="closing-text">I carry every one of them with me. Not as memories, but as living presences. Voices I still hear in the arena when I am unsure. Hands I still feel on my shoulder when I am tired. Breath I still match when I need to slow down. They are not gone. They are here. In every horse I meet. In every lesson I write. In every moment I choose to stay when leaving would be easier.</p>
       <div class="closing-quote">
         <p>"A horse does not leave you when it is gone. It simply moves from the stall beside you to the space inside you. And there, it continues to teach."</p>
         <span>— Praveen Kumar</span>
@@ -1260,7 +984,7 @@
   </div>
 
   <script>
-    // ===== CANVAS ANIMATION (original, with z-index fix) =====
+    // Canvas Animation
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -1456,160 +1180,6 @@
       animate();
     }
 
-    // ===== HORSE DATA (with updated breeds) =====
-    const horses = [
-      {
-        issue: 'Companion No. 01',
-        name: 'T-Rex',
-        breed: 'Hanoverian',
-        age: '8',
-        gender: 'Stallion',
-        photo: 'trex.jpg',
-        memorial: false,
-        story: `<p>He arrived imported, four years old, barely schooled. A living storm wrapped in midnight muscle and raw sensitivity. Every horse I had worked with before had been preparation for this one, though I did not know it yet.</p><div class="story-quote">The universe had not sent me a horse to train. It had sent me a mirror that weighed half a ton and refused to lie.</div><p>We built the piaffe together inside a bamboo circle no wider than fifteen metres. He felt every ounce of pressure I carried. When I stopped trying to fix him and simply stayed, present, honest, unguarded, he offered me everything. Today when he sees me, he calls out. He did not just teach me how to train horses. He taught me how to train myself.</p>`
-      },
-      {
-        issue: 'Companion No. 02',
-        name: 'Gladiator',
-        breed: 'Warmblood',
-        age: '20',
-        gender: 'Stallion',
-        photo: 'gladiator.jpg',
-        memorial: true,
-        story: `<p>Gladiator arrived wearing his name like armour. Aggressive on the outside, coiled and sharp. But underneath that fire lived something ancient and tender, a sensitivity so deep it frightened him as much as it frightened everyone around him.</p><div class="story-quote">He taught me that fire and fragility have always lived in the same body, in horses and in men.</div><p>Twenty years of life lived at full intensity, and he burned every single day of it bright. He is gone now. But I feel him every time a horse tests me and I choose to stay.</p>`
-      },
-      {
-        issue: 'Companion No. 03',
-        name: 'Xanthos',
-        breed: 'Warmblood',
-        age: '15',
-        gender: 'Gelding',
-        photo: 'xanthos.jpg',
-        memorial: false,
-        story: `<p>Xanthos, named after the immortal horse of Achilles, the one who could speak and who wept at his rider's fate. From the first day, this horse carried a mythic quality in his stillness.</p><div class="story-quote">He did not move like a horse being ridden. He moved like a horse choosing to carry you and the difference is everything.</div><p>Fifteen years and still carrying wisdom in his body that words cannot translate. He is the kind of horse that reminds you why you chose this life in the first place.</p>`
-      },
-      {
-        issue: 'Companion No. 04',
-        name: 'Rubin',
-        breed: 'Warmblood',
-        age: '10',
-        gender: 'Stallion',
-        photo: 'rubin.jpg',
-        memorial: false,
-        story: `<p>Rubin. A gemstone of a name for a horse who made you work to find his brilliance. He was not easy in the beginning, layered, complex, a horse who required patience before he would show you anything real.</p><div class="story-quote">The horses that make you earn their trust always give you something more precious than the ones who offer it freely.</div><p>When Rubin finally let you in, what you found was luminous. A mind as sharp as his body, and a willingness that felt like a gift.</p>`
-      },
-      {
-        issue: 'Companion No. 05',
-        name: 'Highsocity',
-        breed: 'Warmblood',
-        age: '7',
-        gender: 'Mare',
-        photo: 'highsocity.jpg',
-        memorial: true,
-        story: `<p>Seven years. That is all she had, and yet she lived those seven years with an elegance that most creatures never find in a lifetime. Highsocity moved through the world as though she had been born knowing something the rest of us were still searching for.</p><div class="story-quote">She taught me about grace, the kind that costs nothing and means everything.</div><p>She is gone. She is not forgotten. Not for a single day.</p>`
-      },
-      {
-        issue: 'Companion No. 06',
-        name: 'Yuvraj',
-        breed: 'Indian Breed',
-        age: '20',
-        gender: 'Stallion',
-        photo: 'yuvraj.jpg',
-        memorial: false,
-        story: `<p>Yuvraj means prince, and he has worn that title without vanity for twenty years. There is a quality to old horses that young ones cannot manufacture, a gravity, a patience, a knowing that settles into their eyes like still water.</p><div class="story-quote">Twenty years of living had not made him slow. It had made him true.</div><p>At twenty, he still moves like a king. He reminds me every day that wisdom is simply patience that has stayed long enough to become real.</p>`
-      },
-      {
-        issue: 'Companion No. 07',
-        name: 'Arjun',
-        breed: 'Warmblood',
-        age: '12',
-        gender: 'Gelding',
-        photo: 'horse7.jpg',
-        memorial: false,
-        story: `<p>If T-Rex was the storm, Arjun was the mountain. Twelve years old, steady as stone, honest in a way that asked nothing dramatic of you. Only that you show up and mean it.</p><div class="story-quote">The quiet horses teach the deepest lessons, because they simply live patience and wait for you to understand.</div><p>Some teachers shout. Arjun simply stood and waited until I was worth standing beside.</p>`
-      },
-      {
-        issue: 'Companion No. 08',
-        name: 'Storm',
-        breed: 'Warmblood',
-        age: '9',
-        gender: 'Mare',
-        photo: 'horse8.jpg',
-        memorial: false,
-        story: `<p>She arrived wild. A warmblood mare with electric energy and a deep suspicion of the entire human world. Storm was not a horse you approached with a plan. She dismantled plans.</p><div class="story-quote">She arrived wild and left refined, though I suspect it was she who refined me and not the other way around.</div><p>Working with Storm was working with weather. You did not control it. You learned to move inside it with respect.</p>`
-      }
-    ];
-
-    let ci = 0;
-
-    function openStory(i) {
-      ci = i;
-      renderStory();
-      document.getElementById('storyOverlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeStory() {
-      document.getElementById('storyOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function renderStory() {
-      const h = horses[ci];
-      document.getElementById('storyIssue').textContent = h.issue;
-      document.getElementById('storyName').textContent = h.name;
-      document.getElementById('navCount').textContent = (ci + 1) + ' / ' + horses.length;
-      document.getElementById('storyPageNum').textContent = "The Horseman's Journal · " + h.issue;
-      document.getElementById('storyMemorialTag').innerHTML = h.memorial ? '<span class="story-memorial-tag">In Memoriam — Passed Away</span>' : '';
-      document.getElementById('storyVitals').innerHTML = '<span class="story-vital">' + h.breed + '</span><span class="story-vital">Age: ' + h.age + '</span><span class="story-vital">' + h.gender + '</span>';
-      
-      const p = document.getElementById('storyPhoto');
-      p.innerHTML = '';
-      p.style.fontSize = '';
-      const img = document.createElement('img');
-      img.src = h.photo;
-      img.alt = h.name;
-      img.onerror = function() {
-        p.innerHTML = '🐴';
-        p.style.fontSize = '8rem';
-      };
-      p.appendChild(img);
-      
-      document.getElementById('storyText').innerHTML = h.story;
-      const storyRight = document.querySelector('.story-right');
-      if (storyRight) storyRight.scrollTop = 0;
-    }
-
-    document.querySelectorAll('.stall-wrap').forEach((c, i) => c.addEventListener('click', () => openStory(i)));
-    document.getElementById('storyClose')?.addEventListener('click', closeStory);
-    document.getElementById('storyBackdrop')?.addEventListener('click', closeStory);
-    
-    document.getElementById('prevBtn')?.addEventListener('click', () => {
-      ci = (ci - 1 + horses.length) % horses.length;
-      renderStory();
-    });
-    document.getElementById('nextBtn')?.addEventListener('click', () => {
-      ci = (ci + 1) % horses.length;
-      renderStory();
-    });
-
-    document.addEventListener('keydown', e => {
-      if (!document.getElementById('storyOverlay').classList.contains('open')) return;
-      if (e.key === 'Escape') closeStory();
-      if (e.key === 'ArrowRight') { ci = (ci + 1) % horses.length; renderStory(); }
-      if (e.key === 'ArrowLeft') { ci = (ci - 1 + horses.length) % horses.length; renderStory(); }
-    });
-
-    const stallObserver = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 100);
-          stallObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.stall-wrap').forEach(c => stallObserver.observe(c));
-
     document.getElementById('scrollHint')?.addEventListener('click', () => {
       document.querySelector('.stalls-section')?.scrollIntoView({ behavior: 'smooth' });
     });
@@ -1620,7 +1190,7 @@
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // ===== UNIFIED COOKIE CONSENT (same as index.html) =====
+    // Cookie Consent
     const cookieConsent = document.getElementById('cookieConsent');
     const acceptCookies = document.getElementById('acceptCookies');
     const declineCookies = document.getElementById('declineCookies');
@@ -1644,7 +1214,18 @@
     if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
     showCookieConsent();
 
-    // ===== FAVICON PARTICLE ANIMATION =====
+    // Stall visibility animation
+    const stallObserver = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 100);
+          stallObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.stall-wrap').forEach(c => stallObserver.observe(c));
+
+    // Favicon Particles
     const faviconCanvas = document.createElement('canvas');
     faviconCanvas.id = 'faviconCanvas';
     faviconCanvas.style.position = 'fixed';
@@ -1733,6 +1314,5 @@
       initFavParticles();
     });
   </script>
-
 </body>
 </html>
