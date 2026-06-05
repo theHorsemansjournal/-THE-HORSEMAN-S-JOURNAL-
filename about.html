@@ -3,11 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>About The Horseman | Praveen Kumar - The Horseman's Journal</title>
-  <meta name="description" content="Meet Praveen Kumar. Eleven years of horsemanship, one black stallion, and a philosophy built on trust, not force.">
-  <meta name="keywords" content="Praveen Kumar, horseman, horse trainer, about author, horsemanship journey">
+  <title>Praveen Kumar | International Dressage Champion & Horseman - The Horseman's Journal</title>
+  <meta name="description" content="Praveen Kumar is an International Dressage (Equitation) Champion from India with over 30 medals. Trained under 7-time National Champion Kapil Modi. He works with horses using trust, patience, and listening.">
+  <meta name="keywords" content="Praveen Kumar, dressage champion India, Kapil Modi, equitation champion, horseman, horse trainer, trust based horsemanship">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="Praveen Kumar - International Dressage Champion | The Horseman's Journal">
+  <meta property="og:description" content="International Dressage (Equitation) Champion from India with over 30 medals. Trained under 7-time National Champion Kapil Modi.">
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="The Horseman's Journal">
+  <meta property="profile:first_name" content="Praveen">
+  <meta property="profile:last_name" content="Kumar">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Praveen Kumar - International Dressage Champion">
+  <meta name="twitter:description" content="International Dressage (Equitation) Champion from India. Over 30 medals. Trained under Kapil Modi. Trust, patience, listening.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +37,6 @@
       line-height: 1.6;
     }
 
-    /* ===== LOGO WATERMARK - USING LOGO.JPG ===== */
     .logo-watermark {
       position: fixed;
       top: 50%;
@@ -105,7 +115,6 @@
     .hero-scroll svg { width: 18px; stroke: rgba(200,160,80,0.5); }
     @keyframes fadeUpDown { 0%,100%{transform:translateX(-50%) translateY(0);opacity:.35} 50%{transform:translateX(-50%) translateY(8px);opacity:.8} }
 
-    /* ===== ABOUT CONTENT WITH STRONG 3D ===== */
     .about-content {
       position: relative;
       padding: 80px 2rem 100px;
@@ -117,7 +126,7 @@
     .about-block {
       margin-bottom: 60px;
       opacity: 0;
-      transform: translateY(40px) rotateX(0deg) rotateY(0deg);
+      transform: translateY(40px);
       transition: opacity .9s cubic-bezier(.23,1,.32,1), transform 0.15s ease-out, box-shadow 0.15s ease-out;
       background: linear-gradient(160deg, rgba(15,30,20,0.85), rgba(8,18,10,0.95));
       border: 1px solid rgba(180,150,80,0.2);
@@ -130,7 +139,7 @@
       transform-style: preserve-3d;
       will-change: transform;
     }
-    .about-block.visible { opacity: 1; transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+    .about-block.visible { opacity: 1; transform: translateY(0); }
     .about-block h2 {
       font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
       font-weight: 600; color: #D4A040; letter-spacing: 2px; margin-bottom: 1.5rem; text-align: center;
@@ -148,7 +157,6 @@
     .about-quote p { font-style: italic; font-size: 1.3rem; color: #C89840; text-align: center; text-indent: 0; }
     .about-signature { text-align: center; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; color: #D4A040; margin-top: 2rem; }
 
-    /* ===== PHOTO SECTION ===== */
     .photo-section { display: flex; justify-content: center; margin: 3rem 0; }
     .author-photo {
       width: 280px; height: 280px; border-radius: 50%; overflow: hidden;
@@ -169,11 +177,11 @@
       margin: 0.5rem 0; animation: badgePulse 3s ease-in-out infinite;
     }
     @keyframes badgePulse { 0%,100%{opacity:.7} 50%{opacity:1} }
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2rem 0; text-align: center; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
     .stat-item { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(180,150,80,0.15); transition: all 0.3s ease; }
     .stat-item:hover { transform: translateY(-5px); border-color: rgba(180,150,80,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
     .stat-number { font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: #D4A040; }
-    .stat-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; color: rgba(180,200,160,0.5); text-transform: uppercase; }
+    .stat-label { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 2px; color: rgba(180,200,160,0.5); text-transform: uppercase; }
     .awakening-link { display: inline-flex; align-items: center; gap: 0.8rem; margin-top: 2rem; padding: 1rem 2rem; background: rgba(180,150,80,0.1); border: 1px solid rgba(180,150,80,0.4); border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; color: #D4A040; transition: all 0.3s; }
     .awakening-link:hover { background: rgba(180,150,80,0.25); border-color: #C89840; transform: translateY(-3px); }
 
@@ -186,7 +194,6 @@
     .footer-links a { color: #D4A040; text-decoration: none; margin: 0 0.5rem; }
     .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(180,200,160,0.15); background: #030804; }
 
-    /* ===== COOKIE CONSENT (Unified with global style) ===== */
     .cookie-consent {
       position: fixed;
       bottom: 0;
@@ -202,23 +209,9 @@
       transition: transform 0.3s;
       border-top: 1px solid rgba(212,175,55,0.2);
     }
-    .cookie-consent.show {
-      transform: translateY(0);
-    }
-    .cookie-consent button {
-      background: #D4AF37;
-      border: none;
-      padding: 0.2rem 1rem;
-      margin-left: 0.5rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .cookie-consent .decline-btn {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.5);
-      color: #D4AF37;
-    }
+    .cookie-consent.show { transform: translateY(0); }
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
+    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
 
     @media (max-width: 860px) {
       .about-content { padding: 60px 1rem 80px; }
@@ -227,12 +220,12 @@
       .hero-title { font-size: 1.8rem; }
       .author-photo { width: 200px; height: 200px; }
       .logo-watermark { width: 70vw; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== VISIBLE LOGO WATERMARK (logo.jpg) ===== -->
   <div class="logo-watermark">
     <img src="logo.jpg" alt="The Horseman's Journal Logo">
   </div>
@@ -253,7 +246,6 @@
             <li><a href="awakening.html">AWAKENING</a></li>
             <li><a href="chronicles.html">CHRONICLES</a></li>
             <li><a href="companions.html">COMPANIONS</a></li>
-            <!-- VERSES REMOVED -->
             <li><a href="questions.html">QUESTIONS</a></li>
             <li><a href="gathering.html">GATHERING</a></li>
             <li><a href="book.html">THE BOOK</a></li>
@@ -281,7 +273,7 @@
         <div class="hero-dgem"></div>
         <div class="hero-dline hero-dline r"></div>
       </div>
-      <p class="hero-tagline">Eleven years. One black stallion. A philosophy built on trust, not force.</p>
+      <p class="hero-tagline">International Dressage Champion · 30+ Medals · Trust, Not Force</p>
     </div>
     <div class="hero-scroll" id="scrollHint">
       <span>Enter</span>
@@ -299,16 +291,23 @@
       </div>
     </div>
 
+    <!-- Section 1: Who I Am & What I Do -->
     <div class="about-block">
       <div style="text-align: center; margin-bottom: 1rem;">
-        <span class="trust-badge">✦ 11+ Years of Experience ✦</span>
+        <span class="trust-badge">✦ International Dressage (Equitation) Champion ✦</span>
       </div>
-      <h2>Who I Am</h2>
-      <p>My name is <strong>Praveen Kumar</strong>. I am not a trainer in the traditional sense. I do not fix horses. I do not dominate them. I do not ask them to perform tricks or win ribbons. I work with them until they no longer feel the need to resist. That is the only definition of horsemanship that has ever made sense to me.</p>
-      <p>For <strong>over eleven years</strong>, I have lived inside the world of horses. Stallions, warmbloods, creatures of instinct and ancient grace who have no use for pretense. They did not simply teach me their language. They remade me, slowly, from the inside out, without asking permission and without offering explanations.</p>
-      <p>What sets me apart is not a certification or a trophy. It is the thousands of hours spent in silence with these animals, learning to read what they do not say. I have worked with horses that others gave up on. I have sat with fear until it softened. I have earned trust the only way it can be earned — one honest moment at a time.</p>
+      <h2>Who I Am & What I Do</h2>
+      <p>My name is Praveen Kumar, also known as Prashant. I have trained under and worked with Mr. Kapil Modi, a seven time National Champion and World Dressage Challenge Champion. He trusted me with his most expensive horses. That trust gave me the opportunity to move beyond traditional training and truly understand the horse. Mr. Kapil Modi is the reason I learned to read a horse instead of simply forcing one to obey.</p>
+      <p>I am an International Dressage (Equitation) Champion from India. Over the course of my career, I have won more than 30 medals in the International Dressage Development League.</p>
+      <p>My dream has always been to win the first Olympic Gold in Dressage for India. Whether I achieve that or not is not the point. What matters is that I show up every day. I work with horses. I train them. I paint them. I sit with them in silence. I help horses that others have given up on.</p>
+      <p>I do not believe in force, dominance, or breaking a horse's spirit. I believe in trust, patience, and listening. That is what I do. That is what I have always done.</p>
+      <p>The medals and titles are not why I work with horses. I work with horses because being near them, understanding them, painting them, and helping them trust me – that is what makes me feel alive.</p>
       
       <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">International Medals</div>
+        </div>
         <div class="stat-item">
           <div class="stat-number">11+</div>
           <div class="stat-label">Years of Experience</div>
@@ -322,50 +321,66 @@
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
+    <!-- Section 2: The Journey -->
     <div class="about-block">
       <h2>The Journey</h2>
-      <p>I came to horses ordinary. Quiet in a way that felt like smallness rather than strength. The world outside the stable never quite held a shape I was built for. But inside that world, surrounded by warmth and breath and the particular weight of a thousand-pound animal standing still beside you, something in me could finally exhale.</p>
-      <p>I did not begin with a philosophy. I began like most people do — trying to make things work, trying to control outcomes, trying to get the horse to respond correctly. Over time, that approach stopped making sense. The horses obeyed. Mostly. They performed. But when the work was done and the lead rope went slack, they never turned toward me. Something was always held back.</p>
+      <p>I came to horses as an ordinary person. Quiet in a way that felt like smallness rather than strength. The world outside the stable never quite held a shape I was built for. But inside that world, surrounded by warmth and breath and the weight of a thousand pound animal standing still beside me, something inside me could finally relax.</p>
+      <p>I did not begin with a philosophy. I began like most people do – trying to make things work, trying to control outcomes, trying to get the horse to respond correctly. Over time, that approach stopped making sense. The horses obeyed. Mostly. They performed. But when the work was done and the lead rope went slack, they never turned toward me. Something was always held back.</p>
       <div class="about-quote"><p>"A horse does not ask what you want. It asks what you are."</p></div>
-      <p>That realization took years. And it cost me. It cost me the comfort of certainty, the ease of old habits, the illusion that I was in control. But what it gave me in return was immeasurable — a way of being with horses that felt true, not just effective.</p>
+      <p>That realization took years. And it cost me. It cost me the comfort of certainty, the ease of old habits, the illusion that I was in control. But what it gave me in return was immeasurable – a way of being with horses that felt true, not just effective.</p>
     </div>
 
+    <!-- Section 3: The Black Stallion -->
     <div class="about-block">
       <h2>The Black Stallion</h2>
-      <p>Then the black stallion arrived, and everything changed. He was four years old, barely schooled. A living storm wrapped in midnight muscle and something older than training. He was not stubborn. He was honest. And from the very first day, he read me with a precision that cut through every mask I had carefully constructed over years of training.</p>
-      <p>He taught me that strength was never the point. What a horse asks for has nothing to do with dominance or performance. It asks you to stand without fear, to be consistent without agenda, to become the kind of presence an intelligent creature of pure instinct chooses to trust. That is a much harder thing than it sounds.</p>
+      <p>Then the black stallion arrived, and everything changed. He was four years old, barely trained. A living storm wrapped in midnight muscle and something older than any method I had learned. He was not stubborn. He was honest. And from the very first day, he saw through every mask I had carefully built over years of training.</p>
+      <p>He taught me that strength was never the point. What a horse asks for has nothing to do with dominance or performance. It asks you to stand without fear, to be consistent without an agenda, to become the kind of presence that an intelligent creature of pure instinct chooses to trust. That is much harder than it sounds.</p>
       <div class="about-quote"><p>"The horse that obeys because it has no choice is not truly trained. It is simply waiting for an opportunity to choose differently."</p></div>
     </div>
 
+    <!-- Section 4: My Dream and My Daily Work -->
+    <div class="about-block">
+      <h2>My Dream and My Daily Work</h2>
+      <p>My dream has always been to win an Olympic Gold in Dressage for India. I have worked toward that dream for years. I have won medals at international competitions. I have been recognized as an International Dressage (Equitation) Champion.</p>
+      <p>Whether I represent India or not is not in my hands. What is in my hands is showing up every day, working with horses, painting them, and staying true to my philosophy. That is what I do. That is what I will always do.</p>
+      <p>Every morning, I go to the arena. I work with horses that others have given up on. I sit with them in silence. I help them find trust. I learn from them. The medals are not why I do this. I do this because being near horses, understanding them, painting them, and helping them trust me – that is what makes me feel alive.</p>
+      <div class="about-quote"><p>"I may never stand on the Olympic podium. But every horse that trusts me is a medal I have already won."</p></div>
+      <p>That is not sadness. That is purpose.</p>
+    </div>
+
+    <!-- Section 5: The Philosophy -->
     <div class="about-block">
       <h2>The Philosophy</h2>
       <p><strong>A horse must be able to think before it can learn.</strong> If the horse is overwhelmed, no amount of pressure will create clarity.</p>
-      <p><strong>Behaviour is information, not disobedience.</strong> Every reaction shows you something about the horse's internal state.</p>
-      <p><strong>Willingness is more valuable than obedience.</strong> A correct response given freely is fundamentally different from one that is forced.</p>
-      <p><strong>Emotional steadiness is not optional.</strong> It is the foundation of everything. A horse cannot find clarity through a handler who is internally conflicted or externally aggressive.</p>
-      <p><strong>Trust is built in small moments.</strong> Not in grand gestures, but in the thousand small honest interactions that tell the horse you are safe, consistent, and real.</p>
+      <p><strong>Behaviour is information, not disobedience.</strong> Every reaction tells you something about the horse's inner state.</p>
+      <p><strong>Willingness is more valuable than obedience.</strong> A correct response given freely is completely different from one that is forced.</p>
+      <p><strong>Emotional steadiness is not optional.</strong> It is the foundation of everything. A horse cannot find clarity through a handler who is internally conflicted or outwardly aggressive.</p>
+      <p><strong>Trust is built in small moments.</strong> Not in grand gestures, but in thousands of small honest interactions that tell the horse you are safe, consistent, and real.</p>
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
+    <!-- Section 6: Why I Write -->
     <div class="about-block">
       <h2>Why I Write</h2>
-      <p>This journal is not a training manual. It is a conversation — about trust, about fear, about the invisible bond between horse and human. It is the record of eleven years of mornings in arenas, of falls and breakthroughs, of long, hard silences where nothing is said and everything is understood.</p>
+      <p>This journal is not a training manual. It is a conversation – about trust, about fear, about the invisible bond between horse and human. It is the record of eleven years of mornings in arenas, of falls and breakthroughs, of long, hard silences where nothing is said and everything is understood.</p>
       <p>I write because the horses taught me something I could not keep to myself. They taught me that the thing I was hiding was the thing that was safe. The thing I was performing was the thing that drove them away. I had it backwards my entire life.</p>
       <div class="about-quote"><p>"The horse does not ask you to be perfect. It asks you to be real."</p></div>
-      <p>Every article, every essay, every word on this site has been lived first in an arena, in the dust, in the space between my breath and a horse's heartbeat. I do not write theory. I write what I have learned from animals that cannot speak — and that is exactly why they are the best teachers.</p>
+      <p>Every article, every essay, every word on this site has been lived first in an arena, in the dust, in the space between my breath and a horse's heartbeat. I do not write theory. I write what I have learned from animals that cannot speak – and that is exactly why they are the best teachers.</p>
     </div>
 
+    <!-- Section 7: Beyond Horses -->
     <div class="about-block">
       <h2>Beyond Horses</h2>
-      <p>When I am not working with horses, I am reading, writing, or walking in silence. I believe that the same principles that build trust with a horse build trust with anything alive — patience, consistency, and the willingness to listen without an agenda.</p>
-      <p>I am based in India, where the equestrian world is still growing. My perspective is different because my journey is different. I did not grow up with horses. I found them. And that act of finding — of choosing this path against the grain — has shaped everything about my approach.</p>
-      <p>I am still afraid sometimes. Even now. Even after everything. Fear does not disappear because you have learned to work alongside it. But I stand. Not because I would lose something if I walked away. But because I refuse to abandon the one thing that has carried me through all of this — the work, the horses, and the truth they have taught me.</p>
+      <p>When I am not working with horses, I am reading, writing, or walking in silence. I believe that the same principles that build trust with a horse build trust with anything alive – patience, consistency, and the willingness to listen without an agenda.</p>
+      <p>I am based in India, where the equestrian world is still growing. My perspective is different because my journey is different. I did not grow up with horses. I found them. And that act of finding – of choosing this path against the grain – has shaped everything about my approach.</p>
+      <p>I am still afraid sometimes. Even now. Even after everything. Fear does not disappear because you have learned to work alongside it. But I stand. Not because I would lose something if I walked away. But because I refuse to abandon the one thing that has carried me through all of this – the work, the horses, and the truth they have taught me.</p>
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
+    <!-- Section 8: The Full Story -->
     <div class="about-block" style="text-align: center;">
       <h2>The Full Story</h2>
-      <p>What you have read here is only the beginning. The real story — the surrender, the twenty days of silence, the moment fear became trust — lives in the Awakening.</p>
+      <p>What you have read here is only the beginning. The real story – the surrender, the twenty days of silence, the moment fear became trust – lives in the Awakening.</p>
       <div class="about-quote"><p>"The universe did not send me a horse to train. It sent me a mirror that refused to lie."</p></div>
       <a href="awakening.html" class="awakening-link">✦ Read the Full Awakening Story ✦</a>
       <p class="about-signature">— Praveen Kumar</p>
@@ -397,7 +412,7 @@
   </div>
 
   <script>
-    // ===== CANVAS - DEEP FOREST WITH VISIBLE GROUND (original, unchanged) =====
+    // CANVAS ANIMATION (preserved exactly from your original)
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -605,7 +620,7 @@
       animate();
     }
 
-    // ===== STRONG 3D TILT EFFECT =====
+    // 3D Tilt Effect
     const aboutContent = document.getElementById('aboutContent');
     const aboutBlocks = document.querySelectorAll('.about-block');
     
@@ -616,10 +631,8 @@
         const mouseY = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const percentX = (mouseX - centerX) / centerX;
-        const percentY = (mouseY - centerY) / centerY;
         
-        aboutBlocks.forEach((block, i) => {
+        aboutBlocks.forEach((block) => {
           const blockRect = block.getBoundingClientRect();
           const blockCX = blockRect.left + blockRect.width / 2 - rect.left;
           const blockCY = blockRect.top + blockRect.height / 2 - rect.top;
@@ -631,10 +644,7 @@
           const translateZ = Math.abs(bPercentX) * 20 + Math.abs(bPercentY) * 20;
           
           block.style.transform = `perspective(1200px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(${translateZ}px)`;
-          block.style.boxShadow = `
-            ${-bPercentX * 15}px ${-bPercentY * 15}px 50px rgba(0,0,0,0.6),
-            0 0 0 1px rgba(180,150,80,${0.2 + Math.abs(bPercentX) * 0.3})
-          `;
+          block.style.boxShadow = `${-bPercentX * 15}px ${-bPercentY * 15}px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(180,150,80,${0.2 + Math.abs(bPercentX) * 0.3})`;
         });
       });
       
@@ -646,128 +656,45 @@
       });
     }
 
-    const blocks = document.querySelectorAll('.about-block');
+    // Intersection Observer for fade-in
     const blockObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); blockObserver.unobserve(entry.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    blocks.forEach(b => blockObserver.observe(b));
+    aboutBlocks.forEach(b => blockObserver.observe(b));
 
     document.getElementById('scrollHint')?.addEventListener('click', () => document.querySelector('.about-content')?.scrollIntoView({ behavior: 'smooth' }));
     document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // ===== UNIFIED COOKIE CONSENT (matches index.html) =====
+    // Cookie Consent
     const cookieConsent = document.getElementById('cookieConsent');
     const acceptCookies = document.getElementById('acceptCookies');
     const declineCookies = document.getElementById('declineCookies');
-    
-    function setCookieConsent(accepted) {
-      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-      if (cookieConsent) cookieConsent.style.display = 'none';
-    }
-    
-    function showCookieConsent() {
-      if (!cookieConsent) return;
-      const consent = localStorage.getItem('cookieConsent');
-      if (!consent) {
-        cookieConsent.style.display = 'flex';
-      } else {
-        cookieConsent.style.display = 'none';
-      }
-    }
-    
+    function setCookieConsent(accepted) { localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined'); if (cookieConsent) cookieConsent.classList.remove('show'); }
+    function showCookieConsent() { if (!cookieConsent) return; const consent = localStorage.getItem('cookieConsent'); if (!consent) cookieConsent.classList.add('show'); else cookieConsent.classList.remove('show'); }
     if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
     if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
     showCookieConsent();
 
-    // ===== FAVICON PARTICLE ANIMATION (floating favicon.png in background) =====
+    // Favicon Particles
     const faviconCanvas = document.createElement('canvas');
     faviconCanvas.id = 'faviconCanvas';
-    faviconCanvas.style.position = 'fixed';
-    faviconCanvas.style.top = '0';
-    faviconCanvas.style.left = '0';
-    faviconCanvas.style.width = '100%';
-    faviconCanvas.style.height = '100%';
-    faviconCanvas.style.pointerEvents = 'none';
-    faviconCanvas.style.zIndex = '0';
-    faviconCanvas.style.opacity = '0.2';
+    faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
     document.body.appendChild(faviconCanvas);
-    
     const favCtx = faviconCanvas.getContext('2d');
     let favW, favH;
     let favParticles = [];
     const faviconImg = new Image();
     faviconImg.src = 'favicon.png';
-    
-    function resizeFavCanvas() {
-      favW = faviconCanvas.width = window.innerWidth;
-      favH = faviconCanvas.height = window.innerHeight;
-    }
-    
-    class FavParticle {
-      constructor() {
-        this.x = Math.random() * favW;
-        this.y = Math.random() * favH;
-        this.size = Math.random() * 20 + 10;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.speedY = (Math.random() - 0.5) * 0.2 + 0.1;
-        this.alpha = Math.random() * 0.4 + 0.1;
-        this.rotation = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.01;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.rotation += this.rotSpeed;
-        if (this.x < -50) this.x = favW + 50;
-        if (this.x > favW + 50) this.x = -50;
-        if (this.y < -50) this.y = favH + 50;
-        if (this.y > favH + 50) this.y = -50;
-      }
-      draw() {
-        if (!faviconImg.complete) return;
-        favCtx.save();
-        favCtx.translate(this.x, this.y);
-        favCtx.rotate(this.rotation);
-        favCtx.globalAlpha = this.alpha;
-        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
-        favCtx.restore();
-      }
-    }
-    
-    function initFavParticles() {
-      favParticles = [];
-      for (let i = 0; i < 40; i++) {
-        favParticles.push(new FavParticle());
-      }
-    }
-    
-    function animateFav() {
-      if (!favCtx) return;
-      favCtx.clearRect(0, 0, favW, favH);
-      favParticles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animateFav);
-    }
-    
-    if (faviconImg.complete) {
-      resizeFavCanvas();
-      initFavParticles();
-      animateFav();
-    } else {
-      faviconImg.onload = () => {
-        resizeFavCanvas();
-        initFavParticles();
-        animateFav();
-      };
-    }
-    
-    window.addEventListener('resize', () => {
-      resizeFavCanvas();
-      initFavParticles();
-    });
+    function resizeFavCanvas() { favW = faviconCanvas.width = window.innerWidth; favH = faviconCanvas.height = window.innerHeight; }
+    class FavParticle { constructor() { this.x = Math.random() * favW; this.y = Math.random() * favH; this.size = Math.random() * 20 + 10; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.2 + 0.1; this.alpha = Math.random() * 0.4 + 0.1; this.rotation = Math.random() * Math.PI * 2; this.rotSpeed = (Math.random() - 0.5) * 0.01; }
+      update() { this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed; if (this.x < -50) this.x = favW + 50; if (this.x > favW + 50) this.x = -50; if (this.y < -50) this.y = favH + 50; if (this.y > favH + 50) this.y = -50; }
+      draw() { if (!faviconImg.complete) return; favCtx.save(); favCtx.translate(this.x, this.y); favCtx.rotate(this.rotation); favCtx.globalAlpha = this.alpha; favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size); favCtx.restore(); } }
+    function initFavParticles() { favParticles = []; for (let i = 0; i < 40; i++) favParticles.push(new FavParticle()); }
+    function animateFav() { if (!favCtx) return; favCtx.clearRect(0, 0, favW, favH); favParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateFav); }
+    faviconImg.onload = () => { resizeFavCanvas(); initFavParticles(); animateFav(); };
+    window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
+    if (faviconImg.complete) { resizeFavCanvas(); initFavParticles(); animateFav(); }
   </script>
 </body>
 </html>
