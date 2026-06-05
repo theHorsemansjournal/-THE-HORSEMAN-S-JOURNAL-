@@ -203,6 +203,44 @@
     </section>
   </main>
 
+    <!-- ===== STUDENT REVIEWS SECTION ===== -->
+    <section class="student-reviews-section">
+      <div class="student-reviews-container">
+        <div class="student-reviews-header">
+          <h2 class="student-reviews-title">✦ What My Riding Students Say ✦</h2>
+          <p class="student-reviews-sub">Real reviews from those who learned to ride with me</p>
+        </div>
+
+        <div class="student-reviews-grid" id="studentReviewsGrid">
+          <!-- Reviews will be loaded automatically from Google Sheets -->
+          <div class="loading-reviews">Loading reviews...</div>
+        </div>
+
+        <div class="student-review-form-container">
+          <h3 class="student-form-title">✧ Share Your Experience ✧</h3>
+          <p class="student-form-note">If you learned to ride with me, your story matters. Your review will appear here after approval.</p>
+          <form id="studentReviewForm" class="student-review-form">
+            <div class="student-form-row">
+              <div class="student-form-group">
+                <input type="text" name="name" placeholder="Your name" required>
+              </div>
+              <div class="student-form-group">
+                <input type="text" name="year" placeholder="When did you learn? (e.g., 2025)">
+              </div>
+            </div>
+            <div class="student-form-group">
+              <textarea name="message" rows="4" placeholder="What did you learn? How did riding lessons change you?" required></textarea>
+            </div>
+            <div class="student-form-group">
+              <input type="email" name="email" placeholder="Your email (not published)" required>
+            </div>
+            <button type="submit" class="submit-student-review">Submit Your Review ✦</button>
+            <div id="studentReviewStatus" class="form-status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  
   <div class="footer-links">
     <a href="privacy.html">Privacy Policy</a> • 
     <a href="sitemap.xml">Sitemap</a> • 
