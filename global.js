@@ -761,7 +761,7 @@ if (studentReviewForm) {
     };
     
     // Send to Google Sheets Web App
-    const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJEgCH6-QiwXC1T8BGgvd-z_7iSfans2NKFAfHbUVWS0Zvn123fDtBFu-jkoWsoWe1/exec';
     
     try {
       const response = await fetch(SCRIPT_URL, {
