@@ -708,3 +708,78 @@
         window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
     }
 })();
+
+// ===== STUDENT REVIEWS: FETCH FROM GOOGLE SHEETS =====
+async function loadStudentReviews() {
+  const container = document.getElementById('studentReviewsGrid');
+  if (!container) return;
+  
+  // Google Sheets Web App URL (you will create this)
+  const SHEET_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+  
+  try {
+    const response = await fetch(SHEET_URL);
+    const reviews = await response.json();
+    
+    if (reviews.length === 0) {
+      container.innerHTML = '<div class="loading-reviews">No reviews yet. Be the first to share your experience!</div>';
+      return;
+    }
+    
+    container.innerHTML = '';
+    reviews.forEach(review => {
+      const card = document.createElement('div');
+      card.className = 'student-review-card';
+      card.innerHTML = `
+        <div class="student-review-stars">★★★★★</div>
+        <p class="student-review-text">"${review.message}"</p>
+        <div class="student-review-author">— ${review.name}</div>
+        <div class="student-review-year">Learned to ride · ${review.year}</div>
+      `;
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error('Error loading reviews:', error);
+    container.innerHTML = '<div class="loading-reviews">Unable to load reviews. Please check back later.</div>';
+  }
+}
+
+// ===== STUDENT REVIEW FORM SUBMISSION =====
+const studentReviewForm = document.getElementById('studentReviewForm');
+if (studentReviewForm) {
+  studentReviewForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const statusDiv = document.getElementById('studentReviewStatus');
+    statusDiv.innerHTML = 'Submitting your review...';
+    statusDiv.classList.remove('error');
+    
+    const formData = {
+      name: studentReviewForm.querySelector('input[name="name"]').value,
+      year: studentReviewForm.querySelector('input[name="year"]').value,
+      message: studentReviewForm.querySelector('textarea[name="message"]').value,
+      email: studentReviewForm.querySelector('input[name="email"]').value
+    };
+    
+    // Send to Google Sheets Web App
+    const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+    
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      statusDiv.innerHTML = '✓ Thank you! Your review has been submitted for approval.';
+      studentReviewForm.reset();
+      setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+    } catch (error) {
+      statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
+      statusDiv.classList.add('error');
+    }
+  });
+}
+
+// Load reviews when page loads
+document.addEventListener('DOMContentLoaded', loadStudentReviews);
