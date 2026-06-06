@@ -1,4 +1,4 @@
-// The Horseman's Journal - Global JavaScript (Static Book – Works on All Devices)
+// The Horseman's Journal - Global JavaScript (Optimized)
 
 (function() {
     if (document.readyState === 'loading') {
@@ -8,26 +8,45 @@
     }
 
     function init() {
-        initHeroCanvas();
-        // No 3D book – show static book instead
-        showStaticBook();
-        initLanternsAndParticles();
+        // Only run canvas-related functions if elements exist
+        if (document.getElementById('heroCanvas')) {
+            initHeroCanvas();
+        }
+        if (document.querySelector('.book-hardcover-container')) {
+            showStaticBook();
+        }
+        if (document.getElementById('lanterns')) {
+            initLanternsAndParticles();
+        }
         initFormsAndFeatures();
         initFaviconParticles();
     }
     
-    // ========== HERO CANVAS (your original, unchanged) ==========
+    // ========== HERO CANVAS ==========
     function initHeroCanvas() {
         const canvas = document.getElementById('heroCanvas');
-        if (!canvas) { console.error('heroCanvas not found'); return; }
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
         let W, H, mx = 0.5, my = 0.5, t = 0;
         let logoOpacity = 0.95;
         let lastMove = 0;
-        function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+        
+        function resize() { 
+            W = canvas.width = canvas.offsetWidth; 
+            H = canvas.height = canvas.offsetHeight; 
+        }
         resize();
         window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => { mx = e.clientX / W; my = e.clientY / H; lastMove = t; });
+        
+        // Only track mouse on desktop
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+        if (!isMobile) {
+            window.addEventListener('mousemove', e => { 
+                mx = e.clientX / W; 
+                my = e.clientY / H; 
+                lastMove = t; 
+            });
+        }
         
         function drawLogo(x, y, size, opacity) {
             ctx.save();
@@ -529,28 +548,25 @@
         window.addEventListener('resize', () => { resize(); });
     }
     
-    // ========== SHOW STATIC BOOK (No Three.js – works everywhere) ==========
+    // ========== SHOW STATIC BOOK ==========
     function showStaticBook() {
         const container = document.querySelector('.book-hardcover-container');
         if (!container) return;
-        // Ensure static book is visible
         const staticBook = container.querySelector('.book-hardcover');
         if (staticBook) {
             staticBook.style.display = 'block';
             staticBook.style.opacity = '1';
             staticBook.style.visibility = 'visible';
         }
-        // Remove any Three.js canvas if present
         const canvas = container.querySelector('canvas');
         if (canvas) canvas.remove();
-        // Also ensure the glow and particles container don't interfere
         const glow = container.querySelector('.book-glow');
         if (glow) glow.style.zIndex = '1';
         const particlesContainer = document.getElementById('bookParticles');
         if (particlesContainer) particlesContainer.style.zIndex = '3';
     }
     
-    // ========== LANTERNS AND PARTICLES (unchanged) ==========
+    // ========== LANTERNS AND PARTICLES ==========
     function initLanternsAndParticles() {
         const sections = [
             { name: 'About', baseHue: 45, shiftSpeed: 0.3, screenX: 12, screenY: 28 },
@@ -573,6 +589,7 @@
                 lanternsDiv.appendChild(el);
             });
         }
+        
         const hallParticles = document.getElementById('hallParticles');
         if (hallParticles) {
             for (let i = 0; i < 35; i++) {
@@ -585,6 +602,7 @@
                 hallParticles.appendChild(p);
             }
         }
+        
         const bookParticlesContainer = document.getElementById('bookParticles');
         if (bookParticlesContainer) {
             for (let i = 0; i < 25; i++) {
@@ -601,27 +619,48 @@
         }
     }
     
-    // ========== FORMS AND FEATURES (unchanged) ==========
+    // ========== FORMS AND FEATURES ==========
     function initFormsAndFeatures() {
         const yearSpan = document.getElementById('currentYear');
         if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        
         const portalBtn = document.getElementById('portalBtn');
         if (portalBtn) portalBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
         const scrollHint = document.getElementById('scrollHint');
-        if (scrollHint) scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
+        if (scrollHint && document.querySelector('.great-hall')) {
+            scrollHint.addEventListener('click', () => { document.querySelector('.great-hall')?.scrollIntoView({ behavior: 'smooth' }); });
+        }
+        
+        // Cookie Consent
         const cookieConsent = document.getElementById('cookieConsent');
         const acceptCookies = document.getElementById('acceptCookies');
         const declineCookies = document.getElementById('declineCookies');
+        
         function setCookieConsent(accepted) {
             localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-            if (cookieConsent) cookieConsent.style.display = 'none';
+            if (cookieConsent) cookieConsent.classList.remove('show');
         }
-        if (cookieConsent && !localStorage.getItem('cookieConsent')) cookieConsent.style.display = 'flex';
+        
+        function showCookieConsent() {
+            if (!cookieConsent) return;
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                cookieConsent.classList.add('show');
+            } else {
+                cookieConsent.classList.remove('show');
+            }
+        }
+        
         if (acceptCookies) acceptCookies.addEventListener('click', () => setCookieConsent(true));
         if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
+        showCookieConsent();
+        
+        // Newsletter and Contact Forms
         const newsletterForm = document.getElementById('newsletterForm');
         const contactForm = document.getElementById('contactForm');
         const formspreeEndpoint = 'https://formspree.io/f/xjgzzdlp';
+        
         async function submitForm(form, statusDivId) {
             const statusDiv = document.getElementById(statusDivId);
             if (!statusDiv) return;
@@ -648,29 +687,39 @@
                 statusDiv.classList.add('error');
             }
         }
-        if (newsletterForm) newsletterForm.addEventListener('submit', async (e) => { e.preventDefault(); await submitForm(newsletterForm, 'newsletterStatus'); });
-        if (contactForm) contactForm.addEventListener('submit', async (e) => { e.preventDefault(); await submitForm(contactForm, 'contactStatus'); });
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async (e) => { 
+                e.preventDefault(); 
+                await submitForm(newsletterForm, 'newsletterStatus'); 
+            });
+        }
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => { 
+                e.preventDefault(); 
+                await submitForm(contactForm, 'contactStatus'); 
+            });
+        }
     }
     
-    // ========== FAVICON PARTICLES (unchanged) ==========
+    // ========== FAVICON PARTICLES ==========
     function initFaviconParticles() {
         const faviconCanvas = document.createElement('canvas');
         faviconCanvas.id = 'faviconCanvas';
-        faviconCanvas.style.position = 'fixed';
-        faviconCanvas.style.top = '0';
-        faviconCanvas.style.left = '0';
-        faviconCanvas.style.width = '100%';
-        faviconCanvas.style.height = '100%';
-        faviconCanvas.style.pointerEvents = 'none';
-        faviconCanvas.style.zIndex = '0';
-        faviconCanvas.style.opacity = '0.2';
+        faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
         document.body.appendChild(faviconCanvas);
+        
         const favCtx = faviconCanvas.getContext('2d');
         let favW, favH;
         let favParticles = [];
         const faviconImg = new Image();
         faviconImg.src = 'favicon.png';
-        function resizeFavCanvas() { favW = faviconCanvas.width = window.innerWidth; favH = faviconCanvas.height = window.innerHeight; }
+        
+        function resizeFavCanvas() { 
+            favW = faviconCanvas.width = window.innerWidth; 
+            favH = faviconCanvas.height = window.innerHeight; 
+        }
+        
         class FavParticle {
             constructor() {
                 this.x = Math.random() * favW;
@@ -701,11 +750,36 @@
                 favCtx.restore();
             }
         }
-        function initFavParticles() { favParticles = []; for (let i = 0; i < 40; i++) favParticles.push(new FavParticle()); }
-        function animateFav() { if (!favCtx) return; favCtx.clearRect(0, 0, favW, favH); favParticles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateFav); }
-        if (faviconImg.complete) { resizeFavCanvas(); initFavParticles(); animateFav(); } 
-        else { faviconImg.onload = () => { resizeFavCanvas(); initFavParticles(); animateFav(); }; }
-        window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
+        
+        function initFavParticles() { 
+            favParticles = []; 
+            for (let i = 0; i < 40; i++) { 
+                favParticles.push(new FavParticle()); 
+            } 
+        }
+        
+        function animateFav() { 
+            if (!favCtx) return;
+            favCtx.clearRect(0, 0, favW, favH); 
+            favParticles.forEach(p => { p.update(); p.draw(); }); 
+            requestAnimationFrame(animateFav); 
+        }
+        
+        if (faviconImg.complete) { 
+            resizeFavCanvas(); 
+            initFavParticles(); 
+            animateFav(); 
+        } else { 
+            faviconImg.onload = () => { 
+                resizeFavCanvas(); 
+                initFavParticles(); 
+                animateFav(); 
+            }; 
+        }
+        window.addEventListener('resize', () => { 
+            resizeFavCanvas(); 
+            initFavParticles(); 
+        });
     }
 })();
 
@@ -714,14 +788,14 @@ async function loadStudentReviews() {
   const container = document.getElementById('studentReviewsGrid');
   if (!container) return;
   
-  // Google Sheets Web App URL (you will create this)
+  // 👇 REPLACE THIS URL with your actual Google Apps Script Web App URL
   const SHEET_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
   
   try {
     const response = await fetch(SHEET_URL);
     const reviews = await response.json();
     
-    if (reviews.length === 0) {
+    if (!reviews || reviews.length === 0) {
       container.innerHTML = '<div class="loading-reviews">No reviews yet. Be the first to share your experience!</div>';
       return;
     }
@@ -732,9 +806,9 @@ async function loadStudentReviews() {
       card.className = 'student-review-card';
       card.innerHTML = `
         <div class="student-review-stars">★★★★★</div>
-        <p class="student-review-text">"${review.message}"</p>
-        <div class="student-review-author">— ${review.name}</div>
-        <div class="student-review-year">Learned to ride · ${review.year}</div>
+        <p class="student-review-text">"${escapeHtml(review.message)}"</p>
+        <div class="student-review-author">— ${escapeHtml(review.name)}</div>
+        <div class="student-review-year">Learned to ride · ${escapeHtml(review.year)}</div>
       `;
       container.appendChild(card);
     });
@@ -744,36 +818,51 @@ async function loadStudentReviews() {
   }
 }
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ===== STUDENT REVIEW FORM SUBMISSION =====
 const studentReviewForm = document.getElementById('studentReviewForm');
 if (studentReviewForm) {
   studentReviewForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const statusDiv = document.getElementById('studentReviewStatus');
+    if (!statusDiv) return;
+    
     statusDiv.innerHTML = 'Submitting your review...';
     statusDiv.classList.remove('error');
     
     const formData = {
-      name: studentReviewForm.querySelector('input[name="name"]').value,
-      year: studentReviewForm.querySelector('input[name="year"]').value,
-      message: studentReviewForm.querySelector('textarea[name="message"]').value,
-      email: studentReviewForm.querySelector('input[name="email"]').value
+      name: studentReviewForm.querySelector('input[name="name"]')?.value || '',
+      year: studentReviewForm.querySelector('input[name="year"]')?.value || '',
+      message: studentReviewForm.querySelector('textarea[name="message"]')?.value || '',
+      email: studentReviewForm.querySelector('input[name="email"]')?.value || ''
     };
     
-    // Send to Google Sheets Web App
+    // 👇 REPLACE THIS URL with your actual Google Apps Script Web App URL
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJEgCH6-QiwXC1T8BGgvd-z_7iSfans2NKFAfHbUVWS0Zvn123fDtBFu-jkoWsoWe1/exec';
     
     try {
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
       
-      statusDiv.innerHTML = '✓ Thank you! Your review has been submitted for approval.';
-      studentReviewForm.reset();
-      setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+      if (response.ok) {
+        statusDiv.innerHTML = '✓ Thank you! Your review has been submitted for approval.';
+        studentReviewForm.reset();
+        setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+      } else {
+        throw new Error('Server error');
+      }
     } catch (error) {
       statusDiv.innerHTML = '❌ Something went wrong. Please try again.';
       statusDiv.classList.add('error');
@@ -781,5 +870,7 @@ if (studentReviewForm) {
   });
 }
 
-// Load reviews when page loads
-document.addEventListener('DOMContentLoaded', loadStudentReviews);
+// Load reviews when page loads (only if the container exists)
+if (document.getElementById('studentReviewsGrid')) {
+  document.addEventListener('DOMContentLoaded', loadStudentReviews);
+}
