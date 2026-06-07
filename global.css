@@ -31,7 +31,7 @@ body::before {
 }
 
 /* Ensure all content sits above watermark */
-.hero, .great-hall, .testimonials, .book-showcase, .extra-sections, .contact, .footer-links, .copyright, .navbar-wrapper {
+.hero, .great-hall, .testimonials, .book-showcase, .extra-sections, .contact, .footer-links, .copyright, .navbar-wrapper, .student-reviews-section {
     position: relative;
     z-index: 1;
 }
@@ -109,38 +109,64 @@ body::before {
     pointer-events: none;
 }
 
+/* ===== UPDATED HERO TITLE STYLES ===== */
 .hero-eyebrow {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
-    letter-spacing: 14px;
-    background: linear-gradient(135deg, #D4AF37, #CD7F32);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: rgba(212, 175, 55, 0.7);
     text-transform: uppercase;
     display: inline-block;
-    margin-bottom: 1rem;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    margin-bottom: 1.2rem;
+    text-shadow: 0 1px 8px rgba(212, 175, 55, 0.15);
 }
 
 .hero-title {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-size: clamp(2rem, 5.5vw, 4.2rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 25%, #8B6914 50%, #D4AF37 75%, #B8860B 100%);
+    margin-bottom: 0.8rem;
+    line-height: 1.15;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.ht-the {
+    font-size: 0.5em;
+    font-weight: 400;
+    letter-spacing: 6px;
+    color: rgba(212, 175, 55, 0.6);
+    text-transform: uppercase;
+}
+
+.ht-horseman {
+    background: linear-gradient(135deg, #D4AF37 0%, #CD7F32 25%, #E8C84A 50%, #D4AF37 75%, #B8860B 100%);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    letter-spacing: 5px;
-    margin-bottom: 0.8rem;
     animation: titleShine 5s ease-in-out infinite;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
+    font-size: 1em;
+}
+
+.ht-journal {
+    font-size: 1.15em;
+    letter-spacing: 8px;
+    background: linear-gradient(135deg, #E8C84A 0%, #D4AF37 50%, #CD7F32 100%);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titleShine 5s ease-in-out infinite 0.5s;
+    filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.35));
 }
 
 @keyframes titleShine {
-    0%, 100% { filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)); background-position: 0% 50%; }
-    50% { filter: drop-shadow(0 0 40px rgba(212,175,55,0.4)); background-position: 100% 50%; }
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .hero-divider {
@@ -241,6 +267,26 @@ body::before {
 }
 
 .hero-scroll svg { width: 20px; stroke: #D4AF37; }
+
+/* ===== HALL EMBLEM (Horse moved from hero to journal section) ===== */
+.hall-emblem {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+.hall-emblem canvas {
+    display: inline-block;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
+    animation: emblemFloat 5s ease-in-out infinite;
+}
+
+@keyframes emblemFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
 
 /* ===== NAVBAR 3D STYLES ===== */
 .navbar-wrapper {
@@ -1149,145 +1195,6 @@ body::before {
     color: #cd7f32;
 }
 
-/* ===== FAVICON ANIMATION CANVAS ===== */
-#faviconCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.2;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 860px) {
-    .navbar-wrapper {
-        padding: 0.5rem;
-        overflow-x: visible;
-    }
-    .scene {
-        perspective: none;
-        width: 100%;
-    }
-    .nav3d {
-        height: auto;
-        transform: rotateX(0deg) !important;
-        background: rgba(0, 0, 0, 0.35);
-        border-radius: 20px;
-        backdrop-filter: blur(12px);
-    }
-    .nav3d:hover {
-        transform: rotateX(0deg) !important;
-    }
-    .face-top {
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid rgba(212, 175, 55, 0.2);
-    }
-    .face-bottom-wall,
-    .face-top-wall,
-    .face-left-wall,
-    .face-right-wall,
-    .face-back {
-        display: none;
-    }
-    .nav-content {
-        position: relative;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        padding: 0.6rem;
-        justify-content: center;
-    }
-    .brand {
-        font-size: 0.55rem;
-        text-align: center;
-        width: 100%;
-        margin-bottom: 0.2rem;
-    }
-    .brand small {
-        font-size: 0.35rem;
-        display: inline-block;
-    }
-    .links {
-        gap: 0.2rem;
-        justify-content: center;
-        width: 100%;
-    }
-    .links li a {
-        font-size: 0.45rem;
-        padding: 3px 5px;
-        letter-spacing: 0.5px;
-        white-space: nowrap;
-    }
-    .portal-scene {
-        position: static;
-        margin-top: 0.2rem;
-    }
-    .portal-top {
-        font-size: 0.45rem;
-        padding: 3px 8px;
-    }
-    .great-hall {
-        padding: 2rem 1rem 3rem;
-    }
-    /* FIX: Better alignment for hall cards on mobile */
-    .hall-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        padding: 1rem;
-        text-align: left;
-    }
-    .hall-card-num {
-        font-size: 1.2rem;
-        min-width: auto;
-    }
-    .hall-card-name {
-        font-size: 0.95rem;
-    }
-    .hall-card-desc {
-        font-size: 0.8rem;
-    }
-    .hall-card-arrow {
-        display: none;
-    }
-    /* FIX: Testimonials grid on very narrow screens */
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    .book-showcase-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2.5rem;
-    }
-    .book-details {
-        text-align: center;
-    }
-    .book-description {
-        max-width: 100%;
-    }
-    .book-actions {
-        justify-content: center;
-    }
-    .extra-grid {
-        flex-direction: column;
-    }
-    #lanterns .lantern-glow {
-        width: 18px !important;
-        height: 24px !important;
-    }
-    #lanterns .lantern-label span {
-        font-size: 0.45rem !important;
-        letter-spacing: 1px !important;
-    }
-    /* Additional safety for all sections */
-    .great-hall, .testimonials, .book-showcase, .extra-sections, .contact {
-        overflow-x: hidden;
-    }
-}
 /* ===== STUDENT REVIEWS SECTION ===== */
 .student-reviews-section {
   background: linear-gradient(180deg, #0a0508 0%, #0d060a 100%);
@@ -1462,27 +1369,155 @@ body::before {
   background: #e6c34c;
 }
 
-.form-status {
-  margin-top: 1rem;
-  font-size: 0.7rem;
-  font-family: 'EB Garamond', serif;
-  color: #D4AF37;
-  text-align: center;
-}
-
-.form-status.error {
-  color: #cd7f32;
-}
-
+/* ===== RESPONSIVE ===== */
 @media (max-width: 860px) {
-  .student-reviews-section {
-    padding: 3rem 1rem;
-  }
-  .student-reviews-title {
-    font-size: 1.4rem;
-  }
-  .student-form-row {
-    flex-direction: column;
-    gap: 0;
-  }
+    .navbar-wrapper {
+        padding: 0.5rem;
+        overflow-x: visible;
+    }
+    .scene {
+        perspective: none;
+        width: 100%;
+    }
+    .nav3d {
+        height: auto;
+        transform: rotateX(0deg) !important;
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+    }
+    .nav3d:hover {
+        transform: rotateX(0deg) !important;
+    }
+    .face-top {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .face-bottom-wall,
+    .face-top-wall,
+    .face-left-wall,
+    .face-right-wall,
+    .face-back {
+        display: none;
+    }
+    .nav-content {
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0.6rem;
+        justify-content: center;
+    }
+    .brand {
+        font-size: 0.55rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 0.2rem;
+    }
+    .brand small {
+        font-size: 0.35rem;
+        display: inline-block;
+    }
+    .links {
+        gap: 0.2rem;
+        justify-content: center;
+        width: 100%;
+    }
+    .links li a {
+        font-size: 0.45rem;
+        padding: 3px 5px;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+    }
+    .portal-scene {
+        position: static;
+        margin-top: 0.2rem;
+    }
+    .portal-top {
+        font-size: 0.45rem;
+        padding: 3px 8px;
+    }
+    .hero-eyebrow {
+        font-size: 0.55rem;
+        letter-spacing: 4px;
+    }
+    .hero-title {
+        font-size: clamp(1.6rem, 8vw, 2.8rem);
+        gap: 0.1rem;
+    }
+    .ht-the {
+        font-size: 0.45em;
+    }
+    .ht-journal {
+        letter-spacing: 5px;
+    }
+    .hall-emblem canvas {
+        width: 80px;
+        height: 80px;
+    }
+    .great-hall {
+        padding: 2rem 1rem 3rem;
+    }
+    .hall-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 1rem;
+        text-align: left;
+    }
+    .hall-card-num {
+        font-size: 1.2rem;
+        min-width: auto;
+    }
+    .hall-card-name {
+        font-size: 0.95rem;
+    }
+    .hall-card-desc {
+        font-size: 0.8rem;
+    }
+    .hall-card-arrow {
+        display: none;
+    }
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .book-showcase-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2.5rem;
+    }
+    .book-details {
+        text-align: center;
+    }
+    .book-description {
+        max-width: 100%;
+    }
+    .book-actions {
+        justify-content: center;
+    }
+    .extra-grid {
+        flex-direction: column;
+    }
+    #lanterns .lantern-glow {
+        width: 18px !important;
+        height: 24px !important;
+    }
+    #lanterns .lantern-label span {
+        font-size: 0.45rem !important;
+        letter-spacing: 1px !important;
+    }
+    .great-hall, .testimonials, .book-showcase, .extra-sections, .contact {
+        overflow-x: hidden;
+    }
+    .student-reviews-section {
+        padding: 3rem 1rem;
+    }
+    .student-reviews-title {
+        font-size: 1.4rem;
+    }
+    .student-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
 }
