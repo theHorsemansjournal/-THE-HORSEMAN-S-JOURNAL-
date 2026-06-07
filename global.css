@@ -109,7 +109,7 @@ body::before {
     pointer-events: none;
 }
 
-/* ===== UPDATED HERO TITLE STYLES ===== */
+/* ===== HERO TITLE STYLES ===== */
 .hero-eyebrow {
     font-family: 'Cinzel', serif;
     font-size: 0.65rem;
@@ -268,7 +268,7 @@ body::before {
 
 .hero-scroll svg { width: 20px; stroke: #D4AF37; }
 
-/* ===== HALL EMBLEM (Horse moved from hero to journal section) ===== */
+/* ===== HALL EMBLEM ===== */
 .hall-emblem {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -1080,6 +1080,11 @@ body::before {
 }
 
 /* ===== FOOTER ===== */
+footer {
+    position: relative;
+    z-index: 1;
+}
+
 .footer-links {
     text-align: center;
     padding: 2rem;
@@ -1201,6 +1206,8 @@ body::before {
   padding: 5rem 2rem;
   border-top: 1px solid rgba(212,175,55,0.08);
   border-bottom: 1px solid rgba(212,175,55,0.08);
+  position: relative;
+  z-index: 1;
 }
 
 .student-reviews-container {
@@ -1437,23 +1444,71 @@ body::before {
         font-size: 0.45rem;
         padding: 3px 8px;
     }
+    
+    /* Mobile hero centering fix */
+    .hero {
+        height: 100vh;
+        min-height: 100vh;
+    }
+    .hero-title-container {
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 94%;
+        padding: 0 0.5rem;
+        text-align: center;
+    }
     .hero-eyebrow {
-        font-size: 0.55rem;
+        font-size: 0.5rem;
         letter-spacing: 4px;
+        margin-bottom: 1rem;
     }
     .hero-title {
-        font-size: clamp(1.6rem, 8vw, 2.8rem);
+        font-size: clamp(1.5rem, 7vw, 2.4rem);
         gap: 0.1rem;
+        text-align: center;
     }
     .ht-the {
         font-size: 0.45em;
+        letter-spacing: 4px;
+    }
+    .ht-horseman {
+        font-size: 1em;
     }
     .ht-journal {
-        letter-spacing: 5px;
+        font-size: 1.1em;
+        letter-spacing: 4px;
     }
+    .hero-tagline {
+        font-size: 0.75rem;
+        max-width: 90%;
+        line-height: 1.5;
+    }
+    .hero-stats {
+        gap: 1.2rem;
+        margin-top: 1.2rem;
+    }
+    .hero-stat {
+        padding-right: 1.2rem;
+        border-right: 1px solid rgba(212,175,55,0.2);
+    }
+    .hero-stat-number {
+        font-size: 1rem;
+    }
+    .hero-stat-label {
+        font-size: 0.45rem;
+        letter-spacing: 2px;
+    }
+    .hero-divider {
+        margin: 0.8rem 0;
+    }
+    .hero-line {
+        width: 50px;
+    }
+    
     .hall-emblem canvas {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
     }
     .great-hall {
         padding: 2rem 1rem 3rem;
@@ -1519,5 +1574,23 @@ body::before {
     .student-form-row {
         flex-direction: column;
         gap: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-title-container {
+        width: 96%;
+    }
+    .hero-title {
+        font-size: clamp(1.3rem, 6vw, 1.8rem);
+    }
+    .hero-stats {
+        gap: 0.8rem;
+    }
+    .hero-stat {
+        padding-right: 0.8rem;
+    }
+    .hero-stat-number {
+        font-size: 0.85rem;
     }
 }
