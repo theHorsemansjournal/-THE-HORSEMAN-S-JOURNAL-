@@ -844,9 +844,12 @@
   </div>
 
   <script>
-    // ===== OPTIMIZED CANVAS FOR MOBILE (SAME VISUAL, BETTER PERFORMANCE) =====
-    const canvas = document.getElementById('heroCanvas');
-    if (canvas) {
+    // ===== OPTIMIZED CANVAS - LOADS FAST ON MOBILE =====
+    (function() {
+      const canvas = document.getElementById('heroCanvas');
+      if (!canvas) return;
+      
+      // Detect mobile device
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
       
       const ctx = canvas.getContext('2d');
@@ -854,23 +857,19 @@
       let mouseX = 0.5, mouseY = 0.5;
       let time = 0;
       let animationId = null;
-      let lastFrameTime = 0;
-      const frameInterval = isMobile ? 33 : 16; // 30fps on mobile, 60fps on desktop
+      let frame = 0;
       
-      // Reduce particle count on mobile
-      const PARTICLE_COUNT = isMobile ? 25 : 80;
+      // Reduce quality on mobile
+      const QUALITY = isMobile ? 'low' : 'high';
+      const PARTICLE_COUNT = isMobile ? 20 : 80;
+      const GRASS_COUNT = isMobile ? 80 : 300;
+      const HORSE_COUNT = isMobile ? 3 : 9;
+      
       let dustParticles = [];
-
+      
       function resize() {
-        if (isMobile) {
-          canvas.width = canvas.offsetWidth;
-          canvas.height = canvas.offsetHeight;
-        } else {
-          canvas.width = canvas.offsetWidth;
-          canvas.height = canvas.offsetHeight;
-        }
-        W = canvas.width;
-        H = canvas.height;
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
         initParticles();
       }
       
@@ -890,7 +889,7 @@
       
       resize();
       window.addEventListener('resize', resize);
-
+      
       const heroSection = document.getElementById('compHero');
       if (heroSection && !isMobile) {
         heroSection.addEventListener('mousemove', (e) => {
@@ -898,26 +897,27 @@
           mouseY = e.clientY / H;
         });
       }
-
+      
+      // Simplified drawing functions for speed
       function drawSky() {
-        const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+        const grad = ctx.createLinearGradient(0, 0, 0, H);
         if (isMobile) {
-          skyGrad.addColorStop(0, '#2a3a4a');
-          skyGrad.addColorStop(0.5, '#6a5a4a');
-          skyGrad.addColorStop(1, '#c89060');
+          grad.addColorStop(0, '#2a3a4a');
+          grad.addColorStop(0.5, '#6a5a4a');
+          grad.addColorStop(1, '#c89060');
         } else {
-          skyGrad.addColorStop(0, '#1a2840');
-          skyGrad.addColorStop(0.25, '#2d3a4a');
-          skyGrad.addColorStop(0.45, '#5a4a3a');
-          skyGrad.addColorStop(0.6, '#8a6a40');
-          skyGrad.addColorStop(0.75, '#c89050');
-          skyGrad.addColorStop(0.9, '#e8c870');
-          skyGrad.addColorStop(1, '#f0d890');
+          grad.addColorStop(0, '#1a2840');
+          grad.addColorStop(0.25, '#2d3a4a');
+          grad.addColorStop(0.45, '#5a4a3a');
+          grad.addColorStop(0.6, '#8a6a40');
+          grad.addColorStop(0.75, '#c89050');
+          grad.addColorStop(0.9, '#e8c870');
+          grad.addColorStop(1, '#f0d890');
         }
-        ctx.fillStyle = skyGrad;
+        ctx.fillStyle = grad;
         ctx.fillRect(0, 0, W, H);
       }
-
+      
       function drawSun() {
         const sx = W * 0.55;
         const sy = H * 0.32;
@@ -929,9 +929,9 @@
         ctx.fillStyle = sunGrad;
         ctx.fillRect(0, 0, W, H);
       }
-
+      
       function drawHills() {
-        const steps = isMobile ? 40 : 80;
+        const steps = isMobile ? 30 : 80;
         ctx.fillStyle = '#3a2a1a';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.7);
@@ -941,8 +941,8 @@
           let y = H * 0.55 + Math.sin(nx * 2.5) * H * 0.06;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+        
         ctx.fillStyle = '#2d1e0f';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.75);
@@ -952,8 +952,8 @@
           let y = H * 0.62 + Math.sin(nx * 1.9 + 1.2) * H * 0.04;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+        
         ctx.fillStyle = '#1a1006';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.78);
@@ -963,18 +963,17 @@
           let y = H * 0.7 + Math.sin(nx * 1.5 + 0.8) * H * 0.03;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
       }
-
+      
       function drawGrass() {
         ctx.fillStyle = '#1a1006';
         ctx.fillRect(0, H * 0.78, W, H * 0.22);
-        const grassCount = isMobile ? 100 : 300;
-        for (let i = 0; i < grassCount; i++) {
+        for (let i = 0; i < GRASS_COUNT; i++) {
           const gx = (Math.sin(i * 127.3 + 311.7) * 0.5 + 0.5) * W;
           const gy = H * 0.76 + (Math.cos(i * 269.5) * 0.5 + 0.5) * H * 0.22;
-          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 6 : 10);
-          ctx.strokeStyle = `rgba(40,30,15,${0.3 + Math.sin(i * 2.1) * 0.15})`;
+          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 5 : 8);
+          ctx.strokeStyle = `rgba(40,30,15,0.4)`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(gx, gy);
@@ -982,7 +981,7 @@
           ctx.stroke();
         }
       }
-
+      
       function drawHorseSilhouette(x, y, scale, flip) {
         ctx.save();
         ctx.translate(x, y);
@@ -1001,9 +1000,8 @@
         [-12, -3, 6, 15].forEach(lx => { ctx.fillRect(lx, 6, 3, 18); });
         ctx.restore();
       }
-
+      
       function drawHorses() {
-        const herdCount = isMobile ? 5 : 9;
         const herdPositions = [
           { x: W * 0.15, y: H * 0.72, s: 0.9, f: false },
           { x: W * 0.30, y: H * 0.71, s: 0.8, f: true },
@@ -1011,29 +1009,30 @@
           { x: W * 0.70, y: H * 0.72, s: 0.85, f: true },
           { x: W * 0.85, y: H * 0.71, s: 0.75, f: false },
         ];
-        for (let i = 0; i < herdCount; i++) {
+        const count = isMobile ? 3 : HORSE_COUNT;
+        for (let i = 0; i < count; i++) {
           const h = herdPositions[i % herdPositions.length];
           drawHorseSilhouette(
-            h.x + (mouseX - 0.5) * (isMobile ? 8 : 15) * h.s,
+            h.x + (mouseX - 0.5) * (isMobile ? 5 : 12) * h.s,
             h.y,
             h.s * 0.6,
             h.f
           );
         }
       }
-
+      
       function drawDust() {
         dustParticles.forEach(p => {
           const px = p.x * W;
           const py = p.y * H + Math.sin(time * p.speed * 0.8 + p.phase) * 5;
           const alpha = p.opacity * (0.3 + 0.5 * Math.sin(time * 0.02 + p.phase));
-          ctx.fillStyle = `rgba(240,220,170,${alpha * 0.6})`;
+          ctx.fillStyle = `rgba(240,220,170,${alpha * 0.5})`;
           ctx.beginPath();
           ctx.arc(px, py, p.size, 0, Math.PI * 2);
           ctx.fill();
         });
       }
-
+      
       function render() {
         ctx.clearRect(0, 0, W, H);
         drawSky();
@@ -1043,26 +1042,38 @@
         drawHorses();
         drawDust();
       }
-
+      
+      // Throttle animation on mobile to 30fps
+      let lastFrame = 0;
+      const frameDelay = isMobile ? 33 : 16;
+      
       function animate(currentTime) {
-        if (!lastFrameTime || (currentTime - lastFrameTime) >= frameInterval) {
+        if (!lastFrame || (currentTime - lastFrame) >= frameDelay) {
           time++;
           dustParticles.forEach(p => {
             p.y -= p.speed * 0.05;
-            if (p.y < -0.1) { p.y = 1.05 + Math.random() * 0.15; p.x = Math.random() * 1.3 - 0.15; }
+            if (p.y < -0.1) {
+              p.y = 1.05 + Math.random() * 0.15;
+              p.x = Math.random() * 1.3 - 0.15;
+            }
           });
           render();
-          lastFrameTime = currentTime;
+          lastFrame = currentTime;
         }
         animationId = requestAnimationFrame(animate);
       }
       
-      animate();
+      // Start animation after page loads
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => animate(0));
+      } else {
+        animate(0);
+      }
       
       window.addEventListener('beforeunload', () => {
         if (animationId) cancelAnimationFrame(animationId);
       });
-    }
+    })();
 
     // ===== REST OF THE SCRIPT =====
     document.getElementById('scrollHint')?.addEventListener('click', () => {
@@ -1110,7 +1121,9 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.stall-wrap').forEach(c => stallObserver.observe(c));
 
-    // Favicon Particles (reduced for mobile)
+    // Favicon Particles (simplified)
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
     const faviconCanvas = document.createElement('canvas');
     faviconCanvas.id = 'faviconCanvas';
     faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
