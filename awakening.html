@@ -19,7 +19,7 @@
   <meta property="og:locale" content="en_IN">
   <meta property="article:author" content="Praveen Kumar">
   <meta property="article:published_time" content="2026-01-01">
-  <meta property="article:modified_time" content="2026-06-07">
+  <meta property="article:modified_time" content="2026-06-08">
   <meta property="article:section" content="Horsemanship">
   <meta property="article:tag" content="Black Stallion">
   <meta property="article:tag" content="Awakening">
@@ -60,7 +60,7 @@
         },
         "url": "https://thehorsemansjournal.com/awakening.html",
         "datePublished": "2026-01-01",
-        "dateModified": "2026-06-07",
+        "dateModified": "2026-06-08",
         "inLanguage": "en-IN",
         "wordCount": 2200,
         "articleSection": "Horsemanship",
@@ -72,14 +72,6 @@
           { "@type": "Thing", "name": "Awakening" },
           { "@type": "Thing", "name": "Surrender" }
         ],
-        "hasPart": [
-          { "@type": "Article", "name": "Chapter I: Eleven Years", "url": "https://thehorsemansjournal.com/awakening.html#ch1" },
-          { "@type": "Article", "name": "Chapter II: The Black Stallion", "url": "https://thehorsemansjournal.com/awakening.html#ch2" },
-          { "@type": "Article", "name": "Chapter III: The Storm", "url": "https://thehorsemansjournal.com/awakening.html#ch3" },
-          { "@type": "Article", "name": "Chapter IV: The Twenty Days", "url": "https://thehorsemansjournal.com/awakening.html#ch4" },
-          { "@type": "Article", "name": "Chapter V: The Surrender", "url": "https://thehorsemansjournal.com/awakening.html#ch5" },
-          { "@type": "Article", "name": "Chapter VI: The Bond", "url": "https://thehorsemansjournal.com/awakening.html#ch6" }
-        ],
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": "https://thehorsemansjournal.com/awakening.html#webpage",
@@ -89,44 +81,12 @@
             "@type": "WebSite",
             "name": "The Horseman's Journal",
             "url": "https://thehorsemansjournal.com"
-          },
-          "speakable": {
-            "@type": "SpeakableSpecification",
-            "cssSelector": [".hero-title", ".page-body"]
           }
         }
       },
       {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is the Awakening story about?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The Awakening is Praveen Kumar's true story of how a black stallion transformed his understanding of horsemanship. After eleven years of training, one moment of surrender changed everything — teaching him that trust, not force, creates the deepest bond with horses."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Who is the black stallion in the Awakening story?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The black stallion is a four-year-old horse who arrived barely schooled. He became Praveen Kumar's greatest teacher, showing him that horses respond to inner state, not technique, and that real training is about becoming someone a horse can trust."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What did Praveen Kumar learn from the twenty days of silence?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "During twenty days away from the stallion after a frightening incident, Praveen learned that surrender — not control — creates connection. When he finally stood still, present but without demand, the stallion chose to come to him freely."
-            }
-          }
-        ]
-      },
-      {
         "@type": "BreadcrumbList",
+        "@id": "https://thehorsemansjournal.com/awakening.html#breadcrumb",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thehorsemansjournal.com/" },
           { "@type": "ListItem", "position": 2, "name": "Awakening", "item": "https://thehorsemansjournal.com/awakening.html" }
@@ -156,7 +116,6 @@
       line-height: 1.6;
     }
 
-    /* ===== LOGO WATERMARK BEHIND TEXT ===== */
     body::before {
       content: '';
       position: fixed;
@@ -179,456 +138,120 @@
       pointer-events: none;
       z-index: 0;
     }
-    .orb1 {
-      width: 55vw; height: 55vw;
-      top: -10vh; right: -10vw;
-      background: radial-gradient(circle, rgba(160, 120, 180, 0.10), transparent);
-    }
-    .orb2 {
-      width: 45vw; height: 45vw;
-      bottom: -5vh; left: -15vw;
-      background: radial-gradient(circle, rgba(200, 160, 120, 0.06), transparent);
-    }
-    .orb3 {
-      width: 35vw; height: 35vw;
-      top: 40vh; left: 35vw;
-      background: radial-gradient(circle, rgba(140, 100, 200, 0.04), transparent);
-    }
+    .orb1 { width: 55vw; height: 55vw; top: -10vh; right: -10vw; background: radial-gradient(circle, rgba(160, 120, 180, 0.10), transparent); }
+    .orb2 { width: 45vw; height: 45vw; bottom: -5vh; left: -15vw; background: radial-gradient(circle, rgba(200, 160, 120, 0.06), transparent); }
+    .orb3 { width: 35vw; height: 35vw; top: 40vh; left: 35vw; background: radial-gradient(circle, rgba(140, 100, 200, 0.04), transparent); }
 
     .awakening-hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 650px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; width: 100%; height: 100vh; min-height: 650px;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
     }
-    .hero-canvas {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%; z-index: 1;
-    }
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
     .hero-overlay {
       position: absolute; inset: 0;
       background: radial-gradient(ellipse at 50% 45%, transparent 15%, rgba(10,8,20,0.8) 85%);
       z-index: 2; pointer-events: none;
     }
     .hero-content {
-      position: relative; z-index: 10;
-      text-align: center; max-width: 900px; padding: 0 2rem;
+      position: relative; z-index: 10; text-align: center; max-width: 900px; padding: 0 2rem;
       animation: awakeningFloat 7s ease-in-out infinite;
     }
-    @keyframes awakeningFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .hero-eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem; letter-spacing: 8px;
-      color: rgba(200, 170, 150, 0.5);
-      text-transform: uppercase; display: block; margin-bottom: 1.5rem;
-    }
-    .hero-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.5rem, 6vw, 5.2rem);
-      font-weight: 700; color: #ffffff;
-      letter-spacing: 3px; line-height: 1.05; margin-bottom: 1.5rem;
-      text-shadow: 0 0 80px rgba(180,140,160,0.35), 0 0 160px rgba(200,160,130,0.2), 0 4px 60px rgba(0,0,0,0.6);
-    }
-    .hero-title .gold {
-      color: #E8C84A;
-      text-shadow: 0 0 60px rgba(200,160,130,0.7), 0 0 120px rgba(200,160,130,0.3);
-    }
-    .hero-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1.2rem; margin-bottom: 1.5rem;
-    }
-    .hero-dline {
-      width: 90px; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,170,150,0.5));
-    }
-    .hero-dline.r { background: linear-gradient(90deg, rgba(200,170,150,0.5), transparent); }
-    .hero-dgem {
-      width: 8px; height: 8px; background: #E8C84A;
-      transform: rotate(45deg); box-shadow: 0 0 18px rgba(200,160,130,0.9);
-    }
-    .hero-tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: clamp(1rem, 2vw, 1.35rem);
-      color: rgba(230, 210, 190, 0.65);
-      letter-spacing: .5px; max-width: 620px; margin: 0 auto; line-height: 1.7;
-    }
-    .hero-author {
-      font-family: 'Cinzel', serif;
-      font-size: .65rem; letter-spacing: 5px;
-      color: rgba(200,170,150,0.4); text-transform: uppercase;
-      margin-bottom: 1.8rem; display: block;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: .6rem;
-      text-decoration: none; color: rgba(200,170,150,0.5);
-      font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: 4px;
-      text-transform: uppercase;
-      border: 1px solid rgba(200,170,150,0.22);
-      padding: 10px 28px; margin-top: .5rem; transition: all .3s ease; border-radius: 2px;
-    }
-    .hero-cta:hover {
-      color: #E8C84A; border-color: rgba(200,170,150,0.45);
-      background: rgba(200,170,150,0.06); transform: translateY(-3px);
-    }
-    .hero-scroll {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
-      animation: fadeUpDown 2.5s ease-in-out infinite;
-      cursor: pointer;
-    }
-    .hero-scroll span {
-      font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 5px;
-      color: rgba(200,170,150,0.45); text-transform: uppercase;
-    }
+    @keyframes awakeningFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .hero-eyebrow { font-family: 'Cinzel',serif; font-size: .6rem; letter-spacing: 8px; color: rgba(200,170,150,0.5); text-transform: uppercase; display: block; margin-bottom: 1.5rem; }
+    .hero-title { font-family: 'Cinzel Decorative',serif; font-size: clamp(2.5rem,6vw,5.2rem); font-weight: 700; color: #fff; letter-spacing: 3px; line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 0 80px rgba(180,140,160,0.35),0 0 160px rgba(200,160,130,0.2),0 4px 60px rgba(0,0,0,0.6); }
+    .hero-title .gold { color: #E8C84A; text-shadow: 0 0 60px rgba(200,160,130,0.7),0 0 120px rgba(200,160,130,0.3); }
+    .hero-divider { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin-bottom: 1.5rem; }
+    .hero-dline { width: 90px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,170,150,0.5)); }
+    .hero-dline.r { background: linear-gradient(90deg,rgba(200,170,150,0.5),transparent); }
+    .hero-dgem { width: 8px; height: 8px; background: #E8C84A; transform: rotate(45deg); box-shadow: 0 0 18px rgba(200,160,130,0.9); }
+    .hero-tagline { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: clamp(1rem,2vw,1.35rem); color: rgba(230,210,190,0.65); letter-spacing: .5px; max-width: 620px; margin: 0 auto; line-height: 1.7; }
+    .hero-author { font-family: 'Cinzel',serif; font-size: .65rem; letter-spacing: 5px; color: rgba(200,170,150,0.4); text-transform: uppercase; margin-bottom: 1.8rem; display: block; }
+    .hero-cta { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; color: rgba(200,170,150,0.5); font-family: 'Cinzel',serif; font-size: .58rem; letter-spacing: 4px; text-transform: uppercase; border: 1px solid rgba(200,170,150,0.22); padding: 10px 28px; margin-top: .5rem; transition: all .3s ease; border-radius: 2px; }
+    .hero-cta:hover { color: #E8C84A; border-color: rgba(200,170,150,0.45); background: rgba(200,170,150,0.06); transform: translateY(-3px); }
+    .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px; animation: fadeUpDown 2.5s ease-in-out infinite; cursor: pointer; }
+    .hero-scroll span { font-family: 'Cinzel',serif; font-size: .52rem; letter-spacing: 5px; color: rgba(200,170,150,0.45); text-transform: uppercase; }
     .hero-scroll svg { width: 18px; stroke: rgba(200,170,150,0.45); }
-    @keyframes fadeUpDown {
-      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
-      50% { transform: translateX(-50%) translateY(8px); opacity: 0.75; }
-    }
+    @keyframes fadeUpDown { 0%,100%{transform:translateX(-50%) translateY(0);opacity:.3} 50%{transform:translateX(-50%) translateY(8px);opacity:.75} }
 
-    .chapter {
-      position: relative;
-      background: #0d0a1e;
-      padding: 6rem 2rem;
-      border-top: 1px solid rgba(180,150,200,0.06);
-      overflow: hidden;
-    }
-    .chapter-alt {
-      background: radial-gradient(ellipse at 50% 0%, rgba(160,130,180,0.04) 0%, transparent 65%);
-    }
-    .chapter-bg-num {
-      position: absolute; right: 2vw; top: 50%; transform: translateY(-50%);
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(8rem, 16vw, 16rem);
-      color: rgba(180,150,200,0.025);
-      pointer-events: none; user-select: none; line-height: 1;
-    }
-    .chapter-container {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; gap: 2rem; align-items: flex-start; position: relative; z-index: 2;
-    }
-    .chapter-sidebar {
-      flex: 0 0 70px;
-      display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-top: 1.5rem;
-    }
-    .chapter-roman {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.6rem; color: rgba(200,170,150,0.35); letter-spacing: .04em;
-    }
-    .chapter-vline {
-      width: 1px; height: 80px;
-      background: linear-gradient(180deg, rgba(200,170,150,0.3), transparent);
-    }
-    .chapter-side-text {
-      font-family: 'Cinzel', serif;
-      font-size: .48rem; letter-spacing: .25em; text-transform: uppercase;
-      color: rgba(200,170,150,0.3);
-      writing-mode: vertical-rl; transform: rotate(180deg);
-    }
-    .manuscript {
-      flex: 1;
-    }
-    .manuscript-inner {
-      background: linear-gradient(160deg, #120e22 0%, #1a1430 45%, #0e0b1c 100%);
-      border-radius: 6px; padding: 3rem 2.5rem 2.5rem 3rem;
-      position: relative; overflow: hidden;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(180,150,200,0.1);
-    }
+    .chapter { position: relative; background: #0d0a1e; padding: 6rem 2rem; border-top: 1px solid rgba(180,150,200,0.06); overflow: hidden; }
+    .chapter-alt { background: radial-gradient(ellipse at 50% 0%, rgba(160,130,180,0.04) 0%, transparent 65%); }
+    .chapter-bg-num { position: absolute; right: 2vw; top: 50%; transform: translateY(-50%); font-family: 'Cinzel Decorative',serif; font-size: clamp(8rem,16vw,16rem); color: rgba(180,150,200,0.025); pointer-events: none; user-select: none; line-height: 1; }
+    .chapter-container { max-width: 1100px; margin: 0 auto; display: flex; gap: 2rem; align-items: flex-start; position: relative; z-index: 2; }
+    .chapter-sidebar { flex: 0 0 70px; display: flex; flex-direction: column; align-items: center; gap: 1rem; padding-top: 1.5rem; }
+    .chapter-roman { font-family: 'Cinzel Decorative',serif; font-size: 1.6rem; color: rgba(200,170,150,0.35); letter-spacing: .04em; }
+    .chapter-vline { width: 1px; height: 80px; background: linear-gradient(180deg,rgba(200,170,150,0.3),transparent); }
+    .chapter-side-text { font-family: 'Cinzel',serif; font-size: .48rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(200,170,150,0.3); writing-mode: vertical-rl; transform: rotate(180deg); }
+    .manuscript { flex: 1; }
+    .manuscript-inner { background: linear-gradient(160deg,#120e22 0%,#1a1430 45%,#0e0b1c 100%); border-radius: 6px; padding: 3rem 2.5rem 2.5rem 3rem; position: relative; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.7),0 0 0 1px rgba(180,150,200,0.1); }
     
-    @media (max-width: 860px) {
-      .manuscript-inner { 
-        padding: 2rem 1.5rem; 
-      }
-      .chapter-container { 
-        flex-direction: column; 
-      }
-      .chapter-sidebar { 
-        flex-direction: row; 
-        padding-top: 0; 
-        flex: 0 0 auto; 
-      }
-      .chapter-vline { 
-        width: 40px; 
-        height: 1px; 
-      }
-      .chapter-side-text { 
-        writing-mode: horizontal-tb; 
-        transform: none; 
-      }
-      .hero-title { 
-        font-size: 2rem; 
-      }
-      .orb {
-        filter: blur(60px) !important;
-        opacity: 0.5 !important;
-      }
+    @media (max-width:860px) {
+      .manuscript-inner { padding: 2rem 1.5rem; }
+      .chapter-container { flex-direction: column; }
+      .chapter-sidebar { flex-direction: row; padding-top: 0; flex: 0 0 auto; }
+      .chapter-vline { width: 40px; height: 1px; }
+      .chapter-side-text { writing-mode: horizontal-tb; transform: none; }
+      .hero-title { font-size: 2rem; }
+      .orb { filter: blur(60px) !important; opacity: 0.5 !important; }
     }
+    @media (max-width:520px) { .hero-title { font-size: 1.6rem; } .chapter { padding: 3rem 1rem; } }
     
-    @media (max-width: 520px) {
-      .hero-title { 
-        font-size: 1.6rem; 
-      }
-      .chapter { 
-        padding: 3rem 1rem; 
-      }
-    }
-    
-    .manuscript-ruled {
-      position: absolute; inset: 0; pointer-events: none;
-      background: repeating-linear-gradient(180deg, transparent, transparent 29px, rgba(200,170,150,0.035) 29px, rgba(200,170,150,0.035) 30px);
-    }
-    .manuscript-margin {
-      position: absolute; left: 42px; top: 0; bottom: 0; width: 1px;
-      background: rgba(180,150,130,0.1); pointer-events: none;
-    }
+    .manuscript-ruled { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg,transparent,transparent 29px,rgba(200,170,150,0.035) 29px,rgba(200,170,150,0.035) 30px); }
+    .manuscript-margin { position: absolute; left: 42px; top: 0; bottom: 0; width: 1px; background: rgba(180,150,130,0.1); pointer-events: none; }
     .manuscript-corners { position: absolute; inset: 12px; pointer-events: none; }
-    .manuscript-corners b {
-      position: absolute; width: 14px; height: 14px;
-      border-color: rgba(200,170,150,0.18); border-style: solid;
-    }
+    .manuscript-corners b { position: absolute; width: 14px; height: 14px; border-color: rgba(200,170,150,0.18); border-style: solid; }
     .manuscript-corners b.tl { top:0; left:0; border-width:1px 0 0 1px; }
     .manuscript-corners b.tr { top:0; right:0; border-width:1px 1px 0 0; }
     .manuscript-corners b.bl { bottom:0; left:0; border-width:0 0 1px 1px; }
     .manuscript-corners b.br { bottom:0; right:0; border-width:0 1px 1px 0; }
-    .page-header {
-      display: flex; align-items: center; gap: .8rem;
-      margin-bottom: 1.8rem; padding-bottom: .7rem;
-      border-bottom: .5px solid rgba(200,170,150,0.1);
-      position: relative; z-index: 1;
-    }
-    .page-chap-num {
-      font-family: 'Cinzel', serif; font-size: .5rem; letter-spacing: .2em;
-      text-transform: uppercase; color: rgba(200,170,150,0.4); white-space: nowrap;
-    }
-    .page-hrule {
-      flex:1; height:.5px;
-      background: linear-gradient(90deg, rgba(200,170,150,0.2), transparent);
-    }
-    .page-chap-title {
-      font-family: 'Cinzel', serif; font-size: .8rem; font-weight: 700;
-      letter-spacing: .15em; text-transform: uppercase; color: #E8C84A; white-space: nowrap;
-    }
-    .page-body {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(.98rem, 1.5vw, 1.08rem); line-height: 2.05;
-      color: rgba(235,225,210,0.78); position: relative; z-index: 1;
-    }
+    .page-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.8rem; padding-bottom: .7rem; border-bottom: .5px solid rgba(200,170,150,0.1); position: relative; z-index: 1; }
+    .page-chap-num { font-family: 'Cinzel',serif; font-size: .5rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(200,170,150,0.4); white-space: nowrap; }
+    .page-hrule { flex:1; height:.5px; background: linear-gradient(90deg,rgba(200,170,150,0.2),transparent); }
+    .page-chap-title { font-family: 'Cinzel',serif; font-size: .8rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #E8C84A; white-space: nowrap; }
+    .page-body { font-family: 'EB Garamond',serif; font-size: clamp(.98rem,1.5vw,1.08rem); line-height: 2.05; color: rgba(235,225,210,0.78); position: relative; z-index: 1; }
     .page-body p { margin-bottom: 1.2em; text-indent: 2em; }
     .page-body p:first-child { text-indent: 0; }
-    
-    .dropcap::first-letter {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.6em;
-      font-weight: 700;
-      color: #E8C84A;
-      float: left;
-      line-height: .75;
-      margin: .08em .1em 0 0;
-      text-shadow: 0 0 20px rgba(200,160,130,0.4);
-    }
-    
-    @media (max-width: 860px) {
-      .dropcap::first-letter {
-        font-size: 2.8em !important;
-        text-shadow: 0 0 10px rgba(200,160,130,0.3) !important;
-      }
-    }
-    
-    .blockquote {
-      border-left: 3px solid rgba(200,170,150,0.35);
-      padding: .85rem 1.1rem; margin: 1.4rem 0;
-      font-style: italic; color: rgba(200,170,150,0.7);
-      background: rgba(200,170,150,0.03);
-      border-radius: 0 4px 4px 0; text-indent: 0 !important;
-      position: relative; z-index: 1;
-    }
-    .page-footer {
-      margin-top: 1.5rem; padding-top: .6rem;
-      border-top: .5px solid rgba(200,170,150,0.08);
-      text-align: center; position: relative; z-index: 1;
-    }
-    .page-num {
-      font-family: 'Cinzel', serif; font-size: .48rem; letter-spacing: 4px;
-      color: rgba(200,170,150,0.22);
-    }
-    .manuscript-shadow {
-      position: absolute; bottom: -16px; left: 5%; right: 5%; height: 16px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.9));
-      border-radius: 0 0 6px 6px; z-index: -1; filter: blur(3px);
-    }
-    .sec-nav {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; gap: 1rem; z-index: 10;
-    }
-    .nav-arrow {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(200,170,150,0.2);
-      color: rgba(200,170,150,0.35);
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; transition: all .3s ease; background: rgba(0,0,0,0.4);
-    }
+    .dropcap::first-letter { font-family: 'Cinzel Decorative',serif; font-size: 3.6em; font-weight: 700; color: #E8C84A; float: left; line-height: .75; margin: .08em .1em 0 0; text-shadow: 0 0 20px rgba(200,160,130,0.4); }
+    @media (max-width:860px) { .dropcap::first-letter { font-size: 2.8em !important; text-shadow: 0 0 10px rgba(200,160,130,0.3) !important; } }
+    .blockquote { border-left: 3px solid rgba(200,170,150,0.35); padding: .85rem 1.1rem; margin: 1.4rem 0; font-style: italic; color: rgba(200,170,150,0.7); background: rgba(200,170,150,0.03); border-radius: 0 4px 4px 0; text-indent: 0 !important; position: relative; z-index: 1; }
+    .page-footer { margin-top: 1.5rem; padding-top: .6rem; border-top: .5px solid rgba(200,170,150,0.08); text-align: center; position: relative; z-index: 1; }
+    .page-num { font-family: 'Cinzel',serif; font-size: .48rem; letter-spacing: 4px; color: rgba(200,170,150,0.22); }
+    .manuscript-shadow { position: absolute; bottom: -16px; left: 5%; right: 5%; height: 16px; background: linear-gradient(180deg,rgba(0,0,0,0.5),rgba(0,0,0,0.9)); border-radius: 0 0 6px 6px; z-index: -1; filter: blur(3px); }
+    .sec-nav { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 1rem; z-index: 10; }
+    .nav-arrow { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(200,170,150,0.2); color: rgba(200,170,150,0.35); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all .3s ease; background: rgba(0,0,0,0.4); }
     .nav-arrow svg { width: 14px; stroke: rgba(200,170,150,0.5); }
-    .nav-arrow:hover {
-      background: rgba(200,170,150,0.08); border-color: rgba(200,170,150,0.4);
-      transform: translateY(-3px);
-    }
+    .nav-arrow:hover { background: rgba(200,170,150,0.08); border-color: rgba(200,170,150,0.4); transform: translateY(-3px); }
     .nav-arrow:hover svg { stroke: #E8C84A; }
-
-    .book-teaser {
-      margin-top: 2rem;
-      padding: 1rem 1.5rem;
-      background: rgba(200,170,150,0.05);
-      border-left: 3px solid #E8C84A;
-      border-radius: 0 8px 8px 0;
-      text-align: center;
-    }
-    .book-teaser p {
-      font-style: italic;
-      font-size: 0.85rem;
-      color: rgba(200,170,150,0.7);
-      margin-bottom: 0.5rem;
-      text-indent: 0;
-    }
-    .book-teaser a {
-      color: #E8C84A;
-      text-decoration: none;
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-    }
+    .book-teaser { margin-top: 2rem; padding: 1rem 1.5rem; background: rgba(200,170,150,0.05); border-left: 3px solid #E8C84A; border-radius: 0 8px 8px 0; text-align: center; }
+    .book-teaser p { font-style: italic; font-size: 0.85rem; color: rgba(200,170,150,0.7); margin-bottom: 0.5rem; text-indent: 0; }
+    .book-teaser a { color: #E8C84A; text-decoration: none; font-family: 'Cinzel',serif; font-size: 0.65rem; letter-spacing: 2px; }
     .book-teaser a:hover { text-decoration: underline; }
 
-    .closing {
-      position: relative; padding: 8rem 2rem 6rem;
-      text-align: center;
-      background: radial-gradient(ellipse at 50% 40%, rgba(160,130,180,0.05) 0%, transparent 65%);
-    }
+    .closing { position: relative; padding: 8rem 2rem 6rem; text-align: center; background: radial-gradient(ellipse at 50% 40%,rgba(160,130,180,0.05) 0%,transparent 65%); }
     .closing-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
-    .closing-star {
-      font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: #E8C84A;
-      margin-bottom: 1.5rem; text-shadow: 0 0 30px rgba(200,160,130,0.5);
-      animation: starPulse 3s ease-in-out infinite;
-    }
-    @keyframes starPulse {
-      0%,100% { transform: scale(1); opacity: .7; }
-      50% { transform: scale(1.1); opacity: 1; }
-    }
-    .closing-text {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
-      color: rgba(200,170,150,0.7); line-height: 2; margin-bottom: 2rem;
-    }
-    .closing-final {
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: clamp(1.3rem, 2.6vw, 1.7rem);
-      color: rgba(200,170,150,0.8); margin-bottom: 1.5rem;
-    }
-    .closing-gold {
-      font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: 6px;
-      text-transform: uppercase; color: #E8C84A;
-      text-shadow: 0 0 15px rgba(200,160,130,0.3); margin-bottom: 1.5rem; display: block;
-    }
-    .closing-symbols {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1.5rem; font-size: 1.8rem; margin-bottom: 1.5rem;
-    }
+    .closing-star { font-family: 'Cinzel Decorative',serif; font-size: 2rem; color: #E8C84A; margin-bottom: 1.5rem; text-shadow: 0 0 30px rgba(200,160,130,0.5); animation: starPulse 3s ease-in-out infinite; }
+    @keyframes starPulse { 0%,100%{transform:scale(1);opacity:.7} 50%{transform:scale(1.1);opacity:1} }
+    .closing-text { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: clamp(1.1rem,2.2vw,1.4rem); color: rgba(200,170,150,0.7); line-height: 2; margin-bottom: 2rem; }
+    .closing-final { font-family: 'Cormorant Garamond',serif; font-style: italic; font-size: clamp(1.3rem,2.6vw,1.7rem); color: rgba(200,170,150,0.8); margin-bottom: 1.5rem; }
+    .closing-gold { font-family: 'Cinzel',serif; font-size: .65rem; letter-spacing: 6px; text-transform: uppercase; color: #E8C84A; text-shadow: 0 0 15px rgba(200,160,130,0.3); margin-bottom: 1.5rem; display: block; }
+    .closing-symbols { display: flex; align-items: center; justify-content: center; gap: 1.5rem; font-size: 1.8rem; margin-bottom: 1.5rem; }
     .closing-symbols span { animation: symFloat 4s ease-in-out infinite; }
     .closing-symbols span:nth-child(2) { animation-delay: .6s; }
-    @keyframes symFloat {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    .closing-byline {
-      font-family: 'Cinzel', serif; font-size: .52rem; letter-spacing: 4px;
-      text-transform: uppercase; color: rgba(240,230,200,0.2);
-    }
+    @keyframes symFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    .closing-byline { font-family: 'Cinzel',serif; font-size: .52rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(240,230,200,0.2); }
 
-    .contact-section {
-      padding: 3rem 2rem;
-      text-align: center;
-      background: #0a0618;
-      border-top: 1px solid rgba(180,150,200,0.08);
-    }
-    .contact-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 5px;
-      color: #D4AF37;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .contact-link {
-      text-decoration: none;
-      color: rgba(240,230,200,0.5);
-      transition: 0.3s;
-      font-family: 'EB Garamond', serif;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .contact-section { padding: 3rem 2rem; text-align: center; background: #0a0618; border-top: 1px solid rgba(180,150,200,0.08); }
+    .contact-heading { font-family: 'Cinzel',serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond',serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
     .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
-    .footer-links {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.25);
-      border-top: 1px solid rgba(180,150,200,0.06);
-      background: #0a0618;
-    }
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(180,150,200,0.06); background: #0a0618; }
     .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
-    .copyright {
-      text-align: center;
-      padding: 1rem 2rem 2rem;
-      font-size: 0.65rem;
-      color: rgba(240,230,200,0.15);
-      background: #0a0618;
-    }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); background: #0a0618; }
 
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #0a0718e6;
-      backdrop-filter: blur(12px);
-      padding: 0.8rem;
-      text-align: center;
-      z-index: 1000;
-      font-size: 0.75rem;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-      border-top: 1px solid rgba(212,175,55,0.2);
-    }
+    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
     .cookie-consent.show { transform: translateY(0); }
-    .cookie-consent button {
-      background: #D4AF37;
-      border: none;
-      padding: 0.2rem 1rem;
-      margin-left: 0.5rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .cookie-consent .decline-btn {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.5);
-      color: #D4AF37;
-    }
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel',serif; }
+    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
   </style>
 </head>
 <body>
@@ -678,11 +301,7 @@
       <div class="hero-content">
         <span class="hero-eyebrow">The Horseman's Journal</span>
         <h1 class="hero-title">Awake<span class="gold">ning</span></h1>
-        <div class="hero-divider">
-          <div class="hero-dline"></div>
-          <div class="hero-dgem"></div>
-          <div class="hero-dline hero-dline r"></div>
-        </div>
+        <div class="hero-divider"><div class="hero-dline"></div><div class="hero-dgem"></div><div class="hero-dline hero-dline r"></div></div>
         <span class="hero-author">by Praveen Kumar</span>
         <p class="hero-tagline">Eleven years. One black stallion. One moment of surrender that changed everything.</p>
         <a href="#ch1" class="hero-cta">Begin Reading →</a>
@@ -693,25 +312,15 @@
       </div>
     </section>
 
-    <!-- CHAPTER 1 -->
     <section class="chapter" id="ch1" aria-labelledby="ch1-heading">
       <div class="chapter-bg-num">I</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">I</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">Eleven Years</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">I</span><div class="chapter-vline"></div><span class="chapter-side-text">Eleven Years</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter I</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch1-heading">Eleven Years</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter I</span><div class="page-hrule"></div><span class="page-chap-title" id="ch1-heading">Eleven Years</span></div>
             <div class="page-body">
               <p class="dropcap">For eleven years I have lived inside the world of horses. Stallions, warmbloods, creatures of instinct and ancient grace who have no use for pretense. They did not simply teach me their language. They remade me, slowly, from the inside out, without asking permission and without offering explanations.</p>
               <p>I came to them ordinary. Quiet in a way that felt like smallness rather than strength. The world outside the stable never quite held a shape I was built for. But inside that world, surrounded by warmth and breath and the particular weight of a thousand-pound animal standing still beside you, something in me could finally exhale.</p>
@@ -724,35 +333,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ This is an excerpt from The Horseman's Journal. The full chapter explores deeper into that quiet place where rest finally found me.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ This is an excerpt from The Horseman's Journal. The full chapter explores deeper into that quiet place where rest finally found me.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#awakeningHero" class="nav-arrow" aria-label="Go to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#ch2" class="nav-arrow" aria-label="Next chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CHAPTER 2 -->
     <section class="chapter chapter-alt" id="ch2" aria-labelledby="ch2-heading">
       <div class="chapter-bg-num">II</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">II</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">The Black Stallion</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">II</span><div class="chapter-vline"></div><span class="chapter-side-text">The Black Stallion</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter II</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch2-heading">The Black Stallion</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter II</span><div class="page-hrule"></div><span class="page-chap-title" id="ch2-heading">The Black Stallion</span></div>
             <div class="page-body">
               <p class="dropcap">Then the black stallion arrived, and everything changed. He was four years old. Barely schooled. A living storm wrapped in midnight muscle and something older than training, older than language. He moved through the world as though every object in it was a question worth examining and every person in it might, at any moment, become a danger worth calculating.</p>
               <p>He was not stubborn. He was honest. There is a large difference, and it took me months to understand it. A stubborn horse is refusing. An honest horse is telling you the truth about something you did not want to hear. And from the very first day, he had a great deal of truth to offer me.</p>
@@ -765,35 +361,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ The full story of how this mirror — this honest, unforgiving stallion — began to break through everything I thought I knew.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ The full story of how this mirror — this honest, unforgiving stallion — began to break through everything I thought I knew.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#ch1" class="nav-arrow" aria-label="Previous chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#ch3" class="nav-arrow" aria-label="Next chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CHAPTER 3 -->
     <section class="chapter" id="ch3" aria-labelledby="ch3-heading">
       <div class="chapter-bg-num">III</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">III</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">The Storm</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">III</span><div class="chapter-vline"></div><span class="chapter-side-text">The Storm</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter III</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch3-heading">The Storm</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter III</span><div class="page-hrule"></div><span class="page-chap-title" id="ch3-heading">The Storm</span></div>
             <div class="page-body">
               <p class="dropcap">One day, he leapt in panic and dragged me across the earth. The rope burned into my palms. The ground came up hard and fast. For those seconds, I was certain this was the end of something, though I could not yet say what. He was not being cruel. He was afraid. But fear in a thousand-pound animal does not pause to make that distinction clear.</p>
               <p>Two fears had collided in that moment. His fear of harm, ancient and animal and legitimate. And mine, which was older and stranger and harder to name. I could have tightened the rope. I could have corrected him back into order. Instead, something inside me, something that had been carrying too much for too long, said: no more of this.</p>
@@ -805,35 +388,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ The moment fear collided with surrender — and the silence that followed changed everything.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ The moment fear collided with surrender — and the silence that followed changed everything.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#ch2" class="nav-arrow" aria-label="Previous chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#ch4" class="nav-arrow" aria-label="Next chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CHAPTER 4 -->
     <section class="chapter chapter-alt" id="ch4" aria-labelledby="ch4-heading">
       <div class="chapter-bg-num">IV</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">IV</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">The Twenty Days</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">IV</span><div class="chapter-vline"></div><span class="chapter-side-text">The Twenty Days</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter IV</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch4-heading">The Twenty Days</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter IV</span><div class="page-hrule"></div><span class="page-chap-title" id="ch4-heading">The Twenty Days</span></div>
             <div class="page-body">
               <p class="dropcap">I went home that night and stayed away for twenty days. I cursed myself in ways I will not repeat here. I told myself it was over, that I was finished, that whatever I had tried to build across all those years of early mornings and calloused hands had finally proved what I always feared: that I was not enough for it. The pain in my chest was real. Physical. The kind of grief that does not ask permission before it sits down in your body.</p>
               <p>Anger so thick I could barely breathe through it. And yet, seven or eight times across those twenty days, something in me that was stronger than the anger forced my feet out to where he was. I could barely breathe when I did it. But I went.</p>
@@ -845,35 +415,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ Twenty days of running. One moment of stopping. The stallion waited. The full story of what happened when I finally stood still.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ Twenty days of running. One moment of stopping. The stallion waited. The full story of what happened when I finally stood still.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#ch3" class="nav-arrow" aria-label="Previous chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#ch5" class="nav-arrow" aria-label="Next chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CHAPTER 5 -->
     <section class="chapter" id="ch5" aria-labelledby="ch5-heading">
       <div class="chapter-bg-num">V</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">V</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">The Surrender</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">V</span><div class="chapter-vline"></div><span class="chapter-side-text">The Surrender</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter V</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch5-heading">The Surrender</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter V</span><div class="page-hrule"></div><span class="page-chap-title" id="ch5-heading">The Surrender</span></div>
             <div class="page-body">
               <p class="dropcap">I stopped performing. I stopped correcting. I watched. A horse does not react to your hands first. He reacts to your inner state, to what is beneath the hands, beneath the voice, beneath the careful posture. What I had been giving him for years was technique wrapped around tension. What I began to give him instead was silence. Real silence. The kind that is not absence but presence without demand.</p>
               <p>I stayed calm on the outside while everything inside was loud. That was the practice. Not pretending the fear was gone, but refusing to let it leak through as threat or correction or tightened grip.</p>
@@ -885,35 +442,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ The surrender that changed everything. When I stopped asking, the stallion began to give. The full chapter reveals what happened next.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ The surrender that changed everything. When I stopped asking, the stallion began to give. The full chapter reveals what happened next.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#ch4" class="nav-arrow" aria-label="Previous chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#ch6" class="nav-arrow" aria-label="Next chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CHAPTER 6 -->
     <section class="chapter chapter-alt" id="ch6" aria-labelledby="ch6-heading">
       <div class="chapter-bg-num">VI</div>
       <div class="chapter-container">
-        <div class="chapter-sidebar">
-          <span class="chapter-roman">VI</span>
-          <div class="chapter-vline"></div>
-          <span class="chapter-side-text">The Bond</span>
-        </div>
+        <div class="chapter-sidebar"><span class="chapter-roman">VI</span><div class="chapter-vline"></div><span class="chapter-side-text">The Bond</span></div>
         <article class="manuscript">
           <div class="manuscript-inner">
-            <div class="manuscript-ruled"></div>
-            <div class="manuscript-margin"></div>
+            <div class="manuscript-ruled"></div><div class="manuscript-margin"></div>
             <div class="manuscript-corners"><b class="tl"></b><b class="tr"></b><b class="bl"></b><b class="br"></b></div>
-            <div class="page-header">
-              <span class="page-chap-num">Chapter VI</span>
-              <div class="page-hrule"></div>
-              <span class="page-chap-title" id="ch6-heading">The Bond</span>
-            </div>
+            <div class="page-header"><span class="page-chap-num">Chapter VI</span><div class="page-hrule"></div><span class="page-chap-title" id="ch6-heading">The Bond</span></div>
             <div class="page-body">
               <p class="dropcap">He beats the door until I come. He moves the moment he sees me crossing the yard. He calls out when I have been away too long, that particular sound that is not fear and not hunger but something else entirely. The sound of a creature that has decided you are worth calling for. He chooses me, freely, over everything else in his world.</p>
               <p>I thought, across all those years, that I was training him. The truth was always the other way around. He was patient with me in ways I had not yet learned to be patient with myself. He waited while I broke open and put myself back together, and when I finally arrived as something closer to whole, he was still there. Still recognizing me. Still choosing.</p>
@@ -926,33 +470,22 @@
           <div class="manuscript-shadow"></div>
         </article>
       </div>
-      <div class="book-teaser">
-        <p>✨ The bond that outlasts fear. The full chapter explores what it means to stand beside someone who has seen you at your worst and stayed.</p>
-        <a href="book.html">Read the full story in the book →</a>
-      </div>
+      <div class="book-teaser"><p>✨ The bond that outlasts fear. The full chapter explores what it means to stand beside someone who has seen you at your worst and stayed.</p><a href="book.html">Read the full story in the book →</a></div>
       <div class="sec-nav">
         <a href="#ch5" class="nav-arrow" aria-label="Previous chapter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
         <a href="#closing" class="nav-arrow" aria-label="Go to closing"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
       </div>
     </section>
 
-    <!-- CLOSING -->
     <section class="closing" id="closing" aria-label="Closing — It is everything">
       <div class="closing-inner">
         <div class="closing-star">✦</div>
-        <div class="closing-text">
-          <p>Eleven years of searching.<br>One black stallion who refused to let me hide.<br>One moment of surrender that changed everything.</p>
-        </div>
-        <div class="closing-final">
-          <p>He did not teach me how to train horses.<br>He taught me how to train myself.</p>
-        </div>
+        <div class="closing-text"><p>Eleven years of searching.<br>One black stallion who refused to let me hide.<br>One moment of surrender that changed everything.</p></div>
+        <div class="closing-final"><p>He did not teach me how to train horses.<br>He taught me how to train myself.</p></div>
         <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,rgba(200,170,150,0.4),transparent);margin:2rem auto;"></div>
         <p style="font-size:1.15rem;color:rgba(235,225,210,0.8);margin-bottom:1.5rem;">I am exactly where I belong.</p>
         <span class="closing-gold">It is everything.</span>
-        <div class="closing-symbols">
-          <span>🖤</span>
-          <span>🐴</span>
-        </div>
+        <div class="closing-symbols"><span>🖤</span><span>🐴</span></div>
         <span class="closing-byline">Written by Praveen Kumar</span>
       </div>
     </section>
@@ -973,9 +506,7 @@
       <a href="sitemap.xml">Sitemap</a> • 
       <a href="terms.html">Terms of Use</a>
     </div>
-    <div class="copyright">
-      © <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.
-    </div>
+    <div class="copyright">© <span id="currentYear"></span> The Horseman's Journal by Praveen Kumar. All rights reserved.</div>
   </footer>
 
   <div id="cookieConsent" class="cookie-consent" role="dialog" aria-label="Cookie consent">
@@ -988,15 +519,9 @@
     (function() {
       var canvas = document.getElementById('heroCanvas');
       if (!canvas) return;
-      
       var ctx = canvas.getContext('2d', { alpha: false });
-      var W, H;
-      var mouseX = 0.5, mouseY = 0.5;
-      var time = 0;
-      var animationId = null;
-      var isVisible = false;
-      var lastFrameTime = 0;
-      
+      var W, H, mouseX = 0.5, mouseY = 0.5, time = 0;
+      var animationId = null, isVisible = false, lastFrameTime = 0;
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 860;
       var isLowPower = isMobile || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
       var FRAME_DELAY = isLowPower ? 50 : isMobile ? 33 : 16;
@@ -1014,208 +539,43 @@
         ctx.scale(dpr, dpr);
         initParticles();
       }
-      
       function displayW() { return W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2)); }
       function displayH() { return H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2)); }
       
       function initParticles() {
         stardust = [];
         for (var i = 0; i < PARTICLE_COUNT; i++) {
-          stardust.push({
-            x: Math.random() * 1.3 - 0.15,
-            y: Math.random() * 1.2,
-            size: Math.random() * (isMobile ? 1.2 : 1.8) + 0.2,
-            speed: Math.random() * 0.25 + 0.05,
-            opacity: Math.random() * 0.5 + 0.2,
-            phase: Math.random() * Math.PI * 2,
-            drift: (Math.random() - 0.5) * 0.3
-          });
+          stardust.push({ x: Math.random() * 1.3 - 0.15, y: Math.random() * 1.2, size: Math.random() * (isMobile ? 1.2 : 1.8) + 0.2, speed: Math.random() * 0.25 + 0.05, opacity: Math.random() * 0.5 + 0.2, phase: Math.random() * Math.PI * 2, drift: (Math.random() - 0.5) * 0.3 });
         }
       }
-      
-      window.addEventListener('resize', function() { resize(); });
+      window.addEventListener('resize', resize);
       
       var heroSection = document.getElementById('awakeningHero');
-      if (heroSection && !isMobile) {
-        heroSection.addEventListener('mousemove', function(e) {
-          mouseX = e.clientX / window.innerWidth;
-          mouseY = e.clientY / window.innerHeight;
-        });
-      }
+      if (heroSection && !isMobile) { heroSection.addEventListener('mousemove', function(e) { mouseX = e.clientX / window.innerWidth; mouseY = e.clientY / window.innerHeight; }); }
       
-      function drawSky() {
-        var dw = displayW(), dh = displayH();
-        var grad = ctx.createLinearGradient(0, 0, 0, dh);
-        grad.addColorStop(0, '#0a0820');
-        grad.addColorStop(0.3, '#120e2e');
-        grad.addColorStop(0.55, '#1a1535');
-        grad.addColorStop(0.7, '#251e40');
-        grad.addColorStop(0.85, '#3a2a45');
-        grad.addColorStop(0.95, '#5a4040');
-        grad.addColorStop(1, '#7a5550');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, dw, dh);
-      }
+      function drawSky() { var dw = displayW(), dh = displayH(), grad = ctx.createLinearGradient(0,0,0,dh); grad.addColorStop(0,'#0a0820'); grad.addColorStop(0.3,'#120e2e'); grad.addColorStop(0.55,'#1a1535'); grad.addColorStop(0.7,'#251e40'); grad.addColorStop(0.85,'#3a2a45'); grad.addColorStop(0.95,'#5a4040'); grad.addColorStop(1,'#7a5550'); ctx.fillStyle = grad; ctx.fillRect(0,0,dw,dh); }
+      function drawStars() { var dw = displayW(), dh = displayH(); for (var i = 0; i < STAR_COUNT; i++) { var sx = (Math.sin(i*127.1+311.7)*0.5+0.5)*dw, sy = (Math.cos(i*269.5+183.3)*0.5+0.5)*dh*0.55, twinkle = 0.3+0.7*Math.abs(Math.sin(time*0.012+i*2.7)); ctx.fillStyle = 'rgba(255,248,232,'+(twinkle*0.25)+')'; ctx.beginPath(); ctx.arc(sx, sy, (isMobile?0.5:0.8)+twinkle*(isMobile?0.3:0.6), 0, Math.PI*2); ctx.fill(); } }
+      function drawMountains() { var dw = displayW(), dh = displayH(); ctx.fillStyle = '#1a1535'; ctx.beginPath(); ctx.moveTo(0,dh*0.72); for(var i=0;i<=60;i++){var nx=i/60;ctx.lineTo(nx*dw,dh*0.52+Math.sin(nx*2.8)*dh*0.12+Math.sin(nx*5.5)*dh*0.05);} ctx.lineTo(dw,dh);ctx.lineTo(0,dh);ctx.closePath();ctx.fill(); ctx.fillStyle = '#141028'; ctx.beginPath(); ctx.moveTo(0,dh*0.75); for(var j=0;j<=60;j++){var nx=j/60;ctx.lineTo(nx*dw,dh*0.58+Math.sin(nx*2.2+1.2)*dh*0.11+Math.sin(nx*4.8)*dh*0.04);} ctx.lineTo(dw,dh);ctx.lineTo(0,dh);ctx.closePath();ctx.fill(); ctx.fillStyle = '#0d0a1c'; ctx.beginPath(); ctx.moveTo(0,dh*0.78); for(var k=0;k<=60;k++){var nx=k/60;ctx.lineTo(nx*dw,dh*0.64+Math.sin(nx*1.8+0.6)*dh*0.09+Math.sin(nx*3.5)*dh*0.03);} ctx.lineTo(dw,dh);ctx.lineTo(0,dh);ctx.closePath();ctx.fill(); }
+      function drawStallion(x,y,scale){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.fillStyle='#0a080c';ctx.beginPath();ctx.ellipse(0,0,45,18,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(25,-5);ctx.quadraticCurveTo(38,-40,30,-52);ctx.quadraticCurveTo(24,-36,10,-8);ctx.closePath();ctx.fill();ctx.beginPath();ctx.ellipse(32,-54,12,6,-0.25,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(34,-59);ctx.lineTo(30,-67);ctx.lineTo(27,-60);ctx.fill();ctx.beginPath();ctx.moveTo(32,-59);ctx.lineTo(36,-66);ctx.lineTo(35,-58);ctx.fill();ctx.fillStyle='#08060a';[-18,-6,8,18].forEach(function(lx){ctx.fillRect(lx,12,6,30);});ctx.strokeStyle='#0a080c';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(28,-50);ctx.quadraticCurveTo(22,-38,18,-20);ctx.stroke();ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-42,-2);ctx.quadraticCurveTo(-55,-15,-50,-30);ctx.stroke();ctx.restore();}
+      function drawYoungMan(x,y,scale){ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);ctx.fillStyle='#1a1525';ctx.beginPath();ctx.ellipse(0,0,6,12,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#2a2035';ctx.beginPath();ctx.arc(0,-16,5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#0a080c';ctx.beginPath();ctx.arc(0,-18,5.5,Math.PI,Math.PI*2);ctx.fill();ctx.fillStyle='#1a1525';ctx.beginPath();ctx.ellipse(0,-8,8,4,0,0,Math.PI*2);ctx.fill();[-3,3].forEach(function(lx){ctx.fillRect(lx,10,3,16);});ctx.strokeStyle='#2a2035';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(7,-6);ctx.lineTo(18,-10);ctx.stroke();ctx.fillStyle='#2a2035';ctx.beginPath();ctx.arc(18,-10,2,0,Math.PI*2);ctx.fill();ctx.restore();}
+      function drawCosmicLight(){var dw=displayW(),dh=displayH(),cx=dw*0.52,cy=dh*0.42,pulse=1+Math.sin(time*0.012)*0.12,grad=ctx.createRadialGradient(cx,cy,0,cx,cy,dw*0.6);grad.addColorStop(0,'rgba(220,190,160,'+((isMobile?0.04:0.07)*pulse)+')');grad.addColorStop(0.25,'rgba(180,140,160,'+((isMobile?0.02:0.04)*pulse)+')');grad.addColorStop(0.55,'rgba(100,60,100,0.01)');grad.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=grad;ctx.fillRect(0,0,dw,dh);}
+      function drawStardust(){var dw=displayW(),dh=displayH();stardust.forEach(function(p){var sx=p.x*dw,sy=p.y*dh,alpha=p.opacity*(0.4+0.6*Math.sin(time*0.025+p.phase));ctx.fillStyle='rgba(255,240,220,'+alpha+')';ctx.shadowBlur=isMobile?1:3;ctx.beginPath();ctx.arc(sx,sy,p.size,0,Math.PI*2);ctx.fill();});ctx.shadowBlur=0;}
       
-      function drawStars() {
-        var dw = displayW(), dh = displayH();
-        for (var i = 0; i < STAR_COUNT; i++) {
-          var sx = (Math.sin(i * 127.1 + 311.7) * 0.5 + 0.5) * dw;
-          var sy = (Math.cos(i * 269.5 + 183.3) * 0.5 + 0.5) * dh * 0.55;
-          var twinkle = 0.3 + 0.7 * Math.abs(Math.sin(time * 0.012 + i * 2.7));
-          ctx.fillStyle = 'rgba(255,248,232,' + (twinkle * 0.25) + ')';
-          ctx.beginPath();
-          ctx.arc(sx, sy, (isMobile ? 0.5 : 0.8) + twinkle * (isMobile ? 0.3 : 0.6), 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
+      function render(){if(!canvas.offsetParent)return;var dw=displayW(),dh=displayH();ctx.clearRect(0,0,dw,dh);drawSky();drawStars();drawMountains();drawCosmicLight();var stallionX=dw*0.48+(mouseX-0.5)*(isMobile?8:25),stallionY=dh*0.58+(mouseY-0.5)*(isMobile?5:15);drawStallion(stallionX,stallionY,isMobile?0.75:1.2);drawYoungMan(stallionX-(isMobile?32:50),stallionY+(isMobile?9:20),isMobile?0.65:1.1);drawStardust();}
       
-      function drawMountains() {
-        var dw = displayW(), dh = displayH();
-        ctx.fillStyle = '#1a1535';
-        ctx.beginPath(); ctx.moveTo(0, dh * 0.72);
-        for (var i = 0; i <= 60; i++) { var nx = i / 60; ctx.lineTo(nx * dw, dh * 0.52 + Math.sin(nx * 2.8) * dh * 0.12 + Math.sin(nx * 5.5) * dh * 0.05); }
-        ctx.lineTo(dw, dh); ctx.lineTo(0, dh); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = '#141028';
-        ctx.beginPath(); ctx.moveTo(0, dh * 0.75);
-        for (var j = 0; j <= 60; j++) { var nx = j / 60; ctx.lineTo(nx * dw, dh * 0.58 + Math.sin(nx * 2.2 + 1.2) * dh * 0.11 + Math.sin(nx * 4.8) * dh * 0.04); }
-        ctx.lineTo(dw, dh); ctx.lineTo(0, dh); ctx.closePath(); ctx.fill();
-        ctx.fillStyle = '#0d0a1c';
-        ctx.beginPath(); ctx.moveTo(0, dh * 0.78);
-        for (var k = 0; k <= 60; k++) { var nx = k / 60; ctx.lineTo(nx * dw, dh * 0.64 + Math.sin(nx * 1.8 + 0.6) * dh * 0.09 + Math.sin(nx * 3.5) * dh * 0.03); }
-        ctx.lineTo(dw, dh); ctx.lineTo(0, dh); ctx.closePath(); ctx.fill();
-      }
-      
-      function drawStallion(x, y, scale) {
-        ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
-        ctx.fillStyle = '#0a080c';
-        ctx.beginPath(); ctx.ellipse(0, 0, 45, 18, 0, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(25, -5); ctx.quadraticCurveTo(38, -40, 30, -52); ctx.quadraticCurveTo(24, -36, 10, -8); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(32, -54, 12, 6, -0.25, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(34, -59); ctx.lineTo(30, -67); ctx.lineTo(27, -60); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(32, -59); ctx.lineTo(36, -66); ctx.lineTo(35, -58); ctx.fill();
-        ctx.fillStyle = '#08060a'; [-18, -6, 8, 18].forEach(function(lx) { ctx.fillRect(lx, 12, 6, 30); });
-        ctx.strokeStyle = '#0a080c'; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(28, -50); ctx.quadraticCurveTo(22, -38, 18, -20); ctx.stroke();
-        ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-42, -2); ctx.quadraticCurveTo(-55, -15, -50, -30); ctx.stroke();
-        ctx.restore();
-      }
-      
-      function drawYoungMan(x, y, scale) {
-        ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale);
-        ctx.fillStyle = '#1a1525'; ctx.beginPath(); ctx.ellipse(0, 0, 6, 12, 0, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#2a2035'; ctx.beginPath(); ctx.arc(0, -16, 5, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#0a080c'; ctx.beginPath(); ctx.arc(0, -18, 5.5, Math.PI, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = '#1a1525'; ctx.beginPath(); ctx.ellipse(0, -8, 8, 4, 0, 0, Math.PI * 2); ctx.fill();
-        [-3, 3].forEach(function(lx) { ctx.fillRect(lx, 10, 3, 16); });
-        ctx.strokeStyle = '#2a2035'; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(7, -6); ctx.lineTo(18, -10); ctx.stroke();
-        ctx.fillStyle = '#2a2035'; ctx.beginPath(); ctx.arc(18, -10, 2, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
-      }
-      
-      function drawCosmicLight() {
-        var dw = displayW(), dh = displayH();
-        var cx = dw * 0.52, cy = dh * 0.42;
-        var pulse = 1 + Math.sin(time * 0.012) * 0.12;
-        var grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, dw * 0.6);
-        grad.addColorStop(0, 'rgba(220,190,160,' + ((isMobile ? 0.04 : 0.07) * pulse) + ')');
-        grad.addColorStop(0.25, 'rgba(180,140,160,' + ((isMobile ? 0.02 : 0.04) * pulse) + ')');
-        grad.addColorStop(0.55, 'rgba(100,60,100,0.01)');
-        grad.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = grad; ctx.fillRect(0, 0, dw, dh);
-      }
-      
-      function drawStardust() {
-        var dw = displayW(), dh = displayH();
-        stardust.forEach(function(p) {
-          var sx = p.x * dw, sy = p.y * dh;
-          var alpha = p.opacity * (0.4 + 0.6 * Math.sin(time * 0.025 + p.phase));
-          ctx.fillStyle = 'rgba(255,240,220,' + alpha + ')';
-          ctx.shadowBlur = isMobile ? 1 : 3;
-          ctx.beginPath(); ctx.arc(sx, sy, p.size, 0, Math.PI * 2); ctx.fill();
-        });
-        ctx.shadowBlur = 0;
-      }
-      
-      function render() {
-        if (!canvas.offsetParent) return;
-        var dw = displayW(), dh = displayH();
-        ctx.clearRect(0, 0, dw, dh);
-        drawSky(); drawStars(); drawMountains(); drawCosmicLight();
-        var stallionX = dw * 0.48 + (mouseX - 0.5) * (isMobile ? 8 : 25);
-        var stallionY = dh * 0.58 + (mouseY - 0.5) * (isMobile ? 5 : 15);
-        drawStallion(stallionX, stallionY, isMobile ? 0.75 : 1.2);
-        var manX = stallionX - (isMobile ? 32 : 50);
-        var manY = stallionY + (isMobile ? 9 : 20);
-        drawYoungMan(manX, manY, isMobile ? 0.65 : 1.1);
-        drawStardust();
-      }
-      
-      var heroObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          isVisible = entry.isIntersecting;
-          if (isVisible && !animationId) { lastFrameTime = 0; animate(0); }
-          else if (!isVisible && animationId) { cancelAnimationFrame(animationId); animationId = null; }
-        });
-      }, { threshold: 0.05 });
+      var heroObserver = new IntersectionObserver(function(entries){entries.forEach(function(entry){isVisible=entry.isIntersecting;if(isVisible&&!animationId){lastFrameTime=0;animate(0);}else if(!isVisible&&animationId){cancelAnimationFrame(animationId);animationId=null;}});},{threshold:0.05});
       heroObserver.observe(canvas);
       
-      function animate(currentTime) {
-        if (!isVisible) { animationId = null; return; }
-        if (!lastFrameTime || (currentTime - lastFrameTime) >= FRAME_DELAY) {
-          time++;
-          stardust.forEach(function(p) {
-            p.y -= p.speed * 0.05;
-            p.x += Math.sin(time * 0.015 + p.phase) * p.drift * 0.02;
-            if (p.y < -0.1) { p.y = 1.05 + Math.random() * 0.15; p.x = Math.random() * 1.3 - 0.15; }
-          });
-          render();
-          lastFrameTime = currentTime;
-        }
-        animationId = requestAnimationFrame(animate);
-      }
-      
-      resize();
-      initParticles();
-      if (window.requestIdleCallback) {
-        window.requestIdleCallback(function() { animate(0); }, { timeout: 1000 });
-      } else {
-        setTimeout(function() { animate(0); }, 100);
-      }
-      window.addEventListener('beforeunload', function() { if (animationId) cancelAnimationFrame(animationId); });
+      function animate(currentTime){if(!isVisible){animationId=null;return;}if(!lastFrameTime||(currentTime-lastFrameTime)>=FRAME_DELAY){time++;stardust.forEach(function(p){p.y-=p.speed*0.05;p.x+=Math.sin(time*0.015+p.phase)*p.drift*0.02;if(p.y<-0.1){p.y=1.05+Math.random()*0.15;p.x=Math.random()*1.3-0.15;}});render();lastFrameTime=currentTime;}animationId=requestAnimationFrame(animate);}
+      resize();initParticles();
+      if(window.requestIdleCallback){window.requestIdleCallback(function(){animate(0);},{timeout:1000});}else{setTimeout(function(){animate(0);},100);}
+      window.addEventListener('beforeunload',function(){if(animationId)cancelAnimationFrame(animationId);});
     })();
 
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-      a.addEventListener('click', function(e) {
-        var href = this.getAttribute('href');
-        if (href === '#') return;
-        var target = document.querySelector(href);
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      });
-    });
-
-    var scrollHint = document.getElementById('scrollHint');
-    if (scrollHint) {
-      scrollHint.addEventListener('click', function() {
-        var firstChapter = document.querySelector('#ch1');
-        if (firstChapter) firstChapter.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-
-    document.getElementById('portalBtn').addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-    (function() {
-      var cookieConsent = document.getElementById('cookieConsent');
-      var acceptCookies = document.getElementById('acceptCookies');
-      var declineCookies = document.getElementById('declineCookies');
-      function setCookieConsent(accepted) { localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined'); if (cookieConsent) cookieConsent.classList.remove('show'); }
-      function showCookieConsent() { if (!cookieConsent) return; var consent = localStorage.getItem('cookieConsent'); if (!consent) cookieConsent.classList.add('show'); else cookieConsent.classList.remove('show'); }
-      if (acceptCookies) acceptCookies.addEventListener('click', function() { setCookieConsent(true); });
-      if (declineCookies) declineCookies.addEventListener('click', function() { setCookieConsent(false); });
-      showCookieConsent();
-    })();
-
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var href=this.getAttribute('href');if(href==='#')return;var target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});
+    document.getElementById('scrollHint').addEventListener('click',function(){var c=document.querySelector('#ch1');if(c)c.scrollIntoView({behavior:'smooth'});});
+    document.getElementById('portalBtn').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+    (function(){var cc=document.getElementById('cookieConsent'),ac=document.getElementById('acceptCookies'),dc=document.getElementById('declineCookies');function s(a){localStorage.setItem('cookieConsent',a?'accepted':'declined');if(cc)cc.classList.remove('show');}function sc(){if(!cc)return;var c=localStorage.getItem('cookieConsent');if(!c)cc.classList.add('show');else cc.classList.remove('show');}if(ac)ac.addEventListener('click',function(){s(true);});if(dc)dc.addEventListener('click',function(){s(false);});sc();})();
     document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
 </body>
