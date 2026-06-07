@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Praveen Kumar | International Dressage Champion & Horseman - The Horseman's Journal</title>
-  <meta name="description" content="Praveen Kumar is an International Dressage (Equitation) Champion from India with over 30 medals. Trained under 7-time National Champion Kapil Modi. He works with horses using trust, patience, and listening.">
-  <meta name="keywords" content="Praveen Kumar, dressage champion India, Kapil Modi, equitation champion, horseman, horse trainer, trust based horsemanship">
+  <meta name="description" content="Praveen Kumar is an International Dressage (Equitation) Champion from India with over 30 medals. He works with horses using trust, patience, and listening. Read his story.">
+  <meta name="keywords" content="Praveen Kumar, dressage champion India, equitation champion, horseman, horse trainer, trust based horsemanship">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   
   <meta property="og:title" content="Praveen Kumar - International Dressage Champion | The Horseman's Journal">
-  <meta property="og:description" content="International Dressage (Equitation) Champion from India with over 30 medals. Trained under 7-time National Champion Kapil Modi.">
+  <meta property="og:description" content="International Dressage (Equitation) Champion from India with over 30 medals. His philosophy: trust, patience, listening.">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="The Horseman's Journal">
   <meta property="profile:first_name" content="Praveen">
@@ -18,7 +18,7 @@
   
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Praveen Kumar - International Dressage Champion">
-  <meta name="twitter:description" content="International Dressage (Equitation) Champion from India. Over 30 medals. Trained under Kapil Modi. Trust, patience, listening.">
+  <meta name="twitter:description" content="International Dressage (Equitation) Champion from India. Over 30 medals. Trust, patience, listening.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,6 +37,7 @@
       line-height: 1.6;
     }
 
+    /* ===== LOGO WATERMARK ===== */
     .logo-watermark {
       position: fixed;
       top: 50%;
@@ -115,6 +116,7 @@
     .hero-scroll svg { width: 18px; stroke: rgba(200,160,80,0.5); }
     @keyframes fadeUpDown { 0%,100%{transform:translateX(-50%) translateY(0);opacity:.35} 50%{transform:translateX(-50%) translateY(8px);opacity:.8} }
 
+    /* ===== ABOUT CONTENT ===== */
     .about-content {
       position: relative;
       padding: 80px 2rem 100px;
@@ -142,27 +144,32 @@
     .about-block.visible { opacity: 1; transform: translateY(0); }
     .about-block h2 {
       font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-      font-weight: 600; color: #D4A040; letter-spacing: 2px; margin-bottom: 1.5rem; text-align: center;
+      font-weight: 600; color: #D4A040; letter-spacing: 2px; margin-bottom: 1.5rem;
     }
     .about-block p {
       font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 2;
-      color: rgba(210,220,200,0.85); margin-bottom: 1.2rem; text-indent: 2em;
+      color: rgba(210,220,200,0.85); margin-bottom: 1.2rem;
     }
-    .about-block p:first-of-type { text-indent: 0; }
     .about-block p strong { color: #D4A040; }
     .about-ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 2rem 0 .5rem; }
     .about-ornament span { width: 50px; height: 1px; background: linear-gradient(90deg, transparent, rgba(180,150,80,0.5), transparent); }
     .about-ornament i { width: 6px; height: 6px; background: #C89840; transform: rotate(45deg); }
     .about-quote { text-align: center; padding: 2rem; margin: 2rem 0; border-top: 1px solid rgba(180,150,80,0.18); border-bottom: 1px solid rgba(180,150,80,0.18); background: rgba(160,130,60,0.04); }
-    .about-quote p { font-style: italic; font-size: 1.3rem; color: #C89840; text-align: center; text-indent: 0; }
+    .about-quote p { font-style: italic; font-size: 1.3rem; color: #C89840; text-align: center; }
     .about-signature { text-align: center; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; color: #D4A040; margin-top: 2rem; }
 
+    /* ===== PHOTO SECTION - LARGER SIZE ===== */
     .photo-section { display: flex; justify-content: center; margin: 3rem 0; }
     .author-photo {
-      width: 280px; height: 280px; border-radius: 50%; overflow: hidden;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      overflow: hidden;
       border: 3px solid #C89840;
       background: linear-gradient(145deg, #1a3020, #081a10);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       box-shadow: 0 0 40px rgba(180,150,80,0.3);
       animation: photoGlow 4s ease-in-out infinite;
     }
@@ -177,11 +184,26 @@
       margin: 0.5rem 0; animation: badgePulse 3s ease-in-out infinite;
     }
     @keyframes badgePulse { 0%,100%{opacity:.7} 50%{opacity:1} }
-    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
-    .stat-item { background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(180,150,80,0.15); transition: all 0.3s ease; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stat-item {
+      background: rgba(0,0,0,0.3);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(180,150,80,0.15);
+      transition: all 0.3s ease;
+    }
     .stat-item:hover { transform: translateY(-5px); border-color: rgba(180,150,80,0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
     .stat-number { font-family: 'Cinzel Decorative', serif; font-size: 2rem; color: #D4A040; }
-    .stat-label { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 2px; color: rgba(180,200,160,0.5); text-transform: uppercase; }
+    .stat-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 2px; color: rgba(180,200,160,0.5); text-transform: uppercase; }
     .awakening-link { display: inline-flex; align-items: center; gap: 0.8rem; margin-top: 2rem; padding: 1rem 2rem; background: rgba(180,150,80,0.1); border: 1px solid rgba(180,150,80,0.4); border-radius: 40px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 3px; color: #D4A040; transition: all 0.3s; }
     .awakening-link:hover { background: rgba(180,150,80,0.25); border-color: #C89840; transform: translateY(-3px); }
 
@@ -218,7 +240,7 @@
       .about-block { padding: 2rem 1.5rem; margin-bottom: 50px; }
       .about-block p { font-size: 1rem; }
       .hero-title { font-size: 1.8rem; }
-      .author-photo { width: 200px; height: 200px; }
+      .author-photo { width: 220px; height: 220px; }
       .logo-watermark { width: 70vw; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -291,17 +313,15 @@
       </div>
     </div>
 
-    <!-- Section 1: Who I Am & What I Do -->
+    <!-- Section 1: About Me -->
     <div class="about-block">
       <div style="text-align: center; margin-bottom: 1rem;">
         <span class="trust-badge">✦ International Dressage (Equitation) Champion ✦</span>
       </div>
-      <h2>Who I Am & What I Do</h2>
-      <p>My name is Praveen Kumar, also known as Prashant. I have trained under and worked with Mr. Kapil Modi, a seven time National Champion and World Dressage Challenge Champion. He trusted me with his most expensive horses. That trust gave me the opportunity to move beyond traditional training and truly understand the horse. Mr. Kapil Modi is the reason I learned to read a horse instead of simply forcing one to obey.</p>
-      <p>I am an International Dressage (Equitation) Champion from India. Over the course of my career, I have won more than 30 medals in the International Dressage Development League.</p>
-      <p>My dream has always been to win the first Olympic Gold in Dressage for India. Whether I achieve that or not is not the point. What matters is that I show up every day. I work with horses. I train them. I paint them. I sit with them in silence. I help horses that others have given up on.</p>
-      <p>I do not believe in force, dominance, or breaking a horse's spirit. I believe in trust, patience, and listening. That is what I do. That is what I have always done.</p>
-      <p>The medals and titles are not why I work with horses. I work with horses because being near them, understanding them, painting them, and helping them trust me – that is what makes me feel alive.</p>
+      <h2>About Me</h2>
+      <p>My name is Praveen Kumar, also known as Prashant.</p>
+      <p>For more than eleven years, I have dedicated my life to understanding horses. I have trained under and worked with Mr. Kapil Modi, a seven-time National Champion and World Dressage Challenge Champion. His trust in me allowed me to work closely with some of his most valuable horses and, more importantly, taught me to look beyond training methods and learn to truly read the horse.</p>
+      <p>I am an International Dressage (Equitation) Champion from India and have earned more than 30 medals in the International Dressage Development League. While competition has been an important part of my journey, my greatest education has come from the horses themselves.</p>
       
       <div class="stats-grid">
         <div class="stat-item">
@@ -317,70 +337,110 @@
           <div class="stat-label">Horses Trained</div>
         </div>
       </div>
-      
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
-    <!-- Section 2: The Journey -->
+    <!-- Section 2: What I Do -->
+    <div class="about-block">
+      <h2>What I Do</h2>
+      <p>I work directly with horses through groundwork, relationship development, movement education, and dressage foundations.</p>
+      <p>My approach focuses on developing horses that are mentally relaxed, physically capable, and genuinely willing to work with people. Every horse is an individual, and I adapt my training to the horse rather than forcing the horse into a fixed system.</p>
+      <p>My work includes:</p>
+      <p>• Building trust and confidence.<br>
+      • Groundwork and relationship development.<br>
+      • Preparing horses for ridden work.<br>
+      • Improving rhythm, balance, and straightness.<br>
+      • Developing strength and self-carriage.<br>
+      • Introducing lateral work foundations.<br>
+      • Improving willingness and focus.<br>
+      • Working with sensitive, misunderstood, or challenging horses.</p>
+      <p>My goal is not simply to teach movements. My goal is to help horses become confident, balanced, and willing partners.</p>
+      <div class="about-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <!-- Section 3: Beyond Techniques -->
+    <div class="about-block">
+      <h2>Beyond Techniques</h2>
+      <p>Training methods, techniques, and tactics all have their place. They can improve communication, solve problems, and help develop specific skills. But in my experience, the greatest change in a horse does not come from a technique. It comes from the quality of presence we bring into the relationship.</p>
+      <p>Calmness matters. Not passive calmness, but calmness combined with awareness, attention, and a genuine willingness to be present with the horse.</p>
+      <p>Many horses spend their lives being corrected. They are pulled into position, pushed into movement, punished for mistakes, or constantly told what they are doing wrong. While correction is sometimes necessary, I have found that horses often learn the most when they are given the opportunity to think, experiment, and discover the answer for themselves.</p>
+      <p>Again and again, I have been impressed by what horses are capable of when they are trusted.</p>
+      <p>Trust is not built through grand gestures. It is built through hundreds of small interactions repeated over time.</p>
+      <p>A horse that trusts you begins to seek your company. It waits for your arrival. It relaxes in your presence. It asks for interaction. Sometimes that trust is expressed through a quiet moment with a head resting against your shoulder. Sometimes it is a horse following you without being asked. Sometimes it is a horse meeting you at the gate before you have even called its name.</p>
+      <p>These moments cannot be forced. They are given freely.</p>
+      <p>One of the greatest teachers in my life has been a black stallion named T-Rex. Through years of working together, he taught me that horses are far more aware, intelligent, and emotionally honest than we often give them credit for. Some days he asks for scratches. Some days he demands a long massage. Some days he offers his best work simply because he wants to engage.</p>
+      <p>Those moments remind me that the strongest partnerships are not built on obedience. They are built on trust, understanding, and the willingness of two individuals to choose each other every day.</p>
+      <div class="about-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <!-- Section 4: The Journey -->
     <div class="about-block">
       <h2>The Journey</h2>
-      <p>I came to horses as an ordinary person. Quiet in a way that felt like smallness rather than strength. The world outside the stable never quite held a shape I was built for. But inside that world, surrounded by warmth and breath and the weight of a thousand pound animal standing still beside me, something inside me could finally relax.</p>
-      <p>I did not begin with a philosophy. I began like most people do – trying to make things work, trying to control outcomes, trying to get the horse to respond correctly. Over time, that approach stopped making sense. The horses obeyed. Mostly. They performed. But when the work was done and the lead rope went slack, they never turned toward me. Something was always held back.</p>
+      <p>I did not come into the horse world with a grand plan.</p>
+      <p>I found horses at a time when much of the world felt confusing and difficult to understand. Inside the stable, surrounded by quiet strength, warm breath, and honest communication, something felt different. Horses did not care about appearance, status, or performance. They responded only to what was real.</p>
+      <p>Like many riders, I initially focused on results. I wanted the correct response, the correct movement, the correct outcome. Over time, I realized that while horses could be taught to obey, obedience alone did not create connection.</p>
+      <p>When the training session ended and the lead rope went slack, the horse still had a choice. That choice fascinated me.</p>
       <div class="about-quote"><p>"A horse does not ask what you want. It asks what you are."</p></div>
-      <p>That realization took years. And it cost me. It cost me the comfort of certainty, the ease of old habits, the illusion that I was in control. But what it gave me in return was immeasurable – a way of being with horses that felt true, not just effective.</p>
+      <p>The more time I spent with horses, the more I realized that successful training was not simply about teaching. It was about becoming someone a horse could trust.</p>
     </div>
 
-    <!-- Section 3: The Black Stallion -->
+    <!-- Section 5: The Black Stallion -->
     <div class="about-block">
       <h2>The Black Stallion</h2>
-      <p>Then the black stallion arrived, and everything changed. He was four years old, barely trained. A living storm wrapped in midnight muscle and something older than any method I had learned. He was not stubborn. He was honest. And from the very first day, he saw through every mask I had carefully built over years of training.</p>
-      <p>He taught me that strength was never the point. What a horse asks for has nothing to do with dominance or performance. It asks you to stand without fear, to be consistent without an agenda, to become the kind of presence that an intelligent creature of pure instinct chooses to trust. That is much harder than it sounds.</p>
+      <p>Everything changed when a young black stallion entered my life.</p>
+      <p>He was powerful, intelligent, and completely uninterested in pretending. He challenged every assumption I had about training. He showed me that strength alone accomplishes very little. Consistency, honesty, patience, and emotional steadiness mattered far more.</p>
+      <p>He taught me that horses do not seek perfection. They seek clarity.</p>
       <div class="about-quote"><p>"The horse that obeys because it has no choice is not truly trained. It is simply waiting for an opportunity to choose differently."</p></div>
+      <p>Working with him transformed my understanding of horses and continues to influence the way I train today.</p>
     </div>
 
-    <!-- Section 4: My Dream and My Daily Work -->
+    <!-- Section 6: My Dream -->
     <div class="about-block">
-      <h2>My Dream and My Daily Work</h2>
-      <p>My dream has always been to win an Olympic Gold in Dressage for India. I have worked toward that dream for years. I have won medals at international competitions. I have been recognized as an International Dressage (Equitation) Champion.</p>
-      <p>Whether I represent India or not is not in my hands. What is in my hands is showing up every day, working with horses, painting them, and staying true to my philosophy. That is what I do. That is what I will always do.</p>
-      <p>Every morning, I go to the arena. I work with horses that others have given up on. I sit with them in silence. I help them find trust. I learn from them. The medals are not why I do this. I do this because being near horses, understanding them, painting them, and helping them trust me – that is what makes me feel alive.</p>
-      <div class="about-quote"><p>"I may never stand on the Olympic podium. But every horse that trusts me is a medal I have already won."</p></div>
-      <p>That is not sadness. That is purpose.</p>
-    </div>
-
-    <!-- Section 5: The Philosophy -->
-    <div class="about-block">
-      <h2>The Philosophy</h2>
-      <p><strong>A horse must be able to think before it can learn.</strong> If the horse is overwhelmed, no amount of pressure will create clarity.</p>
-      <p><strong>Behaviour is information, not disobedience.</strong> Every reaction tells you something about the horse's inner state.</p>
-      <p><strong>Willingness is more valuable than obedience.</strong> A correct response given freely is completely different from one that is forced.</p>
-      <p><strong>Emotional steadiness is not optional.</strong> It is the foundation of everything. A horse cannot find clarity through a handler who is internally conflicted or outwardly aggressive.</p>
-      <p><strong>Trust is built in small moments.</strong> Not in grand gestures, but in thousands of small honest interactions that tell the horse you are safe, consistent, and real.</p>
+      <h2>My Dream</h2>
+      <p>My dream has always been to win India's first Olympic Gold Medal in Dressage.</p>
+      <p>Whether that dream becomes reality is something time will decide. What matters to me is the work itself.</p>
+      <p>Every day I return to the horses. I train them. I learn from them. I help them develop confidence and trust. I sit quietly beside them when they need patience more than instruction.</p>
+      <p>The medals are meaningful, but they are not the reason I do this. The reason is much simpler. Being with horses, understanding them, and helping them become the best version of themselves is what gives my life purpose.</p>
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
-    <!-- Section 6: Why I Write -->
+    <!-- Section 7: My Philosophy -->
+    <div class="about-block">
+      <h2>My Philosophy</h2>
+      <p><strong>A horse must be able to think before it can learn.</strong></p>
+      <p><strong>Behaviour is information, not disobedience.</strong></p>
+      <p><strong>Trust is built through thousands of small interactions.</strong></p>
+      <p><strong>Willingness is more valuable than obedience.</strong></p>
+      <p><strong>The emotional state of the horse matters as much as the physical state.</strong></p>
+      <p><strong>Training should create confidence, not fear.</strong></p>
+      <p><strong>Calmness is not the absence of action. It is the foundation that allows meaningful action to happen.</strong></p>
+      <p><strong>The goal is not control. The goal is partnership.</strong></p>
+      <div class="about-ornament"><span></span><i></i><span></span></div>
+    </div>
+
+    <!-- Section 8: Why I Write -->
     <div class="about-block">
       <h2>Why I Write</h2>
-      <p>This journal is not a training manual. It is a conversation – about trust, about fear, about the invisible bond between horse and human. It is the record of eleven years of mornings in arenas, of falls and breakthroughs, of long, hard silences where nothing is said and everything is understood.</p>
-      <p>I write because the horses taught me something I could not keep to myself. They taught me that the thing I was hiding was the thing that was safe. The thing I was performing was the thing that drove them away. I had it backwards my entire life.</p>
+      <p>The Horseman's Journal exists because horses taught me lessons that extend far beyond riding and training.</p>
+      <p>This website is a place to explore trust, fear, communication, growth, and the relationship between horse and human. Everything I write is rooted in real experiences, real horses, and real lessons learned through years of daily work.</p>
+      <p>I do not write theory. I write what horses have taught me.</p>
       <div class="about-quote"><p>"The horse does not ask you to be perfect. It asks you to be real."</p></div>
-      <p>Every article, every essay, every word on this site has been lived first in an arena, in the dust, in the space between my breath and a horse's heartbeat. I do not write theory. I write what I have learned from animals that cannot speak – and that is exactly why they are the best teachers.</p>
+      <p>Every article begins in the arena long before it reaches the page. And every lesson worth sharing began with a horse.</p>
     </div>
 
-    <!-- Section 7: Beyond Horses -->
+    <!-- Section 9: Working With Me -->
     <div class="about-block">
-      <h2>Beyond Horses</h2>
-      <p>When I am not working with horses, I am reading, writing, or walking in silence. I believe that the same principles that build trust with a horse build trust with anything alive – patience, consistency, and the willingness to listen without an agenda.</p>
-      <p>I am based in India, where the equestrian world is still growing. My perspective is different because my journey is different. I did not grow up with horses. I found them. And that act of finding – of choosing this path against the grain – has shaped everything about my approach.</p>
-      <p>I am still afraid sometimes. Even now. Even after everything. Fear does not disappear because you have learned to work alongside it. But I stand. Not because I would lose something if I walked away. But because I refuse to abandon the one thing that has carried me through all of this – the work, the horses, and the truth they have taught me.</p>
+      <h2>Working With Me</h2>
+      <p>I am available for private horse training and horse development projects.</p>
+      <p>My work focuses on building trust, developing confidence, improving movement quality, creating willingness, and helping horses become balanced partners both mentally and physically.</p>
+      <p>If you are looking for someone who values patience, observation, clear communication, and a horse-centred approach to training, I would be happy to discuss your horse and its individual needs.</p>
       <div class="about-ornament"><span></span><i></i><span></span></div>
     </div>
 
-    <!-- Section 8: The Full Story -->
+    <!-- Section 10: The Full Story -->
     <div class="about-block" style="text-align: center;">
       <h2>The Full Story</h2>
-      <p>What you have read here is only the beginning. The real story – the surrender, the twenty days of silence, the moment fear became trust – lives in the Awakening.</p>
+      <p>What you have read here is only the beginning. The real story — the surrender, the twenty days of silence, the moment fear became trust — lives in the Awakening.</p>
       <div class="about-quote"><p>"The universe did not send me a horse to train. It sent me a mirror that refused to lie."</p></div>
       <a href="awakening.html" class="awakening-link">✦ Read the Full Awakening Story ✦</a>
       <p class="about-signature">— Praveen Kumar</p>
@@ -412,7 +472,7 @@
   </div>
 
   <script>
-    // CANVAS ANIMATION (preserved exactly from your original)
+    // Canvas Animation (same as before - unchanged)
     const canvas = document.getElementById('heroCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
@@ -438,7 +498,6 @@
         skyGrad.addColorStop(1, '#5a6a38');
         ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, W, H * 0.55);
-
         const lightX = W * 0.52, lightY = H * 0.22;
         const sunGrad = ctx.createRadialGradient(lightX, lightY, 0, lightX, lightY, W * 0.4);
         sunGrad.addColorStop(0, 'rgba(220,180,100,0.7)');
@@ -454,12 +513,10 @@
         ctx.beginPath(); ctx.moveTo(0, H * 0.5);
         for (let i = 0; i <= 80; i++) { const nx = i / 80; ctx.lineTo(nx * W, H * 0.38 + Math.sin(nx * 2.2) * H * 0.07 + Math.sin(nx * 5.0) * H * 0.03); }
         ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-
         ctx.fillStyle = '#061812';
         ctx.beginPath(); ctx.moveTo(0, H * 0.56);
         for (let i = 0; i <= 80; i++) { const nx = i / 80; ctx.lineTo(nx * W, H * 0.44 + Math.sin(nx * 1.7 + 1.2) * H * 0.05 + Math.sin(nx * 4.0) * H * 0.025); }
         ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
-
         ctx.fillStyle = '#030a08';
         ctx.beginPath(); ctx.moveTo(0, H * 0.62);
         for (let i = 0; i <= 80; i++) { const nx = i / 80; ctx.lineTo(nx * W, H * 0.52 + Math.sin(nx * 1.3 + 0.8) * H * 0.035); }
@@ -474,7 +531,6 @@
         grad.addColorStop(1, '#040a04');
         ctx.fillStyle = grad;
         ctx.fillRect(0, H * 0.55, W, H * 0.45);
-
         for (let i = 0; i < 500; i++) {
           const gx = (Math.sin(i * 127.3 + 311.7) * 0.5 + 0.5) * W;
           const gy = H * 0.54 + (Math.cos(i * 269.5) * 0.5 + 0.5) * H * 0.44;
@@ -592,7 +648,6 @@
       function render() {
         ctx.clearRect(0, 0, W, H);
         drawSky(); drawHills(); drawGround(); drawFence();
-        
         const herd = [
           { x: W * 0.10, y: H * 0.62, s: 0.44, f: false, g: true },
           { x: W * 0.20, y: H * 0.64, s: 0.34, f: true, g: true },
@@ -601,15 +656,12 @@
           { x: W * 0.30, y: H * 0.60, s: 0.36, f: false, g: false },
         ];
         herd.forEach(h => drawHerdHorse(h.x + (mx - 0.5) * 8 * h.s, h.y, h.s, h.f, h.g));
-        
         drawAtmosphere(); drawBirds();
-        
         const stallionX = W * 0.48 + (mx - 0.5) * 22;
         const stallionY = H * 0.68;
         const headBob = Math.sin(time * 0.035) * 5;
         const tailSway = Math.sin(time * 0.025) * 6;
         drawStallion(stallionX, stallionY, 1.55, headBob, tailSway);
-        
         const boyX = stallionX - 58;
         const boyY = stallionY + 12;
         const headTilt = Math.sin(time * 0.018) * 2;
