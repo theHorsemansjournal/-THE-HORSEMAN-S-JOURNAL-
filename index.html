@@ -47,7 +47,7 @@
         <div class="face face-right-wall"></div>
         <div class="face face-top"></div>
         <div class="nav-content">
-          <div class="brand">The Horseman's Journal<small>EST. MMXXVI</small></div>
+          <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
           <ul class="links">
             <li><a href="about.html">ABOUT</a></li>
             <li><a href="awakening.html">AWAKENING</a></li>
@@ -71,17 +71,21 @@
 
   <main id="main-content">
     <div class="hero">
-      <canvas id="heroCanvas" aria-label="Animated hero background with particles"></canvas>
+      <canvas id="heroCanvas" aria-label="Animated night sky with horses grazing"></canvas>
       <div class="hero-overlay"></div>
       <div class="hero-title-container">
-        <div class="hero-eyebrow">The Horseman's Journal</div>
-        <h1 class="hero-title">The Horseman's Journal</h1>
+        <div class="hero-eyebrow">✦ Est. MMXXVI · Horsemanship India ✦</div>
+        <h1 class="hero-title">
+          <span class="ht-the">The</span>
+          <span class="ht-horseman">Horseman's</span>
+          <span class="ht-journal">Journal</span>
+        </h1>
         <div class="hero-divider">
           <div class="hero-line"></div>
           <div class="hero-gem"></div>
           <div class="hero-line"></div>
         </div>
-        <p class="hero-tagline">Praveen Kumar · Horsemanship India · Trust, Not Force</p>
+        <p class="hero-tagline">Praveen Kumar · International Dressage Champion · Trust, Not Force</p>
         <dl class="hero-stats">
           <div class="hero-stat"><dt class="hero-stat-number">11 Years</dt><dd class="hero-stat-label">Experience</dd></div>
           <div class="hero-stat"><dt class="hero-stat-number">8 Horses</dt><dd class="hero-stat-label">Companions</dd></div>
@@ -96,6 +100,9 @@
 
     <section class="great-hall">
       <div class="hall-inner">
+        <div class="hall-emblem" id="hallEmblem">
+          <canvas id="hallEmblemCanvas" width="120" height="120" aria-label="Horseman emblem"></canvas>
+        </div>
         <div class="hall-header">
           <div class="hall-icon">✦</div>
           <h2 class="hall-heading">The Journal</h2>
@@ -148,7 +155,7 @@
             <div class="book-hardcover">
               <div class="book-spine"></div>
               <div class="book-cover-front">
-                <img src="logo.jpg" alt="The Horseman's Journal book cover" class="book-cover-logo">
+                <img src="logo.jpg" alt="The Horseman's Journal book cover" class="book-cover-logo" loading="lazy">
               </div>
               <div class="book-pages"></div>
               <div class="book-pages-bottom"></div>
@@ -202,18 +209,15 @@
     </section>
   </main>
 
-    <!-- ===== STUDENT REVIEWS SECTION ===== -->
     <section class="student-reviews-section">
       <div class="student-reviews-container">
         <div class="student-reviews-header">
           <h2 class="student-reviews-title">✦ What My Riding Students Say ✦</h2>
           <p class="student-reviews-sub">Real reviews from those who learned to ride with me</p>
         </div>
-
         <div class="student-reviews-grid" id="studentReviewsGrid">
           <div class="loading-reviews">Loading reviews...</div>
         </div>
-
         <div class="student-review-form-container">
           <h3 class="student-form-title">✧ Share Your Experience ✧</h3>
           <p class="student-form-note">If you learned to ride with me, your story matters. Your review will appear here after approval.</p>
