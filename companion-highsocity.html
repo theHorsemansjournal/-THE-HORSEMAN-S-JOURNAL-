@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Highsocity | Warmblood (In Memoriam) - The Horseman's Journal</title>
   <meta name="description" content="Highsocity, a Warmblood. Seven years of elegance and grace. He taught that grace costs nothing and means everything.">
-  <meta name="keywords" content="Highsocity, Warmblood, horse story, in memoriam, grace, horsemanship">
+  <meta name="keywords" content="Highsocity, Warmblood, horse story, in memoriam, grace, horsemanship, Praveen Kumar">
   <meta name="author" content="Praveen Kumar">
   <meta name="robots" content="index, follow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,488 +14,69 @@
   <link rel="stylesheet" href="global.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #0d0804;
-      color: #f0e6d2;
-      font-family: 'Cormorant Garamond', serif;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('logo.jpg');
-      background-repeat: repeat;
-      background-size: 180px;
-      opacity: 0.035;
-      pointer-events: none;
-      z-index: 0;
-    }
-    #faviconCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.2;
-    }
-
-    /* ===== NAVBAR ===== */
-    .navbar-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
-      display: flex;
-      justify-content: center;
-      padding: 0.8rem 1rem 0;
-      pointer-events: none;
-    }
+    body { background: #0d0804; color: #f0e6d2; font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.6; }
+    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('logo.jpg'); background-repeat: repeat; background-size: 180px; opacity: 0.035; pointer-events: none; z-index: 0; }
+    #faviconCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.2; }
+    
+    .navbar-wrapper { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; justify-content: center; padding: 0.8rem 1rem 0; pointer-events: none; }
     .navbar-wrapper * { pointer-events: auto; }
-    .scene {
-      perspective: 700px;
-      perspective-origin: 50% 60%;
-      width: 100%;
-      max-width: 1200px;
-    }
-    .nav3d {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(28deg) rotateY(0deg);
-      transition: transform .5s;
-      height: 60px;
-    }
-    .nav3d:hover { transform: rotateX(8deg) rotateY(2deg); }
-    .face { position: absolute; border-radius: 18px; }
-    .face-top {
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(212,175,55,0.06) 40%, rgba(255,255,255,0.04));
-      border: 1px solid rgba(212,175,55,0.45);
-      backdrop-filter: blur(18px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(0,0,0,0.2), 0 0 60px rgba(212,175,55,0.06);
-      z-index: 4;
-    }
-    .face-back {
-      inset: 0;
-      background: rgba(212,175,55,0.04);
-      border: 1px solid rgba(212,175,55,0.2);
-      transform: translateZ(-36px);
-      z-index: 1;
-    }
-    .face-bottom-wall {
-      left: 18px;
-      right: 18px;
-      bottom: -36px;
-      height: 36px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.18), rgba(100,60,0,0.08) 60%, rgba(0,0,0,0.02));
-      border-left: 1px solid rgba(212,175,55,0.15);
-      border-right: 1px solid rgba(212,175,55,0.15);
-      border-bottom: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 0 12px 12px;
-      transform-origin: top center;
-      transform: rotateX(-90deg);
-      z-index: 2;
-    }
-    .face-top-wall {
-      left: 18px;
-      right: 18px;
-      top: -5px;
-      height: 5px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(212,175,55,0.2));
-      border-radius: 18px 18px 0 0;
-      transform-origin: bottom center;
-      transform: rotateX(90deg);
-      z-index: 3;
-    }
-    .face-left-wall {
-      top: 4px;
-      bottom: 4px;
-      left: -36px;
-      width: 36px;
-      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.1));
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 12px 0 0 12px;
-      transform-origin: right center;
-      transform: rotateY(-90deg);
-      z-index: 2;
-    }
-    .face-right-wall {
-      top: 4px;
-      bottom: 4px;
-      right: -36px;
-      width: 36px;
-      background: linear-gradient(270deg, transparent, rgba(212,175,55,0.1));
-      border: 1px solid rgba(212,175,55,0.1);
-      border-radius: 0 12px 12px 0;
-      transform-origin: left center;
-      transform: rotateY(90deg);
-      z-index: 2;
-    }
-    .nav-content {
-      position: absolute;
-      inset: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 1rem;
-      transform: translateZ(1px);
-      gap: 0.5rem;
-    }
-    .brand {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #D4AF37;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-shadow: 0 0 24px rgba(212,175,55,0.8);
-      flex-shrink: 0;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .brand small {
-      display: inline-block;
-      font-size: 0.4rem;
-      letter-spacing: 2px;
-      color: rgba(212,175,55,0.4);
-      margin-left: 0.2rem;
-    }
-    .links {
-      display: flex;
-      gap: 0.3rem;
-      list-style: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      flex: 1;
-    }
-    .links li a {
-      display: block;
-      font-size: 0.55rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: rgba(255,240,180,0.6);
-      text-decoration: none;
-      padding: 4px 8px;
-      border-radius: 8px;
-      transition: all .25s;
-      white-space: nowrap;
-    }
-    .links li a:hover,
-    .links li a.active {
-      color: #FFF8DC;
-      background: rgba(255,255,255,0.07);
-      text-shadow: 0 0 16px rgba(212,175,55,0.9);
-    }
-    .portal-scene {
-      perspective: 300px;
-      flex-shrink: 0;
-    }
-    .portal-btn {
-      position: relative;
-      transform-style: preserve-3d;
-      transform: rotateX(22deg);
-      transition: transform .25s;
-      display: inline-block;
-      border: none;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-    }
-    .portal-btn:hover {
-      transform: rotateX(5deg) translateY(-2px);
-    }
-    .portal-top {
-      display: block;
-      padding: 4px 10px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25));
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(212,175,55,0.7);
-      border-radius: 100px;
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.5rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #FFF8DC;
-      text-shadow: 0 0 12px rgba(212,175,55,0.9);
-      white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-    }
-    .portal-wall {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(140,90,0,0.6), rgba(60,30,0,0.4));
-      border-radius: 100px;
-      transform: translateZ(-14px);
-      z-index: 2;
-      border: 1px solid rgba(120,70,0,0.5);
-    }
-    .portal-glow {
-      position: absolute;
-      inset: -4px;
-      border-radius: 100px;
-      background: transparent;
-      box-shadow: 0 0 20px rgba(212,175,55,0.4),0 0 60px rgba(212,175,55,0.15);
-      transform: translateZ(-7px);
-      z-index: 1;
-    }
-
-    /* Mobile navbar: stack vertically */
+    .scene { width: 100%; max-width: 1200px; }
+    .nav3d { background: rgba(0,0,0,0.4); border-radius: 20px; backdrop-filter: blur(12px); padding: 0.5rem 1rem; }
+    .nav-content { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+    .brand { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; color: #D4AF37; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+    .brand small { display: inline-block; font-size: 0.4rem; letter-spacing: 2px; color: rgba(212,175,55,0.4); margin-left: 0.2rem; }
+    .links { display: flex; gap: 0.3rem; list-style: none; flex-wrap: wrap; justify-content: center; }
+    .links li a { display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 1px; color: rgba(255,240,180,0.6); text-decoration: none; padding: 4px 8px; border-radius: 8px; transition: all .25s; white-space: nowrap; }
+    .links li a:hover, .links li a.active { color: #FFF8DC; background: rgba(255,255,255,0.1); }
+    .portal-btn { background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(212,175,55,0.35) 50%, rgba(180,120,0,0.25)); backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.7); border-radius: 100px; padding: 4px 10px; font-family: 'Raleway', sans-serif; font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; color: #FFF8DC; cursor: pointer; }
     @media (max-width: 860px) {
       .navbar-wrapper { padding: 0.5rem; }
-      .nav3d { height: auto; transform: rotateX(0deg) !important; background: rgba(0,0,0,0.5); border-radius: 20px; }
-      .nav3d:hover { transform: rotateX(0deg) !important; }
-      .face-bottom-wall, .face-top-wall, .face-left-wall, .face-right-wall, .face-back { display: none; }
-      .face-top { background: rgba(0,0,0,0.3); border: 1px solid rgba(212,175,55,0.2); }
-      .nav-content { position: relative; flex-direction: column; gap: 0.4rem; padding: 0.6rem; }
-      .brand { font-size: 0.6rem; text-align: center; width: 100%; margin-bottom: 0.2rem; }
-      .brand small { font-size: 0.35rem; }
-      .links { width: 100%; justify-content: center; gap: 0.2rem; }
+      .nav3d { background: rgba(0,0,0,0.5); }
+      .nav-content { flex-direction: column; gap: 0.4rem; padding: 0.6rem; }
+      .brand { font-size: 0.6rem; text-align: center; width: 100%; }
       .links li a { font-size: 0.45rem; padding: 3px 5px; }
-      .portal-top { font-size: 0.45rem; padding: 3px 8px; }
+      .portal-btn { font-size: 0.45rem; padding: 3px 8px; }
     }
-
-    /* Simple header without canvas */
-    .page-header {
-      text-align: center;
-      padding: 110px 2rem 1.5rem;
-      background: linear-gradient(145deg, #2a1a10, #1a0f0a);
-      border-bottom: 1px solid rgba(212,175,55,0.2);
-      margin-bottom: 2rem;
-    }
-    .page-header h1 {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: #E8C84A;
-      text-shadow: 0 0 30px rgba(212,175,55,0.3);
-      letter-spacing: 3px;
-    }
-
-    /* Article container */
-    .article-container {
-      max-width: 800px;
-      margin: 0 auto 4rem;
-      padding: 2rem;
-      background: rgba(10,8,20,0.6);
-      border-radius: 16px;
-      border: 1px solid rgba(212,175,55,0.15);
-    }
-    .horse-photo {
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto 2rem;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #D4AF37;
-    }
-    .horse-photo img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .memorial-tag {
-      display: inline-block;
-      background: rgba(180,150,80,0.2);
-      border: 1px solid rgba(212,175,55,0.4);
-      border-radius: 40px;
-      padding: 0.2rem 1rem;
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      color: #D4AF37;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    .article-meta {
-      font-family: 'Cinzel', serif;
-      font-size: 0.7rem;
-      color: rgba(212,175,55,0.6);
-      margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(212,175,55,0.2);
-      padding-bottom: 0.5rem;
-      text-align: center;
-    }
-    .article-content {
-      font-family: 'EB Garamond', serif;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: rgba(240,230,210,0.85);
-    }
-    .article-content p {
-      margin-bottom: 1.2rem;
-    }
-    .article-content .dropcap::first-letter {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 3.5em;
-      font-weight: 700;
-      color: #D4AF37;
-      float: left;
-      line-height: 0.75;
-      margin-right: 0.2rem;
-    }
-    .article-content .quote {
-      border-left: 3px solid #D4AF37;
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      font-style: italic;
-      background: rgba(212,175,55,0.05);
-      color: #e8d8a0;
-      border-radius: 0 8px 8px 0;
-    }
-
-    /* Navigation between horses */
-    .horse-navigation {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(212,175,55,0.2);
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-    .nav-prev, .nav-next {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 1px;
-      color: #D4AF37;
-      text-decoration: none;
-      transition: all 0.3s;
-      padding: 0.4rem 0.8rem;
-      border-radius: 30px;
-      background: rgba(212,175,55,0.05);
-      white-space: nowrap;
-    }
-    .nav-prev:hover, .nav-next:hover {
-      background: rgba(212,175,55,0.15);
-    }
-    .nav-prev:hover { transform: translateX(-3px); }
-    .nav-next:hover { transform: translateX(3px); }
-    .nav-back {
-      font-family: 'Cinzel', serif;
-      font-size: 0.55rem;
-      letter-spacing: 1px;
-      color: rgba(212,175,55,0.5);
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .nav-back:hover {
-      color: #D4AF37;
-    }
-
-    /* Contact & Footer */
-    .contact-section {
-      padding: 3rem 2rem;
-      text-align: center;
-      background: #0a0603;
-      border-top: 1px solid rgba(212,175,55,0.1);
-    }
-    .contact-heading {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      letter-spacing: 5px;
-      color: #D4AF37;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .contact-link {
-      text-decoration: none;
-      color: rgba(240,230,200,0.5);
-      transition: 0.3s;
-      font-family: 'EB Garamond', serif;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .contact-link:hover {
-      color: #D4AF37;
-      transform: translateY(-3px);
-    }
-    .footer-links {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.7rem;
-      color: rgba(240,230,200,0.25);
-      border-top: 1px solid rgba(212,175,55,0.06);
-      background: #0a0603;
-    }
-    .footer-links a {
-      color: #D4AF37;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
-    .copyright {
-      text-align: center;
-      padding: 1rem 2rem 2rem;
-      font-size: 0.65rem;
-      color: rgba(240,230,200,0.15);
-      background: #0a0603;
-    }
-    .cookie-consent {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #0a0718e6;
-      backdrop-filter: blur(12px);
-      padding: 0.8rem;
-      text-align: center;
-      z-index: 1000;
-      font-size: 0.75rem;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-      border-top: 1px solid rgba(212,175,55,0.2);
-    }
-    .cookie-consent.show {
-      transform: translateY(0);
-    }
-    .cookie-consent button {
-      background: #D4AF37;
-      border: none;
-      padding: 0.2rem 1rem;
-      margin-left: 0.5rem;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-    }
-    .cookie-consent .decline-btn {
-      background: transparent;
-      border: 1px solid rgba(212,175,55,0.5);
-      color: #D4AF37;
-    }
-    @media (max-width: 860px) {
-      .page-header { padding: 100px 1rem 1rem; }
-      .article-container { margin: 1rem; padding: 1.2rem; }
-      .horse-photo { max-width: 100%; }
-      .horse-navigation { justify-content: center; }
-      .nav-prev, .nav-next { font-size: 0.55rem; }
-    }
+    
+    .page-header { text-align: center; padding: 110px 2rem 1.5rem; background: linear-gradient(145deg, #2a1a10, #1a0f0a); border-bottom: 1px solid rgba(212,175,55,0.2); margin-bottom: 2rem; }
+    .page-header h1 { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #E8C84A; text-shadow: 0 0 20px rgba(212,175,55,0.3); letter-spacing: 3px; }
+    
+    .article-container { max-width: 800px; margin: 0 auto 4rem; padding: 2rem; background: rgba(10,8,20,0.6); border-radius: 16px; border: 1px solid rgba(212,175,55,0.15); }
+    .horse-photo { width: 100%; max-width: 400px; margin: 0 auto 2rem; border-radius: 12px; overflow: hidden; border: 2px solid #D4AF37; }
+    .horse-photo img { width: 100%; height: auto; display: block; }
+    .memorial-tag { display: inline-block; background: rgba(180,150,80,0.2); border: 1px solid rgba(212,175,55,0.4); border-radius: 40px; padding: 0.2rem 1rem; font-family: 'Cinzel', serif; font-size: 0.6rem; color: #D4AF37; margin-bottom: 1rem; }
+    .article-meta { font-family: 'Cinzel', serif; font-size: 0.7rem; color: rgba(212,175,55,0.6); margin-bottom: 1.5rem; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 0.5rem; text-align: center; }
+    .article-content { font-family: 'EB Garamond', serif; font-size: 1.1rem; line-height: 1.8; color: rgba(240,230,210,0.85); }
+    .article-content p { margin-bottom: 1.2rem; }
+    .article-content .dropcap::first-letter { font-family: 'Cinzel Decorative', serif; font-size: 3.5em; font-weight: 700; color: #D4AF37; float: left; line-height: 0.75; margin-right: 0.2rem; }
+    .article-content .quote { border-left: 3px solid #D4AF37; padding: 1rem 1.5rem; margin: 1.5rem 0; font-style: italic; background: rgba(212,175,55,0.05); color: #e8d8a0; border-radius: 0 8px 8px 0; }
+    
+    .horse-navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(212,175,55,0.2); flex-wrap: wrap; gap: 0.8rem; }
+    .nav-prev, .nav-next { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 1px; color: #D4AF37; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 30px; background: rgba(212,175,55,0.08); white-space: nowrap; }
+    .nav-back { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 1px; color: rgba(212,175,55,0.5); text-decoration: none; }
+    .nav-back:hover { color: #D4AF37; }
+    
+    .contact-section { padding: 3rem 2rem; text-align: center; background: #0a0603; border-top: 1px solid rgba(212,175,55,0.1); }
+    .contact-heading { font-family: 'Cinzel', serif; font-size: 0.8rem; letter-spacing: 5px; color: #D4AF37; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link { text-decoration: none; color: rgba(240,230,200,0.5); transition: 0.3s; font-family: 'EB Garamond', serif; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .contact-link:hover { color: #D4AF37; transform: translateY(-3px); }
+    .footer-links { text-align: center; padding: 2rem; font-size: 0.7rem; color: rgba(240,230,200,0.25); border-top: 1px solid rgba(212,175,55,0.06); background: #0a0603; }
+    .footer-links a { color: #D4AF37; text-decoration: none; margin: 0 0.5rem; }
+    .copyright { text-align: center; padding: 1rem 2rem 2rem; font-size: 0.65rem; color: rgba(240,230,200,0.15); background: #0a0603; }
+    
+    .cookie-consent { position: fixed; bottom: 0; left: 0; width: 100%; background: #0a0718e6; backdrop-filter: blur(12px); padding: 0.8rem; text-align: center; z-index: 1000; font-size: 0.75rem; transform: translateY(100%); transition: transform 0.3s; border-top: 1px solid rgba(212,175,55,0.2); }
+    .cookie-consent.show { transform: translateY(0); }
+    .cookie-consent button { background: #D4AF37; border: none; padding: 0.2rem 1rem; margin-left: 0.5rem; border-radius: 20px; cursor: pointer; font-family: 'Cinzel', serif; }
+    .cookie-consent .decline-btn { background: transparent; border: 1px solid rgba(212,175,55,0.5); color: #D4AF37; }
+    @media (max-width: 860px) { .page-header { padding: 100px 1rem 1rem; } .article-container { margin: 1rem; padding: 1.2rem; } .horse-photo { max-width: 100%; } .horse-navigation { justify-content: center; } .nav-prev, .nav-next { font-size: 0.55rem; } }
   </style>
 </head>
 <body>
 
 <div class="navbar-wrapper">
   <div class="scene">
-    <nav class="nav3d">
-      <div class="face face-back"></div>
-      <div class="face face-bottom-wall"></div>
-      <div class="face face-top-wall"></div>
-      <div class="face face-left-wall"></div>
-      <div class="face face-right-wall"></div>
-      <div class="face face-top"></div>
+    <div class="nav3d">
       <div class="nav-content">
         <a href="index.html" class="brand">The Horseman's Journal<small>EST. MMXXVI</small></a>
         <ul class="links">
@@ -508,14 +89,10 @@
           <li><a href="book.html">THE BOOK</a></li>
         </ul>
         <div class="portal-scene">
-          <button class="portal-btn" id="portalBtn" type="button">
-            <span class="portal-glow"></span>
-            <span class="portal-wall"></span>
-            <span class="portal-top">PORTAL ✦</span>
-          </button>
+          <button class="portal-btn" id="portalBtn" type="button">PORTAL ✦</button>
         </div>
       </div>
-    </nav>
+    </div>
   </div>
 </div>
 
@@ -535,7 +112,6 @@
     <p>He is gone. He is not forgotten. Not for a single day.</p>
   </div>
 
-  <!-- Navigation between horses -->
   <div class="horse-navigation">
     <a href="companion-rubin.html" class="nav-prev">← Previous (Rubin)</a>
     <a href="companions.html" class="nav-back">Back to Companions</a>
@@ -568,7 +144,6 @@
 <script>
   document.getElementById('portalBtn')?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   document.getElementById('currentYear').textContent = new Date().getFullYear();
-
   const cookieConsent = document.getElementById('cookieConsent');
   const acceptCookies = document.getElementById('acceptCookies');
   const declineCookies = document.getElementById('declineCookies');
