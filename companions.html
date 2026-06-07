@@ -20,7 +20,8 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@300;400;500;600;700;900&family=Raleway:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <!-- Only load essential fonts first, rest as swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Raleway:wght@300;400&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="global.css">
   
@@ -33,6 +34,7 @@
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     body::before {
@@ -48,17 +50,8 @@
       opacity: 0.035;
       pointer-events: none;
       z-index: 0;
-    }
-
-    #faviconCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.2;
+      /* Prevent repaint */
+      will-change: auto;
     }
 
     .orb {
@@ -67,6 +60,9 @@
       filter: blur(120px);
       pointer-events: none;
       z-index: 0;
+      /* GPU acceleration for orbs only */
+      transform: translateZ(0);
+      will-change: auto;
     }
     .orb1 {
       width: 55vw; height: 55vw;
@@ -224,20 +220,19 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2.5rem 2rem;
-      perspective: 1000px;
     }
     @media (max-width: 1000px) { .stalls-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 700px) { .stalls-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 450px) { .stalls-grid { grid-template-columns: 1fr; } }
 
     .stall-wrap {
-      perspective: 900px;
       cursor: pointer;
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity .7s ease, transform .7s ease;
+      transition: opacity .4s ease, transform .4s ease;
       text-decoration: none;
       display: block;
+      /* Remove perspective from individual cards on mobile */
     }
     .stall-wrap.visible {
       opacity: 1;
@@ -248,12 +243,42 @@
       position: relative;
       width: 100%;
       aspect-ratio: 3 / 4;
-      transform-style: preserve-3d;
-      transform: rotateY(0deg);
-      transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+      transition: transform .4s ease;
     }
-    .stall-wrap:hover .stall-3d {
-      transform: rotateY(-8deg);
+    
+    /* Only apply 3D hover effects on non-touch devices */
+    @media (hover: hover) and (pointer: fine) {
+      .stall-wrap {
+        perspective: 900px;
+      }
+      .stall-3d {
+        transform-style: preserve-3d;
+        transform: rotateY(0deg);
+        transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+      }
+      .stall-wrap:hover .stall-3d {
+        transform: rotateY(-8deg);
+      }
+      .stall-wrap:hover .stall-door {
+        transform: rotateY(-85deg);
+      }
+      .stall-wrap:hover .stall-photo-wrap img {
+        transform: scale(1.04);
+        filter: brightness(1) sepia(.05);
+      }
+      .stall-wrap:hover .stall-nameplate {
+        opacity: 0;
+      }
+      .stall-wrap:hover .stall-info {
+        opacity: 0;
+      }
+      .stall-wrap:hover .memorial-badge {
+        opacity: 0;
+      }
+      .stall-wrap:hover .stall-read {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     .stall-frame {
@@ -303,13 +328,11 @@
       height: 100%;
       object-fit: cover;
       object-position: center 30%;
-      transition: transform .8s ease;
+      transition: transform .4s ease, filter .4s ease;
       filter: brightness(.9) sepia(.15);
+      /* Lazy loading attribute will be added via JS */
     }
-    .stall-wrap:hover .stall-photo-wrap img {
-      transform: scale(1.04);
-      filter: brightness(1) sepia(.05);
-    }
+
     .stall-photo-placeholder {
       width: 100%;
       height: 100%;
@@ -327,7 +350,7 @@
       border-radius: 3px;
       z-index: 4;
       transform-origin: left center;
-      transition: transform .6s cubic-bezier(.23,1,.32,1);
+      transition: transform .4s ease;
       box-shadow: 2px 0 12px rgba(0,0,0,0.4);
       overflow: hidden;
     }
@@ -352,9 +375,6 @@
       background: rgba(0,0,0,0.15);
       transform: translateX(-50%);
     }
-    .stall-wrap:hover .stall-door {
-      transform: rotateY(-85deg);
-    }
 
     .stall-nameplate {
       position: absolute;
@@ -365,9 +385,6 @@
       text-align: center;
       pointer-events: none;
       transition: opacity .4s ease;
-    }
-    .stall-wrap:hover .stall-nameplate {
-      opacity: 0;
     }
     .nameplate-brass {
       display: inline-block;
@@ -407,9 +424,6 @@
       pointer-events: none;
       transition: opacity .4s ease;
     }
-    .stall-wrap:hover .stall-info {
-      opacity: 0;
-    }
     .stall-info-name {
       font-family: 'Cinzel', serif;
       font-size: .75rem;
@@ -441,10 +455,6 @@
       pointer-events: none;
       transition: all .4s ease;
     }
-    .stall-wrap:hover .stall-read {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
 
     .memorial-badge {
       position: absolute;
@@ -461,9 +471,6 @@
       border-radius: 2px;
       background: rgba(0, 0, 0, 0.55);
       transition: opacity .4s ease;
-    }
-    .stall-wrap:hover .memorial-badge {
-      opacity: 0;
     }
 
     .companions-closing {
@@ -648,11 +655,14 @@
       .closing-title { font-size: 1.4rem; }
       .closing-text { font-size: 0.95rem; }
       .hero-tagline { font-size: 0.8rem; }
+      /* Disable blur effects on mobile for performance */
+      .orb { filter: blur(60px); }
     }
     @media (max-width: 520px) {
       .hero-title { font-size: 1.8rem; }
       .stall-logo-emblem { width: 28px; height: 28px; top: 4px; right: 4px; }
       .stall-logo-emblem img { width: 22px; }
+      .comp-hero { min-height: 500px; }
     }
   </style>
 </head>
@@ -721,9 +731,9 @@
       <a href="companion-trex.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="trex.jpg" alt="T-Rex"></div>
+          <div class="stall-photo-wrap"><img data-src="trex.jpg" alt="T-Rex" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">T-Rex</div><div class="nameplate-sub">Hanoverian</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">T-Rex</div><div class="stall-info-breed">Hanoverian · Stallion · Age 7</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -732,9 +742,9 @@
       <a href="companion-gladiator.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="gladiator.jpg" alt="Gladiator"></div>
+          <div class="stall-photo-wrap"><img data-src="gladiator.jpg" alt="Gladiator" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Gladiator</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info"><div class="stall-info-name">Gladiator</div><div class="stall-info-breed">Warmblood · Stallion · Age 20</div></div>
           <span class="stall-read">Open Stall</span>
@@ -744,9 +754,9 @@
       <a href="companion-xanthos.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="xanthos.jpg" alt="Xanthos"></div>
+          <div class="stall-photo-wrap"><img data-src="xanthos.jpg" alt="Xanthos" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Xanthos</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">Xanthos</div><div class="stall-info-breed">Warmblood · Gelding · Age 15</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -755,9 +765,9 @@
       <a href="companion-rubin.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="rubin.jpg" alt="Rubin"></div>
+          <div class="stall-photo-wrap"><img data-src="rubin.jpg" alt="Rubin" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Rubin</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">Rubin</div><div class="stall-info-breed">Warmblood · Stallion · Age 10</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -766,9 +776,9 @@
       <a href="companion-highsocity.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="highsocity.jpg" alt="Highsocity"></div>
+          <div class="stall-photo-wrap"><img data-src="highsocity.jpg" alt="Highsocity" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Highsocity</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="memorial-badge">In Memoriam</div>
           <div class="stall-info"><div class="stall-info-name">Highsocity</div><div class="stall-info-breed">Warmblood · Age 7</div></div>
           <span class="stall-read">Open Stall</span>
@@ -778,9 +788,9 @@
       <a href="companion-yuvraj.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="yuvraj.jpg" alt="Yuvraj"></div>
+          <div class="stall-photo-wrap"><img data-src="yuvraj.jpg" alt="Yuvraj" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Yuvraj</div><div class="nameplate-sub">Indian Breed</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">Yuvraj</div><div class="stall-info-breed">Indian Breed · Stallion · Age 20</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -789,9 +799,9 @@
       <a href="companion-maverick.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="maverick.jpg" alt="Maverick"></div>
+          <div class="stall-photo-wrap"><img data-src="maverick.jpg" alt="Maverick" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Maverick</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">Maverick</div><div class="stall-info-breed">Warmblood · Gelding · Age 12</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -800,9 +810,9 @@
       <a href="companion-storm.html" class="stall-wrap">
         <div class="stall-3d">
           <div class="stall-frame"></div>
-          <div class="stall-photo-wrap"><img src="storm.jpg" alt="Storm"></div>
+          <div class="stall-photo-wrap"><img data-src="storm.jpg" alt="Storm" class="lazy-img"></div>
           <div class="stall-door"><div class="stall-nameplate"><div class="nameplate-brass"><div class="nameplate-name">Storm</div><div class="nameplate-sub">Warmblood</div></div></div></div>
-          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo"></div>
+          <div class="stall-logo-emblem"><img src="logo.jpg" alt="Journal Logo" loading="lazy"></div>
           <div class="stall-info"><div class="stall-info-name">Storm</div><div class="stall-info-breed">Warmblood · Mare · Age 9</div></div>
           <span class="stall-read">Open Stall</span>
         </div>
@@ -825,8 +835,8 @@
   <section class="contact-section">
     <h3 class="contact-heading">Connect</h3>
     <div class="contact-links">
-      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank">📸 Instagram</a>
-      <a href="https://wa.me/919811618824" class="contact-link" target="_blank">💬 WhatsApp</a>
+      <a href="https://www.instagram.com/thehorsemans_journal/" class="contact-link" target="_blank" rel="noopener">📸 Instagram</a>
+      <a href="https://wa.me/919811618824" class="contact-link" target="_blank" rel="noopener">💬 WhatsApp</a>
       <a href="mailto:praveen@thehorsemansjournal.com" class="contact-link">✉️ Email</a>
     </div>
   </section>
@@ -845,33 +855,74 @@
   </div>
 
   <script>
-    // ===== OPTIMIZED CANVAS - FULL VISUALS, MOBILE-FRIENDLY =====
     (function() {
+      // ===== PERFORMANCE DETECTION =====
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      const isLowPower = isMobile || navigator.hardwareConcurrency <= 4;
+      
+      // ===== LAZY LOAD IMAGES =====
+      const lazyImages = document.querySelectorAll('.lazy-img');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              const src = img.getAttribute('data-src');
+              if (src) {
+                img.src = src;
+                img.removeAttribute('data-src');
+                img.classList.remove('lazy-img');
+                imageObserver.unobserve(img);
+              }
+            }
+          });
+        }, {
+          rootMargin: '200px 0px', // Load images 200px before they appear
+          threshold: 0.01
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+      } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+          const src = img.getAttribute('data-src');
+          if (src) {
+            img.src = src;
+            img.removeAttribute('data-src');
+          }
+        });
+      }
+      
+      // ===== HERO CANVAS - PAUSES WHEN NOT VISIBLE =====
       const canvas = document.getElementById('heroCanvas');
       if (!canvas) return;
       
-      // Detect mobile device for performance tuning
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-      
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { alpha: false }); // Disable alpha for performance
       let W, H;
-      let mouseX = 0.5, mouseY = 0.5;
+      const mouseX = 0.5, mouseY = 0.5;
       let time = 0;
       let animationId = null;
       let lastFrameTime = 0;
+      let isVisible = false;
       
-      // Adjust quality based on device
-      const PARTICLE_COUNT = isMobile ? 25 : 80;
-      const GRASS_COUNT = isMobile ? 100 : 300;
-      const HILL_STEPS = isMobile ? 40 : 80;
-      const HORSE_COUNT = isMobile ? 5 : 9;
-      const FRAME_DELAY = isMobile ? 33 : 16; // 30fps on mobile, 60fps on desktop
+      // Reduced particle counts for mobile
+      const PARTICLE_COUNT = isLowPower ? 15 : isMobile ? 25 : 80;
+      const GRASS_COUNT = isLowPower ? 60 : isMobile ? 100 : 300;
+      const HILL_STEPS = isLowPower ? 30 : isMobile ? 40 : 80;
+      const HORSE_COUNT = isLowPower ? 3 : isMobile ? 5 : 9;
+      const FRAME_DELAY = isMobile ? 50 : isLowPower ? 66 : 33; // 20fps low, 30fps mobile, 60fps desktop
       
       let dustParticles = [];
       
       function resize() {
-        W = canvas.width = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
+        const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2); // Cap DPR
+        const rect = canvas.getBoundingClientRect();
+        W = canvas.width = rect.width * dpr;
+        H = canvas.height = rect.height * dpr;
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        ctx.scale(dpr, dpr);
         initParticles();
       }
       
@@ -881,7 +932,7 @@
           dustParticles.push({
             x: Math.random() * 1.3 - 0.15,
             y: Math.random() * 1.2,
-            size: Math.random() * (isMobile ? 1.5 : 2.2) + 0.3,
+            size: Math.random() * (isMobile ? 1.2 : 2.2) + 0.3,
             speed: Math.random() * 0.15 + 0.03,
             opacity: Math.random() * 0.3 + 0.1,
             phase: Math.random() * Math.PI * 2
@@ -889,19 +940,10 @@
         }
       }
       
-      resize();
-      window.addEventListener('resize', resize);
-      
-      const heroSection = document.getElementById('compHero');
-      if (heroSection && !isMobile) {
-        heroSection.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX / W;
-          mouseY = e.clientY / H;
-        });
-      }
-      
       function drawSky() {
-        const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, displayH);
         if (isMobile) {
           skyGrad.addColorStop(0, '#2a3a4a');
           skyGrad.addColorStop(0.5, '#6a5a4a');
@@ -916,68 +958,76 @@
           skyGrad.addColorStop(1, '#f0d890');
         }
         ctx.fillStyle = skyGrad;
-        ctx.fillRect(0, 0, W, H);
+        ctx.fillRect(0, 0, displayW, displayH);
       }
       
       function drawSun() {
-        const sx = W * 0.55;
-        const sy = H * 0.32;
-        const sunGrad = ctx.createRadialGradient(sx, sy, 10, sx, sy, W * 0.35);
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const sx = displayW * 0.55;
+        const sy = displayH * 0.32;
+        const sunGrad = ctx.createRadialGradient(sx, sy, 10, sx, sy, displayW * 0.35);
         sunGrad.addColorStop(0, 'rgba(255,240,200,0.7)');
         sunGrad.addColorStop(0.2, 'rgba(255,220,160,0.3)');
         sunGrad.addColorStop(0.5, 'rgba(200,120,40,0.05)');
         sunGrad.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = sunGrad;
-        ctx.fillRect(0, 0, W, H);
+        ctx.fillRect(0, 0, displayW, displayH);
       }
       
       function drawHills() {
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        
         ctx.fillStyle = '#3a2a1a';
         ctx.beginPath();
-        ctx.moveTo(0, H * 0.7);
+        ctx.moveTo(0, displayH * 0.7);
         for (let i = 0; i <= HILL_STEPS; i++) {
           const nx = i / HILL_STEPS;
-          const x = nx * W;
-          let y = H * 0.55 + Math.sin(nx * 2.5) * H * 0.06;
+          const x = nx * displayW;
+          let y = displayH * 0.55 + Math.sin(nx * 2.5) * displayH * 0.06;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.lineTo(displayW, displayH); ctx.lineTo(0, displayH); ctx.closePath(); ctx.fill();
         
         ctx.fillStyle = '#2d1e0f';
         ctx.beginPath();
-        ctx.moveTo(0, H * 0.75);
+        ctx.moveTo(0, displayH * 0.75);
         for (let i = 0; i <= HILL_STEPS; i++) {
           const nx = i / HILL_STEPS;
-          const x = nx * W;
-          let y = H * 0.62 + Math.sin(nx * 1.9 + 1.2) * H * 0.04;
+          const x = nx * displayW;
+          let y = displayH * 0.62 + Math.sin(nx * 1.9 + 1.2) * displayH * 0.04;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.lineTo(displayW, displayH); ctx.lineTo(0, displayH); ctx.closePath(); ctx.fill();
         
         ctx.fillStyle = '#1a1006';
         ctx.beginPath();
-        ctx.moveTo(0, H * 0.78);
+        ctx.moveTo(0, displayH * 0.78);
         for (let i = 0; i <= HILL_STEPS; i++) {
           const nx = i / HILL_STEPS;
-          const x = nx * W;
-          let y = H * 0.7 + Math.sin(nx * 1.5 + 0.8) * H * 0.03;
+          const x = nx * displayW;
+          let y = displayH * 0.7 + Math.sin(nx * 1.5 + 0.8) * displayH * 0.03;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
+        ctx.lineTo(displayW, displayH); ctx.lineTo(0, displayH); ctx.closePath(); ctx.fill();
       }
       
       function drawGrass() {
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        
         ctx.fillStyle = '#1a1006';
-        ctx.fillRect(0, H * 0.78, W, H * 0.22);
+        ctx.fillRect(0, displayH * 0.78, displayW, displayH * 0.22);
         for (let i = 0; i < GRASS_COUNT; i++) {
-          const gx = (Math.sin(i * 127.3 + 311.7) * 0.5 + 0.5) * W;
-          const gy = H * 0.76 + (Math.cos(i * 269.5) * 0.5 + 0.5) * H * 0.22;
-          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 6 : 10);
+          const gx = (Math.sin(i * 127.3 + 311.7) * 0.5 + 0.5) * displayW;
+          const gy = displayH * 0.76 + (Math.cos(i * 269.5) * 0.5 + 0.5) * displayH * 0.22;
+          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 4 : 10);
           ctx.strokeStyle = `rgba(40,30,15,${0.3 + Math.sin(i * 2.1) * 0.15})`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(gx, gy);
-          ctx.lineTo(gx + Math.sin(time * 0.02 + i) * 1.5, gy - gh);
+          ctx.lineTo(gx, gy - gh);
           ctx.stroke();
         }
       }
@@ -1002,28 +1052,27 @@
       }
       
       function drawHorses() {
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
         const herdPositions = [
-          { x: W * 0.15, y: H * 0.72, s: 0.9, f: false },
-          { x: W * 0.30, y: H * 0.71, s: 0.8, f: true },
-          { x: W * 0.50, y: H * 0.73, s: 1.0, f: false },
-          { x: W * 0.70, y: H * 0.72, s: 0.85, f: true },
-          { x: W * 0.85, y: H * 0.71, s: 0.75, f: false },
+          { x: displayW * 0.15, y: displayH * 0.72, s: 0.9, f: false },
+          { x: displayW * 0.30, y: displayH * 0.71, s: 0.8, f: true },
+          { x: displayW * 0.50, y: displayH * 0.73, s: 1.0, f: false },
+          { x: displayW * 0.70, y: displayH * 0.72, s: 0.85, f: true },
+          { x: displayW * 0.85, y: displayH * 0.71, s: 0.75, f: false },
         ];
         for (let i = 0; i < HORSE_COUNT; i++) {
           const h = herdPositions[i % herdPositions.length];
-          drawHorseSilhouette(
-            h.x + (mouseX - 0.5) * (isMobile ? 8 : 15) * h.s,
-            h.y,
-            h.s * 0.6,
-            h.f
-          );
+          drawHorseSilhouette(h.x, h.y, h.s * 0.6, h.f);
         }
       }
       
       function drawDust() {
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
         dustParticles.forEach(p => {
-          const px = p.x * W;
-          const py = p.y * H + Math.sin(time * p.speed * 0.8 + p.phase) * 5;
+          const px = p.x * displayW;
+          const py = p.y * displayH + Math.sin(time * p.speed * 0.8 + p.phase) * 5;
           const alpha = p.opacity * (0.3 + 0.5 * Math.sin(time * 0.02 + p.phase));
           ctx.fillStyle = `rgba(240,220,170,${alpha * 0.6})`;
           ctx.beginPath();
@@ -1033,7 +1082,9 @@
       }
       
       function render() {
-        ctx.clearRect(0, 0, W, H);
+        const displayW = W / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        const displayH = H / (isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 2));
+        ctx.clearRect(0, 0, displayW, displayH);
         drawSky();
         drawSun();
         drawHills();
@@ -1042,7 +1093,28 @@
         drawDust();
       }
       
+      // Only animate when canvas is visible
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationId) {
+            lastFrameTime = 0;
+            animate(0);
+          } else if (!isVisible && animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        });
+      }, { threshold: 0.01 });
+      
+      heroObserver.observe(canvas);
+      
       function animate(currentTime) {
+        if (!isVisible) {
+          animationId = null;
+          return;
+        }
+        
         if (!lastFrameTime || (currentTime - lastFrameTime) >= FRAME_DELAY) {
           time++;
           dustParticles.forEach(p => {
@@ -1058,19 +1130,14 @@
         animationId = requestAnimationFrame(animate);
       }
       
-      // Start animation after page loads to prevent blocking
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => animate(0));
-      } else {
-        animate(0);
-      }
+      resize();
+      window.addEventListener('resize', resize);
       
-      window.addEventListener('beforeunload', () => {
-        if (animationId) cancelAnimationFrame(animationId);
-      });
+      // REMOVED: favicon floating particles - this was a HUGE performance drain
+      // Only keep the static background watermark
     })();
 
-    // ===== REST OF THE SCRIPT =====
+    // ===== SIMPLE INTERACTIONS =====
     document.getElementById('scrollHint')?.addEventListener('click', () => {
       document.querySelector('.stalls-section')?.scrollIntoView({ behavior: 'smooth' });
     });
@@ -1096,8 +1163,6 @@
       const consent = localStorage.getItem('cookieConsent');
       if (!consent) {
         cookieConsent.classList.add('show');
-      } else {
-        cookieConsent.classList.remove('show');
       }
     }
     
@@ -1105,80 +1170,16 @@
     if (declineCookies) declineCookies.addEventListener('click', () => setCookieConsent(false));
     showCookieConsent();
 
-    // Stall visibility animation
+    // Stall visibility animation with staggered delay
     const stallObserver = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 50);
-          stallObserver.unobserve(e.target);
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 50);
+          stallObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '100px 0px' });
     document.querySelectorAll('.stall-wrap').forEach(c => stallObserver.observe(c));
-
-    // Favicon Particles (reduced on mobile)
-    const faviconCanvas = document.createElement('canvas');
-    faviconCanvas.id = 'faviconCanvas';
-    faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
-    document.body.appendChild(faviconCanvas);
-    
-    const favCtx = faviconCanvas.getContext('2d');
-    let favW, favH;
-    let favParticles = [];
-    const faviconImg = new Image();
-    faviconImg.src = 'favicon.png';
-    
-    function resizeFavCanvas() { favW = faviconCanvas.width = window.innerWidth; favH = faviconCanvas.height = window.innerHeight; }
-    
-    class FavParticle {
-      constructor() {
-        this.x = Math.random() * favW;
-        this.y = Math.random() * favH;
-        this.size = Math.random() * (isMobile ? 12 : 20) + 8;
-        this.speedX = (Math.random() - 0.5) * 0.2;
-        this.speedY = (Math.random() - 0.5) * 0.15 + 0.08;
-        this.alpha = Math.random() * 0.3 + 0.1;
-        this.rotation = Math.random() * Math.PI * 2;
-        this.rotSpeed = (Math.random() - 0.5) * 0.008;
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        this.rotation += this.rotSpeed;
-        if (this.x < -50) this.x = favW + 50;
-        if (this.x > favW + 50) this.x = -50;
-        if (this.y < -50) this.y = favH + 50;
-        if (this.y > favH + 50) this.y = -50;
-      }
-      draw() {
-        if (!faviconImg.complete) return;
-        favCtx.save();
-        favCtx.translate(this.x, this.y);
-        favCtx.rotate(this.rotation);
-        favCtx.globalAlpha = this.alpha;
-        favCtx.drawImage(faviconImg, -this.size/2, -this.size/2, this.size, this.size);
-        favCtx.restore();
-      }
-    }
-    
-    function initFavParticles() {
-      const particleCount = isMobile ? 20 : 40;
-      favParticles = [];
-      for (let i = 0; i < particleCount; i++) {
-        favParticles.push(new FavParticle());
-      }
-    }
-    
-    function animateFav() {
-      if (!favCtx) return;
-      favCtx.clearRect(0, 0, favW, favH);
-      favParticles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateFav);
-    }
-    
-    faviconImg.onload = () => { resizeFavCanvas(); initFavParticles(); animateFav(); };
-    window.addEventListener('resize', () => { resizeFavCanvas(); initFavParticles(); });
-    if (faviconImg.complete) { resizeFavCanvas(); initFavParticles(); animateFav(); }
   </script>
 </body>
 </html>
