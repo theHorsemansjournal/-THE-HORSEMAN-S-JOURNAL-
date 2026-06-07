@@ -647,6 +647,7 @@
       .hero-title { font-size: 2rem; }
       .closing-title { font-size: 1.4rem; }
       .closing-text { font-size: 0.95rem; }
+      .hero-tagline { font-size: 0.8rem; }
     }
     @media (max-width: 520px) {
       .hero-title { font-size: 1.8rem; }
@@ -844,12 +845,12 @@
   </div>
 
   <script>
-    // ===== OPTIMIZED CANVAS - LOADS FAST ON MOBILE =====
+    // ===== OPTIMIZED CANVAS - FULL VISUALS, MOBILE-FRIENDLY =====
     (function() {
       const canvas = document.getElementById('heroCanvas');
       if (!canvas) return;
       
-      // Detect mobile device
+      // Detect mobile device for performance tuning
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
       
       const ctx = canvas.getContext('2d');
@@ -857,13 +858,14 @@
       let mouseX = 0.5, mouseY = 0.5;
       let time = 0;
       let animationId = null;
-      let frame = 0;
+      let lastFrameTime = 0;
       
-      // Reduce quality on mobile
-      const QUALITY = isMobile ? 'low' : 'high';
-      const PARTICLE_COUNT = isMobile ? 20 : 80;
-      const GRASS_COUNT = isMobile ? 80 : 300;
-      const HORSE_COUNT = isMobile ? 3 : 9;
+      // Adjust quality based on device
+      const PARTICLE_COUNT = isMobile ? 25 : 80;
+      const GRASS_COUNT = isMobile ? 100 : 300;
+      const HILL_STEPS = isMobile ? 40 : 80;
+      const HORSE_COUNT = isMobile ? 5 : 9;
+      const FRAME_DELAY = isMobile ? 33 : 16; // 30fps on mobile, 60fps on desktop
       
       let dustParticles = [];
       
@@ -898,23 +900,22 @@
         });
       }
       
-      // Simplified drawing functions for speed
       function drawSky() {
-        const grad = ctx.createLinearGradient(0, 0, 0, H);
+        const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
         if (isMobile) {
-          grad.addColorStop(0, '#2a3a4a');
-          grad.addColorStop(0.5, '#6a5a4a');
-          grad.addColorStop(1, '#c89060');
+          skyGrad.addColorStop(0, '#2a3a4a');
+          skyGrad.addColorStop(0.5, '#6a5a4a');
+          skyGrad.addColorStop(1, '#c89060');
         } else {
-          grad.addColorStop(0, '#1a2840');
-          grad.addColorStop(0.25, '#2d3a4a');
-          grad.addColorStop(0.45, '#5a4a3a');
-          grad.addColorStop(0.6, '#8a6a40');
-          grad.addColorStop(0.75, '#c89050');
-          grad.addColorStop(0.9, '#e8c870');
-          grad.addColorStop(1, '#f0d890');
+          skyGrad.addColorStop(0, '#1a2840');
+          skyGrad.addColorStop(0.25, '#2d3a4a');
+          skyGrad.addColorStop(0.45, '#5a4a3a');
+          skyGrad.addColorStop(0.6, '#8a6a40');
+          skyGrad.addColorStop(0.75, '#c89050');
+          skyGrad.addColorStop(0.9, '#e8c870');
+          skyGrad.addColorStop(1, '#f0d890');
         }
-        ctx.fillStyle = grad;
+        ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, W, H);
       }
       
@@ -931,39 +932,38 @@
       }
       
       function drawHills() {
-        const steps = isMobile ? 30 : 80;
         ctx.fillStyle = '#3a2a1a';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.7);
-        for (let i = 0; i <= steps; i++) {
-          const nx = i / steps;
+        for (let i = 0; i <= HILL_STEPS; i++) {
+          const nx = i / HILL_STEPS;
           const x = nx * W;
           let y = H * 0.55 + Math.sin(nx * 2.5) * H * 0.06;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
         
         ctx.fillStyle = '#2d1e0f';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.75);
-        for (let i = 0; i <= steps; i++) {
-          const nx = i / steps;
+        for (let i = 0; i <= HILL_STEPS; i++) {
+          const nx = i / HILL_STEPS;
           const x = nx * W;
           let y = H * 0.62 + Math.sin(nx * 1.9 + 1.2) * H * 0.04;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
         
         ctx.fillStyle = '#1a1006';
         ctx.beginPath();
         ctx.moveTo(0, H * 0.78);
-        for (let i = 0; i <= steps; i++) {
-          const nx = i / steps;
+        for (let i = 0; i <= HILL_STEPS; i++) {
+          const nx = i / HILL_STEPS;
           const x = nx * W;
           let y = H * 0.7 + Math.sin(nx * 1.5 + 0.8) * H * 0.03;
           ctx.lineTo(x, y);
         }
-        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+        ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fill();
       }
       
       function drawGrass() {
@@ -972,8 +972,8 @@
         for (let i = 0; i < GRASS_COUNT; i++) {
           const gx = (Math.sin(i * 127.3 + 311.7) * 0.5 + 0.5) * W;
           const gy = H * 0.76 + (Math.cos(i * 269.5) * 0.5 + 0.5) * H * 0.22;
-          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 5 : 8);
-          ctx.strokeStyle = `rgba(40,30,15,0.4)`;
+          const gh = 3 + Math.abs(Math.sin(i * 3.7 + time * 0.01)) * (isMobile ? 6 : 10);
+          ctx.strokeStyle = `rgba(40,30,15,${0.3 + Math.sin(i * 2.1) * 0.15})`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
           ctx.moveTo(gx, gy);
@@ -1009,11 +1009,10 @@
           { x: W * 0.70, y: H * 0.72, s: 0.85, f: true },
           { x: W * 0.85, y: H * 0.71, s: 0.75, f: false },
         ];
-        const count = isMobile ? 3 : HORSE_COUNT;
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < HORSE_COUNT; i++) {
           const h = herdPositions[i % herdPositions.length];
           drawHorseSilhouette(
-            h.x + (mouseX - 0.5) * (isMobile ? 5 : 12) * h.s,
+            h.x + (mouseX - 0.5) * (isMobile ? 8 : 15) * h.s,
             h.y,
             h.s * 0.6,
             h.f
@@ -1026,7 +1025,7 @@
           const px = p.x * W;
           const py = p.y * H + Math.sin(time * p.speed * 0.8 + p.phase) * 5;
           const alpha = p.opacity * (0.3 + 0.5 * Math.sin(time * 0.02 + p.phase));
-          ctx.fillStyle = `rgba(240,220,170,${alpha * 0.5})`;
+          ctx.fillStyle = `rgba(240,220,170,${alpha * 0.6})`;
           ctx.beginPath();
           ctx.arc(px, py, p.size, 0, Math.PI * 2);
           ctx.fill();
@@ -1043,12 +1042,8 @@
         drawDust();
       }
       
-      // Throttle animation on mobile to 30fps
-      let lastFrame = 0;
-      const frameDelay = isMobile ? 33 : 16;
-      
       function animate(currentTime) {
-        if (!lastFrame || (currentTime - lastFrame) >= frameDelay) {
+        if (!lastFrameTime || (currentTime - lastFrameTime) >= FRAME_DELAY) {
           time++;
           dustParticles.forEach(p => {
             p.y -= p.speed * 0.05;
@@ -1058,12 +1053,12 @@
             }
           });
           render();
-          lastFrame = currentTime;
+          lastFrameTime = currentTime;
         }
         animationId = requestAnimationFrame(animate);
       }
       
-      // Start animation after page loads
+      // Start animation after page loads to prevent blocking
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => animate(0));
       } else {
@@ -1121,9 +1116,7 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.stall-wrap').forEach(c => stallObserver.observe(c));
 
-    // Favicon Particles (simplified)
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
+    // Favicon Particles (reduced on mobile)
     const faviconCanvas = document.createElement('canvas');
     faviconCanvas.id = 'faviconCanvas';
     faviconCanvas.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; opacity:0.2;';
