@@ -1,92 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="sitemap-style.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- MAIN PAGES -->
   <url>
     <loc>https://thehorsemansjournal.com/</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/about.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/awakening.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/chronicles.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/companions.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/questions.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/gathering.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/book.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/privacy.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://thehorsemansjournal.com/terms.html</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-06-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
-  <!-- 15 CHRONICLE ARTICLES -->
-  <url><loc>https://thehorsemansjournal.com/chronicle-1.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-2.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-3.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-4.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-5.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-6.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-7.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-8.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-9.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-10.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-11.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-12.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-13.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-14.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/chronicle-15.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <!-- 15 CHRONICLE ARTICLES (Foundational) -->
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-horse-psychology.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-flight-response.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-trust-vs-control.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-body-language.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-human-mistakes.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-6.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-7.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-8.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-9.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-10.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-11.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-12.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-13.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-14.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/chronicle-15.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- 8 COMPANION PAGES -->
-  <url><loc>https://thehorsemansjournal.com/companion-trex.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-gladiator.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-xanthos.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-rubin.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-highsocity.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-yuvraj.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-maverick.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://thehorsemansjournal.com/companion-storm.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-trex.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-gladiator.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-xanthos.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-rubin.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-highsocity.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-yuvraj.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-maverick.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thehorsemansjournal.com/companion-storm.html</loc>
+    <lastmod>2026-06-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
